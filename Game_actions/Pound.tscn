@@ -4,6 +4,7 @@
 
 [node name="Pound" type="Node2D" groups=["presistent"]]
 script = ExtResource( 1 )
+power = 40
 Name = "Pound"
 Types = 1
 learned_level = 3

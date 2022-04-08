@@ -128,13 +128,16 @@ func _physics_process(_delta):
 	if self.current_holder != null:
 		if current_holder.level >= self.learned_level:
 			if learned == false:
-				if current_holder.Learned_moves.size() <= 4:
+				MoveLearner.learning = true
+				MoveLearner.target_pokemon = self.current_holder
+				MoveLearner.move_to_learn = self
+				if current_holder.Learned_moves.size() < 3:
 					current_holder.learn(self)
 					learned = true
-				elif current_holder.Learned_moves.size() >= 4:
-					current_holder.Learned_moves.erase(4)
-					current_holder.learn(self)
-					learned = true
+				elif current_holder.Learned_moves.size() == 4:
+					MoveLearner.target_pokemon = self.current_holder
+					MoveLearner.move_to_learn = self
+					Utils.get_scene_manager.transition_to_Move_learner()
 
 func _ready():
 	yield(get_tree().create_timer(0.2),"timeout")

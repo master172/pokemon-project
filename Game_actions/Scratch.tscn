@@ -4,6 +4,7 @@
 
 [node name="Scratch" type="Node2D" groups=["presistent"]]
 script = ExtResource( 1 )
+power = 40
 Name = "Scratch"
 Types = 1
 learned_level = 4

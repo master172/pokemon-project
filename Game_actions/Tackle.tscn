@@ -4,6 +4,7 @@
 
 [node name="Tackle" type="Node2D" groups=["presistent"]]
 script = ExtResource( 1 )
+power = 50
 Name = "Tackle"
 Types = 1
 pp = 40

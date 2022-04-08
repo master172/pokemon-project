@@ -20,5 +20,6 @@
 			"path": "res://assests/player/walk/walk_down/walk_down_0.png"
 		}
 	],
-	"scale": 100
+	"scale": 100,
+	"theme": ""
 }

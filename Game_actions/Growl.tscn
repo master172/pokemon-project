@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game_script_resources/Actions.gd" type="Script" id=1]
+[ext_resource path="res://Game_actions/Special_effects/Growl_special.gd" type="Script" id=2]
+
+[node name="Growl" type="Node2D"]
+script = ExtResource( 1 )
+Name = "Growl"
+Types = 1
+learned_level = 5
+pp = 40
+special_effects = ExtResource( 2 )
+description = "Lowers opponent's Attack."

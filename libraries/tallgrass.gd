@@ -1,5 +1,7 @@
 extends Node2D
 
+export(int,"1","1/2","1/3","1/4") var encounter_rate
+
 var rng = RandomNumberGenerator.new()
 var rng_new = RandomNumberGenerator.new()
 var rng_new_2 = RandomNumberGenerator.new()
