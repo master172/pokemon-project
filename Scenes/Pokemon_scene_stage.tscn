@@ -1,0 +1,87 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://assests/libraries/Ui/Place_box1.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Pokemon_scene_stage.gd" type="Script" id=2]
+[ext_resource path="res://Ui/Pokemon_Box.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assests/libraries/Ui/tackle_box_foreground.png" type="Texture" id=4]
+[ext_resource path="res://Ui/Bag_Box.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assests/libraries/battle_grounds/gras_ground.png" type="Texture" id=6]
+[ext_resource path="res://Ui/Run_Box.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Ui/Battle_box.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Ui/back box.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Ui/battle_boxes/Attack_box_1.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Ui/battle_boxes/Attack_box_2.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Ui/battle_boxes/Attack_box_3.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Ui/battle_boxes/Attack_box_4.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Ui/Poke_box.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Ui/Capture_box.tscn" type="PackedScene" id=16]
+
+[node name="Pokemon_scene" type="CanvasLayer"]
+layer = 3
+script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 183, 47 )
+region_enabled = true
+region_rect = Rect2( 0, 34, 64, 64 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 78, 100 )
+region_enabled = true
+region_rect = Rect2( -1, 100, 64, 59 )
+
+[node name="Control" type="Control" parent="."]
+margin_top = 112.0
+margin_right = 240.0
+margin_bottom = 160.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back_box" type="Sprite" parent="Control"]
+scale = Vector2( 1, 0.685714 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Sprite" type="Sprite" parent="Control/Back_box"]
+z_index = 1
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 45, 16 )
+
+[node name="Bag_Box" parent="Node2D" instance=ExtResource( 5 )]
+
+[node name="Battle_box" parent="Node2D" instance=ExtResource( 8 )]
+
+[node name="Capture_box" parent="Node2D" instance=ExtResource( 16 )]
+
+[node name="Pokemon_Box" parent="Node2D" instance=ExtResource( 3 )]
+
+[node name="Run_Box" parent="Node2D" instance=ExtResource( 7 )]
+
+[node name="Battle_box" type="Node2D" parent="."]
+visible = false
+position = Vector2( 45, 16 )
+
+[node name="back box" parent="Battle_box" instance=ExtResource( 9 )]
+
+[node name="Attack_box_1" parent="Battle_box" instance=ExtResource( 10 )]
+position = Vector2( -29, 120 )
+
+[node name="Attack_box_2" parent="Battle_box" instance=ExtResource( 11 )]
+
+[node name="Attack_box_3" parent="Battle_box" instance=ExtResource( 12 )]
+
+[node name="Attack_box_4" parent="Battle_box" instance=ExtResource( 13 )]
+
+[node name="Poke_box" parent="." instance=ExtResource( 14 )]

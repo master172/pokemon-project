@@ -1,0 +1,96 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://assests/libraries/Ui/Buttons/A/A pressed.png" type="Texture" id=1]
+[ext_resource path="res://assests/libraries/Ui/Buttons/W/W unpressed.png" type="Texture" id=2]
+[ext_resource path="res://assests/libraries/Ui/Buttons/A/A unpressed.png" type="Texture" id=3]
+[ext_resource path="res://assests/libraries/Ui/Buttons/W/W pressed.png" type="Texture" id=4]
+[ext_resource path="res://assests/libraries/Ui/Buttons/S/S unpressed.png" type="Texture" id=5]
+[ext_resource path="res://assests/libraries/Ui/Buttons/S/S pressed.png" type="Texture" id=6]
+[ext_resource path="res://assests/libraries/Ui/Buttons/D/D unpressed.png" type="Texture" id=7]
+[ext_resource path="res://assests/libraries/Ui/Buttons/D/D pressed.png" type="Texture" id=8]
+[ext_resource path="res://UI UX/Control_tab.gd" type="Script" id=9]
+[ext_resource path="res://assests/libraries/Ui/Buttons/Cross/X pressed.png" type="Texture" id=10]
+[ext_resource path="res://assests/libraries/Ui/Buttons/Cross/X unpressed.png" type="Texture" id=11]
+[ext_resource path="res://assests/libraries/Ui/Buttons/Box/Box unpressed.png" type="Texture" id=12]
+[ext_resource path="res://assests/libraries/Ui/Buttons/Box/Box pressed.png" type="Texture" id=13]
+[ext_resource path="res://assests/libraries/Ui/Buttons/Circle/O pressed.png" type="Texture" id=14]
+[ext_resource path="res://assests/libraries/Ui/Buttons/Triangle/Triangle unpressed.png" type="Texture" id=15]
+[ext_resource path="res://assests/libraries/Ui/Buttons/Circle/O unpressed.png" type="Texture" id=16]
+[ext_resource path="res://assests/libraries/Ui/Buttons/Triangle/Triangle pressed.png" type="Texture" id=17]
+
+[node name="Control_tab" type="CanvasLayer"]
+layer = 20
+script = ExtResource( 9 )
+
+[node name="Control" type="Control" parent="."]
+margin_top = 160.0
+margin_right = 240.0
+margin_bottom = 320.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 1.0
+color = Color( 0.247059, 0.247059, 0.247059, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="A" type="TouchScreenButton" parent="Control"]
+position = Vector2( 16, 76 )
+scale = Vector2( 0.1, 0.1 )
+normal = ExtResource( 3 )
+pressed = ExtResource( 1 )
+action = "A"
+
+[node name="W" type="TouchScreenButton" parent="Control"]
+position = Vector2( 36, 56 )
+scale = Vector2( 0.1, 0.1 )
+normal = ExtResource( 2 )
+pressed = ExtResource( 4 )
+action = "W"
+
+[node name="S" type="TouchScreenButton" parent="Control"]
+position = Vector2( 36, 96 )
+scale = Vector2( 0.1, 0.1 )
+normal = ExtResource( 5 )
+pressed = ExtResource( 6 )
+action = "S"
+
+[node name="D" type="TouchScreenButton" parent="Control"]
+position = Vector2( 56, 76 )
+scale = Vector2( 0.1, 0.1 )
+normal = ExtResource( 7 )
+pressed = ExtResource( 8 )
+action = "D"
+
+[node name="Cross" type="TouchScreenButton" parent="Control"]
+position = Vector2( 184, 56 )
+scale = Vector2( 0.1, 0.1 )
+normal = ExtResource( 11 )
+pressed = ExtResource( 10 )
+action = "decline"
+
+[node name="Box" type="TouchScreenButton" parent="Control"]
+position = Vector2( 164, 76 )
+scale = Vector2( 0.1, 0.1 )
+normal = ExtResource( 12 )
+pressed = ExtResource( 13 )
+action = "debug"
+
+[node name="Circle" type="TouchScreenButton" parent="Control"]
+position = Vector2( 184, 96 )
+scale = Vector2( 0.1, 0.1 )
+normal = ExtResource( 16 )
+pressed = ExtResource( 14 )
+action = "accept"
+
+[node name="Triangle" type="TouchScreenButton" parent="Control"]
+position = Vector2( 204, 76 )
+scale = Vector2( 0.1, 0.1 )
+normal = ExtResource( 15 )
+pressed = ExtResource( 17 )
+action = "menu"

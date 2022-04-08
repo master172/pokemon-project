@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Game_script_resources/Pokemon.gd" type="Script" id=1]
+[ext_resource path="res://Pokemon/Squirtle.png" type="Texture" id=2]
+[ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game_actions/Pound.tscn" type="PackedScene" id=4]
+
+[node name="Squirtle" type="Node2D" groups=["Presist"]]
+script = ExtResource( 1 )
+sprite = ExtResource( 2 )
+Name = "Squirtle"
+id = 10
+Type_1 = 11
+Damage_normally_by = [ 1, 12, 4, 13, 5, 14, 6, 16, 7, 8, 17, 18 ]
+Weak_to = [ 10, 3 ]
+Resistant_to = [ 9, 2, 11, 15 ]
+Immune_to = [ 0 ]
+Moves = [ ExtResource( 3 ), ExtResource( 4 ) ]
+catch_rate = 45.0
+Levelling_rate = "Medium_slow"
+Min_Hatch_time = 5140
+Max_Hatch_time = 5395
+gender_ratio = "25.0%_male"
+egg_groups = 5
+base_friend_ship = 70
+height = 0.5
+weight = 9.0
+status_effect = 5
+base_Health_points = 44
+base_attack = 48
+base_special_attack = 65
+base_defense = 50
+base_special_defense = 65
+base_speed = 43
+defense_yield = 1
+pokemon_entry = "Its shell is not just for protection. Its rounded shape and the grooves on its surface minimize resistance in water, enabling Squirtle to swim at high speeds."
+
+[node name="Tackle" parent="." instance=ExtResource( 3 )]
+
+[node name="Pound" parent="." instance=ExtResource( 4 )]

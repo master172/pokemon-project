@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Game_script_resources/Actions.gd" type="Script" id=1]
+
+[node name="Scratch" type="Node2D" groups=["presistent"]]
+script = ExtResource( 1 )
+Name = "Scratch"
+Types = 1
+learned_level = 4
+pp = 35
+description = "The pokemon scratches it's opponent"

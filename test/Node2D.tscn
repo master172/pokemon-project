@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://players/ash/ash.tscn" type="PackedScene" id=1]
+[ext_resource path="res://libraries/TileMap3.tscn" type="PackedScene" id=2]
+
+[node name="Node2D" type="YSort"]
+
+[node name="TileMap" parent="." instance=ExtResource( 2 )]
+position = Vector2( 16, -32 )
+z_index = 1
+cell_tile_origin = 2
+tile_data = PoolIntArray( 65535, 0, 0 )
+
+[node name="ash" parent="." instance=ExtResource( 1 )]
+position = Vector2( -24, 16 )
+z_index = 0

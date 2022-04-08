@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assests/libraries/pkmnfl.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assests/libraries/Ui/new_streamtexture.tres" type="Texture" id=2]
+[ext_resource path="res://Ui/confirmation_box.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 11
+font_data = ExtResource( 1 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 216, 96 )
+scale = Vector2( -0.03, 0.177 )
+texture = ExtResource( 2 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( -2.06018, 1.77924 )
+
+[node name="confirm" type="ColorRect" parent="Node2D"]
+margin_left = 208.0
+margin_top = 80.0
+margin_right = 228.0
+margin_bottom = 91.0
+color = Color( 0.172549, 0.172549, 0.172549, 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Node2D/confirm"]
+anchor_left = 0.0983269
+anchor_right = 0.0983269
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+text = "yes"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="decline" type="ColorRect" parent="Node2D"]
+margin_left = 208.0
+margin_top = 96.0
+margin_right = 228.0
+margin_bottom = 107.0
+color = Color( 0.101961, 0.101961, 0.101961, 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Node2D/decline"]
+margin_left = 4.96313
+margin_top = 0.0936432
+margin_right = 44.9631
+margin_bottom = 14.0936
+custom_fonts/font = SubResource( 1 )
+text = "no
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}

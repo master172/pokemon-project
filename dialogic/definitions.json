@@ -1,0 +1,19 @@
+{
+	"glossary": [
+
+	],
+	"variables": [
+		{
+			"id": "1642423868-894",
+			"name": "Pokemon_name",
+			"type": 0,
+			"value": "charmander"
+		},
+		{
+			"id": "1643528440-787",
+			"name": "Player_name",
+			"type": 0,
+			"value": "Ash"
+		}
+	]
+}

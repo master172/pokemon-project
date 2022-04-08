@@ -1,0 +1,20 @@
+{
+	"color": "#ff00bdff",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1642594545.json",
+	"mirror_portraits": false,
+	"name": "Prof_oak",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": 0,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": ""
+		}
+	],
+	"scale": 100
+}

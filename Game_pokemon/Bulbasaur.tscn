@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Game_script_resources/Pokemon.gd" type="Script" id=1]
+[ext_resource path="res://Pokemon/Bulbasaur.png" type="Texture" id=2]
+[ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game_actions/Pound.tscn" type="PackedScene" id=4]
+
+[node name="Bulbasaur" type="Node2D" groups=["Presist"]]
+script = ExtResource( 1 )
+sprite = ExtResource( 2 )
+Name = "Bulbasaur"
+id = 1
+Type_1 = 10
+Type_2 = 13
+Damage_normally_by = [ 1, 13, 5, 14, 6, 16, 9, 8, 17 ]
+Weak_to = [ 4, 2, 7, 15 ]
+Resistant_to = [ 12, 11, 10, 3, 18 ]
+Immune_to = [ 0 ]
+Moves = [ ExtResource( 3 ), ExtResource( 4 ) ]
+catch_rate = 45.0
+Levelling_rate = "Medium_slow"
+Min_Hatch_time = 5140
+Max_Hatch_time = 5395
+gender_ratio = "25.0%_male"
+egg_groups = 2049
+base_friend_ship = 70
+height = 0.7
+weight = 6.9
+status_effect = 5
+base_Health_points = 45
+base_attack = 49
+base_special_attack = 49
+base_defense = 65
+base_special_defense = 65
+base_speed = 45
+sp_attack_yield = 1
+pokemon_entry = "Bulbasaur can be seen napping in bright sunlight. There is a seed on its back. By soaking up the sun's rays, the seed grows progressively larger"
+
+[node name="Tackle" parent="." instance=ExtResource( 3 )]
+
+[node name="Pound" parent="." instance=ExtResource( 4 )]
