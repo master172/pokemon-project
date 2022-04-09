@@ -322,6 +322,7 @@ func learn(move):
 func _unlearn(move):
 	move.learned = false
 	move.to_add = false
+	move.can_add = false
 
 func _physics_process(_delta):
 

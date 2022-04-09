@@ -1,6 +1,7 @@
 extends Node2D
 class_name Moves
 
+export(bool) var can_add = true
 var to_add = false
 
 export(int) var power
@@ -42,6 +43,7 @@ func save():
 		"pp":pp,
 		"added":added,
 		"to_add":to_add,
+		'can_add':can_add,
 	}
 	return save_dict
 
@@ -126,7 +128,7 @@ func _physics_process(_delta):
 	if self.get_parent() != null:
 		current_holder = self.get_parent()
 	if self.current_holder != null:
-		if current_holder.level >= self.learned_level:
+		if current_holder.level >= self.learned_level and can_add == true:
 			if learned == false:
 				MoveLearner.learning = true
 				MoveLearner.target_pokemon = self.current_holder
