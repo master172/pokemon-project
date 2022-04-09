@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game_script_resources/Pokemon.gd" type="Script" id=1]
 [ext_resource path="res://Pokemon/Charmander.png" type="Texture" id=2]
 [ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game_actions/Growl.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game_actions/Scratch.tscn" type="PackedScene" id=5]
 
 [node name="Charmander" type="Node2D" groups=["Presist"]]
@@ -38,3 +39,5 @@ pokemon_entry = "The flame that burns at the tip of its tail is an indication of
 [node name="Tackle" parent="." instance=ExtResource( 3 )]
 
 [node name="Scratch" parent="." instance=ExtResource( 5 )]
+
+[node name="Growl" parent="." instance=ExtResource( 4 )]

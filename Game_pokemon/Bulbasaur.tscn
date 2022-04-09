@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game_script_resources/Pokemon.gd" type="Script" id=1]
 [ext_resource path="res://Pokemon/Bulbasaur.png" type="Texture" id=2]
 [ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Game_actions/Pound.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game_actions/Growl.tscn" type="PackedScene" id=5]
 
 [node name="Bulbasaur" type="Node2D" groups=["Presist"]]
 script = ExtResource( 1 )
@@ -39,3 +40,5 @@ pokemon_entry = "Bulbasaur can be seen napping in bright sunlight. There is a se
 [node name="Tackle" parent="." instance=ExtResource( 3 )]
 
 [node name="Pound" parent="." instance=ExtResource( 4 )]
+
+[node name="Growl" parent="." instance=ExtResource( 5 )]

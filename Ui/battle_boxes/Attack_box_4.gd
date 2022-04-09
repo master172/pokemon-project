@@ -12,9 +12,9 @@ onready var Description_label = $Control/Description_box
 
 func _ready():
 	if PlayerPokemon.current_pokemon != null:
-		if PlayerPokemon.current_pokemon.Learned_moves.size() >= 3:
-			Main_label.text = PlayerPokemon.current_pokemon.Learned_moves[4].name
-			Description_label.text = PlayerPokemon.current_pokemon.Learned_moves[4].description
+		if PlayerPokemon.current_pokemon.Learned_moves.size() >= 4:
+			Main_label.text = PlayerPokemon.current_pokemon.Learned_moves[3].name
+			Description_label.text = PlayerPokemon.current_pokemon.Learned_moves[3].description
 		else:
 			Main_label.text = " "
 			Description_label.text = " "
@@ -25,9 +25,9 @@ func _ready():
 
 func _physics_process(_delta):
 	if PlayerPokemon.current_pokemon != null:
-		if PlayerPokemon.current_pokemon.Learned_moves.size() >= 3:
-			Main_label.text = PlayerPokemon.current_pokemon.Learned_moves[4].name
-			Description_label.text = PlayerPokemon.current_pokemon.Learned_moves[4].description
+		if PlayerPokemon.current_pokemon.Learned_moves.size() >= 4:
+			Main_label.text = PlayerPokemon.current_pokemon.Learned_moves[3].name
+			Description_label.text = PlayerPokemon.current_pokemon.Learned_moves[3].description
 		else:
 			Main_label.text = " "
 			Description_label.text = " "

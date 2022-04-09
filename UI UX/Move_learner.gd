@@ -106,13 +106,13 @@ func _input(event):
 					current_option = Options.Main
 				elif selected_option == 1:
 					if move_selected == 0:
-						MoveLearner._make_to_learn(0)
+						MoveLearner._make_to_learn(0,MoveLearner.target_pokemon.Learned_moves[0])
 					elif move_selected == 1:
-						MoveLearner._make_to_learn(1)	
+						MoveLearner._make_to_learn(1,MoveLearner.target_pokemon.Learned_moves[1])	
 					elif move_selected == 2:
-						MoveLearner._make_to_learn(2)	
+						MoveLearner._make_to_learn(2,MoveLearner.target_pokemon.Learned_moves[2])	
 					elif move_selected == 3:
-						MoveLearner._make_to_learn(3)	
+						MoveLearner._make_to_learn(3,MoveLearner.target_pokemon.Learned_moves[3])	
 				elif selected_option == 2:
 					pass
 				elif selected_option == 3:

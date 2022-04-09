@@ -319,6 +319,9 @@ func change_parent():
 func learn(move):
 	self.Learned_moves.append(move)
 
+func _unlearn(move):
+	move.learned = false
+	move.to_add = false
 
 func _physics_process(_delta):
 
