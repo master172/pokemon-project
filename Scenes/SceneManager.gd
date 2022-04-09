@@ -66,8 +66,10 @@ func finished_fading():
 		Transition_Type.MOVE_LEARNER:
 			$MoveLearner/Move_learner.current_pokemon = MoveLearner.target_pokemon
 			$MoveLearner/Move_learner.current_option = $MoveLearner/Move_learner.Options.Selection
+			Utils.get_player().set_physics_process(false)
 		Transition_Type.EXIT_MOVE_LEARNER:
 			$MoveLearner/Move_learner.current_option = $MoveLearner/Move_learner.Options.Main
+			Utils.get_player().set_physics_process(true)
 		Transition_Type.PARTY_SCENE:
 			$Menu.load_party_screen()
 		Transition_Type.POKEMON_SCENE:
