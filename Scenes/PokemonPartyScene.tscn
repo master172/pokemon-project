@@ -159,9 +159,6 @@ margin_top = 65.247
 margin_right = 56.0058
 margin_bottom = 73.247
 custom_fonts/font = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Out_of" type="Label" parent="Pokemon_1"]
 margin_left = 65.3413
@@ -169,9 +166,6 @@ margin_top = 65.247
 margin_right = 73.3413
 margin_bottom = 73.247
 custom_fonts/font = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="gender" type="Sprite" parent="Pokemon_1"]
 position = Vector2( 76.0092, 52.8726 )
