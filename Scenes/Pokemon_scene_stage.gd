@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 const pokemon_scene =preload("res://Scenes/Battle_pokemon.tscn")
 

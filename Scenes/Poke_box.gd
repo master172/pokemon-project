@@ -21,6 +21,8 @@ onready var Pokemon_4 = $Poke_selector/HBoxContainer/Poke_ball_4/Pokemon_sprite
 onready var Pokemon_5 = $Poke_selector/HBoxContainer/Poke_ball_5/Pokemon_sprite
 onready var Pokemon_6 = $Poke_selector/HBoxContainer/Poke_ball_6/Pokemon_sprite
 
+func _ready():
+	visible = true
 func _kill():
 	pokemon_selected = true
 	self.get_parent().ui_state = self.get_parent().Ui_state.Main
