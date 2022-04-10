@@ -4,7 +4,6 @@ var learning = false
 
 var move_to_learn
 var target_pokemon
-var deleting_move
 
 func _ready():
 	pass

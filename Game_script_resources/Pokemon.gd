@@ -127,27 +127,29 @@ var opposing_pokemon
 var current_holder
 
 func _calculate_exp_poits_to_give():
-	var opposition_level
-	var battle_type
-	var targets
-	var win_type
-	var turns
-	turns = BattleManager.turns
+	var _opposition_level
+	var _battle_type
+	var _targets
+	var _win_type
+	var _turns
+	_turns = BattleManager.turns
 	if BattleManager.catched == true and BattleManager.fainted == false:
-		win_type = 1
+		_win_type = 1
 	elif BattleManager.catched == false and BattleManager.fainted == true:
-		win_type = 2
+		_win_type = 2
 	if self.get_parent() == OpposingTrainerMonsters:
-		targets = PlayerPokemon.targets
+		_targets = PlayerPokemon.targets
 	if self.opposing_pokemon != null:
-		opposition_level = self.opposing_pokemon.level
+		_opposition_level = self.opposing_pokemon.level
 	else:
-		opposition_level = 0 
+		_opposition_level = 0 
 	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
-		battle_type = 1
+		_battle_type = 1
 	else:
-		battle_type = 2
+		_battle_type = 2
+
 	exp_gainied = 1000
+	
 	if exp_gainied < 0:
 		exp_gainied = exp_gainied*-1
 	else:	
