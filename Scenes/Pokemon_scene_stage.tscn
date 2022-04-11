@@ -141,8 +141,8 @@ region_rect = Rect2( 0.590935, 33.9263, 62.9813, 63.7719 )
 
 [node name="HealthBar" type="TextureProgress" parent="Battle_identifier/Player_pokemon_0"]
 modulate = Color( 0.435294, 0.752941, 0.172549, 1 )
-margin_left = 53.0
-margin_right = 113.0
+margin_left = 55.5
+margin_right = 115.5
 margin_bottom = 4.0
 rect_scale = Vector2( 3, 3 )
 max_value = 67.0
@@ -154,11 +154,12 @@ texture_progress = ExtResource( 18 )
 
 [node name="Exp_bar" type="TextureProgress" parent="Battle_identifier/Player_pokemon_0"]
 modulate = Color( 0.0745098, 0.847059, 0.776471, 1 )
-margin_left = 52.5
-margin_top = 12.5
-margin_right = 112.5
-margin_bottom = 16.5
-rect_scale = Vector2( 2.7, 2.7 )
+margin_left = 60.0
+margin_top = 13.0
+margin_right = 120.0
+margin_bottom = 17.0
+rect_scale = Vector2( 2.5, 2.7 )
+value = 100.0
 texture_progress = ExtResource( 18 )
 
 [node name="CONTAINER" type="Sprite" parent="Battle_identifier/Player_pokemon_0"]
@@ -185,8 +186,8 @@ region_rect = Rect2( 0.590935, 33.9263, 62.9813, 63.7719 )
 
 [node name="HealthBar" type="TextureProgress" parent="Battle_identifier/Enemy_pokemon_0"]
 modulate = Color( 0.435294, 0.752941, 0.172549, 1 )
-margin_left = 52.0
-margin_right = 112.0
+margin_left = 57.5
+margin_right = 117.5
 margin_bottom = 4.0
 rect_scale = Vector2( 3, 3 )
 max_value = 67.0
@@ -204,6 +205,9 @@ centered = false
 material = SubResource( 1 )
 texture = ExtResource( 20 )
 centered = false
+
+[node name="Tween" type="Tween" parent="Battle_identifier"]
+playback_process_mode = 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
