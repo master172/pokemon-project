@@ -103,7 +103,7 @@ export(int)var attack_yield
 export(int)var defense_yield 
 export(int)var speed_yield
 export(int)var sp_attack_yield
-export(int)var sp_defnse_yield
+export(int)var sp_defense_yield
 
 export(String,MULTILINE) var pokemon_entry 
 
@@ -159,12 +159,31 @@ func _lose():
 	_calculate_exp_poits_to_give()
 	if self.opposing_pokemon != null:
 		self.opposing_pokemon.experince_gained += exp_gainied
+		_add_ev_yield()
 		self.opposing_pokemon._update_level()
 
 func _level_up():
 	_update_level()
 	_calculate_stats()
+	_add_stats()
 
+func _add_ev_yield():
+	if self.opposing_pokemon != null:
+		self.opposing_pokemon.Current_health_points += self.hp_yield
+		self.opposing_pokemon.Current_attack += self.attack_yield
+		self.opposing_pokemon.Current_defense += self.defense_yield
+		self.opposing_pokemon.Current_special_attack += self.sp_attack_yield
+		self.opposing_pokemon.Current_special_defense += self.sp_defense_yield
+		self.opposing_pokemon.Current_speed += self.speed_yield
+
+func _add_stats():
+	self.Current_health_points += (self.Base_Health_points / 20) + (self.EV_Health_points/50)
+	self.Current_attack += (self.Base_attack / 20) + (self.EV_attack / 50)
+	self.Current_defense += (self.Base_defense / 20) + (self.EV_defense / 50)
+	self.Current_special_attack += (self.Base_special_attack / 20) + (self.EV_special_attack / 50)
+	self.Current_special_defense += (self.Base_special_defense / 20) + (self.EV_special_defense / 50)
+	self.Current_speed += (self.Base_speed / 20) + (self.EV_speed / 50)
+	
 func _ready():		
 	if name_changed == false:
 		self.name = "Pokemon_" + String(Utils.Num_loaded_pokemon) + "_" + name
@@ -293,6 +312,20 @@ func save():
 		"Max_defense" : Max_defense,
 		"Max_special_attack":Max_special_attack,
 		"Max_special_defense":Max_special_defense,
+
+		"EV_Health_points": EV_Health_points,
+		"EV_speed":EV_speed,
+		"EV_attack":EV_attack,
+		"EV_defense":EV_defense,
+		"EV_special_attack":EV_special_attack,
+		"EV_special_defense":EV_special_defense,
+
+		"IV_Health_points": IV_Health_points,
+		"IV_speed": IV_speed,
+		"IV_attack": IV_attack,
+		"IV_defense": IV_defense,
+		"IV_special_attack": IV_special_attack,
+		"IV_special_defense": IV_special_defense,
 
 		"filename" : get_filename(),
 		"parent" : get_parent().get_path(),

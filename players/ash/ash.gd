@@ -94,6 +94,7 @@ onready var next_scene_to_go
 
 #variables-->talking_variables
 var is_talking : bool = false
+var interacting = false
 var current_interacted
 var current_dialog_to_display = []
 
@@ -154,7 +155,16 @@ func set_spawn(location: Vector2, direction: Vector2):
 	
 
 func _interact():
-	pass
+
+	if interaction_ray.is_colliding():
+		if !is_moving:
+			if interaction_ray.get_collider().is_in_group("Interactable"):
+				if Input.is_action_just_pressed("accept") and interacting == false:
+					interacting = true
+					is_talking = true
+					interaction_ray.get_collider()._interact_out_put()
+					interacting = false
+					is_talking = false
 		
 
 func interact_update():
@@ -170,6 +180,7 @@ func interact_update():
 	elif looking_direction == Looking_direction.down:
 		interaction_ray.cast_to = Vector2(0,8)
 	interaction_ray.force_raycast_update()
+	
 
 func _update_check():
 	#checking_when_we_are_on_-x_cordinates
@@ -220,7 +231,7 @@ func _physics_process(delta):
 	
 	_update_check()
 	
-	#calling_the_interact_update_method
+	#calling_the_interact_update_method and the interact method
 	interact_update()
 	
 	#checking_if_we_are_interacting_and_performing_with_respect_to_it
@@ -454,6 +465,7 @@ func move(delta):
 	#updating_the_door_ray
 	door_ray.cast_to = desired_step
 	door_ray.force_raycast_update()
+
 	
 	
 	#changing_scene_if_the_door_ray_is_colliding
