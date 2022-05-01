@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/W pressed.png-8939d2cbecabdc4659b550e0f322b93d.stex"
+path="res://.import/Menu.png-7aecf1d9ecc73c134b651838da60e708.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assests/libraries/Ui/Buttons/A/W pressed.png"
-dest_files=[ "res://.import/W pressed.png-8939d2cbecabdc4659b550e0f322b93d.stex" ]
+source_file="res://assests/libraries/Ui/Menu.png"
+dest_files=[ "res://.import/Menu.png-7aecf1d9ecc73c134b651838da60e708.stex" ]
 
 [params]
 

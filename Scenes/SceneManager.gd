@@ -5,11 +5,21 @@ var player_direction = Vector2(0,0)
 
 var next_scene
 
+const pc = preload("res://UI UX/Pc.tscn")
 
 
 
-enum Transition_Type  {NEW_SCENE, PARTY_SCENE, MENU_ONLY, POKEMON_SCENE,EXIT_POKEMON_SCENE,MOVE_LEARNER,EXIT_MOVE_LEARNER}
+enum Transition_Type  {NEW_SCENE, PARTY_SCENE, MENU_ONLY, POKEMON_SCENE,EXIT_POKEMON_SCENE,MOVE_LEARNER,EXIT_MOVE_LEARNER,PC,EXIT_PC}
 var transition_type = Transition_Type.NEW_SCENE
+
+func transition_to_Pc():
+	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
+	var Pc = pc.instance()
+	add_child(Pc)
+	transition_type = Transition_Type.PC
+
+func transition_exit_Pc():
+	transition_type = Transition_Type.EXIT_PC
 
 func transition_to_Move_learner():
 	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
@@ -63,6 +73,10 @@ func finished_fading():
 			var player = $CurrentScene.get_children().back().find_node("ash")
 			player.set_spawn(player_location,player_direction)
 			SceneLoaded.current_scene = String(next_scene)
+		Transition_Type.PC:
+			Utils.get_player().set_physics_process(false)
+		Transition_Type.EXIT_PC:
+			Utils.get_player().set_physics_process(true)
 		Transition_Type.MOVE_LEARNER:
 			$MoveLearner/Move_learner.current_pokemon = MoveLearner.target_pokemon
 			$MoveLearner/Move_learner.current_option = $MoveLearner/Move_learner.Options.Selection

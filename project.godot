@@ -155,6 +155,7 @@ _global_script_class_icons={
 config/name="pokemon project"
 config/description="a trial to recreate pokemon red in godot or something like it or close to it"
 run/main_scene="res://Scenes/SceneManager.tscn"
+run/low_processor_mode=true
 config/icon="res://icon.png"
 
 [autoload]
@@ -170,6 +171,10 @@ SceneLoaded="*res://autoload/Scene_loaded.gd"
 GameSaver="*res://autoload/GameSaver.gd"
 PokeHelper="*res://autoload/Poke_helper.gd"
 MoveLearner="*res://autoload/Move_learner.gd"
+
+[debug]
+
+shapes/collision/shape_color=Color( 1, 1, 1, 0.419608 )
 
 [display]
 

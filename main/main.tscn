@@ -1613,7 +1613,7 @@ polygon = PoolVector2Array( -16, -528, -16, -560, 80, -560, 80, -528 )
 [node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="trees"]
 polygon = PoolVector2Array( -48, -592, -16, -592, -16, -720, -48, -720 )
 
-[node name="StaticBody2D" parent="." instance=ExtResource( 10 )]
+[node name="Pc" parent="." instance=ExtResource( 10 )]
 position = Vector2( -88, -32 )
 
 [connection signal="body_entered" from="red_house/door" to="red_house/door" method="_on_door_body_entered"]
