@@ -175,6 +175,8 @@ MoveLearner="*res://autoload/Move_learner.gd"
 [debug]
 
 shapes/collision/shape_color=Color( 1, 1, 1, 0.419608 )
+shapes/collision/contact_color=Color( 1, 0.109804, 0, 0.8 )
+shapes/navigation/disabled_geometry_color=Color( 0.839216, 0.588235, 0.0862745, 0.4 )
 
 [display]
 

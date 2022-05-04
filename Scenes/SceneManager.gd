@@ -14,19 +14,25 @@ var transition_type = Transition_Type.NEW_SCENE
 
 func transition_to_Pc():
 	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
+	Utils.get_player().set_physics_process(false)
 	var Pc = pc.instance()
 	add_child(Pc)
 	transition_type = Transition_Type.PC
 
 func transition_exit_Pc():
 	transition_type = Transition_Type.EXIT_PC
+	yield(get_tree().create_timer(0.1),"timeout")
+	Utils.get_player().set_physics_process(true)
 
 func transition_to_Move_learner():
 	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
+	Utils.get_player().set_physics_process(false)
 	transition_type = Transition_Type.MOVE_LEARNER
 
 func transition_exit_Move_learner():
 	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
+	yield(get_tree().create_timer(0.1),"timeout")
+	Utils.get_player().set_physics_process(true)
 	transition_type = Transition_Type.EXIT_MOVE_LEARNER
 
 func transition_to_party_scene():
@@ -73,17 +79,13 @@ func finished_fading():
 			var player = $CurrentScene.get_children().back().find_node("ash")
 			player.set_spawn(player_location,player_direction)
 			SceneLoaded.current_scene = String(next_scene)
-		Transition_Type.PC:
-			Utils.get_player().set_physics_process(false)
-		Transition_Type.EXIT_PC:
-			Utils.get_player().set_physics_process(true)
 		Transition_Type.MOVE_LEARNER:
 			$MoveLearner/Move_learner.current_pokemon = MoveLearner.target_pokemon
 			$MoveLearner/Move_learner.current_option = $MoveLearner/Move_learner.Options.Selection
-			Utils.get_player().set_physics_process(false)
+			
 		Transition_Type.EXIT_MOVE_LEARNER:
 			$MoveLearner/Move_learner.current_option = $MoveLearner/Move_learner.Options.Main
-			Utils.get_player().set_physics_process(true)
+			
 		Transition_Type.PARTY_SCENE:
 			$Menu.load_party_screen()
 		Transition_Type.POKEMON_SCENE:

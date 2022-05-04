@@ -1,10 +1,14 @@
 extends Control
 
+
+
 onready var grid_container = $ScrollContainer/GridContainer
 
 const Pokemon_card = preload("res://UI UX/Pokemon1_card.tscn")
 
 var number :int = 0
+
+
 
 func _ready():
 	yield(get_tree().create_timer(0.2),"timeout")

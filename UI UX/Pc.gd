@@ -9,6 +9,10 @@ var state = states.Navigation
 onready var Home = $Control/Home
 onready var Pokemons = $Control/Pokemon
 
+var selected_pokemon
+
+const Cont_box = preload("res://Ui/Pc_cont_box.tscn")
+
 """//////////////////////////////////////////////////////   FUNTION  BUTTONS   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"""
 
 #Settings
@@ -76,7 +80,15 @@ var max_selected : int = 6
 
 var animation_playable = true
 
+var controller_active = false
+
 func _input(event):
+	if state == states.Pokemon_box:
+		if event.is_action_pressed("accept") and controller_active == false:
+			controller_active = true
+			var cont_box = (Cont_box).instance()
+			cont_box.controller = self
+			self.add_child(cont_box)
 	if state == states.PC_selection:
 		if event.is_action_pressed("accept"):
 			if current_selected == 0:
