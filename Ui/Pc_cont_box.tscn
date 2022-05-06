@@ -8,7 +8,7 @@
 size = 11
 font_data = ExtResource( 1 )
 
-[node name="Control" type="Control"]
+[node name="Pc_cont_box" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -160.0

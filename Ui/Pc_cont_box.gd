@@ -58,7 +58,7 @@ func _input(event):
 	elif event.is_action_pressed("accept"):
 		match selected_option:
 			Options.Back:
-				_kill()
+				self.controller._remove_controller()
 	elif event.is_action_pressed("decline"):
 		if self.controller != null:
 			pass

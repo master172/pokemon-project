@@ -2,7 +2,7 @@ extends CanvasLayer
 
 onready var Animation_player = $AnimationPlayer
 
-enum states {PC_selection, Pokemon_box, Item_box, Professor_box, Scene, Navigation}
+enum states {PC_selection, Pokemon_box, Item_box, Professor_box, Scene, Navigation,Party_navigation}
 
 var state = states.Navigation
 
@@ -69,8 +69,49 @@ onready var Call_someone = $Control/Home/VBoxContainer/Call_someone
 
 onready var Back = $Control/Home/VBoxContainer/Back
 
+#Party_pokemon_1
+
+onready var Party_Pokemon_1 = $Control/Pokemon/Party/ColorRect/VBoxContainer/HBoxContainer/Party_sprites/Left/Pokemon_back_1
+
+#Party_Pokemon_2
+
+onready var Party_Pokemon_2 = $Control/Pokemon/Party/ColorRect/VBoxContainer/HBoxContainer/Party_sprites/Left/Pokemon_back_2
+
+#Party_Pokemon_3
+
+onready var Party_Pokemon_3 = $Control/Pokemon/Party/ColorRect/VBoxContainer/HBoxContainer/Party_sprites/Left/Pokemon_back_3
+
+#Party_Pokemon_4
+
+onready var Party_Pokemon_4 = $Control/Pokemon/Party/ColorRect/VBoxContainer/HBoxContainer/Party_sprites/Right/Pokemon_back_4
+
+#Party_Pokemon_5
+
+onready var Party_Pokemon_5 = $Control/Pokemon/Party/ColorRect/VBoxContainer/HBoxContainer/Party_sprites/Right/Pokemon_back_5
+
+#Party_pokemon_6
+
+onready var Party_Pokemon_6 = $Control/Pokemon/Party/ColorRect/VBoxContainer/HBoxContainer/Party_sprites/Right/Pokemon_back_6
+
+#Deposit
+
+onready var Deposit = $Control/Pokemon/Party/ColorRect/VBoxContainer/Button_box/Deposit 
+
+#Switch
+
+onready var Switch = $Control/Pokemon/Party/ColorRect/VBoxContainer/Button_box/Switch
+
+#Move
+
+onready var Move = $Control/Pokemon/Party/ColorRect/VBoxContainer/Button_box/Move
+
+#Back
+
+onready var Returns = $Control/Pokemon/Party/ColorRect/VBoxContainer/Button_box/Back
+
 """//////////////////////////////////////////////////////   END  OF  FUNTION  BUTTONS   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"""
 
+var current_to_change
 
 var current_pokebox :int = 0
 
@@ -82,11 +123,18 @@ var animation_playable = true
 
 var controller_active = false
 
+var cont_box
+
+func _remove_controller():
+	if cont_box != null:
+		cont_box.queue_free()
+		yield(get_tree().create_timer(0.1),"timeout")
+		controller_active = false
 func _input(event):
 	if state == states.Pokemon_box:
 		if event.is_action_pressed("accept") and controller_active == false:
 			controller_active = true
-			var cont_box = (Cont_box).instance()
+			cont_box = (Cont_box).instance()
 			cont_box.controller = self
 			self.add_child(cont_box)
 	if state == states.PC_selection:
@@ -117,7 +165,7 @@ func _input(event):
 				current_selected = current_selected - 1
 			else:
 				current_selected = max_selected
-	
+
 	if event.is_action_pressed("D"):
 		if state == states.Navigation:
 			if current_selected == 0:
@@ -133,6 +181,18 @@ func _input(event):
 			else:
 				current_selected = 0
 		
+		elif state == states.Party_navigation:
+			if current_selected == 3 or current_selected == 4 or current_selected == 5 or current_selected == 6 or current_selected == 7 or current_selected == 8 or current_selected == 9:
+				state = states.Pokemon_box
+				current_selected = 0
+				current_to_change.color = Color("250080")
+			elif current_selected == 0:
+				current_selected = 4
+			elif current_selected == 1:
+				current_selected = 5
+			elif current_selected == 2:
+				current_selected = 3
+		
 	if event.is_action_pressed("A"):
 		if !state == states.Navigation:
 			if state == states.PC_selection:
@@ -145,12 +205,21 @@ func _input(event):
 				elif current_selected == 0:
 					for i in $Control/Pokemon/ScrollContainer/GridContainer.get_child_count():
 						$Control/Pokemon/ScrollContainer/GridContainer.get_child(i).selected = false
+					state = states.Party_navigation
+					current_selected = 0
+					
+			elif state == states.Party_navigation:
+				if current_selected == 0 or current_selected == 1 or current_selected == 2 or current_selected == 6 or current_selected == 7 or current_selected == 8 or current_selected == 9:
 					state = states.Navigation
 					current_selected = 2
+					current_to_change.color = Color("250080")
+				elif current_selected == 3:
+					current_selected = 0
+				elif current_selected == 4:
+					current_selected = 1
+				elif current_selected == 5:
+					current_selected = 2
 			
-
-
-		
 
 func _function():
 	if state == states.Navigation:
@@ -263,3 +332,56 @@ func _physics_process(_delta):
 		else:
 			Back.color = Color("0b042a")
 	
+	if state == states.Party_navigation:
+		max_selected = 9
+		if current_selected == 0:
+			Party_Pokemon_1.color = Color("17bcc8")
+			current_to_change = Party_Pokemon_1
+		else:
+			Party_Pokemon_1.color = Color("250080")	
+		if current_selected == 1:
+			Party_Pokemon_2.color = Color("17bcc8")
+			current_to_change = Party_Pokemon_2
+		else:
+			Party_Pokemon_2.color = Color("250080")
+		if current_selected == 2:
+			Party_Pokemon_3.color = Color("17bcc8")
+			current_to_change = Party_Pokemon_3
+		else:
+			Party_Pokemon_3.color = Color("250080")
+		if current_selected == 3:
+			Party_Pokemon_4.color = Color("17bcc8")
+			current_to_change = Party_Pokemon_4
+		else:
+			Party_Pokemon_4.color = Color("250080")
+		if current_selected == 4:
+			Party_Pokemon_5.color = Color("17bcc8")
+			current_to_change = Party_Pokemon_5
+		else:
+			Party_Pokemon_5.color = Color("250080")
+		if current_selected == 5:
+			Party_Pokemon_6.color = Color("17bcc8")
+			current_to_change = Party_Pokemon_6
+		else:
+			Party_Pokemon_6.color = Color("250080")
+		if current_selected == 6:
+			Deposit.color = Color("17bcc8")
+			current_to_change = Deposit
+		else:
+			Deposit.color = Color("250080")
+		if current_selected == 7:
+			Switch.color = Color("17bcc8")
+			current_to_change = Switch
+		else:
+			Switch.color = Color("250080")
+		if current_selected == 8:
+			Move.color = Color("17bcc8")
+			current_to_change = Move
+		else:
+			Move.color = Color("250080")
+		if current_selected == 9:
+			Returns.color = Color("17bcc8")
+			current_to_change = Returns
+		else:
+			Returns.color = Color("250080")
+		
