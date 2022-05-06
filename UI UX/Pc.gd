@@ -2,7 +2,7 @@ extends CanvasLayer
 
 onready var Animation_player = $AnimationPlayer
 
-enum states {PC_selection, Pokemon_box, Item_box, Professor_box, Scene, Navigation,Party_navigation}
+enum states {PC_selection, Pokemon_box, Item_box, Professor_box, Scene, Navigation,Party_navigation,Party_selection}
 
 var state = states.Navigation
 
@@ -125,18 +125,23 @@ var controller_active = false
 
 var cont_box
 
+
 func _remove_controller():
 	if cont_box != null:
 		cont_box.queue_free()
 		yield(get_tree().create_timer(0.1),"timeout")
 		controller_active = false
 func _input(event):
+	if event.is_action_pressed("accept") and state == states.Party_navigation:
+			state = states.Party_selection
+			current_selected = 0
 	if state == states.Pokemon_box:
 		if event.is_action_pressed("accept") and controller_active == false:
 			controller_active = true
 			cont_box = (Cont_box).instance()
 			cont_box.controller = self
 			self.add_child(cont_box)
+		
 	if state == states.PC_selection:
 		if event.is_action_pressed("accept"):
 			if current_selected == 0:
@@ -219,6 +224,12 @@ func _input(event):
 					current_selected = 1
 				elif current_selected == 5:
 					current_selected = 2
+	
+	if event.is_action_pressed("decline"):
+		if state == states.Party_selection:
+			state = states.Party_navigation
+			current_to_change.color = Color("250080")
+			current_selected = 0
 			
 
 func _function():
@@ -305,7 +316,6 @@ func _physics_process(_delta):
 	elif current_selected != 4 and state == states.Navigation:
 		Call_control.color = Color("0b042a")
 		Call_definer.color = Color("00ffffff")		
-
 	if current_selected == 5 and state == states.Navigation:
 		settings_control.color = Color("b8ff00b9")
 		settings_definer.color = Color("ff00b9")
@@ -333,7 +343,7 @@ func _physics_process(_delta):
 			Back.color = Color("0b042a")
 	
 	if state == states.Party_navigation:
-		max_selected = 9
+		max_selected = 5
 		if current_selected == 0:
 			Party_Pokemon_1.color = Color("17bcc8")
 			current_to_change = Party_Pokemon_1
@@ -364,22 +374,25 @@ func _physics_process(_delta):
 			current_to_change = Party_Pokemon_6
 		else:
 			Party_Pokemon_6.color = Color("250080")
-		if current_selected == 6:
+		
+	if state == states.Party_selection:
+		max_selected = 3
+		if current_selected == 0:
 			Deposit.color = Color("17bcc8")
 			current_to_change = Deposit
 		else:
 			Deposit.color = Color("250080")
-		if current_selected == 7:
+		if current_selected == 1:
 			Switch.color = Color("17bcc8")
 			current_to_change = Switch
 		else:
 			Switch.color = Color("250080")
-		if current_selected == 8:
+		if current_selected == 2:
 			Move.color = Color("17bcc8")
 			current_to_change = Move
 		else:
 			Move.color = Color("250080")
-		if current_selected == 9:
+		if current_selected == 3:
 			Returns.color = Color("17bcc8")
 			current_to_change = Returns
 		else:
