@@ -131,10 +131,28 @@ func _remove_controller():
 		cont_box.queue_free()
 		yield(get_tree().create_timer(0.1),"timeout")
 		controller_active = false
+
 func _input(event):
+	if state == states.Party_selection:
+		if event.is_action_pressed("accept"):
+			if current_selected == 0:
+				if selected_pokemon == PlayerPokemon.first_pokemon:
+					PlayerPokemon.pc_pokemon.append(PlayerPokemon.first_pokemon)
 	if event.is_action_pressed("accept") and state == states.Party_navigation:
-			state = states.Party_selection
-			current_selected = 0
+		if current_selected == 0:
+			selected_pokemon = PlayerPokemon.first_pokemon
+		elif current_selected == 1:
+			selected_pokemon = PlayerPokemon.second_pokemon
+		elif current_selected == 2:
+			selected_pokemon = PlayerPokemon.third_pokemon
+		elif current_selected == 3:
+			selected_pokemon = PlayerPokemon.fourth_pokemon
+		elif current_selected == 4:
+			selected_pokemon = PlayerPokemon.fifth_pokemon
+		elif current_selected == 5:
+			selected_pokemon = PlayerPokemon.sixth_pokemon
+		state = states.Party_selection
+		current_selected = 0
 	if state == states.Pokemon_box:
 		if event.is_action_pressed("accept") and controller_active == false:
 			controller_active = true
