@@ -2,7 +2,7 @@ extends CanvasLayer
 
 onready var Animation_player = $AnimationPlayer
 
-enum states {PC_selection, Pokemon_box, Item_box, Professor_box, Scene, Navigation,Party_navigation,Party_selection}
+enum states {PC_selection, Pokemon_box, Item_box, Professor_box, Scene, Navigation,Party_navigation,Party_selection,Switching_pokemon}
 
 var state = states.Navigation
 
@@ -123,7 +123,13 @@ var animation_playable = true
 
 var controller_active = false
 
-var cont_box
+var cont_box	
+
+
+
+
+var temp_pokemon
+
 
 
 func _remove_controller():
@@ -133,11 +139,87 @@ func _remove_controller():
 		controller_active = false
 
 func _input(event):
+	if state == states.Switching_pokemon:
+		max_selected = $Control/Pokemon/ScrollContainer/GridContainer.get_child_count() -1
+		if event.is_action_pressed("A"):
+			if current_selected == 0:
+				state = states.Party_navigation
+			else:
+				current_selected -= 1
+		elif event.is_action_pressed("D"):
+			if current_selected != max_selected:
+				current_selected += 1
+			else:
+				current_selected = 0
+		if event.is_action_pressed("decline"):
+			state = states.Pokemon_box
+		elif event.is_action_pressed("accept"):
+			_switch_pokemon(selected_pokemon,PlayerPokemon.pc_pokemon[current_selected])
+			state = states.Party_selection
+			current_selected = 0
+			
 	if state == states.Party_selection:
 		if event.is_action_pressed("accept"):
 			if current_selected == 0:
+				Utils.Num_loaded_pokemon += 1
 				if selected_pokemon == PlayerPokemon.first_pokemon:
+					PlayerPokemon.first_pokemon.change_path = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
+					PlayerPokemon.first_pokemon.change_pc_poke = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
 					PlayerPokemon.pc_pokemon.append(PlayerPokemon.first_pokemon)
+					PlayerPokemon.first_pokemon = PlayerPokemon.second_pokemon
+					PlayerPokemon.second_pokemon = PlayerPokemon.third_pokemon
+					PlayerPokemon.third_pokemon = PlayerPokemon.fourth_pokemon
+					PlayerPokemon.fourth_pokemon = PlayerPokemon.fifth_pokemon
+					PlayerPokemon.fifth_pokemon = PlayerPokemon.sixth_pokemon
+					PlayerPokemon.sixth_pokemon = null
+					$Control/Pokemon._update()
+				elif selected_pokemon == PlayerPokemon.second_pokemon:
+					PlayerPokemon.second_pokemon.change_path = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
+					PlayerPokemon.second_pokemon.change_pc_poke = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
+					PlayerPokemon.pc_pokemon.append(PlayerPokemon.second_pokemon)
+					PlayerPokemon.second_pokemon = PlayerPokemon.third_pokemon
+					PlayerPokemon.third_pokemon = PlayerPokemon.fourth_pokemon
+					PlayerPokemon.fourth_pokemon = PlayerPokemon.fifth_pokemon
+					PlayerPokemon.fifth_pokemon = PlayerPokemon.sixth_pokemon
+					PlayerPokemon.sixth_pokemon = null
+					$Control/Pokemon._update()
+				elif selected_pokemon == PlayerPokemon.third_pokemon:
+					PlayerPokemon.third_pokemon.change_path = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
+					PlayerPokemon.third_pokemon.change_pc_poke = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
+					PlayerPokemon.pc_pokemon.append(PlayerPokemon.third_pokemon)
+					PlayerPokemon.third_pokemon = PlayerPokemon.fourth_pokemon
+					PlayerPokemon.fourth_pokemon = PlayerPokemon.fifth_pokemon
+					PlayerPokemon.fifth_pokemon = PlayerPokemon.sixth_pokemon
+					PlayerPokemon.sixth_pokemon = null
+					$Control/Pokemon._update()
+				elif selected_pokemon == PlayerPokemon.fourth_pokemon:
+					PlayerPokemon.fourth_pokemon.change_path = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
+					PlayerPokemon.fourth_pokemon.change_pc_poke = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
+					PlayerPokemon.pc_pokemon.append(PlayerPokemon.fourth_pokemon)
+					PlayerPokemon.fourth_pokemon = PlayerPokemon.fifth_pokemon
+					PlayerPokemon.fifth_pokemon = PlayerPokemon.sixth_pokemon
+					PlayerPokemon.sixth_pokemon = null
+					$Control/Pokemon._update()
+				elif selected_pokemon == PlayerPokemon.fifth_pokemon:
+					PlayerPokemon.fifth_pokemon.change_path = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
+					PlayerPokemon.fifth_pokemon.change_pc_poke = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
+					PlayerPokemon.pc_pokemon.append(PlayerPokemon.fifth_pokemon)
+					PlayerPokemon.fifth_pokemon = PlayerPokemon.sixth_pokemon
+					PlayerPokemon.sixth_pokemon = null
+					$Control/Pokemon._update()
+				elif selected_pokemon == PlayerPokemon.sixth_pokemon:
+					PlayerPokemon.sixth_pokemon.change_path = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
+					PlayerPokemon.sixth_pokemon.change_pc_poke = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
+					PlayerPokemon.pc_pokemon.append(PlayerPokemon.sixth_pokemon)
+					PlayerPokemon.sixth_pokemon = null
+					$Control/Pokemon._update()
+			if event.is_action_pressed("decline") and current_selected == 3:
+				current_to_change.color = Color("250080")
+				current_selected = 0
+				state = states.Party_navigation
+			if event.is_action_pressed("accept") and current_selected == 1:
+				_pre_switch()
+	
 	if event.is_action_pressed("accept") and state == states.Party_navigation:
 		if current_selected == 0:
 			selected_pokemon = PlayerPokemon.first_pokemon
@@ -153,6 +235,8 @@ func _input(event):
 			selected_pokemon = PlayerPokemon.sixth_pokemon
 		state = states.Party_selection
 		current_selected = 0
+
+		
 	if state == states.Pokemon_box:
 		if event.is_action_pressed("accept") and controller_active == false:
 			controller_active = true
@@ -248,7 +332,18 @@ func _input(event):
 			state = states.Party_navigation
 			current_to_change.color = Color("250080")
 			current_selected = 0
+
+func _pre_switch():
+	state = states.Switching_pokemon
+	current_selected = 0
+	
 			
+func _switch_pokemon(pokemon_1,pokemon_2) -> void:
+
+	PlayerPokemon._switch(pokemon_1,pokemon_2)
+	$Control/Pokemon._update()
+	pokemon_1 = null
+	pokemon_2 = null
 
 func _function():
 	if state == states.Navigation:
@@ -279,6 +374,17 @@ func _reset_pc_Selection():
 
 
 func _physics_process(_delta):
+	if state == states.Switching_pokemon:
+		if Input.is_action_pressed("W"):
+			$Control/Pokemon/ScrollContainer.scroll_vertical += 1
+		elif Input.is_action_pressed("S"):
+			$Control/Pokemon/ScrollContainer.scroll_vertical -= 1
+		max_selected = $Control/Pokemon/ScrollContainer/GridContainer.get_child_count() -1
+		for i in $Control/Pokemon/ScrollContainer/GridContainer.get_child_count():
+			if $Control/Pokemon/ScrollContainer/GridContainer.get_child(i).num == current_selected:
+				$Control/Pokemon/ScrollContainer/GridContainer.get_child(i).selected = true
+			else:
+				$Control/Pokemon/ScrollContainer/GridContainer.get_child(i).selected = false
 	if state == states.Pokemon_box:
 		if Input.is_action_pressed("W"):
 			$Control/Pokemon/ScrollContainer.scroll_vertical += 1

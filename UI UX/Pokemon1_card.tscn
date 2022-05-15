@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Fonts/Pokemon_12.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Pokemon/Articuno.png" type="Texture" id=2]
 [ext_resource path="res://UI UX/Pokemon1_card.gd" type="Script" id=3]
 
 [node name="Pokemon1" type="TextureRect"]
@@ -34,7 +33,6 @@ color = Color( 0.0588235, 0.0235294, 0.231373, 1 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 5, 1 )
 scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 2 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0.684021, 34.0005, 62.8255, 63.3979 )
@@ -55,7 +53,6 @@ margin_right = 44.0
 margin_bottom = 46.0
 rect_scale = Vector2( 0.37, 0.37 )
 custom_fonts/font = ExtResource( 1 )
-text = "12"
 
 [node name="Nm" type="Label" parent="."]
 margin_left = 2.0
@@ -73,4 +70,3 @@ margin_right = 77.0
 margin_bottom = 41.0
 rect_scale = Vector2( 0.312571, 0.342007 )
 custom_fonts/font = ExtResource( 1 )
-text = "Articuno"

@@ -10,7 +10,7 @@
 [ext_resource path="res://assests/libraries/Ui/Mobile.png" type="Texture" id=8]
 [ext_resource path="res://Fonts/Pokemon_12.tres" type="DynamicFont" id=9]
 [ext_resource path="res://UI UX/Pokemon.gd" type="Script" id=10]
-[ext_resource path="res://Pokemon/Arbok.png" type="Texture" id=12]
+[ext_resource path="res://assests/libraries/Ui/Buttons/Cross/X pressed.png" type="Texture" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0431373, 0.0156863, 0.164706, 1 )
@@ -645,7 +645,6 @@ color = Color( 0.0588235, 0.0235294, 0.231373, 1 )
 [node name="Sprite" type="Sprite" parent="Control/Pokemon/Party/ColorRect/VBoxContainer/HBoxContainer/Party_sprites/Left/Pokemon_back_1/Fore_ground"]
 position = Vector2( 9, 7 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 12 )
 region_enabled = true
 region_rect = Rect2( 26.2001, 9.21863, 37.7352, 23.3843 )
 
@@ -668,7 +667,6 @@ color = Color( 0.0588235, 0.0235294, 0.231373, 1 )
 [node name="Sprite2" type="Sprite" parent="Control/Pokemon/Party/ColorRect/VBoxContainer/HBoxContainer/Party_sprites/Left/Pokemon_back_2/Fore_ground2"]
 position = Vector2( 9, 7 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 12 )
 region_enabled = true
 region_rect = Rect2( 26.3299, 9.21863, 37.6054, 23.3843 )
 
@@ -691,7 +689,6 @@ color = Color( 0.0588235, 0.0235294, 0.231373, 1 )
 [node name="Sprite3" type="Sprite" parent="Control/Pokemon/Party/ColorRect/VBoxContainer/HBoxContainer/Party_sprites/Left/Pokemon_back_3/Fore_ground3"]
 position = Vector2( 9, 7 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 12 )
 region_enabled = true
 region_rect = Rect2( 26.3299, 9.21863, 37.6054, 23.3843 )
 
@@ -720,7 +717,6 @@ color = Color( 0.0588235, 0.0235294, 0.231373, 1 )
 [node name="Sprite4" type="Sprite" parent="Control/Pokemon/Party/ColorRect/VBoxContainer/HBoxContainer/Party_sprites/Right/Pokemon_back_4/Fore_ground4"]
 position = Vector2( 9, 7 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 12 )
 region_enabled = true
 region_rect = Rect2( 26.3299, 9.21863, 37.6054, 23.3843 )
 
@@ -743,7 +739,6 @@ color = Color( 0.0588235, 0.0235294, 0.231373, 1 )
 [node name="Sprite5" type="Sprite" parent="Control/Pokemon/Party/ColorRect/VBoxContainer/HBoxContainer/Party_sprites/Right/Pokemon_back_5/Fore_ground5"]
 position = Vector2( 9, 7 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 12 )
 region_enabled = true
 region_rect = Rect2( 26.2001, 9.21863, 37.7352, 23.3843 )
 
@@ -766,7 +761,6 @@ color = Color( 0.0588235, 0.0235294, 0.231373, 1 )
 [node name="Sprite6" type="Sprite" parent="Control/Pokemon/Party/ColorRect/VBoxContainer/HBoxContainer/Party_sprites/Right/Pokemon_back_6/Fore_ground6"]
 position = Vector2( 9, 7 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 12 )
 region_enabled = true
 region_rect = Rect2( 26.5895, 9.21863, 37.3458, 23.3843 )
 
@@ -884,6 +878,11 @@ rect_scale = Vector2( 0.7, 0.6 )
 custom_fonts/font = ExtResource( 9 )
 text = "Back"
 align = 1
+
+[node name="XPressed" type="Sprite" parent="Control/Pokemon/Party/ColorRect/VBoxContainer/Button_box/Back/ColorRect/Label"]
+position = Vector2( 49.8214, 6.66699 )
+scale = Vector2( 0.0589285, 0.0666664 )
+texture = ExtResource( 11 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 4 )

@@ -32,6 +32,9 @@ var sixth_pokemon
 
 var pc_pokemon : Array
 
+
+
+
 func _ready():
 	yield(get_tree().create_timer(2),"timeout")
 	pokemon1 = first_pokemon
@@ -40,6 +43,47 @@ func _ready():
 	pokemon4 = fourth_pokemon
 	pokemon5 = fifth_pokemon
 	pokemon6 = sixth_pokemon
+
+func _switch(selected_pokemon_1,selected_pokemon_2):
+	var temp_pokemon_1 = selected_pokemon_1
+	var tmp = selected_pokemon_1.change_path
+	var tmp_1 = selected_pokemon_1.change_pc_poke
+
+	
+
+	selected_pokemon_1.change_path = selected_pokemon_2.change_path
+	selected_pokemon_1.change_pc_poke = selected_pokemon_2.change_pc_poke
+
+	selected_pokemon_2.change_path = tmp
+	selected_pokemon_2.change_pc_poke = tmp_1
+
+	if pc_pokemon.has(selected_pokemon_2):
+		pc_pokemon.erase(selected_pokemon_2)
+		pc_pokemon.append(selected_pokemon_1)
+
+	if selected_pokemon_2.change_path == "first_pokemon":
+		first_pokemon = selected_pokemon_2
+	elif selected_pokemon_2.change_path == "second_pokemon":
+		second_pokemon = selected_pokemon_2
+	elif selected_pokemon_2.change_path == "third_pokemon":
+		third_pokemon = selected_pokemon_2
+	elif selected_pokemon_2.change_path == "fourth_pokemon":
+		fourth_pokemon = selected_pokemon_2
+	elif selected_pokemon_2.change_path == "fifth_pokemon":
+		fifth_pokemon = selected_pokemon_2
+	elif selected_pokemon_2.change_path == "sixth_pokemon":
+		sixth_pokemon = selected_pokemon_2
+	
+	
+	
+
+	
+
+	
+
+
+	
+
 
 
 func switch(first_slot, second_slot):

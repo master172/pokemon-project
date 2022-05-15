@@ -192,8 +192,12 @@ func _ready():
 	
 	
 	yield(get_tree().create_timer(0.2),"timeout")
-
+	
+	
 	if added == true:
+		if self.change_pc_poke != null:
+			change_path = change_pc_poke
+			PlayerPokemon.pc_pokemon.append(self)
 		if change_path == "first_pokemon":
 			PlayerPokemon.first_pokemon = self
 		elif change_path == "second_pokemon":
@@ -206,8 +210,6 @@ func _ready():
 			PlayerPokemon.fifth_pokemon = self
 		elif change_path == "sixth_pokemon":
 			PlayerPokemon.sixth_pokemon = self
-		else:
-			PlayerPokemon.pc_pokemon.append(self)
 
 func _calculate_experience():
 	if Levelling_rate == "Fast":

@@ -13,18 +13,76 @@ const Pokemon_card = preload("res://UI UX/Pokemon1_card.tscn")
 
 var number :int = 0
 
+var pokemon_set = false
 
 func _physics_process(_delta):
-	yield(get_tree().create_timer(0.2),"timeout")
-	pokemon_1.texture = PlayerPokemon.first_pokemon.sprite
-	pokemon_2.texture = PlayerPokemon.second_pokemon.sprite
-	pokemon_3.texture = PlayerPokemon.third_pokemon.sprite
-	pokemon_4.texture = PlayerPokemon.fourth_pokemon.sprite
-	pokemon_5.texture = PlayerPokemon.fifth_pokemon.sprite
-	pokemon_6.texture = PlayerPokemon.sixth_pokemon.sprite
+	if pokemon_set == false:
+		yield(get_tree().create_timer(0.2),"timeout")
+		pokemon_set = true
+		if PlayerPokemon.first_pokemon !=  null:
+			pokemon_1.texture = PlayerPokemon.first_pokemon.sprite
+		else:
+			pokemon_1.texture =  null
+		if PlayerPokemon.second_pokemon !=  null:
+			pokemon_2.texture = PlayerPokemon.second_pokemon.sprite
+		else:
+			pokemon_2.texture =  null
+		if PlayerPokemon.third_pokemon !=  null:
+			pokemon_3.texture = PlayerPokemon.third_pokemon.sprite
+		else:
+			pokemon_3.texture =  null
+		
+		if PlayerPokemon.fourth_pokemon !=  null:
+			pokemon_4.texture = PlayerPokemon.fourth_pokemon.sprite
+		else:	
+			pokemon_4.texture =  null
+		if PlayerPokemon.fifth_pokemon !=  null:
+			pokemon_5.texture = PlayerPokemon.fifth_pokemon.sprite
+		else:	
+			pokemon_5.texture =  null
+		if PlayerPokemon.sixth_pokemon !=  null:
+			pokemon_6.texture = PlayerPokemon.sixth_pokemon.sprite
+		else:	
+			pokemon_6.texture =  null
+	else:
+		if PlayerPokemon.first_pokemon !=  null:
+			pokemon_1.texture = PlayerPokemon.first_pokemon.sprite
+		else:
+			pokemon_1.texture =  null
+		if PlayerPokemon.second_pokemon !=  null:
+			pokemon_2.texture = PlayerPokemon.second_pokemon.sprite
+		else:
+			pokemon_2.texture =  null
+		if PlayerPokemon.third_pokemon !=  null:
+			pokemon_3.texture = PlayerPokemon.third_pokemon.sprite
+		else:
+			pokemon_3.texture =  null
+		
+		if PlayerPokemon.fourth_pokemon !=  null:
+			pokemon_4.texture = PlayerPokemon.fourth_pokemon.sprite
+		else:	
+			pokemon_4.texture =  null
+		if PlayerPokemon.fifth_pokemon !=  null:
+			pokemon_5.texture = PlayerPokemon.fifth_pokemon.sprite
+		else:	
+			pokemon_5.texture =  null
+		if PlayerPokemon.sixth_pokemon !=  null:
+			pokemon_6.texture = PlayerPokemon.sixth_pokemon.sprite
+		else:	
+			pokemon_6.texture =  null
 
 func _ready():
 	yield(get_tree().create_timer(0.2),"timeout")
+	for i in PlayerPokemon.pc_pokemon:
+		var pokemon_card = Pokemon_card.instance()
+		pokemon_card.num = number
+		number += 1
+		pokemon_card.Pokemon_to_set = i
+		grid_container.add_child(pokemon_card)
+
+func _update():
+	for i in grid_container.get_children():
+		i.queue_free()		
 	for i in PlayerPokemon.pc_pokemon:
 		var pokemon_card = Pokemon_card.instance()
 		pokemon_card.num = number
