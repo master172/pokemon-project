@@ -8,6 +8,7 @@ var State = states.Main
 var Poke_cont_box
 
 const poke_cont_box = preload("res://Ui/Battle_box_cont.tscn")
+
 var current_selected:int = 1
 
 func _kill():

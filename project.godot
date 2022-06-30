@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/textalog/resources/character_class/character_class.gd"
 }, {
+"base": "HBoxContainer",
+"class": "ContributorClass",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/ContributorClass.gd"
+}, {
 "base": "DialogNode",
 "class": "DialogBubble",
 "language": "GDScript",
@@ -89,6 +94,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/event_system_plugin/events/wait.gd"
 }, {
+"base": "PanelContainer",
+"class": "GistItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/GistItem.gd"
+}, {
+"base": "",
+"class": "GitAPI",
+"language": "NativeScript",
+"path": "res://addons/godot-git-plugin/git_api.gdns"
+}, {
+"base": "HBoxContainer",
+"class": "InvitationItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/InvitationItem.gd"
+}, {
 "base": "Node",
 "class": "Learned_moves",
 "language": "GDScript",
@@ -119,6 +139,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/textalog/nodes/dialogue_base_node/portraits_node/portraits_node.gd"
 }, {
+"base": "PanelContainer",
+"class": "RepositoryItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/RepositoryItem.gd"
+}, {
 "base": "Resource",
 "class": "Timeline",
 "language": "GDScript",
@@ -126,6 +151,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Character": "res://addons/textalog/assets/icons/character_icon.png",
+"ContributorClass": "",
 "DialogBubble": "",
 "DialogManager": "",
 "DialogNode": "",
@@ -141,12 +167,16 @@ _global_script_class_icons={
 "EventSet": "",
 "EventShow": "",
 "EventWait": "",
+"GistItem": "",
+"GitAPI": "",
+"InvitationItem": "",
 "Learned_moves": "",
 "Moves": "",
 "OptionsManager": "",
 "Pokemon": "",
 "Portrait": "res://addons/textalog/assets/icons/portrait_icon.png",
 "PortraitManager": "",
+"RepositoryItem": "",
 "Timeline": "res://addons/event_system_plugin/assets/icons/timeline_icon.png"
 }
 
@@ -171,6 +201,10 @@ SceneLoaded="*res://autoload/Scene_loaded.gd"
 GameSaver="*res://autoload/GameSaver.gd"
 PokeHelper="*res://autoload/Poke_helper.gd"
 MoveLearner="*res://autoload/Move_learner.gd"
+PluginSettings="*res://addons/github-integration/scripts/PluginSettings.gd"
+IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
+UserData="*res://addons/github-integration/scripts/user_data.gd"
+RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
 
 [debug]
 
@@ -191,7 +225,11 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/event_system_plugin/plugin.cfg", "res://addons/textalog/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/event_system_plugin/plugin.cfg", "res://addons/github-integration/plugin.cfg", "res://addons/textalog/plugin.cfg" )
+
+[gdnative]
+
+singletons=[ "res://addons/godot-git-plugin/git_api.gdnlib" ]
 
 [global]
 
@@ -314,6 +352,7 @@ pointing/emulate_touch_from_mouse=true
 
 [physics]
 
+common/physics_fps=240
 common/enable_pause_aware_picking=true
 
 [rendering]

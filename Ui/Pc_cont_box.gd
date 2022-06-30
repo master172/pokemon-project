@@ -1,11 +1,11 @@
 extends Control
 
 
-enum Options { Summary, Switch, Item, Moves, Release, Back }
+enum Options { Summary, Withdraw, Item, Moves, Release, Back }
 var selected_option: int = Options.Summary
 
 onready var Summary = $Node2D/Summary
-onready var Switch = $Node2D/Switch
+onready var Withdraw = $Node2D/Withdraw
 onready var Item = $Node2D/Item
 onready var Moves = $Node2D/Moves
 onready var Release = $Node2D/Release
@@ -15,7 +15,7 @@ var controller
 
 onready var options: Dictionary = {
 	Options.Summary: Summary,
-	Options.Switch: Switch,
+	Options.Withdraw: Withdraw,
 	Options.Item: Item,
 	Options.Moves: Moves,
 	Options.Release: Release,
@@ -59,6 +59,8 @@ func _input(event):
 		match selected_option:
 			Options.Back:
 				self.controller._remove_controller()
+			Options.Withdraw:
+				self.controller._withdraw(self.controller.selected_pokemon)
 	elif event.is_action_pressed("decline"):
 		if self.controller != null:
 			pass

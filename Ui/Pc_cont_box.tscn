@@ -52,7 +52,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Switch" type="ColorRect" parent="Node2D"]
+[node name="Withdraw" type="ColorRect" parent="Node2D"]
 margin_left = 192.0
 margin_top = 89.0
 margin_right = 226.0
@@ -63,17 +63,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Node2D/Switch"]
+[node name="Label" type="Label" parent="Node2D/Withdraw"]
 margin_right = 43.0
 margin_bottom = 16.0
 rect_scale = Vector2( 0.8, 1.25 )
 custom_fonts/font = SubResource( 1 )
-text = "Switch"
+text = "Withdraw"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Item" type="ColorRect" parent="Node2D"]
 margin_left = 192.0

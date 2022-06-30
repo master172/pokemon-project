@@ -138,6 +138,25 @@ func _remove_controller():
 		yield(get_tree().create_timer(0.1),"timeout")
 		controller_active = false
 
+func _withdraw(selecPokemon):
+	selecPokemon.change_path = null
+	selecPokemon.change_pc_poke = null
+	if PlayerPokemon.second_pokemon == null:
+		selecPokemon.change_path = "second_pokemon"		
+		PlayerPokemon.second_pokemon = selecPokemon
+	elif PlayerPokemon.third_pokemon == null:
+		selecPokemon.change_path = "third_pokemon"
+		PlayerPokemon.third_pokemon = selecPokemon
+	elif PlayerPokemon.fourth_pokemon == null:
+		selecPokemon.change_path = "fourth_pokemon"
+		PlayerPokemon.fourth_pokemon = selecPokemon
+	elif PlayerPokemon.fifth_pokemon == null:
+		selecPokemon.change_path = " fifth_pokemon"
+		PlayerPokemon.fifth_pokemon = selecPokemon
+	elif PlayerPokemon.sixth_pokemon == null:
+		selecPokemon.change_path = "sixth_pokemon"
+		PlayerPokemon.sixth_pokemon = selecPokemon
+			
 func _input(event):
 	if state == states.Switching_pokemon:
 		max_selected = $Control/Pokemon/ScrollContainer/GridContainer.get_child_count() -1
@@ -215,8 +234,8 @@ func _input(event):
 					$Control/Pokemon._update()
 			if event.is_action_pressed("decline") and current_selected == 3:
 				current_to_change.color = Color("250080")
-				current_selected = 0
 				state = states.Party_navigation
+				current_selected = 0
 			if event.is_action_pressed("accept") and current_selected == 1:
 				_pre_switch()
 	
@@ -256,8 +275,7 @@ func _input(event):
 				state = states.Navigation
 				current_selected = 4
 			elif current_selected == 3:
-				Utils.Get_Scene_Manager().transition_exit_Pc()
-				queue_free()
+				get_tree().change_scene_to(load("res://Scenes/SceneManager.tscn"))
 	
 	if event.is_action_pressed("W"):
 		if state != states.Pokemon_box:
@@ -344,7 +362,7 @@ func _switch_pokemon(pokemon_1,pokemon_2) -> void:
 	$Control/Pokemon._update()
 	pokemon_1 = null
 	pokemon_2 = null
-
+	get_tree().reload_current_scene()
 func _function():
 	if state == states.Navigation:
 		if current_selected == 0:

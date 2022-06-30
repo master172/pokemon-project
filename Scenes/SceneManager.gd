@@ -13,16 +13,15 @@ enum Transition_Type  {NEW_SCENE, PARTY_SCENE, MENU_ONLY, POKEMON_SCENE,EXIT_POK
 var transition_type = Transition_Type.NEW_SCENE
 
 func transition_to_Pc():
-	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
-	Utils.get_player().set_physics_process(false)
-	var Pc = pc.instance()
-	add_child(Pc)
-	transition_type = Transition_Type.PC
+	SaveAndLoad.save_game()
+	Utils.get_player().is_moving = false
+	Utils.get_player().is_running = false
+	Utils.get_player().is_cycling = false
+	Utils.get_player().is_talking = false
+	Utils.get_player().is_surfing = false
+	Utils.get_player()._save_data()
+	get_tree().change_scene_to(load("res://UI UX/Pc.tscn"))
 
-func transition_exit_Pc():
-	transition_type = Transition_Type.EXIT_PC
-	yield(get_tree().create_timer(0.1),"timeout")
-	Utils.get_player().set_physics_process(true)
 
 func transition_to_Move_learner():
 	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")

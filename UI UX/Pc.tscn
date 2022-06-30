@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assests/libraries/Ui/Menu.png" type="Texture" id=1]
 [ext_resource path="res://assests/libraries/Ui/Home.png" type="Texture" id=2]
@@ -8,9 +8,10 @@
 [ext_resource path="res://assests/libraries/Ui/Pokeball.png" type="Texture" id=6]
 [ext_resource path="res://assests/libraries/Ui/Item.png" type="Texture" id=7]
 [ext_resource path="res://assests/libraries/Ui/Mobile.png" type="Texture" id=8]
-[ext_resource path="res://Fonts/Pokemon_12.tres" type="DynamicFont" id=9]
+[ext_resource path="res://Fonts/Pokemon_16.tres" type="DynamicFont" id=9]
 [ext_resource path="res://UI UX/Pokemon.gd" type="Script" id=10]
 [ext_resource path="res://assests/libraries/Ui/Buttons/Cross/X pressed.png" type="Texture" id=11]
+[ext_resource path="res://UI UX/Control_tab.tscn" type="PackedScene" id=12]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0431373, 0.0156863, 0.164706, 1 )
@@ -887,3 +888,5 @@ texture = ExtResource( 11 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 4 )
 anims/Side_bar_anim = SubResource( 3 )
+
+[node name="Control_tab" parent="." instance=ExtResource( 12 )]
