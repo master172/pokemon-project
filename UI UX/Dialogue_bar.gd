@@ -61,12 +61,15 @@ func _physics_process(delta):
 					emit_signal("Dialog_changed")
 				elif typeof(text_to_diaplay[current_set + 1]) == TYPE_INT:
 					if text_to_diaplay[current_set + 1] == 1:
-						to_choice = true
-						_ask_choice()
-						emit_signal("choice_asked")
+						if choices != null:
+							to_choice = true
+							_ask_choice()
+							emit_signal("choice_asked")
+						else:
+							current_set += 1
 					elif text_to_diaplay[current_set + 1] == 0:
 						emit_signal("Dialog_ended")
-						queue_free()
+						self.queue_free()
 		
 	if handling_choice == true:
 		
@@ -98,6 +101,9 @@ func _finish_choices():
 	handling_choice = false
 	choosed = false
 	choice_var = 0
+	current_choice = 0
+	option_array.clear()
+	selected_choice = 0
 	for i in range(0,Option_container.get_child(1).get_child_count()):
 		Option_container.get_child(1).get_child(i).queue_free()
 
