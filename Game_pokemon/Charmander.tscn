@@ -1,13 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Game_script_resources/Pokemon.gd" type="Script" id=1]
 [ext_resource path="res://Pokemon/Charmander.png" type="Texture" id=2]
 [ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Game_actions/Growl.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game_actions/Scratch.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game_pokemon/Charizard.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Pokemon/Charizard.png" type="Texture" id=7]
 
 [node name="Charmander" type="Node2D" groups=["Presist"]]
 script = ExtResource( 1 )
+base_experience_yeild = 64.0
 sprite = ExtResource( 2 )
 Name = "Charmander"
 id = 4
@@ -16,6 +19,7 @@ Damage_normally_by = [ 1, 12, 4, 13, 16, 3, 7, 8, 17 ]
 Weak_to = [ 5, 14, 11 ]
 Resistant_to = [ 6, 9, 2, 10, 15, 18 ]
 Immune_to = [ 0 ]
+level_to_next_form = 16
 Moves = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ) ]
 catch_rate = 45.0
 Levelling_rate = "Medium_slow"
@@ -35,6 +39,8 @@ base_special_defense = 50
 base_speed = 65
 speed_yield = 1
 pokemon_entry = "The flame that burns at the tip of its tail is an indication of its emotions. The flame wavers when Charmander is happy, and blazes when it is enraged."
+next_form = ExtResource( 6 )
+stage_2 = ExtResource( 7 )
 
 [node name="Tackle" parent="." instance=ExtResource( 3 )]
 

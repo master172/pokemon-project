@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ui_arrow_left_right.png-0bac0802560aaf289112404526c96ae3.stex"
+path="res://.import/new background.png-a76ccdc124bd344ffcead681da2c0796.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assests/libraries/ui_arrow_left_right.png"
-dest_files=[ "res://.import/ui_arrow_left_right.png-0bac0802560aaf289112404526c96ae3.stex" ]
+source_file="res://assests/libraries/new background.png"
+dest_files=[ "res://.import/new background.png-a76ccdc124bd344ffcead681da2c0796.stex" ]
 
 [params]
 

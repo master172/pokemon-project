@@ -448,3 +448,5 @@ align = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 8 )
+
+[node name="Dialog" type="CanvasLayer" parent="."]

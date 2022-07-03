@@ -8,6 +8,7 @@
 
 [node name="Bulbasaur" type="Node2D" groups=["Presist"]]
 script = ExtResource( 1 )
+base_experience_yeild = 65.0
 sprite = ExtResource( 2 )
 Name = "Bulbasaur"
 id = 1

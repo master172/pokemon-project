@@ -32,6 +32,20 @@ var sixth_pokemon
 
 var pc_pokemon : Array
 
+	
+func _check_evolution():
+	if self.first_pokemon != null:
+		self.first_pokemon.evolve()
+	if self.second_pokemon != null:
+		self.second_pokemon.evolve()
+	if self.third_pokemon != null:
+		self.third_pokemon.evolve()
+	if self.fourth_pokemon != null:
+		self.fourth_pokemon.evolve()
+	if self.fifth_pokemon != null:
+		self.fifth_pokemon.evolve()
+	if self.sixth_pokemon != null:
+		self.sixth_pokemon.evolve()
 
 
 
@@ -74,12 +88,7 @@ func _switch(selected_pokemon_1,selected_pokemon_2):
 	elif selected_pokemon_2.change_path == "sixth_pokemon":
 		sixth_pokemon = selected_pokemon_2
 	
-	
-	
 
-	
-
-	
 
 
 	

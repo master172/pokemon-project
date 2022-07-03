@@ -108,6 +108,7 @@ func win():
 		PlayerPokemon.current_pokemon = null
 		BattleManager.fainted = true
 		Utils.Get_Scene_Manager().transition_exit_pokemon_scene()
+		PlayerPokemon._check_evolution()
 
 func _capture():
 	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:

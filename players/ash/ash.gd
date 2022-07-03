@@ -162,9 +162,13 @@ func _interact():
 				if Input.is_action_just_pressed("accept") and interacting == false:
 					interacting = true
 					is_talking = true
-					interaction_ray.get_collider()._interact_out_put()
-					interacting = false
-					is_talking = false
+					if interaction_ray.get_collider().has_method("_Start_dialog"):
+						interaction_ray.get_collider()._Start_dialog()
+						interaction_ray.get_collider().player = self
+					elif interaction_ray.get_collider().has_method("_interact_out_put"):
+						interaction_ray.get_collider()._interact_out_put()
+						interacting = false
+						is_talking = false
 		
 
 func interact_update():

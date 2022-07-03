@@ -1,6 +1,8 @@
 extends Node2D
 class_name Pokemon
 
+var evolver
+
 var exp_given :bool = false
 
 var exp_gainied : float = 0
@@ -11,6 +13,7 @@ var change_path
 
 var change_pc_poke
 
+export(int,1,3) var current_stage = 1
 var added:bool
 var name_changed :bool = false
 
@@ -37,6 +40,7 @@ export(Array,int,"None","Normal","Fire","Electric","Flying","Ground","Bug","Psyc
 export(Array,int,"None","Normal","Fire","Electric","Flying","Ground","Bug","Psychic","Dragon","Steel","Grass","Water","Fighting","Poison","Rock","Ice","Ghost","Dark","Fairy") var Immune_to = null
 
 
+export(int,0,100) var level_to_next_form
 export(Array,Resource) var abilites 
 
 export(Array,Resource) var Learned_moves
@@ -50,7 +54,7 @@ export(String,"Fast","Slow","Medium_slow","Medium_fast","Erratic","Fluctuating")
 export(int) var Min_Hatch_time =""
 export(int) var Max_Hatch_time =""
 
-export(String,"50.0%_male","25.0%_male","0%_male","100%_male") var gender_ratio
+export(String,"50.0%_male","87.5%_male","25.0%_male","0%_male","100%_male") var gender_ratio
 
 export(int,FLAGS,"Monster","Human-Like","Water 1","Water 3","Bug","MineralFlying","Amorphous","Field","Water 2","Fairy","Ditto","Grass","Dragon","No Eggs Discovered","Gender unknown") var egg_groups
 
@@ -108,6 +112,7 @@ export(int)var sp_defense_yield
 export(String,MULTILINE) var pokemon_entry 
 
 export(PackedScene) var next_form
+export(PackedScene) var last_form
 
 var can_battle :bool = false
 var fainted = false
@@ -125,6 +130,10 @@ var max_level:int = 100
 var opposing_pokemon
 
 var current_holder
+
+export(String) var evolving_attributes
+export(Texture) var stage_2
+export(Texture) var stage_3
 
 func _calculate_exp_poits_to_give():
 	var _opposition_level
@@ -148,7 +157,7 @@ func _calculate_exp_poits_to_give():
 	else:
 		_battle_type = 2
 
-	exp_gainied = 1000
+	exp_gainied = (((self.base_experience_yeild * self.level) * int(rand_range(1,2))) *  int(rand_range(1,2)))/7
 	
 	if exp_gainied < 0:
 		exp_gainied = exp_gainied*-1
@@ -346,6 +355,29 @@ func save():
 		"added":added,
 		"change_path":change_path,
 		"change_pc_poke":change_pc_poke,
+
+		"current_stage":current_stage,
+		"Name":Name,
+		"id":id,
+		"Damage_normally_by":Damage_normally_by,
+		"Weak_to":Weak_to,
+		"Resistant_to":Resistant_to,
+		"Immune_to":Immune_to,
+		"level_to_next_form":level_to_next_form,
+		"gender_ratio":gender_ratio,
+		"Type_1":Type_1,
+		"Type_2":Type_2,
+		"catch_rate":catch_rate,
+		"Levelling_rate":Levelling_rate,
+		"Min_Hatch_time":Min_Hatch_time,
+		"Max_Hatch_time":Max_Hatch_time,
+		"egg_groups":egg_groups,
+		"base_friend_ship":base_friend_ship,
+		"height":height,
+		"weight":weight,
+		"pokemon_entry":pokemon_entry,
+		"abilites":abilites,
+
 	}
 	return save_dict
 
@@ -362,6 +394,16 @@ func _unlearn(move):
 	move.can_add = false
 
 func _physics_process(_delta):
+
+	if current_stage == 1:
+		self.sprite = self.sprite
+		next_form = next_form
+	elif current_stage == 2 and stage_2 != null:
+		self.sprite = self.stage_2
+		next_form = last_form
+	elif current_stage == 3 and stage_3 != null:
+		self.sprite = self.stage_3
+		next_form = null
 
 	if self.Current_health_points <= 0:
 		self.fainted = true
@@ -470,3 +512,49 @@ func _notification(what):
 			self.change_path = "sixth_pokemon"
 		else:
 			self.change_path = change_pc_poke
+
+
+#evolving
+func evolve():
+	if self.level >= self.level_to_next_form and self.next_form != null:
+		if self.next_form != null:
+			self.current_stage += 1
+			#reassigning the values
+			evolver = self.next_form.instance()
+			self.id = self.evolver.id
+			self.Name = self.evolver.name
+			self.Type_1 = self.evolver.Type_1
+			self.Type_2 = self.evolver.Type_2
+			self.Damage_normally_by = self.evolver.Damage_normally_by
+			self.Weak_to = self.evolver.Weak_to
+			self.Resistant_to = self.evolver.Resistant_to
+			self.Immune_to = self.evolver.Immune_to
+			self.level_to_next_form = self.evolver.level_to_next_form
+			self.abilites = self.evolver.abilites
+			self.catch_rate = self.evolver.catch_rate
+			self.Levelling_rate = self.evolver.Levelling_rate
+			self.Min_Hatch_time = self.evolver.Min_Hatch_time
+			self.Max_Hatch_time = self.evolver.Max_Hatch_time
+			self.gender_ratio = self.evolver.gender_ratio
+			self.egg_groups = self.evolver.egg_groups
+			self.base_friend_ship = self.evolver.base_friend_ship
+			self.height = self.evolver.height
+			self.weight = self.evolver.weight
+			self.base_Health_points = self.evolver.base_Health_points
+			self.base_attack = self.evolver.base_attack
+			self.base_defense = self.evolver.base_defense
+			self.base_special_attack = self.evolver.base_special_attack
+			self.base_special_defense = self.evolver.base_special_defense
+			self.base_speed = self.evolver.base_speed
+			self.hp_yield = self.evolver.hp_yield
+			self.attack_yield = self.evolver.attack_yield
+			self.sp_attack_yield = self.evolver.sp_attack_yield
+			self.sp_defense_yield = self.evolver.sp_defense_yield
+			self.defense_yield = self.evolver.defense_yield
+			self.speed_yield = self.evolver.speed_yield
+			self.pokemon_entry = self.evolver.pokemon_entry
+		else:
+			print("Max staged reached")
+	else:
+		pass
+	return
