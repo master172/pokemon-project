@@ -15,10 +15,22 @@ texture = ExtResource( 1 )
 centered = false
 hframes = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="Count" type="Label" parent="."]
 margin_left = 24.0
 margin_top = 2.0
 margin_right = 42.0
 margin_bottom = 16.0
 rect_scale = Vector2( 0.438307, 0.361128 )
 custom_fonts/font = ExtResource( 2 )
+
+[node name="item" type="Sprite" parent="."]
+position = Vector2( 15, 16 )
+
+[node name="Label" type="RichTextLabel" parent="."]
+margin_left = 2.0
+margin_top = 26.0
+margin_right = 83.0
+margin_bottom = 75.0
+rect_scale = Vector2( 0.32152, 0.288012 )
+custom_fonts/normal_font = ExtResource( 2 )
+scroll_active = false

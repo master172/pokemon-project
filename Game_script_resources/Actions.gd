@@ -34,7 +34,7 @@ export(Resource) var special_effects
 
 export(String, MULTILINE) var description
 
-export(int,0,100) var Accuracy = 100.0
+export(float,0,100) var Accuracy = 100.0
 
 func save():
 	var save_dict = {

@@ -22,7 +22,7 @@ var in_battle = false
 export(Texture) var sprite 
 
 export(String) var Name = ""
-export(int) var id =""
+export(int) var id 
 
 export(Array, int,"None","Normal","Fire","Electric","Flying","Ground","Bug","Psychic","Dragon","Steel","Grass","Water","Fighting","Poison","Rock","Ice","Ghost","Dark","Fairy") var Type_1
 
@@ -45,12 +45,12 @@ export(Array,Resource) var Learned_moves
 
 export(Array,Resource) var Moves
 
-export(float) var catch_rate = ""
+export(float) var catch_rate
 
 export(String,"Fast","Slow","Medium_slow","Medium_fast","Erratic","Fluctuating") var Levelling_rate 
 
-export(int) var Min_Hatch_time =""
-export(int) var Max_Hatch_time =""
+export(int) var Min_Hatch_time
+export(int) var Max_Hatch_time
 
 export(String,"50.0%_male","87.5%_male","25.0%_male","0%_male","100%_male") var gender_ratio
 

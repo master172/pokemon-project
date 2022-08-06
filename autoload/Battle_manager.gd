@@ -10,7 +10,7 @@ var fainted =  false
 
 var in_battle = false
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if OpposingTrainerMonsters.pokemon != null:
 		PlayerPokemon.opposing_pokemon = OpposingTrainerMonsters.pokemon
 	else:

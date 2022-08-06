@@ -59,7 +59,6 @@ func _ready():
 	pokemon6 = sixth_pokemon
 
 func _switch(selected_pokemon_1,selected_pokemon_2):
-	var temp_pokemon_1 = selected_pokemon_1
 	var tmp = selected_pokemon_1.change_path
 	var tmp_1 = selected_pokemon_1.change_pc_poke
 
