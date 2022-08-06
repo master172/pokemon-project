@@ -3,6 +3,8 @@ extends Node
 var targets : int = 1
 
 var pokemon 
+var second_pokemon
+var third_pokemon
 
 var opposing_pokemon 
 

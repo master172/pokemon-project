@@ -24,11 +24,9 @@ export(Texture) var sprite
 export(String) var Name = ""
 export(int) var id =""
 
-export(int,"None","Normal","Fire","Electric","Flying","Ground","Bug","Psychic","Dragon","Steel","Grass","Water","Fighting","Poison","Rock","Ice","Ghost","Dark","Fairy") var Type_1
+export(Array, int,"None","Normal","Fire","Electric","Flying","Ground","Bug","Psychic","Dragon","Steel","Grass","Water","Fighting","Poison","Rock","Ice","Ghost","Dark","Fairy") var Type_1
 
-export(int,"None","Normal","Fire","Electric","Flying","Ground"\
-,"Bug","Psychic","Dragon","Steel","Grass","Water","Fighting"\
-,"Poison","Rock","Ice","Ghost","Dark","Fairy") var Type_2
+export(Array, int,"None","Normal","Fire","Electric","Flying","Ground","Bug","Psychic","Dragon","Steel","Grass","Water","Fighting","Poison","Rock","Ice","Ghost","Dark","Fairy") var Type_2
 
 
 export(Array,int,"None","Normal","Fire","Electric","Flying","Ground","Bug","Psychic","Dragon","Steel","Grass","Water","Fighting","Poison","Rock","Ice","Ghost","Dark","Fairy") var Damage_normally_by = null
@@ -117,8 +115,8 @@ export(PackedScene) var last_form
 var can_battle :bool = false
 var fainted = false
 
-var Weakness : float
-var Resistance : float
+var Weakness : float = 1
+var Resistance : float = 1
 
 var gender
 
@@ -186,12 +184,12 @@ func _add_ev_yield():
 		self.opposing_pokemon.Current_speed += self.speed_yield
 
 func _add_stats():
-	self.Current_health_points += (self.Base_Health_points / 20) + (self.EV_Health_points/50)
-	self.Current_attack += (self.Base_attack / 20) + (self.EV_attack / 50)
-	self.Current_defense += (self.Base_defense / 20) + (self.EV_defense / 50)
-	self.Current_special_attack += (self.Base_special_attack / 20) + (self.EV_special_attack / 50)
-	self.Current_special_defense += (self.Base_special_defense / 20) + (self.EV_special_defense / 50)
-	self.Current_speed += (self.Base_speed / 20) + (self.EV_speed / 50)
+	self.Current_health_points += ((self.base_Health_points / 20) + (self.EV_Health_points/50)/7)
+	self.Current_attack += (self.base_attack / 20) + (self.EV_attack / 50)
+	self.Current_defense += (self.base_defense / 20) + (self.EV_defense / 50)
+	self.Current_special_attack += (self.base_special_attack / 20) + (self.EV_special_attack / 50)
+	self.Current_special_defense += (self.base_special_defense / 20) + (self.EV_special_defense / 50)
+	self.Current_speed += (self.base_speed / 20) + (self.EV_speed / 50)
 	
 func _ready():		
 	if name_changed == false:
@@ -384,6 +382,10 @@ func save():
 func change_parent():
 	get_parent().remove_child(self)
 	Utils.parent_to_change.add_child(self)
+	if Utils.parent_to_change == OpposingTrainerMonsters:
+		OpposingTrainerMonsters.pokemon = self
+		
+
 
 func learn(move):
 	self.Learned_moves.append(move)
@@ -393,6 +395,88 @@ func _unlearn(move):
 	move.to_add = false
 	move.can_add = false
 
+
+func _calc_weak_and_res():
+	if self.get_parent() == OpposingTrainerMonsters:
+		print("Opposition")
+		if OpposingTrainerMonsters.pokemon == self:
+			print("Opposition set")
+			if OpposingTrainerMonsters.opposing_pokemon != null:
+				print("Opposition set of opposition")
+				self.opposing_pokemon = OpposingTrainerMonsters.opposing_pokemon
+				print("Self Opposition set")
+				if self.opposing_pokemon != null and PlayerPokemon.current_pokemon != null:
+					print("Srarting opposition")
+					if self.opposing_pokemon.id == self.id:
+						print("same Opposition")
+						self.Weakness = 1
+						self.Resistance = 1
+					elif self.opposing_pokemon.id != self.id:
+						print("Not same Oppositions")
+						for i in self.opposing_pokemon.Weak_to.size():
+							if self.opposing_pokemon.Weak_to[i] == self.Type_1[0]:
+								print("Oppositiion weak to")
+								self.Weakness = 2
+								self.Resistance = 2
+						for i in self.opposing_pokemon.Resistant_to.size():
+							if self.opposing_pokemon.Resistant_to[i] == self.Type_1[0]:
+								print("Oppositiion resistant to")
+								self.Resistance = 0.5
+								self.Weakness = 2
+						for i in self.opposing_pokemon.Damage_normally_by.size():
+							if self.opposing_pokemon.Damage_normally_by[i] == self.Type_1[0]:
+								print("Oppositiion damage normaly by")
+								self.Resistance = 1
+								self.Weakness = 1
+						for i in self.opposing_pokemon.Immune_to.size():
+							if self.opposing_pokemon.Immune_to[i] == self.Type_1[0]:
+								print("Oppositiion Immune to")
+								self.Resistance = 0
+								self.Weakness = 0
+			else:
+				self.opposing_pokemon = null
+	
+	elif self.get_parent() == PlayerPokemon:
+		print("PlayerPokemon")
+		if PlayerPokemon.current_pokemon == self:
+			print("Current pokemon")
+			if PlayerPokemon.opposing_pokemon != null:
+				print("Opposing pokemon")
+				self.opposing_pokemon = PlayerPokemon.opposing_pokemon
+				print("Set opposing_pokemon")
+				if self.opposing_pokemon != null and OpposingTrainerMonsters.pokemon != null:
+					print("Starting")
+					if self.opposing_pokemon.id == self.id:
+						print("Same")
+						self.Weakness = 1
+						self.Resistance = 1
+					elif self.opposing_pokemon.id != self.id:
+						print("Not same")
+						for i in self.opposing_pokemon.Weak_to.size():
+							if self.opposing_pokemon.Weak_to[i] == self.Type_1[0]:
+								print("weak to")
+								self.Weakness = 2
+								self.Resistance = 2
+						for i in self.opposing_pokemon.Resistant_to.size():
+							if self.opposing_pokemon.Resistant_to[i] == self.Type_1[0]:
+								print("resistant to")
+								self.Resistance = 0.5
+								self.Weakness = 2
+						for i in self.opposing_pokemon.Damage_normally_by.size():
+							if self.opposing_pokemon.Damage_normally_by[i] == self.Type_1[0]:
+								print("damage normaly by")
+								self.Resistance = 1
+								self.Weakness = 1
+						for i in self.opposing_pokemon.Immune_to.size():
+							if self.opposing_pokemon.Immune_to[i] == self.Type_1[0]:
+								print("Immune to")
+								self.Resistance = 0
+								self.Weakness = 0
+		elif PlayerPokemon.current_pokemon != self:
+			self.opposing_pokemon = null
+	
+	print(self.Name, " ",Weakness, " ", Resistance) 
+	
 func _physics_process(_delta):
 
 	if current_stage == 1:
@@ -424,77 +508,39 @@ func _physics_process(_delta):
 	if self.get_parent() != null:
 		self.current_holder = self.get_parent()
 	
-	if self.get_parent() == OpposingTrainerMonsters:
-		OpposingTrainerMonsters.pokemon = self
-		if OpposingTrainerMonsters.pokemon == self:
-			if OpposingTrainerMonsters.opposing_pokemon != null:
-				self.opposing_pokemon = OpposingTrainerMonsters.opposing_pokemon
-				if self.opposing_pokemon != null and PlayerPokemon.current_pokemon != null:
-					if self.opposing_pokemon.Weak_to.has(self.Type_1):
-						self.Resistance = 2
-						self.Weakness = 2
-					elif self.opposing_pokemon.Resistant_to.has(self.Type_1):
-						self.Resistance = 0.5
-						self.Weakness = 2
-					elif self.opposing_pokemon.Damage_normally_by.has(self.Type_1):
-						self.Resistance = 1
-						self.Weakness = 1
-					elif self.opposing_pokemon.Immune_to.has(self.Type_1):
-						self.Resistance = 0
-						self.Weakness = 0
-			else:
-				self.opposing_pokemon = null
-	
-	elif self.get_parent() == PlayerPokemon:
-		if PlayerPokemon.current_pokemon == self:
-			if PlayerPokemon.opposing_pokemon != null:
-				self.opposing_pokemon = PlayerPokemon.opposing_pokemon
-				if self.opposing_pokemon != null and OpposingTrainerMonsters.pokemon != null:
-					if self.opposing_pokemon.Weak_to.has(self.Type_1):
-						self.Resistance = 2
-						self.Weakness = 2
-					elif self.opposing_pokemon.Resistant_to.has(self.Type_1):
-						self.Resistance = 0.5
-						self.Weakness = 2
-					elif self.opposing_pokemon.Damage_normally_by.has(self.Type_1):
-						self.Resistance = 1
-						self.Weakness = 1
-					elif self.opposing_pokemon.Immune_to.has(self.Type_1):
-						self.Resistance = 0
-						self.Weakness = 0
-			else:
-				self.opposing_pokemon = null
 
-		if PlayerPokemon.first_pokemon == null and not added:
-			PlayerPokemon.first_pokemon = self
-			added = true
-			change_path = "first_pokemon"
-		elif PlayerPokemon.second_pokemon == null and not added:
-			PlayerPokemon.second_pokemon = self
-			added = true
-			change_path = "second_pokemon"
-		elif PlayerPokemon.third_pokemon == null and not added:
-			PlayerPokemon.third_pokemon = self
-			added = true
-			change_path = "third_pokemon"
-		elif PlayerPokemon.fourth_pokemon == null and not added:
-			PlayerPokemon.fourth_pokemon = self
-			added = true
-			change_path = "fourth_pokemon"
-		elif PlayerPokemon.fifth_pokemon == null and not added:
-			PlayerPokemon.fifth_pokemon = self
-			added = true
-			change_path = "fifth_pokemon"
-		elif PlayerPokemon.sixth_pokemon == null and not added:
-			PlayerPokemon.sixth_pokemon = self
-			added = true
-			change_path = "sixth_pokemon"
-		else:
-			if not added:
-				PlayerPokemon.pc_pokemon.append(self)
+
+		if self.get_parent() != null and self.get_parent() == PlayerPokemon:
+			if PlayerPokemon.first_pokemon == null and not added:
+				PlayerPokemon.first_pokemon = self
 				added = true
-				change_pc_poke = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
-				change_path = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
+				change_path = "first_pokemon"
+			elif PlayerPokemon.second_pokemon == null and not added:
+				PlayerPokemon.second_pokemon = self
+				added = true
+				change_path = "second_pokemon"
+			elif PlayerPokemon.third_pokemon == null and not added:
+				PlayerPokemon.third_pokemon = self
+				added = true
+				change_path = "third_pokemon"
+			elif PlayerPokemon.fourth_pokemon == null and not added:
+				PlayerPokemon.fourth_pokemon = self
+				added = true
+				change_path = "fourth_pokemon"
+			elif PlayerPokemon.fifth_pokemon == null and not added:
+				PlayerPokemon.fifth_pokemon = self
+				added = true
+				change_path = "fifth_pokemon"
+			elif PlayerPokemon.sixth_pokemon == null and not added:
+				PlayerPokemon.sixth_pokemon = self
+				added = true
+				change_path = "sixth_pokemon"
+			else:
+				if not added:
+					PlayerPokemon.pc_pokemon.append(self)
+					added = true
+					change_pc_poke = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
+					change_path = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
 
 func _notification(what):
 	if what == NOTIFICATION_WM_QUIT_REQUEST or what == NOTIFICATION_WM_GO_BACK_REQUEST:
@@ -553,6 +599,10 @@ func evolve():
 			self.defense_yield = self.evolver.defense_yield
 			self.speed_yield = self.evolver.speed_yield
 			self.pokemon_entry = self.evolver.pokemon_entry
+
+			_update_level()
+			_calculate_stats()
+			_add_stats()
 		else:
 			print("Max staged reached")
 	else:

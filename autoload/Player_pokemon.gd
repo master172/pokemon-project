@@ -146,7 +146,10 @@ func switch(first_slot, second_slot):
 
 
 func _physics_process(_delta):
+	
 	if current_pokemon != null:
+		if current_pokemon.opposing_pokemon == null and OpposingTrainerMonsters.pokemon != null:
+			current_pokemon.opposing_pokemon = OpposingTrainerMonsters.pokemon
 		if Input.is_action_just_pressed("test"):
 			current_pokemon.experince_gained += 1000
 			current_pokemon._update_level()

@@ -356,13 +356,14 @@ func _pre_switch():
 	current_selected = 0
 	
 			
-func _switch_pokemon(pokemon_1,pokemon_2) -> void:
+func _switch_pokemon(pokemon_1,pokemon_2):
 
 	PlayerPokemon._switch(pokemon_1,pokemon_2)
 	$Control/Pokemon._update()
 	pokemon_1 = null
 	pokemon_2 = null
 	get_tree().reload_current_scene()
+
 func _function():
 	if state == states.Navigation:
 		if current_selected == 0:

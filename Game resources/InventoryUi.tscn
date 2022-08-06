@@ -1,0 +1,343 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Game resources/InventoryUi.gd" type="Script" id=1]
+[ext_resource path="res://assests/libraries/Bag/Bag.png" type="Texture" id=2]
+[ext_resource path="res://Game resources/Poke_slot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assests/libraries/Bag/Bag_cutout.png" type="Texture" id=4]
+[ext_resource path="res://assests/libraries/Bag/Item Atlas.png" type="Texture" id=5]
+[ext_resource path="res://Fonts/Pokemon_16.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Game resources/Pocket_box.gd" type="Script" id=7]
+[ext_resource path="res://assests/libraries/Bag/Selector.png" type="Texture" id=8]
+[ext_resource path="res://Game resources/Item_box.gd" type="Script" id=9]
+
+[node name="InventoryUi" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -160.0
+script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+
+[node name="Poke_box" type="Control" parent="TextureRect"]
+margin_left = 12.0
+margin_top = 7.0
+margin_right = 95.0
+margin_bottom = 61.0
+
+[node name="GridContainer" type="GridContainer" parent="TextureRect/Poke_box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+columns = 3
+
+[node name="Slot_1" parent="TextureRect/Poke_box/GridContainer" instance=ExtResource( 3 )]
+
+[node name="Slot_2" parent="TextureRect/Poke_box/GridContainer" instance=ExtResource( 3 )]
+margin_left = 29.0
+margin_right = 54.0
+
+[node name="Slot_3" parent="TextureRect/Poke_box/GridContainer" instance=ExtResource( 3 )]
+margin_left = 58.0
+margin_right = 83.0
+
+[node name="Slot_4" parent="TextureRect/Poke_box/GridContainer" instance=ExtResource( 3 )]
+margin_top = 29.0
+margin_bottom = 54.0
+
+[node name="Slot_5" parent="TextureRect/Poke_box/GridContainer" instance=ExtResource( 3 )]
+margin_left = 29.0
+margin_top = 29.0
+margin_right = 54.0
+margin_bottom = 54.0
+
+[node name="Slot_6" parent="TextureRect/Poke_box/GridContainer" instance=ExtResource( 3 )]
+margin_left = 58.0
+margin_top = 29.0
+margin_right = 83.0
+margin_bottom = 54.0
+
+[node name="Item_box" type="Control" parent="TextureRect"]
+margin_left = 128.0
+margin_top = 11.0
+margin_right = 230.0
+margin_bottom = 98.0
+
+[node name="Free_space" type="Control" parent="TextureRect/Item_box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TextureRect/Item_box/Free_space"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = 10.0
+margin_bottom = -3.0
+
+[node name="Free_space_grid" type="GridContainer" parent="TextureRect/Item_box/Free_space/ScrollContainer"]
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 3
+
+[node name="Items" type="Control" parent="TextureRect/Item_box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TextureRect/Item_box/Items"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = 10.0
+margin_bottom = -3.0
+
+[node name="Item_grid" type="GridContainer" parent="TextureRect/Item_box/Items/ScrollContainer"]
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 3
+
+[node name="Battle_items" type="Control" parent="TextureRect/Item_box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TextureRect/Item_box/Battle_items"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = 10.0
+margin_bottom = -3.0
+
+[node name="Battle_grid" type="GridContainer" parent="TextureRect/Item_box/Battle_items/ScrollContainer"]
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 3
+
+[node name="Medicine" type="Control" parent="TextureRect/Item_box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TextureRect/Item_box/Medicine"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = 10.0
+margin_bottom = -3.0
+
+[node name="Medicine_grid" type="GridContainer" parent="TextureRect/Item_box/Medicine/ScrollContainer"]
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 3
+
+[node name="Tm_hm" type="Control" parent="TextureRect/Item_box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TextureRect/Item_box/Tm_hm"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = 10.0
+margin_bottom = -3.0
+
+[node name="Tm_hm_grid" type="GridContainer" parent="TextureRect/Item_box/Tm_hm/ScrollContainer"]
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 3
+
+[node name="Berries" type="Control" parent="TextureRect/Item_box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TextureRect/Item_box/Berries"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = 10.0
+margin_bottom = -3.0
+
+[node name="Berries_grid" type="GridContainer" parent="TextureRect/Item_box/Berries/ScrollContainer"]
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 3
+
+[node name="Pokeballs" type="Control" parent="TextureRect/Item_box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TextureRect/Item_box/Pokeballs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = 10.0
+margin_bottom = -3.0
+
+[node name="poke_ball_grid" type="GridContainer" parent="TextureRect/Item_box/Pokeballs/ScrollContainer"]
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 3
+
+[node name="Key_items" type="Control" parent="TextureRect/Item_box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TextureRect/Item_box/Key_items"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = 10.0
+margin_bottom = -3.0
+
+[node name="Key_item_grid" type="GridContainer" parent="TextureRect/Item_box/Key_items/ScrollContainer"]
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 3
+
+[node name="Money" type="Control" parent="TextureRect"]
+margin_left = 41.0
+margin_top = 80.0
+margin_right = 90.0
+margin_bottom = 94.0
+
+[node name="Label" type="Label" parent="TextureRect/Money"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 6 )
+text = "122,839"
+
+[node name="Pocket_box" type="Control" parent="TextureRect"]
+margin_left = 20.0
+margin_top = 66.0
+margin_right = 89.0
+margin_bottom = 76.0
+rect_scale = Vector2( 0.987, 1 )
+script = ExtResource( 7 )
+
+[node name="Container" type="Control" parent="TextureRect/Pocket_box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -11.9605
+margin_right = 27.0395
+rect_scale = Vector2( 0.991276, 1 )
+
+[node name="Berries" type="TextureRect" parent="TextureRect/Pocket_box/Container"]
+margin_right = 10.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 10, 10 )
+
+[node name="Sprite" type="Sprite" parent="TextureRect/Pocket_box/Container/Berries"]
+scale = Vector2( 0.144928, 0.147741 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 16.5175, 356.37, 68.965, 68.1308 )
+
+[node name="Pokeballs" type="TextureRect" parent="TextureRect/Pocket_box/Container"]
+margin_left = 14.0
+margin_right = 24.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 10, 10 )
+
+[node name="Sprite" type="Sprite" parent="TextureRect/Pocket_box/Container/Pokeballs"]
+scale = Vector2( 0.144928, 0.147741 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 16.6037, 18.8387, 69.6071, 68.0939 )
+
+[node name="Key_items" type="TextureRect" parent="TextureRect/Pocket_box/Container"]
+margin_left = 28.0
+margin_right = 38.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 10, 10 )
+
+[node name="Sprite" type="Sprite" parent="TextureRect/Pocket_box/Container/Key_items"]
+scale = Vector2( 0.144928, 0.147741 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 17.043, 131.621, 68.1286, 67.3768 )
+
+[node name="Free_space" type="TextureRect" parent="TextureRect/Pocket_box/Container"]
+margin_left = 42.0
+margin_right = 52.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 10, 10 )
+
+[node name="Sprite" type="Sprite" parent="TextureRect/Pocket_box/Container/Free_space"]
+scale = Vector2( 0.144928, 0.147741 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 17.5277, 580.986, 67.4729, 68.164 )
+
+[node name="Items" type="TextureRect" parent="TextureRect/Pocket_box/Container"]
+margin_left = 56.0
+margin_right = 66.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 10, 10 )
+
+[node name="Sprite" type="Sprite" parent="TextureRect/Pocket_box/Container/Items"]
+scale = Vector2( 0.144928, 0.147741 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 17.3754, 467.904, 67.8406, 69.2029 )
+
+[node name="Battle_items" type="TextureRect" parent="TextureRect/Pocket_box/Container"]
+margin_left = 70.0
+margin_right = 80.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 10, 10 )
+
+[node name="Sprite" type="Sprite" parent="TextureRect/Pocket_box/Container/Battle_items"]
+scale = Vector2( 0.144928, 0.147741 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 14.8212, 677.615, 68.1429, 68.3236 )
+
+[node name="Meidicine" type="TextureRect" parent="TextureRect/Pocket_box/Container"]
+margin_left = 84.0
+margin_right = 94.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 10, 10 )
+
+[node name="Sprite" type="Sprite" parent="TextureRect/Pocket_box/Container/Meidicine"]
+scale = Vector2( 0.144928, 0.147741 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 14.9922, 790.94, 67.7588, 67.4059 )
+
+[node name="TM_hm" type="TextureRect" parent="TextureRect/Pocket_box/Container"]
+margin_left = 98.0
+margin_right = 108.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 10, 10 )
+
+[node name="Sprite" type="Sprite" parent="TextureRect/Pocket_box/Container/TM_hm"]
+scale = Vector2( 0.144928, 0.147741 )
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 16.9565, 243.833, 67.8168, 68.2538 )
+
+[node name="Sprite" type="Sprite" parent="TextureRect/Pocket_box"]
+position = Vector2( 29.382, 0 )
+texture = ExtResource( 8 )
+centered = false
+hframes = 2
+frame = 1
+
+[node name="Mask" type="TextureRect" parent="."]
+margin_right = 240.0
+margin_bottom = 160.0
+texture = ExtResource( 4 )

@@ -6,14 +6,14 @@
 [ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game_actions/Growl.tscn" type="PackedScene" id=5]
 
-[node name="Charizard" type="Node2D"]
+[node name="Charizard" type="Node2D" groups=["Presist"]]
 script = ExtResource( 2 )
 base_experience_yeild = 209.0
 sprite = ExtResource( 1 )
 Name = "Charizard"
 id = 6
-Type_1 = 2
-Type_2 = 4
+Type_1 = [ 2 ]
+Type_2 = [ 4 ]
 Damage_normally_by = [ 1, 4, 13, 16, 8, 15, 8, 17 ]
 Weak_to = [ 14, 11, 3, 2, 10, 18 ]
 Resistant_to = [ 12, 6, 9 ]
@@ -38,7 +38,10 @@ sp_attack_yield = 3
 pokemon_entry = "Charizard, the Flame Pokémon. Charizard is a Flying and Fire type. When competing in intense battles, Charizard's flame becomes more intense as well."
 
 [node name="Tackle" parent="." instance=ExtResource( 4 )]
+Types = 0
 
 [node name="Scratch" parent="." instance=ExtResource( 3 )]
+Types = 0
 
 [node name="Growl" parent="." instance=ExtResource( 5 )]
+Types = 0

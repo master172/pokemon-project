@@ -39,39 +39,52 @@ func _input(event):
 			if current_selected == 1:
 				if PlayerPokemon.first_pokemon != null:
 					PlayerPokemon.current_pokemon = PlayerPokemon.first_pokemon
+					PlayerPokemon.current_pokemon._calc_weak_and_res()
+					OpposingTrainerMonsters.pokemon._calc_weak_and_res()
 					_kill()
 				else:
 					print("no_pokemon_selected")
 			elif current_selected == 2:
 				if PlayerPokemon.second_pokemon != null:
 					PlayerPokemon.current_pokemon = PlayerPokemon.second_pokemon
+					PlayerPokemon.current_pokemon._calc_weak_and_res()
+					OpposingTrainerMonsters.pokemon._calc_weak_and_res()
 					_kill()
 				else:
 					print("no_pokemon_selected")
 			elif current_selected == 3:
 				if PlayerPokemon.third_pokemon != null:
 					PlayerPokemon.current_pokemon = PlayerPokemon.third_pokemon
+					PlayerPokemon.current_pokemon._calc_weak_and_res()
+					OpposingTrainerMonsters.pokemon._calc_weak_and_res()
 					_kill()
 				else:
 					print("no_pokemon_selected")
 			elif current_selected == 4:
 				if PlayerPokemon.fourth_pokemon != null:
 					PlayerPokemon.current_pokemon = PlayerPokemon.fourth_pokemon
+					PlayerPokemon.current_pokemon._calc_weak_and_res()
+					OpposingTrainerMonsters.pokemon._calc_weak_and_res()
 					_kill()
 				else:
 					print("no_pokemon_selected")
 			elif current_selected == 5:
 				if PlayerPokemon.fifth_pokemon != null:
 					PlayerPokemon.current_pokemon = PlayerPokemon.fifth_pokemon
+					PlayerPokemon.current_pokemon._calc_weak_and_res()
+					OpposingTrainerMonsters.pokemon._calc_weak_and_res()
 					_kill()
 				else:
 					print("no_pokemon_selected")
 			elif current_selected == 6:
 				if PlayerPokemon.sixth_pokemon != null:
 					PlayerPokemon.current_pokemon = PlayerPokemon.sixth_pokemon
+					PlayerPokemon.current_pokemon._calc_weak_and_res()
+					OpposingTrainerMonsters.pokemon._calc_weak_and_res()
 					_kill()
 				else:
 					print("no_pokemon_selected")
+			
 		
 		if event.is_action_pressed("W"):
 			if current_selected == 6:

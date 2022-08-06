@@ -104,12 +104,13 @@ tracks/0/keys = {
 [node name="Dialogue_bar" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = -160.0
 script = ExtResource( 3 )
 
 [node name="NinePatchRect" type="TextureRect" parent="."]
-margin_top = 116.0
+margin_top = 109.0
 margin_right = 240.0
-margin_bottom = 116.0
+margin_bottom = 159.0
 rect_min_size = Vector2( 0, 50 )
 texture = ExtResource( 1 )
 expand = true
@@ -144,9 +145,9 @@ anims/Text_display = SubResource( 5 )
 
 [node name="Option_container" type="VBoxContainer" parent="."]
 margin_left = 182.0
-margin_top = 83.0
+margin_top = 76.0
 margin_right = 237.0
-margin_bottom = 123.0
+margin_bottom = 116.0
 custom_constants/separation = 0
 
 [node name="Top_piece" type="TextureRect" parent="Option_container"]

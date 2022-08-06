@@ -12,8 +12,8 @@ base_experience_yeild = 65.0
 sprite = ExtResource( 2 )
 Name = "Bulbasaur"
 id = 1
-Type_1 = 10
-Type_2 = 13
+Type_1 = [ 10 ]
+Type_2 = [ 13 ]
 Damage_normally_by = [ 1, 13, 5, 14, 6, 16, 9, 8, 17 ]
 Weak_to = [ 4, 2, 7, 15 ]
 Resistant_to = [ 12, 11, 10, 3, 18 ]
@@ -39,7 +39,10 @@ sp_attack_yield = 1
 pokemon_entry = "Bulbasaur can be seen napping in bright sunlight. There is a seed on its back. By soaking up the sun's rays, the seed grows progressively larger"
 
 [node name="Tackle" parent="." instance=ExtResource( 3 )]
+Types = 0
 
 [node name="Pound" parent="." instance=ExtResource( 4 )]
+Types = 0
 
 [node name="Growl" parent="." instance=ExtResource( 5 )]
+Types = 0

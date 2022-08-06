@@ -1,6 +1,6 @@
 extends Control
 
-const option = preload("res://UI UX/Option.tscn")
+var option = load("res://UI UX/Option.tscn")
 
 onready var Text_displayer = $AnimationPlayer
 onready var RichTextLabel = $NinePatchRect/RichTextLabel
@@ -9,11 +9,13 @@ onready var arrow = $Arrow
 onready var Option_container = $Option_container
 
 var text_to_diaplay : Array = ["Hello, World! Spam and Eggs this is gonna be exilirating lets get excited",
-"Progress has been made", "We reached to infinite and beyond","lets try choices",1,"we finished choices",0]
+"Progress has been made", "We reached to infinite and beyond","lets try choices",1,"we finished choices",
+"We started functions",2,"We finished functions",0]
 
 var current_set = 0
 
 var choices : Array = [["yes","you_choosed_first_option","so the answer is 1",1],["no","you_choosed_second_option","so the answer is 2",1]]
+var function :Array = ["Call_name",["param_1","Param_2"]]
 var to_choice = false
 
 var option_array : Array = []
@@ -34,6 +36,7 @@ signal Dialog_changed
 
 signal choice_asked
 signal choice_selected
+signal function(function_name ,parameters)
 signal _choice_number(choice)
 signal choice_ended
 
@@ -41,9 +44,10 @@ func _ready():
 	emit_signal("Dialog_started")
 	Option_container.visible = false
 
-	RichTextLabel.text = text_to_diaplay[0]
-	$Arrow/AnimationPlayer.play("Still")
-	Text_displayer.play("Text_display")
+	if text_to_diaplay.size() > 0:
+		RichTextLabel.text = text_to_diaplay[0]
+		$Arrow/AnimationPlayer.play("Still")
+		Text_displayer.play("Text_display")
 
 func _physics_process(delta):
 	if to_choice == false:
@@ -67,6 +71,9 @@ func _physics_process(delta):
 							emit_signal("choice_asked")
 						else:
 							current_set += 1
+					elif text_to_diaplay[current_set + 1] == 2:
+						emit_signal("function", function)
+						current_set += 1
 					elif text_to_diaplay[current_set + 1] == 0:
 						emit_signal("Dialog_ended")
 						self.queue_free()

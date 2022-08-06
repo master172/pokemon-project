@@ -63,11 +63,11 @@ func _calculate_damage():
 	else:
 		crit = 1
 	var stab : float 
-	if self.Types == current_holder.Type_1 and self.Types == current_holder.Type_2:
+	if self.Types == current_holder.Type_1[0] and self.Types == current_holder.Type_2[0]:
 		stab = 2.0
-	elif self.Types == current_holder.Type_1 and self.Types != current_holder.Type_2:
+	elif self.Types == current_holder.Type_1[0] and self.Types != current_holder.Type_2[0]:
 		stab = 1.5
-	elif self.Types != current_holder.Type_1 and self.Types != current_holder.Type_2:
+	elif self.Types != current_holder.Type_1[0] and self.Types != current_holder.Type_2[0]:
 		stab = 1.0
 	else:
 		stab = 0.5
@@ -96,6 +96,9 @@ func _calculate_damage():
 		targets = PlayerPokemon.targets
 	elif current_holder.get_parent() == OpposingTrainerMonsters:
 		targets = OpposingTrainerMonsters.targets
+	
+	print("Current level: ", current_holder.level, " Current_attack: ", current_holder.Current_attack, " Power: ", power, " Opposing defense: ", current_holder.opposing_pokemon.Current_defense,
+	" Stab: ", stab , " Weakness: ",current_holder.Weakness, " Resistance " , current_holder.Resistance, " Random number ", random_number  )
 	damage = ((((((2 * current_holder.level)/5)+2)*current_holder.Current_attack * power / current_holder.opposing_pokemon.Current_defense)/50)+2)* stab * current_holder.Weakness * current_holder.Resistance * random_number/ 100
 	damage = damage / targets * weather * (PokeHelper.player_badjes + 1) * crit* effectiveness
 	_apply_damage()
@@ -116,6 +119,7 @@ func _apply_damage():
 	if is_missed == false:
 		if damage <= 1:
 			print("evaded")
+			print(damage)
 		elif damage >= 1:
 			self.current_holder.opposing_pokemon.Current_health_points -= damage
 			print("damaged")

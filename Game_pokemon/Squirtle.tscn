@@ -12,7 +12,8 @@ base_experience_yeild = 65.0
 sprite = ExtResource( 2 )
 Name = "Squirtle"
 id = 10
-Type_1 = 11
+Type_1 = [ 11 ]
+Type_2 = [ 0 ]
 Damage_normally_by = [ 1, 12, 4, 13, 5, 14, 6, 16, 7, 8, 17, 18 ]
 Weak_to = [ 10, 3 ]
 Resistant_to = [ 9, 2, 11, 15 ]
@@ -38,7 +39,10 @@ defense_yield = 1
 pokemon_entry = "Its shell is not just for protection. Its rounded shape and the grooves on its surface minimize resistance in water, enabling Squirtle to swim at high speeds."
 
 [node name="Tackle" parent="." instance=ExtResource( 3 )]
+Types = 0
 
 [node name="Pound" parent="." instance=ExtResource( 4 )]
+Types = 0
 
 [node name="Skull bash" parent="." instance=ExtResource( 5 )]
+Types = 0

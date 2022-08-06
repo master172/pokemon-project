@@ -14,7 +14,8 @@ base_experience_yeild = 64.0
 sprite = ExtResource( 2 )
 Name = "Charmander"
 id = 4
-Type_1 = 2
+Type_1 = [ 2 ]
+Type_2 = [ 0 ]
 Damage_normally_by = [ 1, 12, 4, 13, 16, 3, 7, 8, 17 ]
 Weak_to = [ 5, 14, 11 ]
 Resistant_to = [ 6, 9, 2, 10, 15, 18 ]
@@ -43,7 +44,10 @@ next_form = ExtResource( 6 )
 stage_2 = ExtResource( 7 )
 
 [node name="Tackle" parent="." instance=ExtResource( 3 )]
+Types = 0
 
 [node name="Scratch" parent="." instance=ExtResource( 5 )]
+Types = 0
 
 [node name="Growl" parent="." instance=ExtResource( 4 )]
+Types = 0

@@ -591,3 +591,4 @@ func _apply_data():
 		self.is_moving = player_data.is_moving
 		self.is_running = player_data.is_running
 		self.is_cycling = player_data.is_cycling
+		player_data = null
