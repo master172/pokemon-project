@@ -107,7 +107,7 @@ func _input(event):
 			else:
 				current_selected -= 1
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if pokemon_selected == false:
 		if PlayerPokemon.first_pokemon != null:
 			Pokemon_1.texture = PlayerPokemon.first_pokemon.sprite

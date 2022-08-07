@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Items/Potion.gd" type="Script" id=1]
+[ext_resource path="res://assests/libraries/Items/Potion.png" type="Texture" id=2]
+
+[node name="potion" type="Node2D"]
+script = ExtResource( 1 )
+sprite = ExtResource( 2 )
+Name = "Potion"
+Description = "It heals the pokemon by 20 health points"
+type = "Battle_Items"

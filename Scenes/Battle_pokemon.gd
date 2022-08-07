@@ -84,7 +84,7 @@ func _input(event):
 					current_selected = current_selected + 1
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if current_selected == 1:
 		$Control/Pokemons/Pokemon1/Battle_selector.frame = 1
 	else:

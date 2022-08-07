@@ -15,7 +15,7 @@ var text_to_diaplay : Array = ["Hello, World! Spam and Eggs this is gonna be exi
 var current_set = 0
 
 var choices : Array = [["yes","you_choosed_first_option","so the answer is 1",1],["no","you_choosed_second_option","so the answer is 2",1]]
-var function :Array = ["Call_name",["param_1","Param_2"]]
+var functions :Array = ["Call_name",["param_1","Param_2"]]
 var to_choice = false
 
 var option_array : Array = []
@@ -36,7 +36,7 @@ signal Dialog_changed
 
 signal choice_asked
 signal choice_selected
-signal function(function_name ,parameters)
+signal _function(function)
 signal _choice_number(choice)
 signal choice_ended
 
@@ -49,7 +49,7 @@ func _ready():
 		$Arrow/AnimationPlayer.play("Still")
 		Text_displayer.play("Text_display")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if to_choice == false:
 		if Input.is_action_just_pressed("accept") and RichTextLabel.percent_visible != 1:
 			Text_displayer.play("Text skip")
@@ -72,7 +72,7 @@ func _physics_process(delta):
 						else:
 							current_set += 1
 					elif text_to_diaplay[current_set + 1] == 2:
-						emit_signal("function", function)
+						emit_signal("_function",functions)
 						current_set += 1
 					elif text_to_diaplay[current_set + 1] == 0:
 						emit_signal("Dialog_ended")
@@ -109,7 +109,6 @@ func _finish_choices():
 	choosed = false
 	choice_var = 0
 	current_choice = 0
-	option_array.clear()
 	selected_choice = 0
 	for i in range(0,Option_container.get_child(1).get_child_count()):
 		Option_container.get_child(1).get_child(i).queue_free()

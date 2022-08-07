@@ -28,12 +28,24 @@ _global_script_classes=[ {
 "class": "Pokemon",
 "language": "GDScript",
 "path": "res://Game_script_resources/Pokemon.gd"
+}, {
+"base": "Node2D",
+"class": "base_item",
+"language": "GDScript",
+"path": "res://Game_script_resources/items_base.gd"
+}, {
+"base": "base_item",
+"class": "potion",
+"language": "GDScript",
+"path": "res://Items/Potion.gd"
 } ]
 _global_script_class_icons={
 "GitAPI": "",
 "Learned_moves": "",
 "Moves": "",
-"Pokemon": ""
+"Pokemon": "",
+"base_item": "",
+"potion": ""
 }
 
 [application]
