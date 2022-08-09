@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assests/libraries/Ui/Place_box1.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Pokemon_scene_stage.gd" type="Script" id=2]
@@ -22,7 +22,62 @@
 [ext_resource path="res://assests/libraries/Ui/Battle identifier 0.png" type="Texture" id=20]
 [ext_resource path="res://assests/libraries/Ui/Battle identifier glow.png" type="Texture" id=21]
 [ext_resource path="res://Scenes/Battle_identifier.gd" type="Script" id=22]
-[ext_resource path="res://libraries/Day_and_night/Day_And_night_cycle.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/Scene_modulate.gd" type="Script" id=23]
+
+[sub_resource type="Animation" id=5]
+resource_name = "Day_night_cycle"
+length = 24.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5, 12.1, 16, 19, 24 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.239216, 0.262745, 0.619608, 1 ), Color( 0.627451, 0.415686, 0.352941, 1 ), Color( 1, 1, 1, 1 ), Color( 0.772549, 0.611765, 0.423529, 1 ), Color( 0.309804, 0.321569, 0.576471, 1 ), Color( 0.239216, 0.262745, 0.619608, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5, 12.1, 16, 19, 24 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.596078 ), Color( 1, 1, 1, 0.419608 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.341176 ), Color( 1, 1, 1, 0.509804 ), Color( 1, 1, 1, 0.596078 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.596078 ) ]
+}
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
@@ -107,6 +162,18 @@ position = Vector2( 45, 16 )
 [node name="Pokemon_Box" parent="Node2D" instance=ExtResource( 3 )]
 
 [node name="Run_Box" parent="Node2D" instance=ExtResource( 7 )]
+
+[node name="Scene_modulate" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0.596078 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 240.0
+margin_bottom = 112.0
+script = ExtResource( 23 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Scene_modulate"]
+anims/Day_night_cycle = SubResource( 5 )
+anims/RESET = SubResource( 4 )
 
 [node name="Battle_box" type="Node2D" parent="."]
 visible = false
@@ -212,5 +279,3 @@ playback_process_mode = 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
-
-[node name="Day_And_night_cycle" parent="." instance=ExtResource( 23 )]
