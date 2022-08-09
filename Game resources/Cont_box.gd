@@ -37,7 +37,11 @@ func set_active_option():
 
 func _kill():
 	queue_free()
-	controller._reset()
+	controller._reset(true)
+
+func _Poke_kill():
+	queue_free()
+	controller._reset(false)
 
 func _input(event):
 	if event.is_action_pressed("ui_down"):
@@ -58,11 +62,7 @@ func _input(event):
 					_kill()
 					
 			Options.Use:
-				print("hi")
-				if self.Pokemon_cont != null:
-					if current_item != null:
-						if current_item.has_method("_use"):
-							current_item._use()
+				_Poke_kill()
 	elif event.is_action_pressed("decline"):
 		if self.controller != null:
 			_kill()

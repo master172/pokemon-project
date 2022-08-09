@@ -1,6 +1,8 @@
 extends base_item
 class_name potion
 
+func _use(_pokemon):
+	print("use")
 
 
 func save():

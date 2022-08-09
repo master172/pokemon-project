@@ -75,7 +75,7 @@ const cont_box = preload("res://Game resources/Cont_box.tscn")
 var Cont_box
 #</dependencies>
 
-enum states {Poke_selection, Pocket_selection, Dialogue, Item_Selection,Cont_box}
+enum states {Poke_selection, Pocket_selection, Dialogue, Item_Selection,Cont_box,Item_poke_selection}
 var state = states.Poke_selection
 
 var current_selected = 0
@@ -91,7 +91,57 @@ var Battle_Items = []
 var Medicine = []
 var Bag_items = []
 
+var current_item
+var current_pokemon
 
+func _set_current_selected():
+	
+	if state == states.Poke_selection or state == states.Item_poke_selection:
+		if current_selected == 0:
+			current_pokemon = PlayerPokemon.first_pokemon
+		elif current_selected == 1:
+			current_pokemon = PlayerPokemon.second_pokemon
+		elif current_selected == 2:
+			current_pokemon = PlayerPokemon.third_pokemon
+		elif current_selected == 3:
+			current_pokemon = PlayerPokemon.fourth_pokemon
+		elif current_selected == 4:
+			current_pokemon = PlayerPokemon. fifth_pokemon
+		elif current_selected == 5:
+			current_pokemon = PlayerPokemon.sixth_pokemon
+		else:
+			current_pokemon = current_pokemon
+	else:
+		current_pokemon = current_pokemon
+	
+	if state == states.Item_Selection:
+		if current_pocket == 0 and PokeHelper.Free_space.size() > 0:
+			current_item = PokeHelper.Free_space[current_selected]
+
+		elif current_pocket == 1 and PokeHelper.items.size() > 0:
+			current_item = PokeHelper.items[current_selected]
+
+		elif current_pocket == 2 and PokeHelper.Battle_Items.size() > 0:
+			current_item = PokeHelper.Battle_Items[current_selected]
+
+		elif current_pocket == 3 and PokeHelper.Medicine.size() > 0:
+			current_item = PokeHelper.Medicine[current_selected]
+
+		elif current_pocket == 4 and PokeHelper.Tm_Hm.size() > 0:
+			current_item = PokeHelper.Tm_Hm[current_selected]
+
+		elif current_pocket == 5 and PokeHelper.Berries.size() > 0:
+			current_item = PokeHelper.Berries[current_selected]
+
+		elif current_pocket == 6 and PokeHelper.Pokeballs.size() > 0:
+			current_item = PokeHelper.Pokeballs[current_selected]
+
+		elif current_pocket == 7 and PokeHelper.Key_items.size() > 0:
+			current_item = PokeHelper.Key_items[current_selected]
+		else:
+			current_item = current_item
+	else:
+		current_item = current_item
 
 
 func _ready():
@@ -178,15 +228,24 @@ func _ready():
 	#finish adding the item slots
 
 #resseting the state after closing the controller box
-func _reset():
+func _reset(value):
 	yield(get_tree().create_timer(0.01),"timeout")
-	state = states.Item_Selection
+	if value == true:
+		state = states.Item_Selection
+	else:
+		state = states.Item_poke_selection
+		current_selected = 0
 
 func _input(event):
+
+
 	if is_instance_valid(Cont_box):
 		state = states.Cont_box
 	else:
 		state = state
+	
+
+
 	if state != states.Cont_box:
 		if event.is_action_pressed("accept"):
 			if state == states.Item_Selection:
@@ -294,8 +353,42 @@ func _input(event):
 				if current_selected > 0:
 					current_selected -= 1
 				elif current_selected == 0:
-					state = states.Item_Selection	
-					current_selected = 0
+					if current_pocket != null:
+						if current_pocket == 0 and PokeHelper.Free_space.size() > 0:
+							state = states.Item_Selection
+							current_selected = 0
+	
+						elif current_pocket == 1 and PokeHelper.items.size() > 0:
+							state = states.Item_Selection
+							current_selected = 0
+	
+						elif current_pocket == 2 and PokeHelper.Battle_Items.size() > 0:
+							state = states.Item_Selection
+							current_selected = 0
+	
+						elif current_pocket == 3 and PokeHelper.Medicine.size() > 0:
+							state = states.Item_Selection
+							current_selected = 0
+	
+						elif current_pocket == 4 and PokeHelper.Tm_Hm.size() > 0:
+							state = states.Item_Selection
+							current_selected = 0
+	
+						elif current_pocket == 5 and PokeHelper.Berries.size() > 0:
+							state = states.Item_Selection
+							current_selected = 0
+	
+						elif current_pocket == 6 and PokeHelper.Pokeballs.size() > 0:
+							state = states.Item_Selection
+							current_selected = 0
+	
+						elif current_pocket == 7 and PokeHelper.Key_items.size() > 0:
+							state = states.Item_Selection
+							current_selected = 0
+							
+						else:
+							state = states.Pocket_selection
+							current_selected = 0
 			
 
 			if event.is_action_pressed("D"):
@@ -350,10 +443,41 @@ func _input(event):
 					current_selected = 0
 				if pre_item_slot != null:
 					pre_item_slot.frame = 0
-	
+		
+
+		elif state == states.Item_poke_selection:
+			if event.is_action_pressed("accept"):
+				if current_item != null and current_pokemon != null:
+					current_item._use(current_pokemon)
+					state = states.Item_Selection
+					current_selected = 0
+					
+			if event.is_action_pressed("W"):
+				if current_selected < max_selecctable:
+					current_selected += 1
+				else:
+					current_selected = 0
+			elif event.is_action_pressed("D"):
+				if current_selected < max_selecctable:
+					current_selected += 1
+				else:
+					current_selected = 0
+			elif event.is_action_pressed("S"):
+				if current_selected > 0:
+					current_selected -= 1
+				else:
+					current_selected = max_selecctable
+			elif event.is_action_pressed("A"):
+				if current_selected > 0:
+					current_selected -= 1
+				else:
+					current_selected = max_selecctable
 
 
 func _physics_process(_delta):
+	_set_current_selected()
+
+	
 	Pokeballs = PokeHelper.Pokeballs
 	Key_items = PokeHelper.Key_items
 	Tm_Hm = PokeHelper.Tm_Hm
@@ -375,6 +499,16 @@ func _physics_process(_delta):
 				Poke_slots[i].active = true
 			else:
 				Poke_slots[i].active = false
+	
+	#Item_poke_selection
+	elif state == states.Item_poke_selection:
+		max_selecctable = 5
+		Pocket_selector.frame = 0
+		for i in range(0,Poke_slots.size()):
+			if i == current_selected:
+				Poke_slots[i].active = true
+			else:
+				Poke_slots[i].active = false 
 	
 	#pocket_selection
 	elif state == states.Pocket_selection:
@@ -473,5 +607,4 @@ func _physics_process(_delta):
 		pocket_map[current_pocket].get_child(0).get_child(0).get_child(current_selected).get_child(0).frame = 1
 
 		current_item_slot = pocket_map[current_pocket].get_child(0).get_child(0).get_child(current_selected).get_child(0)
-
 
