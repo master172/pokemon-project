@@ -191,8 +191,33 @@ func _input(event):
 		if event.is_action_pressed("accept"):
 			if state == states.Item_Selection:
 				Cont_box = cont_box.instance()
-				self.add_child(Cont_box)
 				Cont_box.controller = self
+				if current_pocket == 0 and PokeHelper.Free_space.size() > 0:
+					Cont_box.current_item = PokeHelper.Free_space[current_selected]
+
+				elif current_pocket == 1 and PokeHelper.items.size() > 0:
+					Cont_box.current_item = PokeHelper.items[current_selected]
+
+				elif current_pocket == 2 and PokeHelper.Battle_Items.size() > 0:
+					Cont_box.current_item = PokeHelper.Battle_Items[current_selected]
+
+				elif current_pocket == 3 and PokeHelper.Medicine.size() > 0:
+					Cont_box.current_item = PokeHelper.Medicine[current_selected]
+
+				elif current_pocket == 4 and PokeHelper.Tm_Hm.size() > 0:
+					Cont_box.current_item = PokeHelper.Tm_Hm[current_selected]
+
+				elif current_pocket == 5 and PokeHelper.Berries.size() > 0:
+					Cont_box.current_item = PokeHelper.Berries[current_selected]
+
+				elif current_pocket == 6 and PokeHelper.Pokeballs.size() > 0:
+					Cont_box.current_item = PokeHelper.Pokeballs[current_selected]
+
+				elif current_pocket == 7 and PokeHelper.Key_items.size() > 0:
+					Cont_box.current_item = PokeHelper.Key_items[current_selected]
+	
+				self.add_child(Cont_box)
+				
 				self.state = states.Cont_box
 				
 		if state == states.Pocket_selection:
@@ -201,30 +226,35 @@ func _input(event):
 					if current_pocket == 0 and PokeHelper.Free_space.size() > 0:
 						state = states.Item_Selection
 						current_selected = 0
+
 					elif current_pocket == 1 and PokeHelper.items.size() > 0:
 						state = states.Item_Selection
 						current_selected = 0
+
 					elif current_pocket == 2 and PokeHelper.Battle_Items.size() > 0:
 						state = states.Item_Selection
 						current_selected = 0
-					elif current_pocket == 0 and PokeHelper.Free_space.size() > 0:
-						state = states.Item_Selection
-						current_selected = 0
+
 					elif current_pocket == 3 and PokeHelper.Medicine.size() > 0:
 						state = states.Item_Selection
 						current_selected = 0
+
 					elif current_pocket == 4 and PokeHelper.Tm_Hm.size() > 0:
 						state = states.Item_Selection
 						current_selected = 0
+
 					elif current_pocket == 5 and PokeHelper.Berries.size() > 0:
 						state = states.Item_Selection
 						current_selected = 0
-					elif current_pocket == 5 and PokeHelper.Pokeballs.size() > 0:
+
+					elif current_pocket == 6 and PokeHelper.Pokeballs.size() > 0:
 						state = states.Item_Selection
 						current_selected = 0
-					elif current_pocket == 5 and PokeHelper.Key_items.size() > 0:
+
+					elif current_pocket == 7 and PokeHelper.Key_items.size() > 0:
 						state = states.Item_Selection
 						current_selected = 0
+						
 					else:
 						state = states.Poke_selection
 						current_selected = 0

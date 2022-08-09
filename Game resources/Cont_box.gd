@@ -1,6 +1,9 @@
 extends Control
 
 var Pokemon_cont
+var current_item
+var current_pocket
+var current_index
 
 enum Options { Use,Give,Discard,Register,Free_space, Back }
 var selected_option: int = Options.Use
@@ -55,8 +58,11 @@ func _input(event):
 					_kill()
 					
 			Options.Use:
+				print("hi")
 				if self.Pokemon_cont != null:
-					_kill()
+					if current_item != null:
+						if current_item.has_method("_use"):
+							current_item._use()
 	elif event.is_action_pressed("decline"):
 		if self.controller != null:
 			_kill()
