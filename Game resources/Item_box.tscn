@@ -36,5 +36,4 @@ margin_right = 95.0
 margin_bottom = 76.0
 rect_scale = Vector2( 0.28, 0.28 )
 custom_fonts/normal_font = ExtResource( 2 )
-bbcode_text = "it heals the pokemon by 20 health points"
 scroll_active = false
