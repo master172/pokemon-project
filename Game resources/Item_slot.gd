@@ -12,6 +12,7 @@ func _ready():
 		Item = item.instance()
 func _physics_process(_delta):
 	if Item != null:
+		
 		Sprite.texture = Item.sprite
 		count.text = String(Item.count)
 		description.text = Item.Description
