@@ -78,17 +78,21 @@ func _physics_process(_delta):
 			if battle_mouse_num == 3:
 				ui_state = Ui_state.Main
 			elif battle_mouse_num == 4:
-				PlayerPokemon.current_pokemon.Learned_moves[0]._calculate_damage()
-				BattleManager.turns += 1
+				if PlayerPokemon.current_pokemon.Learned_moves.size() >= 1:
+					PlayerPokemon.current_pokemon.Learned_moves[0]._calculate_damage()
+					BattleManager.turns += 1
 			elif battle_mouse_num == 0:
-				PlayerPokemon.current_pokemon.Learned_moves[1]._calculate_damage()
-				BattleManager.turns += 1
+				if PlayerPokemon.current_pokemon.Learned_moves.size() >= 2:
+					PlayerPokemon.current_pokemon.Learned_moves[1]._calculate_damage()
+					BattleManager.turns += 1
 			elif battle_mouse_num == 1:
-				PlayerPokemon.current_pokemon.Learned_moves[2]._calculate_damage()
-				BattleManager.turns += 1
+				if PlayerPokemon.current_pokemon.Learned_moves.size() >= 3:
+					PlayerPokemon.current_pokemon.Learned_moves[2]._calculate_damage()
+					BattleManager.turns += 1
 			elif battle_mouse_num == 2:
-				PlayerPokemon.current_pokemon.Learned_moves[3]._calculate_damage()
-				BattleManager.turns += 1
+				if PlayerPokemon.current_pokemon.Learned_moves.size() >= 4:
+					PlayerPokemon.current_pokemon.Learned_moves[3]._calculate_damage()
+					BattleManager.turns += 1
 
 
 func _change_pokemon():

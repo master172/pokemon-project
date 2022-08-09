@@ -70,7 +70,12 @@ onready var Pocket_container = $TextureRect/Pocket_box/Container
 
 #<selection>
 
-enum states {Poke_selection, Pocket_selection, Dialogue, Item_Selection}
+#<dependencies>
+const cont_box = preload("res://Game resources/Cont_box.tscn")
+var Cont_box
+#</dependencies>
+
+enum states {Poke_selection, Pocket_selection, Dialogue, Item_Selection,Cont_box}
 var state = states.Poke_selection
 
 var current_selected = 0
@@ -92,7 +97,8 @@ var Bag_items = []
 func _ready():
 	state = states.Poke_selection
 	
-	
+
+	#adding the pokemon sprites in pokemon slots
 
 	yield(get_tree().create_timer(0.2),"timeout")
 	if PlayerPokemon.first_pokemon != null:
@@ -114,6 +120,10 @@ func _ready():
 		if Slot_6_sprite.texture != PlayerPokemon.sixth_pokemon.sprite:
 			Slot_6_sprite.texture = PlayerPokemon.sixth_pokemon.sprite
 	
+	#finish setting the pokemon Sprite
+
+	#setting the pocket arrays
+	
 	Pokeballs = PokeHelper.Pokeballs
 	Key_items = PokeHelper.Key_items
 	Tm_Hm = PokeHelper.Tm_Hm
@@ -124,133 +134,192 @@ func _ready():
 	Bag_items = PokeHelper.items
 	
 	
-	for _i in range(0,Bag_items.size()):
+	#adding the Item_slots
+	for i in range(0,Bag_items.size()):
 		var item_slot = Item_slot.instance()
+		item_slot.item = PokeHelper.Bag_items[i]
 		item_grid.add_child(item_slot)
 	
-	for _i in range(0,Medicine.size()):
+	for i in range(0,Medicine.size()):
 		var item_slot = Item_slot.instance()
+		item_slot.item = PokeHelper.Medicine[i]
 		medicine_grid.add_child(item_slot)
 	
-	for _i in range(0,Battle_Items.size()):
+	for i in range(0,Battle_Items.size()):
 		var item_slot = Item_slot.instance()
+		item_slot.item = PokeHelper.Battle_Items[i]
 		battle_grid.add_child(item_slot)
 	
-	for _i in range(0,Tm_Hm.size()):
+	for i in range(0,Tm_Hm.size()):
 		var item_slot = Item_slot.instance()
+		item_slot.item = PokeHelper.Tm_Hm[i]
 		tm_hm_grid.add_child(item_slot)
 	
-	for _i in range(0,Key_items.size()):
+	for i in range(0,Key_items.size()):
 		var item_slot = Item_slot.instance()
+		item_slot.item = PokeHelper.Key_items[i]
 		key_item_grid.add_child(item_slot)
 	
-	for _i in range(0,Free_space.size()):
+	for i in range(0,Free_space.size()):
 		var item_slot = Item_slot.instance()
+		item_slot.item = PokeHelper.Free_space[i]
 		free_space_grid.add_child(item_slot)
 	
-	for _i in range(0,Berries.size()):
+	for i in range(0,Berries.size()):
 		var item_slot = Item_slot.instance()
+		item_slot.item = PokeHelper.Berries[i]
 		berries_grid.add_child(item_slot)
 	
-	for _i in range(0,Pokeballs.size()):
+	for i in range(0,Pokeballs.size()):
 		var item_slot = Item_slot.instance()
+		item_slot.item = PokeHelper.Pokeballs[i]
 		poke_ball_grid.add_child(item_slot)
+	
+	#finish adding the item slots
+
+#resseting the state after closing the controller box
+func _reset():
+	yield(get_tree().create_timer(0.01),"timeout")
+	state = states.Item_Selection
 
 func _input(event):
-	if state == states.Pocket_selection:
-		if event.is_action_pressed("W"):
-			state = states.Item_Selection
-			current_selected = 0
-			
-		if event.is_action_pressed("A"):
-			for i in range(0,Pocket_container.get_child_count()):
-				Pocket_container.get_child(i).rect_position.x += 14
-			if pocket_var > 0:
-				pocket_var -= 1
-			else:
-				pocket_var = max_selecctable
-		if event.is_action_pressed("S"):
-			state = states.Poke_selection
-			current_selected = 5
-			max_selecctable = 5
-		if event.is_action_pressed("D"):
+	if is_instance_valid(Cont_box):
+		state = states.Cont_box
+	else:
+		state = state
+	if state != states.Cont_box:
+		if event.is_action_pressed("accept"):
+			if state == states.Item_Selection:
+				Cont_box = cont_box.instance()
+				self.add_child(Cont_box)
+				Cont_box.controller = self
+				self.state = states.Cont_box
+				
+		if state == states.Pocket_selection:
+			if event.is_action_pressed("W"):
+				if current_pocket != null:
+					if current_pocket == 0 and PokeHelper.Free_space.size() > 0:
+						state = states.Item_Selection
+						current_selected = 0
+					elif current_pocket == 1 and PokeHelper.items.size() > 0:
+						state = states.Item_Selection
+						current_selected = 0
+					elif current_pocket == 2 and PokeHelper.Battle_Items.size() > 0:
+						state = states.Item_Selection
+						current_selected = 0
+					elif current_pocket == 0 and PokeHelper.Free_space.size() > 0:
+						state = states.Item_Selection
+						current_selected = 0
+					elif current_pocket == 3 and PokeHelper.Medicine.size() > 0:
+						state = states.Item_Selection
+						current_selected = 0
+					elif current_pocket == 4 and PokeHelper.Tm_Hm.size() > 0:
+						state = states.Item_Selection
+						current_selected = 0
+					elif current_pocket == 5 and PokeHelper.Berries.size() > 0:
+						state = states.Item_Selection
+						current_selected = 0
+					elif current_pocket == 5 and PokeHelper.Pokeballs.size() > 0:
+						state = states.Item_Selection
+						current_selected = 0
+					elif current_pocket == 5 and PokeHelper.Key_items.size() > 0:
+						state = states.Item_Selection
+						current_selected = 0
+					else:
+						state = states.Poke_selection
+						current_selected = 0
 
-			for i in range(0,Pocket_container.get_child_count()):
-				Pocket_container.get_child(i).rect_position.x -= 14
-			
-			if pocket_var < max_selecctable:
-				pocket_var += 1
-			else:
-				pocket_var = 0
-	
-	elif state == states.Poke_selection:
-		if event.is_action_pressed("W"):
-			if current_selected < max_selecctable:
-				current_selected += 1
-			elif current_selected == max_selecctable:
-				state = states.Pocket_selection
-				current_selected = 0
-		
-		elif event.is_action_pressed("S"):
-			if current_selected > 0:
-				current_selected -= 1
-			elif current_selected == 0:
-				state = states.Item_Selection	
-				current_selected = 0
-		
 
-		if event.is_action_pressed("D"):
-			if current_selected < max_selecctable:
-				current_selected += 1
-			elif current_selected == max_selecctable:
-				state = states.Pocket_selection
-				current_selected = 0
-		
-		elif event.is_action_pressed("A"):
-			if current_selected > 0:
-				current_selected -= 1
-			elif current_selected == 0:
-				state = states.Item_Selection	
-				current_selected = 0
-	
-	elif state == states.Dialogue:
-		pass
-	
-	elif state == states.Item_Selection:
-		if event.is_action_pressed("W"):
-			if current_selected < max_selecctable:
-				current_selected += 1
-			elif current_selected == max_selecctable:
+				
+			if event.is_action_pressed("A"):
+				for i in range(0,Pocket_container.get_child_count()):
+					Pocket_container.get_child(i).rect_position.x += 14
+				if pocket_var > 0:
+					pocket_var -= 1
+				else:
+					pocket_var = max_selecctable
+			if event.is_action_pressed("S"):
 				state = states.Poke_selection
-				current_selected = 0
-			if pre_item_slot != null:
-				pre_item_slot.frame = 0
-		
-		elif event.is_action_pressed("S"):
-			if current_selected > 0:
-				current_selected -= 1
-			elif current_selected == 0:
-				state = states.Pocket_selection	
-				current_selected = 0
-			if pre_item_slot != null:
-				pre_item_slot.frame = 0
+				current_selected = 5
+				max_selecctable = 5
+			if event.is_action_pressed("D"):
 
-		if event.is_action_pressed("D"):
-			if current_selected < max_selecctable:
-				current_selected += 1
-			elif current_selected == max_selecctable:
-				state = states.Poke_selection
-				current_selected = 0
-			if pre_item_slot != null:
-				pre_item_slot.frame = 0
-		elif event.is_action_pressed("A"):
-			if current_selected > 0:
-				current_selected -= 1
-			elif current_selected == 0:
-				state = states.Pocket_selection	
-				current_selected = 0
-			if pre_item_slot != null:
-				pre_item_slot.frame = 0
+				for i in range(0,Pocket_container.get_child_count()):
+					Pocket_container.get_child(i).rect_position.x -= 14
+				
+				if pocket_var < max_selecctable:
+					pocket_var += 1
+				else:
+					pocket_var = 0
+		
+		elif state == states.Poke_selection:
+			if event.is_action_pressed("W"):
+				if current_selected < max_selecctable:
+					current_selected += 1
+				elif current_selected == max_selecctable:
+					state = states.Pocket_selection
+					current_selected = 0
+			
+			elif event.is_action_pressed("S"):
+				if current_selected > 0:
+					current_selected -= 1
+				elif current_selected == 0:
+					state = states.Item_Selection	
+					current_selected = 0
+			
+
+			if event.is_action_pressed("D"):
+				if current_selected < max_selecctable:
+					current_selected += 1
+				elif current_selected == max_selecctable:
+					state = states.Pocket_selection
+					current_selected = 0
+			
+			elif event.is_action_pressed("A"):
+				if current_selected > 0:
+					current_selected -= 1
+				elif current_selected == 0:
+					state = states.Item_Selection	
+					current_selected = 0
+		
+		elif state == states.Dialogue:
+			pass
+		
+		elif state == states.Item_Selection:
+			if event.is_action_pressed("W"):
+				if current_selected < max_selecctable:
+					current_selected += 1
+				elif current_selected == max_selecctable:
+					state = states.Poke_selection
+					current_selected = 0
+				if pre_item_slot != null:
+					pre_item_slot.frame = 0
+			
+			elif event.is_action_pressed("S"):
+				if current_selected > 0:
+					current_selected -= 1
+				elif current_selected == 0:
+					state = states.Pocket_selection	
+					current_selected = 0
+				if pre_item_slot != null:
+					pre_item_slot.frame = 0
+
+			if event.is_action_pressed("D"):
+				if current_selected < max_selecctable:
+					current_selected += 1
+				elif current_selected == max_selecctable:
+					state = states.Poke_selection
+					current_selected = 0
+				if pre_item_slot != null:
+					pre_item_slot.frame = 0
+			elif event.is_action_pressed("A"):
+				if current_selected > 0:
+					current_selected -= 1
+				elif current_selected == 0:
+					state = states.Pocket_selection	
+					current_selected = 0
+				if pre_item_slot != null:
+					pre_item_slot.frame = 0
 	
 
 

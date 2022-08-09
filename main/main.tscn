@@ -1629,6 +1629,10 @@ position = Vector2( 8, -824 )
 position = Vector2( -152, 24 )
 holding_item = ExtResource( 21 )
 
+[node name="Overworld Item2" parent="." instance=ExtResource( 20 )]
+position = Vector2( -136, 24 )
+holding_item = ExtResource( 21 )
+
 [connection signal="body_entered" from="red_house/door" to="red_house/door" method="_on_door_body_entered"]
 [connection signal="body_exited" from="red_house/door" to="red_house/door" method="_on_door_body_exited"]
 [connection signal="body_entered" from="Blue_house/door" to="Blue_house/door" method="_on_door_body_entered"]

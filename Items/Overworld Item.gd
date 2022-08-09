@@ -82,28 +82,100 @@ func _register(function_name,_function_params):
 			self.Holding_item._register()
 			self.used = true
 			if self.Holding_item.type == "Free_space":
-				PokeHelper.Free_space.append(self.holding_item.instance())
+				var _Item_to_add = self.holding_item.instance()
+				_Item_to_add.count = int(1)
+				if PokeHelper.Free_space.size() != 0:
+					for i in range(0,PokeHelper.Free_space.size()):
+						if PokeHelper.Free_space[i].id == _Item_to_add.id:
+							PokeHelper.Free_space[i].count += 1
+						else:
+							PokeHelper.add_child(_Item_to_add)
+				else:
+					PokeHelper.add_child(_Item_to_add)
 				print("Free_space")
 			elif self.Holding_item.type == "Items":
-				PokeHelper.Items.append(self.holding_item.instance())
+				var _Item_to_add = self.holding_item.instance()
+				_Item_to_add.count = int(1)
+				if PokeHelper.Items.size() != 0:
+					for i in range(0,PokeHelper.Items.size()):
+						if PokeHelper.Items[i].id == _Item_to_add.id:
+							PokeHelper.Items[i].count += 1
+						else:
+							PokeHelper.add_child(_Item_to_add)
+				else:
+					PokeHelper.add_child(_Item_to_add)
 				print("Items")
 			elif self.Holding_item.type == "Battle_Items":
-				PokeHelper.Battle_Items.append(self.holding_item.instance())
+				var _Item_to_add = self.holding_item.instance()
+				_Item_to_add.count = int(1)
+				if PokeHelper.Battle_Items.size() != 0:
+					for i in range(0,PokeHelper.Battle_Items.size()):
+						if PokeHelper.Battle_Items[i].id == _Item_to_add.id:
+							PokeHelper.Battle_Items[i].count += 1
+						else:
+							PokeHelper.add_child(_Item_to_add)
+				else:
+					PokeHelper.add_child(_Item_to_add)
 				print("Battle Items")
 			elif self.Holding_item.type == "Medicine":
-				PokeHelper.Medicine.append(self.holding_item.instance())
+				var _Item_to_add = self.holding_item.instance()
+				_Item_to_add.count = int(1)
+				if PokeHelper.Medicine.size() != 0:
+					for i in range(0,PokeHelper.Medicine.size()):
+						if PokeHelper.Medicine[i].id == _Item_to_add.id:
+							PokeHelper.Medicine[i].count += 1
+						else:
+							PokeHelper.add_child(_Item_to_add)
+				else:
+					PokeHelper.add_child(_Item_to_add)
 				print("Medicine")
 			elif self.Holding_item.type == "Tm_Hm":
-				PokeHelper.Tm_Hm.append(self.holding_item.instance())
+				var _Item_to_add = self.holding_item.instance()
+				_Item_to_add.count = int(1)
+				if PokeHelper.Tm_Hm.size() != 0:
+					for i in range(0,PokeHelper.Tm_Hm.size()):
+						if PokeHelper.Tm_Hm[i].id == _Item_to_add.id:
+							PokeHelper.Tm_Hm[i].count += 1
+						else:
+							PokeHelper.add_child(_Item_to_add)
+				else:
+					PokeHelper.add_child(_Item_to_add)
 				print("Tm Hm")
 			elif self.Holding_item.type == "Berries":
-				PokeHelper.Berries.append(self.holding_item.instance())
+				var _Item_to_add = self.holding_item.instance()
+				_Item_to_add.count = int(1)
+				if PokeHelper.Berries.size() != 0:
+					for i in range(0,PokeHelper.Berries.size()):
+						if PokeHelper.Berries[i].id == _Item_to_add.id:
+							PokeHelper.Berries[i].count += 1
+						else:
+							PokeHelper.add_child(_Item_to_add)
+				else:
+					PokeHelper.add_child(_Item_to_add)
 				print("Berries")
 			elif self.Holding_item.type == "Pokeballs":
-				PokeHelper.Pokeballs.append(self.holding_item.instance())
+				var _Item_to_add = self.holding_item.instance()
+				_Item_to_add.count = int(1)
+				if PokeHelper.Pokeballs.size() != 0:
+					for i in range(0,PokeHelper.Pokeballs.size()):
+						if PokeHelper.Pokeballs[i].id == _Item_to_add.id:
+							PokeHelper.Pokeballs[i].count += 1
+						else:
+							PokeHelper.add_child(_Item_to_add)
+				else:
+					PokeHelper.add_child(_Item_to_add)
 				print("Pokeballs")
 			elif self.Holding_item.type == "Key_items":
-				PokeHelper.key_items.append(self.holding_item.instance())
+				var _Item_to_add = self.holding_item.instance()
+				_Item_to_add.count = int(1)
+				if PokeHelper.Key_items.size() != 0:
+					for i in range(0,PokeHelper.Key_items.size()):
+						if PokeHelper.Key_items[i].id == _Item_to_add.id:
+							PokeHelper.Key_items[i].count += 1
+						else:
+							PokeHelper.add_child(_Item_to_add)
+				else:
+					PokeHelper.add_child(_Item_to_add)
 				print("Key Items")
 			self.visible = false
 			$CollisionShape2D.disabled = true

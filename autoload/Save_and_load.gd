@@ -25,7 +25,7 @@ func _notification(what):
 
 func save_game():
 	var save_game = File.new()
-	save_game.open("user://savegame.txt", File.WRITE)
+	save_game.open("user://savegame.json", File.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group("Presist")
 	for node in save_nodes:
 		# Check the node is an instanced scene so it can be instanced again during load.
@@ -47,7 +47,7 @@ func save_game():
 
 func load_game():
 	var save_game = File.new()
-	if not save_game.file_exists("user://savegame.txt"):
+	if not save_game.file_exists("user://savegame.json"):
 		return # Error! We don't have a save to load.
 
 	# We need to revert the game state so we're not cloning objects
@@ -60,7 +60,7 @@ func load_game():
 
 	# Load the file line by line and process that dictionary to restore
 	# the object it represents.
-	save_game.open("user://savegame.txt", File.READ)
+	save_game.open("user://savegame.json", File.READ)
 	while save_game.get_position() < save_game.get_len():
 		# Get the saved dictionary from the next line in the save file
 		var node_data = parse_json(save_game.get_line())

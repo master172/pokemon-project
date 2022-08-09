@@ -4,7 +4,7 @@ extends KinematicBody2D
 
 #variables-->save_directory
 
-var save_path = "user://player_save.txt"
+var save_path = "user://player_save.json"
 
 var player_data
 #variables-->signals

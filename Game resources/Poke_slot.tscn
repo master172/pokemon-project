@@ -12,8 +12,7 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 centered = false
-hframes = 2
-frame = 1
+hframes = 3
 
 [node name="Pokemon" type="Sprite" parent="Sprite"]
 position = Vector2( 11, 12 )

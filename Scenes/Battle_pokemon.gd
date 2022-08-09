@@ -39,6 +39,8 @@ func _input(event):
 			if is_instance_valid(Poke_cont_box):
 				Poke_cont_box.queue_free()
 				State = states.Main
+		elif event.is_action_pressed("decline") and State == states.Main:
+			_kill()
 		if is_instance_valid(Poke_cont_box):
 			State = states.Poke_cont_box
 		else:
