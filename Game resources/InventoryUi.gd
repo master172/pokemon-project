@@ -1,5 +1,16 @@
 extends Control
 
+#<Dialogue>
+onready var dialogue_container = $Dialogue_controller
+onready var Item_displayer = $Dialogue_controller/HBoxContainer/Item_displayer
+onready var Item_label = $Dialogue_controller/HBoxContainer/Label
+
+var current_to_display_text = ""
+
+#<preset_dialogues>
+var Not_now = "Professors words echoed:, Ash there is a time for everythin but not now"
+#</Dialogue>
+
 #<item_box>
 #<boxes>
 onready var item_box = $TextureRect/Item_box
@@ -75,7 +86,7 @@ const cont_box = preload("res://Game resources/Cont_box.tscn")
 var Cont_box
 #</dependencies>
 
-enum states {Poke_selection, Pocket_selection, Dialogue, Item_Selection,Cont_box,Item_poke_selection}
+enum states {Poke_selection, Pocket_selection, Dialogue, Item_Selection,Cont_box,Item_poke_selection,Scene_switched}
 var state = states.Poke_selection
 
 var current_selected = 0
@@ -238,6 +249,8 @@ func _reset(value):
 
 func _input(event):
 
+	
+
 
 	if is_instance_valid(Cont_box):
 		state = states.Cont_box
@@ -281,6 +294,7 @@ func _input(event):
 				
 		if state == states.Pocket_selection:
 			if event.is_action_pressed("W"):
+				current_to_display_text = ""
 				if current_pocket != null:
 					if current_pocket == 0 and PokeHelper.Free_space.size() > 0:
 						state = states.Item_Selection
@@ -321,6 +335,7 @@ func _input(event):
 
 				
 			if event.is_action_pressed("A"):
+				current_to_display_text = ""
 				for i in range(0,Pocket_container.get_child_count()):
 					Pocket_container.get_child(i).rect_position.x += 14
 				if pocket_var > 0:
@@ -328,10 +343,12 @@ func _input(event):
 				else:
 					pocket_var = max_selecctable
 			if event.is_action_pressed("S"):
+				current_to_display_text = ""
 				state = states.Poke_selection
 				current_selected = 5
 				max_selecctable = 5
 			if event.is_action_pressed("D"):
+				current_to_display_text = ""
 
 				for i in range(0,Pocket_container.get_child_count()):
 					Pocket_container.get_child(i).rect_position.x -= 14
@@ -343,6 +360,7 @@ func _input(event):
 		
 		elif state == states.Poke_selection:
 			if event.is_action_pressed("W"):
+				current_to_display_text = ""
 				if current_selected < max_selecctable:
 					current_selected += 1
 				elif current_selected == max_selecctable:
@@ -350,6 +368,7 @@ func _input(event):
 					current_selected = 0
 			
 			elif event.is_action_pressed("S"):
+				current_to_display_text = ""
 				if current_selected > 0:
 					current_selected -= 1
 				elif current_selected == 0:
@@ -392,6 +411,7 @@ func _input(event):
 			
 
 			if event.is_action_pressed("D"):
+				current_to_display_text = ""
 				if current_selected < max_selecctable:
 					current_selected += 1
 				elif current_selected == max_selecctable:
@@ -399,6 +419,7 @@ func _input(event):
 					current_selected = 0
 			
 			elif event.is_action_pressed("A"):
+				current_to_display_text = ""
 				if current_selected > 0:
 					current_selected -= 1
 				elif current_selected == 0:
@@ -410,6 +431,7 @@ func _input(event):
 		
 		elif state == states.Item_Selection:
 			if event.is_action_pressed("W"):
+				current_to_display_text = ""
 				if current_selected < max_selecctable:
 					current_selected += 1
 				elif current_selected == max_selecctable:
@@ -419,6 +441,7 @@ func _input(event):
 					pre_item_slot.frame = 0
 			
 			elif event.is_action_pressed("S"):
+				current_to_display_text = ""
 				if current_selected > 0:
 					current_selected -= 1
 				elif current_selected == 0:
@@ -428,6 +451,7 @@ func _input(event):
 					pre_item_slot.frame = 0
 
 			if event.is_action_pressed("D"):
+				current_to_display_text = ""
 				if current_selected < max_selecctable:
 					current_selected += 1
 				elif current_selected == max_selecctable:
@@ -436,6 +460,7 @@ func _input(event):
 				if pre_item_slot != null:
 					pre_item_slot.frame = 0
 			elif event.is_action_pressed("A"):
+				current_to_display_text = ""
 				if current_selected > 0:
 					current_selected -= 1
 				elif current_selected == 0:
@@ -449,34 +474,58 @@ func _input(event):
 			if event.is_action_pressed("accept"):
 				if current_item != null and current_pokemon != null:
 					current_item._use(current_pokemon)
+					if current_item.No_effect == true:
+						current_to_display_text = current_item.No_effect_text
 					state = states.Item_Selection
 					current_selected = 0
 					
 			if event.is_action_pressed("W"):
+				current_to_display_text = ""
 				if current_selected < max_selecctable:
 					current_selected += 1
 				else:
 					current_selected = 0
 			elif event.is_action_pressed("D"):
+				current_to_display_text = ""
 				if current_selected < max_selecctable:
 					current_selected += 1
 				else:
 					current_selected = 0
 			elif event.is_action_pressed("S"):
+				current_to_display_text = ""
 				if current_selected > 0:
 					current_selected -= 1
 				else:
 					current_selected = max_selecctable
 			elif event.is_action_pressed("A"):
+				current_to_display_text = ""
 				if current_selected > 0:
 					current_selected -= 1
 				else:
 					current_selected = max_selecctable
 
 
+
 func _physics_process(_delta):
+
 	_set_current_selected()
 
+	if current_item != null:
+		if current_item.has_meta("_useable"):
+			pass
+		else:
+			if state == states.Item_Selection and current_to_display_text == "":
+				Item_displayer.texture = current_item.sprite
+				Item_label.text = current_item.Description
+			elif state == states.Item_Selection and current_to_display_text != "":
+				Item_displayer.texture = current_item.sprite
+				Item_label.text = current_to_display_text
+			elif state == states.Cont_box or state == states.Item_poke_selection:
+				Item_displayer.texture = current_item.sprite
+				Item_label.text = current_item.current_text
+			else:
+				Item_displayer.texture = null
+				Item_label.text = ""
 	
 	Pokeballs = PokeHelper.Pokeballs
 	Key_items = PokeHelper.Key_items
