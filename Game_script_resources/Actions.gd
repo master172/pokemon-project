@@ -36,6 +36,10 @@ export(String, MULTILINE) var description
 
 export(float,0,100) var Accuracy = 100.0
 
+var unlearned = false
+
+
+
 func save():
 	var save_dict = {
 		"learned":learned,
@@ -43,9 +47,14 @@ func save():
 		"pp":pp,
 		"added":added,
 		"to_add":to_add,
-		'can_add':can_add,
+		"can_add":can_add,
+		"unlearned":unlearned,
 	}
-	return save_dict
+	if unlearned == false:
+		return save_dict
+	else:
+		self.remove_from_group("presistent")
+		return null
 
 func _calculate_damage():
 	if self.current_holder.opposing_pokemon.Weak_to.has(self.Types):

@@ -391,6 +391,7 @@ func learn(move):
 	self.Learned_moves.append(move)
 
 func _unlearn(move):
+	move.unlearned = true
 	move.learned = false
 	move.to_add = false
 	move.can_add = false
