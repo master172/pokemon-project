@@ -12,9 +12,12 @@ func _use(_pokemon):
 			_pokemon.Current_health_points = _pokemon.Max_health_points
 			self.count -= 1
 		No_effect = false
+		_done()
 	else:
 		No_effect = true
 
+func _done():
+	PokeHelper.Pokemon_scene_done = true
 
 func save():
 	var save_dict = {

@@ -1,5 +1,6 @@
 extends Node
 
+var Pokemon_scene_done = false
 
 var weathers : Array  = ["Sunny","Clear","Rainy"]
 

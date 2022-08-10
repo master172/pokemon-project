@@ -279,3 +279,6 @@ playback_process_mode = 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
+
+[node name="Bag_layer" type="Node2D" parent="."]
+z_index = 20

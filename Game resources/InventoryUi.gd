@@ -1,5 +1,7 @@
 extends Control
 
+var controller
+
 #<Dialogue>
 onready var dialogue_container = $Dialogue_controller
 onready var Item_displayer = $Dialogue_controller/HBoxContainer/Item_displayer
@@ -248,7 +250,7 @@ func _reset(value):
 		current_selected = 0
 
 func _input(event):
-
+	
 	
 
 
@@ -293,6 +295,11 @@ func _input(event):
 				self.state = states.Cont_box
 				
 		if state == states.Pocket_selection:
+			if event.is_action_pressed("decline"):
+				if self.controller != null:
+					if self.controller.Name == "Pokemon_scene_stage":
+						self.controller.ui_state = self.controller.Ui_state.Main
+						queue_free()
 			if event.is_action_pressed("W"):
 				current_to_display_text = ""
 				if current_pocket != null:
@@ -359,6 +366,11 @@ func _input(event):
 					pocket_var = 0
 		
 		elif state == states.Poke_selection:
+			if event.is_action_pressed("decline"):
+				if self.controller != null:
+					if self.controller.Name == "Pokemon_scene_stage":
+						self.controller.ui_state = self.controller.Ui_state.Main
+						queue_free()
 			if event.is_action_pressed("W"):
 				current_to_display_text = ""
 				if current_selected < max_selecctable:
@@ -430,6 +442,11 @@ func _input(event):
 			pass
 		
 		elif state == states.Item_Selection:
+			if event.is_action_pressed("decline"):
+				if self.controller != null:
+					if self.controller.Name == "Pokemon_scene_stage":
+						self.controller.ui_state = self.controller.Ui_state.Main
+						queue_free()
 			if event.is_action_pressed("W"):
 				current_to_display_text = ""
 				if current_selected < max_selecctable:
@@ -471,6 +488,9 @@ func _input(event):
 		
 
 		elif state == states.Item_poke_selection:
+			if event.is_action_pressed("decline"):
+				state = states.Item_Selection
+				current_selected = 0
 			if event.is_action_pressed("accept"):
 				if current_item != null and current_pokemon != null:
 					current_item._use(current_pokemon)
@@ -507,6 +527,7 @@ func _input(event):
 
 
 func _physics_process(_delta):
+	_kill()
 
 	_set_current_selected()
 
@@ -657,3 +678,10 @@ func _physics_process(_delta):
 
 		current_item_slot = pocket_map[current_pocket].get_child(0).get_child(0).get_child(current_selected).get_child(0)
 
+func _kill():
+	if PokeHelper.Pokemon_scene_done == true:
+		if self.controller != null:
+			if self.controller.Name == "Pokemon_scene_stage":
+				self.controller.ui_state = self.controller.Ui_state.Main
+				PokeHelper.Pokemon_scene_done = false
+				queue_free()

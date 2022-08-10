@@ -1,7 +1,10 @@
 extends Control
 
-const pokemon_scene =preload("res://Scenes/Battle_pokemon.tscn")
+onready var Bag_layer = $Bag_layer
+const pokemon_scene = preload("res://Scenes/Battle_pokemon.tscn")
+const Bag = preload("res://Game resources/InventoryUi.tscn")
 
+var Name = "Pokemon_scene_stage"
 var player_pokemon
 var enemy_pokemon
 
@@ -19,7 +22,7 @@ var max_num = 4
 
 var max_pokemon_number = 6
 
-enum Ui_state { Main,Battle,Pokemon,Selection}
+enum Ui_state { Main,Battle,Pokemon,Selection,Bag}
 
 var ui_state = Ui_state.Main
 
@@ -66,7 +69,7 @@ func _physics_process(_delta):
 			if current_mouse_num == 0:
 				_attack_inp()
 			elif current_mouse_num == 1:
-				print("bag")
+				_bag()
 			elif current_mouse_num == 2:
 				_run()
 			elif current_mouse_num == 3:
@@ -94,6 +97,12 @@ func _physics_process(_delta):
 					PlayerPokemon.current_pokemon.Learned_moves[3]._calculate_damage()
 					BattleManager.turns += 1
 
+
+func _bag():
+	var Bag_scene = Bag.instance()
+	Bag_layer.add_child(Bag_scene)
+	Bag_scene.controller = self
+	ui_state = Ui_state.Bag
 
 func _change_pokemon():
 	var Pokemon_scene = pokemon_scene.instance()
