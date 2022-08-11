@@ -120,7 +120,6 @@ anims/fade_out = SubResource( 2 )
 [node name="MoveLearner" type="CanvasLayer" parent="."]
 
 [node name="Move_learner" type="Control" parent="MoveLearner"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -160.0
@@ -157,18 +156,18 @@ hframes = 2
 
 [node name="Name" type="Label" parent="MoveLearner/Move_learner/Move_container/Move1"]
 margin_left = 28.0
-margin_top = 2.0
+margin_top = 5.0
 margin_right = 90.0
-margin_bottom = 16.0
+margin_bottom = 19.0
 rect_scale = Vector2( 0.42722, 0.433317 )
 custom_fonts/font = SubResource( 5 )
 text = "Tackle"
 
 [node name="Description" type="Label" parent="MoveLearner/Move_learner/Move_container/Move1"]
 margin_left = 28.0
-margin_top = 8.0
-margin_right = 239.0
-margin_bottom = 57.0
+margin_top = 13.0
+margin_right = 227.0
+margin_bottom = 40.0
 rect_scale = Vector2( 0.331731, 0.41125 )
 custom_fonts/font = SubResource( 5 )
 text = "Description"
@@ -190,18 +189,18 @@ hframes = 2
 
 [node name="Name" type="Label" parent="MoveLearner/Move_learner/Move_container/Move2"]
 margin_left = 28.0
-margin_top = 2.0
+margin_top = 5.0
 margin_right = 90.0
-margin_bottom = 16.0
+margin_bottom = 19.0
 rect_scale = Vector2( 0.42722, 0.433317 )
 custom_fonts/font = SubResource( 5 )
 text = "Tackle"
 
 [node name="Description" type="Label" parent="MoveLearner/Move_learner/Move_container/Move2"]
 margin_left = 28.0
-margin_top = 8.0
-margin_right = 239.0
-margin_bottom = 57.0
+margin_top = 13.0
+margin_right = 227.0
+margin_bottom = 45.0
 rect_scale = Vector2( 0.331731, 0.41125 )
 custom_fonts/font = SubResource( 5 )
 text = "Description"
@@ -223,18 +222,18 @@ hframes = 2
 
 [node name="Name" type="Label" parent="MoveLearner/Move_learner/Move_container/Move3"]
 margin_left = 28.0
-margin_top = 2.0
+margin_top = 5.0
 margin_right = 90.0
-margin_bottom = 16.0
+margin_bottom = 19.0
 rect_scale = Vector2( 0.42722, 0.433317 )
 custom_fonts/font = SubResource( 5 )
 text = "Tackle"
 
 [node name="Description" type="Label" parent="MoveLearner/Move_learner/Move_container/Move3"]
 margin_left = 28.0
-margin_top = 8.0
-margin_right = 239.0
-margin_bottom = 57.0
+margin_top = 13.0
+margin_right = 227.0
+margin_bottom = 42.0
 rect_scale = Vector2( 0.331731, 0.41125 )
 custom_fonts/font = SubResource( 5 )
 text = "Description"
@@ -257,18 +256,18 @@ hframes = 2
 
 [node name="Name" type="Label" parent="MoveLearner/Move_learner/Move_container/Move4"]
 margin_left = 28.0
-margin_top = 2.0
+margin_top = 5.0
 margin_right = 90.0
-margin_bottom = 16.0
+margin_bottom = 19.0
 rect_scale = Vector2( 0.42722, 0.433317 )
 custom_fonts/font = SubResource( 5 )
 text = "Tackle"
 
 [node name="Description" type="Label" parent="MoveLearner/Move_learner/Move_container/Move4"]
 margin_left = 28.0
-margin_top = 8.0
-margin_right = 239.0
-margin_bottom = 57.0
+margin_top = 13.0
+margin_right = 227.0
+margin_bottom = 42.0
 rect_scale = Vector2( 0.331731, 0.41125 )
 custom_fonts/font = SubResource( 5 )
 text = "Description"
@@ -297,18 +296,21 @@ hframes = 2
 
 [node name="Name" type="Label" parent="MoveLearner/Move_learner/Forgetter/Move"]
 margin_left = 31.0
-margin_top = 3.0
+margin_top = 5.0
 margin_right = 211.0
-margin_bottom = 19.0
+margin_bottom = 21.0
 rect_scale = Vector2( 0.42722, 0.433317 )
 custom_fonts/font = SubResource( 5 )
 text = "Tackle"
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Description" type="Label" parent="MoveLearner/Move_learner/Forgetter/Move"]
 margin_left = 31.0
-margin_top = 10.0
-margin_right = 263.0
-margin_bottom = 68.0
+margin_top = 14.0
+margin_right = 251.0
+margin_bottom = 53.0
 rect_scale = Vector2( 0.331731, 0.41125 )
 custom_fonts/font = SubResource( 5 )
 text = "Description"

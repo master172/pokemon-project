@@ -12,6 +12,7 @@ const pc = preload("res://UI UX/Pc.tscn")
 enum Transition_Type  {NEW_SCENE, PARTY_SCENE, MENU_ONLY, POKEMON_SCENE,EXIT_POKEMON_SCENE,MOVE_LEARNER,EXIT_MOVE_LEARNER,PC,EXIT_PC}
 var transition_type = Transition_Type.NEW_SCENE
 
+
 func transition_to_Pc():
 	SaveAndLoad.save_game()
 	Utils.get_player().is_moving = false
@@ -27,6 +28,9 @@ func transition_to_Move_learner():
 	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
 	Utils.get_player().set_physics_process(false)
 	transition_type = Transition_Type.MOVE_LEARNER
+	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
+	finished_fading()
+
 
 func transition_exit_Move_learner():
 	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
@@ -45,6 +49,7 @@ func transition_exit_party_scene():
 func transition_to_pokemon_scene():
 	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
 	transition_type = Transition_Type.POKEMON_SCENE
+	
 	
 func transition_exit_pokemon_scene():
 	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
@@ -96,6 +101,10 @@ func finished_fading():
 		Transition_Type.EXIT_POKEMON_SCENE:
 			$Pokemon_scene.unload_pokemon_scene()
 			BattleManager.in_battle = false
+			
+
+			PlayerPokemon._check_evolution()
+			PlayerPokemon._check_move_learning()
 	
 	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_out")
 

@@ -51,6 +51,7 @@ func _check_evolution():
 		self.sixth_pokemon.evolve()
 
 func _check_move_learning():
+	print("checking")
 	if self.first_pokemon != null:
 		self.first_pokemon._check_move_to_learn()
 	if self.second_pokemon != null:

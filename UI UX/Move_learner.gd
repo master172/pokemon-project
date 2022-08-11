@@ -107,12 +107,20 @@ func _input(event):
 				elif selected_option == 1:
 					if move_selected == 0:
 						MoveLearner._make_to_learn(0,MoveLearner.target_pokemon.Learned_moves[0])
+						current_pokemon = null
+
 					elif move_selected == 1:
 						MoveLearner._make_to_learn(1,MoveLearner.target_pokemon.Learned_moves[1])	
+						current_pokemon = null
+
 					elif move_selected == 2:
-						MoveLearner._make_to_learn(2,MoveLearner.target_pokemon.Learned_moves[2])	
+						MoveLearner._make_to_learn(2,MoveLearner.target_pokemon.Learned_moves[2])
+						current_pokemon = null
+
 					elif move_selected == 3:
-						MoveLearner._make_to_learn(3,MoveLearner.target_pokemon.Learned_moves[3])	
+						MoveLearner._make_to_learn(3,MoveLearner.target_pokemon.Learned_moves[3])
+						current_pokemon = null
+
 				elif selected_option == 2:
 					pass
 				elif selected_option == 3:
@@ -124,26 +132,25 @@ func _input(event):
 
 func _physics_process(_delta):
 	if self.current_pokemon != null:
-		if current_pokemon.Learned_moves.size() > 0:
-			Move_1_Name = current_pokemon.Learned_moves[0].name
-			Move_1_Description = current_pokemon.Learned_moves[0].description
-		if current_pokemon.Learned_moves.size() > 1:
-			Move_2_Name = current_pokemon.Learned_moves[1].name
-			Move_2_Description = current_pokemon.Learned_moves[1].description
-		if current_pokemon.Learned_moves.size ()> 2:
-			Move_3_Name = current_pokemon.Learned_moves[2].name
-			Move_3_Description = current_pokemon.Learned_moves[2].description
-		if current_pokemon.Learned_moves.size() > 3:
-			Move_4_Name = current_pokemon.Learned_moves[3].name
-			Move_4_Description = current_pokemon.Learned_moves[3].description
+		if current_pokemon.Learned_moves.size() >= 1:
+			Move_1_Name.text = current_pokemon.Learned_moves[0].name
+			Move_1_Description.text = current_pokemon.Learned_moves[0].description
+		if current_pokemon.Learned_moves.size() >- 2:
+			Move_2_Name.text = current_pokemon.Learned_moves[1].name
+			Move_2_Description.text = current_pokemon.Learned_moves[1].description
+		if current_pokemon.Learned_moves.size () >=  3:
+			Move_3_Name.text = current_pokemon.Learned_moves[2].name
+			Move_3_Description.text = current_pokemon.Learned_moves[2].description
+		if current_pokemon.Learned_moves.size() >= 4:
+			Move_4_Name.text = current_pokemon.Learned_moves[3].name
+			Move_4_Description.text = current_pokemon.Learned_moves[3].description
 		if MoveLearner.move_to_learn != null:
-			move_to_learn_Name = MoveLearner.move_to_learn.name
-			move_to_learn_Description = MoveLearner.move_to_learn.description
+			move_to_learn_Name.text = MoveLearner.move_to_learn.name
+			move_to_learn_Description.text = MoveLearner.move_to_learn.description
 	if current_option == Options.Main:
 		visible = false
-	else:
+	elif current_option == Options.Selection:
 		visible = true
-	if current_option == Options.Selection:
 		if selected_option == 0:
 			Move_1_selection.frame = 1
 		else:
@@ -169,7 +176,8 @@ func _physics_process(_delta):
 		else:
 			move_to_learn.frame = 0
 	
-	if current_option == Options.Options:
+	elif current_option == Options.Options:
+		self.visible = true
 		if selected_option == 0:
 			learn.frame = 1
 		else:
@@ -189,3 +197,6 @@ func _physics_process(_delta):
 			back.frame = 1
 		else:
 			back.frame = 0
+	else:
+		self.visible = false
+	

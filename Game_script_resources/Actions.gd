@@ -50,11 +50,8 @@ func save():
 		"can_add":can_add,
 		"unlearned":unlearned,
 	}
-	if unlearned == false:
-		return save_dict
-	else:
-		self.remove_from_group("presistent")
-		return null
+	return save_dict
+
 
 func _calculate_damage():
 	if self.current_holder.opposing_pokemon.Weak_to.has(self.Types):
