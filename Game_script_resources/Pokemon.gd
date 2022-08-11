@@ -191,7 +191,8 @@ func _add_stats():
 	self.Current_special_defense += (self.base_special_defense / 20) + (self.EV_special_defense / 50)
 	self.Current_speed += (self.base_speed / 20) + (self.EV_speed / 50)
 	
-func _ready():		
+func _ready():
+	
 	if name_changed == false:
 		self.name = "Pokemon_" + String(Utils.Num_loaded_pokemon) + "_" + name
 		Utils.Num_loaded_pokemon += 1
@@ -200,7 +201,8 @@ func _ready():
 	
 	yield(get_tree().create_timer(0.2),"timeout")
 	
-	
+	_check_move_to_learn()
+
 	if added == true:
 		if self.change_pc_poke != null:
 			change_path = change_pc_poke
@@ -384,13 +386,17 @@ func change_parent():
 	Utils.parent_to_change.add_child(self)
 	if Utils.parent_to_change == OpposingTrainerMonsters:
 		OpposingTrainerMonsters.pokemon = self
-		
+
+func _check_move_to_learn():
+	for i in range(0,self.get_child_count()):
+		self.get_child(i)._start_learning()
 
 
 func learn(move):
 	self.Learned_moves.append(move)
 
 func _unlearn(move):
+	print("hi")
 	move.unlearned = true
 	move.learned = false
 	move.to_add = false

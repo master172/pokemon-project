@@ -1,5 +1,8 @@
 extends Node2D
 
+var party_pokemon : Array = [first_pokemon,second_pokemon,third_pokemon,fourth_pokemon, fifth_pokemon,sixth_pokemon]
+
+var current_learning_pokemon
 var lost = false
 var won = false
 
@@ -47,7 +50,19 @@ func _check_evolution():
 	if self.sixth_pokemon != null:
 		self.sixth_pokemon.evolve()
 
-
+func _check_move_learning():
+	if self.first_pokemon != null:
+		self.first_pokemon._check_move_to_learn()
+	if self.second_pokemon != null:
+		self.second_pokemon._check_move_to_learn()
+	if self.third_pokemon != null:
+		self.third_pokemon._check_move_to_learn()
+	if self.fourth_pokemon != null:
+		self.fourth_pokemon._check_move_to_learn()
+	if self.fifth_pokemon != null:
+		self.fifth_pokemon._check_move_to_learn()
+	if self.sixth_pokemon != null:
+		self.sixth_pokemon._check_move_to_learn()
 
 func _ready():
 	yield(get_tree().create_timer(2),"timeout")

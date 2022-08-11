@@ -18,7 +18,7 @@ func _make_to_learn(index,deleting_move):
 	move_to_learn = null
 	target_pokemon = null
 	index = 0
-	Utils.get_scene_manager.transition_exit_Move_learner()
+	Utils.Get_Scene_Manager().transition_exit_Move_learner()
 
 func _physics_process(_delta):
 	if learning == true:

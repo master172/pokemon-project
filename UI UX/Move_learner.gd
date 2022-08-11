@@ -124,16 +124,16 @@ func _input(event):
 
 func _physics_process(_delta):
 	if self.current_pokemon != null:
-		if current_pokemon.Learned_moves.size > 0:
+		if current_pokemon.Learned_moves.size() > 0:
 			Move_1_Name = current_pokemon.Learned_moves[0].name
 			Move_1_Description = current_pokemon.Learned_moves[0].description
-		if current_pokemon.Learned_movessize > 1:
+		if current_pokemon.Learned_moves.size() > 1:
 			Move_2_Name = current_pokemon.Learned_moves[1].name
 			Move_2_Description = current_pokemon.Learned_moves[1].description
-		if current_pokemon.Learned_movessize > 2:
+		if current_pokemon.Learned_moves.size ()> 2:
 			Move_3_Name = current_pokemon.Learned_moves[2].name
 			Move_3_Description = current_pokemon.Learned_moves[2].description
-		if current_pokemon.Learned_movessize > 3:
+		if current_pokemon.Learned_moves.size() > 3:
 			Move_4_Name = current_pokemon.Learned_moves[3].name
 			Move_4_Description = current_pokemon.Learned_moves[3].description
 		if MoveLearner.move_to_learn != null:
