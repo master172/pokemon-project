@@ -69,6 +69,12 @@ func _input(event):
 			move_selected = selected_option
 			current_option = Options.Options
 			selected_option = 0
+		elif event.is_action_pressed("decline"):
+			MoveLearner._cancel_learning()
+			selected_option = 0
+			move_selected = 0
+			current_pokemon = null
+			
 
 
 
@@ -107,18 +113,27 @@ func _input(event):
 				elif selected_option == 1:
 					if move_selected == 0:
 						MoveLearner._make_to_learn(0,MoveLearner.target_pokemon.Learned_moves[0])
+						
 						current_pokemon = null
 
 					elif move_selected == 1:
 						MoveLearner._make_to_learn(1,MoveLearner.target_pokemon.Learned_moves[1])	
+						
 						current_pokemon = null
 
 					elif move_selected == 2:
 						MoveLearner._make_to_learn(2,MoveLearner.target_pokemon.Learned_moves[2])
+						
 						current_pokemon = null
 
 					elif move_selected == 3:
 						MoveLearner._make_to_learn(3,MoveLearner.target_pokemon.Learned_moves[3])
+						
+						current_pokemon = null
+
+					elif move_selected == 4:
+						MoveLearner._cancel_learning()
+						
 						current_pokemon = null
 
 				elif selected_option == 2:

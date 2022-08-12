@@ -103,8 +103,6 @@ func _calculate_damage():
 	elif current_holder.get_parent() == OpposingTrainerMonsters:
 		targets = OpposingTrainerMonsters.targets
 	
-	print("Current level: ", current_holder.level, " Current_attack: ", current_holder.Current_attack, " Power: ", power, " Opposing defense: ", current_holder.opposing_pokemon.Current_defense,
-	" Stab: ", stab , " Weakness: ",current_holder.Weakness, " Resistance " , current_holder.Resistance, " Random number ", random_number  )
 	damage = ((((((2 * current_holder.level)/5)+2)*current_holder.Current_attack * power / current_holder.opposing_pokemon.Current_defense)/50)+2)* stab * current_holder.Weakness * current_holder.Resistance * random_number/ 100
 	damage = damage / targets * weather * (PokeHelper.player_badjes + 1) * crit* effectiveness
 	_apply_damage()
@@ -142,7 +140,7 @@ func _physics_process(_delta):
 func _start_learning():
 	if self.current_holder != null:
 		if current_holder.level >= self.learned_level and can_add == true:
-			if learned == false:
+			if learned == false and unlearned == false:
 				MoveLearner.learning = true
 				MoveLearner.target_pokemon = self.current_holder
 				MoveLearner.move_to_learn = self
@@ -154,6 +152,7 @@ func _start_learning():
 					MoveLearner.target_pokemon = self.current_holder
 					MoveLearner.move_to_learn = self
 					Utils.Get_Scene_Manager().transition_to_Move_learner()
+					
 
 func _ready():
 	yield(get_tree().create_timer(0.2),"timeout")

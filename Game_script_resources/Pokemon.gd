@@ -169,6 +169,8 @@ func _lose():
 		_add_ev_yield()
 		self.opposing_pokemon._update_level()
 
+			
+
 func _level_up():
 	_update_level()
 	_calculate_stats()
@@ -253,6 +255,9 @@ func _update_level():
 		if experince_gained >= experince_to_next_level:
 			level += 1
 			_calculate_experience()
+	if self.get_parent() == PlayerPokemon:
+		PlayerPokemon._check_evolution()
+		PlayerPokemon._check_move_learning()
 
 func _calculate_stats():
 	var stats_calculated : bool = false

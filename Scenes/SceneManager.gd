@@ -7,11 +7,20 @@ var next_scene
 
 const pc = preload("res://UI UX/Pc.tscn")
 
+var need_move_to_learn = false
 
+var transition_queue : Array = []
 
 enum Transition_Type  {NEW_SCENE, PARTY_SCENE, MENU_ONLY, POKEMON_SCENE,EXIT_POKEMON_SCENE,MOVE_LEARNER,EXIT_MOVE_LEARNER,PC,EXIT_PC}
 var transition_type = Transition_Type.NEW_SCENE
 
+enum Move_learn_transtion_type {MOVE_LEARNER,EXIT_MOVE_LEARNER}
+var move_learn_transtion_type = Move_learn_transtion_type.MOVE_LEARNER
+
+func _fade_in():
+	if $ScreenTransition/ColorRect/AnimationPlayer.is_playing():
+		$ScreenTransition/ColorRect/AnimationPlayer.stop()
+	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
 
 func transition_to_Pc():
 	SaveAndLoad.save_game()
@@ -25,34 +34,33 @@ func transition_to_Pc():
 
 
 func transition_to_Move_learner():
-	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
+	_fade_in()
 	Utils.get_player().set_physics_process(false)
-	transition_type = Transition_Type.MOVE_LEARNER
-	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
-	finished_fading()
+	move_learn_transtion_type = Move_learn_transtion_type.MOVE_LEARNER
+	need_move_to_learn = true
 
 
 func transition_exit_Move_learner():
-	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
+	_fade_in()
 	yield(get_tree().create_timer(0.1),"timeout")
 	Utils.get_player().set_physics_process(true)
-	transition_type = Transition_Type.EXIT_MOVE_LEARNER
+	move_learn_transtion_type = Move_learn_transtion_type.EXIT_MOVE_LEARNER
 
 func transition_to_party_scene():
-	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
+	_fade_in()
 	transition_type = Transition_Type.PARTY_SCENE
 
 func transition_exit_party_scene():
-	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
+	_fade_in()
 	transition_type = Transition_Type.MENU_ONLY
 
 func transition_to_pokemon_scene():
-	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
+	_fade_in()
 	transition_type = Transition_Type.POKEMON_SCENE
 	
 	
 func transition_exit_pokemon_scene():
-	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
+	_fade_in()
 	transition_type = Transition_Type.EXIT_POKEMON_SCENE
 	BattleManager.catched = false
 	BattleManager.fainted = false
@@ -74,38 +82,64 @@ func transition_to_scene(new_scene:String, spawn_location, spawn_direction):
 
 
 func finished_fading():
-	match transition_type:
-		Transition_Type.NEW_SCENE:
-			
-			$CurrentScene.get_child(0).queue_free()
-			$CurrentScene.add_child(load(next_scene).instance())
-	
-			var player = $CurrentScene.get_children().back().find_node("ash")
-			player.set_spawn(player_location,player_direction)
-			SceneLoaded.current_scene = String(next_scene)
-		Transition_Type.MOVE_LEARNER:
-			$MoveLearner/Move_learner.current_pokemon = MoveLearner.target_pokemon
-			$MoveLearner/Move_learner.current_option = $MoveLearner/Move_learner.Options.Selection
-			
-		Transition_Type.EXIT_MOVE_LEARNER:
-			$MoveLearner/Move_learner.current_option = $MoveLearner/Move_learner.Options.Main
-			
-		Transition_Type.PARTY_SCENE:
-			$Menu.load_party_screen()
-		Transition_Type.POKEMON_SCENE:
-			$Pokemon_scene.load_pokemon_scene()
-			BattleManager.in_battle = true
-		Transition_Type.MENU_ONLY:
-			if$Menu.screen_loaded == $Menu.ScreenLoaded.Party_screen:
-				$Menu.unload_party_screen()
-		Transition_Type.EXIT_POKEMON_SCENE:
-			$Pokemon_scene.unload_pokemon_scene()
-			BattleManager.in_battle = false
-			
+	if need_move_to_learn == false:
+		match transition_type:
+			Transition_Type.NEW_SCENE:
+				
+				$CurrentScene.get_child(0).queue_free()
+				$CurrentScene.add_child(load(next_scene).instance())
+		
+				var player = $CurrentScene.get_children().back().find_node("ash")
+				player.set_spawn(player_location,player_direction)
+				SceneLoaded.current_scene = String(next_scene)
 
-			PlayerPokemon._check_evolution()
-			PlayerPokemon._check_move_learning()
-	
-	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_out")
+			Transition_Type.PARTY_SCENE:
+				$Menu.load_party_screen()
+			Transition_Type.POKEMON_SCENE:
+				$Pokemon_scene.load_pokemon_scene()
+				BattleManager.in_battle = true
+			Transition_Type.MENU_ONLY:
+				if$Menu.screen_loaded == $Menu.ScreenLoaded.Party_screen:
+					$Menu.unload_party_screen()
+			Transition_Type.EXIT_POKEMON_SCENE:
+				$Pokemon_scene.unload_pokemon_scene()
+				BattleManager.in_battle = false
+				
+		
+		$ScreenTransition/ColorRect/AnimationPlayer.play("fade_out")
+	else:
+		match move_learn_transtion_type:
+			Move_learn_transtion_type.EXIT_MOVE_LEARNER:
+				$MoveLearner/Move_learner.current_option = $MoveLearner/Move_learner.Options.Main
+				$MoveLearner/Move_learner.selected_option = 0
+				$MoveLearner/Move_learner.move_selected = 0
+				need_move_to_learn = false
+				match transition_type:
+					Transition_Type.NEW_SCENE:
+						
+						$CurrentScene.get_child(0).queue_free()
+						$CurrentScene.add_child(load(next_scene).instance())
+				
+						var player = $CurrentScene.get_children().back().find_node("ash")
+						player.set_spawn(player_location,player_direction)
+						SceneLoaded.current_scene = String(next_scene)
+		
+					Transition_Type.PARTY_SCENE:
+						$Menu.load_party_screen()
+					Transition_Type.POKEMON_SCENE:
+						$Pokemon_scene.load_pokemon_scene()
+						BattleManager.in_battle = true
+					Transition_Type.MENU_ONLY:
+						if$Menu.screen_loaded == $Menu.ScreenLoaded.Party_screen:
+							$Menu.unload_party_screen()
+					Transition_Type.EXIT_POKEMON_SCENE:
+						$Pokemon_scene.unload_pokemon_scene()
+						BattleManager.in_battle = false
+			Move_learn_transtion_type.MOVE_LEARNER:
+				Utils.get_player().set_physics_process(false)
+				$MoveLearner/Move_learner.current_pokemon = MoveLearner.target_pokemon
+				$MoveLearner/Move_learner.current_option = $MoveLearner/Move_learner.Options.Selection
+		$ScreenTransition/ColorRect/AnimationPlayer.play("fade_out")
+
 
 
