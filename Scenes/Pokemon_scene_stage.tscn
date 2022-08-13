@@ -136,9 +136,6 @@ region_rect = Rect2( -1, 100, 64, 59 )
 margin_top = 112.0
 margin_right = 240.0
 margin_bottom = 160.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Back_box" type="Sprite" parent="Control"]
 scale = Vector2( 1, 0.685714 )

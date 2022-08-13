@@ -621,3 +621,8 @@ func evolve():
 	else:
 		pass
 	return
+
+func _wild_battle():
+	for i in range(0,(self.Learned_moves.size()-1)):
+		self.Learned_moves[i]._calculate_damage()
+		BattleManager.Ally_turn()

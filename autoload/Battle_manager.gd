@@ -10,6 +10,16 @@ var fainted =  false
 
 var in_battle = false
 
+enum  what_turn {ALLY_TURN, ENEMY_TURN}
+var current_turn = what_turn.ALLY_TURN
+
+func Ally_turn():
+	current_turn = what_turn.ALLY_TURN
+
+func Enemy_turn():
+	current_turn = what_turn.ENEMY_TURN
+	OpposingTrainerMonsters._attack()
+
 func _physics_process(_delta):
 	if OpposingTrainerMonsters.pokemon != null:
 		PlayerPokemon.opposing_pokemon = OpposingTrainerMonsters.pokemon

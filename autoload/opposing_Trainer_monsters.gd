@@ -21,3 +21,8 @@ func _remove_children():
 
 func _change_parent():
 	self.get_child(0).change_parent()
+
+func _attack():
+	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
+		if self.pokemon != null:
+			pokemon._wild_battle()
