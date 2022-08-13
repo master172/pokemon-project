@@ -33,7 +33,13 @@ var charecter
 func _ready():
 	ui_state = Ui_state.Selection
 
+func _need_to_switch():
+	pass
 func _physics_process(_delta):
+	if BattleManager.multi_battle == false:
+		_single_battle()
+
+func _single_battle():
 	if PlayerPokemon.current_learning_pokemon == null:
 	
 		if OpposingTrainerMonsters.pokemon != null:
@@ -102,7 +108,6 @@ func _physics_process(_delta):
 							BattleManager.turns += 1
 							BattleManager.Enemy_turn()
 
-
 func _bag():
 	var Bag_scene = Bag.instance()
 	Bag_layer.add_child(Bag_scene)
@@ -151,82 +156,83 @@ func _run():
 		print("cant escape an trainer battle")
 
 func _input(event):
-	if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN:
-		if event is InputEventMouseButton:
-			if event.is_pressed():
-				if ui_state ==  Ui_state.Main:
-					if event.button_index == BUTTON_WHEEL_UP:
-						if current_mouse_num < max_num:
-							current_mouse_num += 1
-							for i in range(0,scroll_container.get_child_count()):
-								scroll_container.get_child(i).position.x -= 101
-						else:
-							current_mouse_num = 0
-					elif event.button_index == BUTTON_WHEEL_DOWN:
+	if BattleManager.multi_battle == false:
+		if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN:
+			if event is InputEventMouseButton:
+				if event.is_pressed():
+					if ui_state ==  Ui_state.Main:
+						if event.button_index == BUTTON_WHEEL_UP:
+							if current_mouse_num < max_num:
+								current_mouse_num += 1
+								for i in range(0,scroll_container.get_child_count()):
+									scroll_container.get_child(i).position.x -= 101
+							else:
+								current_mouse_num = 0
+						elif event.button_index == BUTTON_WHEEL_DOWN:
+							if current_mouse_num != 0:
+								current_mouse_num -= 1
+								for i in range(0,scroll_container.get_child_count()):
+									scroll_container.get_child(i).position.x += 101
+							else:
+								current_mouse_num = max_num
+					elif ui_state == Ui_state.Battle:
+						if event.button_index == BUTTON_WHEEL_UP:
+							if battle_mouse_num < max_num:
+								battle_mouse_num += 1
+								for i in range(0,battle_box.get_child_count()):
+									battle_box.get_child(i).position.x -= 101
+							else:
+								battle_mouse_num = 0
+						elif event.button_index == BUTTON_WHEEL_DOWN:
+							if battle_mouse_num != 0:
+								battle_mouse_num -= 1
+								for i in range(0,battle_box.get_child_count()):
+									battle_box.get_child(i).position.x += 101
+							else:
+								battle_mouse_num = max_num
+
+			if ui_state == Ui_state.Main:
+				if event.is_action_pressed("A"):
+					if ui_state == Ui_state.Main:
 						if current_mouse_num != 0:
 							current_mouse_num -= 1
 							for i in range(0,scroll_container.get_child_count()):
 								scroll_container.get_child(i).position.x += 101
 						else:
+							for i in range(0,scroll_container.get_child_count()):
+								scroll_container.get_child(i).position.x += 101
 							current_mouse_num = max_num
-				elif ui_state == Ui_state.Battle:
-					if event.button_index == BUTTON_WHEEL_UP:
-						if battle_mouse_num < max_num:
-							battle_mouse_num += 1
-							for i in range(0,battle_box.get_child_count()):
-								battle_box.get_child(i).position.x -= 101
+				elif event.is_action_pressed("D"):
+					if ui_state == Ui_state.Main:
+						if current_mouse_num < max_num:
+							current_mouse_num += 1
+							for i in range(0,scroll_container.get_child_count()):
+								scroll_container.get_child(i).position.x -= 101
 						else:
-							battle_mouse_num = 0
-					elif event.button_index == BUTTON_WHEEL_DOWN:
+							for i in range(0,scroll_container.get_child_count()):
+								scroll_container.get_child(i).position.x -= 101
+							current_mouse_num = 0
+			elif ui_state == Ui_state.Battle:
+				if event.is_action_pressed("A"):
+					if ui_state == Ui_state.Battle:
 						if battle_mouse_num != 0:
 							battle_mouse_num -= 1
 							for i in range(0,battle_box.get_child_count()):
 								battle_box.get_child(i).position.x += 101
 						else:
+							for i in range(0,battle_box.get_child_count()):
+								battle_box.get_child(i).position.x += 101
 							battle_mouse_num = max_num
-
-		if ui_state == Ui_state.Main:
-			if event.is_action_pressed("A"):
-				if ui_state == Ui_state.Main:
-					if current_mouse_num != 0:
-						current_mouse_num -= 1
-						for i in range(0,scroll_container.get_child_count()):
-							scroll_container.get_child(i).position.x += 101
-					else:
-						for i in range(0,scroll_container.get_child_count()):
-							scroll_container.get_child(i).position.x += 101
-						current_mouse_num = max_num
-			elif event.is_action_pressed("D"):
-				if ui_state == Ui_state.Main:
-					if current_mouse_num < max_num:
-						current_mouse_num += 1
-						for i in range(0,scroll_container.get_child_count()):
-							scroll_container.get_child(i).position.x -= 101
-					else:
-						for i in range(0,scroll_container.get_child_count()):
-							scroll_container.get_child(i).position.x -= 101
-						current_mouse_num = 0
-		elif ui_state == Ui_state.Battle:
-			if event.is_action_pressed("A"):
-				if ui_state == Ui_state.Battle:
-					if battle_mouse_num != 0:
-						battle_mouse_num -= 1
-						for i in range(0,battle_box.get_child_count()):
-							battle_box.get_child(i).position.x += 101
-					else:
-						for i in range(0,battle_box.get_child_count()):
-							battle_box.get_child(i).position.x += 101
-						battle_mouse_num = max_num
-			elif event.is_action_pressed("D"):
-				if ui_state == Ui_state.Battle:
-					if battle_mouse_num < max_num:
-						battle_mouse_num += 1
-						for i in range(0,battle_box.get_child_count()):
-							battle_box.get_child(i).position.x -= 101
-					else:
-						for i in range(0,battle_box.get_child_count()):
-							battle_box.get_child(i).position.x -= 101
-						battle_mouse_num = 0
+				elif event.is_action_pressed("D"):
+					if ui_state == Ui_state.Battle:
+						if battle_mouse_num < max_num:
+							battle_mouse_num += 1
+							for i in range(0,battle_box.get_child_count()):
+								battle_box.get_child(i).position.x -= 101
+						else:
+							for i in range(0,battle_box.get_child_count()):
+								battle_box.get_child(i).position.x -= 101
+							battle_mouse_num = 0
 
 
 

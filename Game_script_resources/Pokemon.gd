@@ -168,6 +168,8 @@ func _lose():
 		self.opposing_pokemon.experince_gained += exp_gainied
 		_add_ev_yield()
 		self.opposing_pokemon._update_level()
+	if self.get_parent() == PlayerPokemon:
+		PlayerPokemon._active_pokemon()
 
 			
 

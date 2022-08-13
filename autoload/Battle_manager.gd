@@ -3,6 +3,7 @@ extends Node
 enum types_of_battle {Wild,Trainer}
 var type_of_battle
 
+var multi_battle = false
 var turns:int
 
 var catched = false

@@ -35,7 +35,41 @@ var sixth_pokemon
 
 var pc_pokemon : Array
 
-	
+var active_pokemon :int = 0
+
+var num_active_pokemon = []
+
+func _active_pokemon():
+	if self.first_pokemon != null:
+		if self.first_pokemon.fainted == false:
+			self.active_pokemon += 1
+		else:
+			self.active_pokemon -= 1
+	if self.second_pokemon != null:
+		if self.second_pokemon.fainted == false:
+			self.active_pokemon += 1
+		else:
+			self.active_pokemon -= 1
+	if self.third_pokemon != null:
+		if self.third_pokemon.fainted == false:
+			self.active_pokemon += 1
+		else:
+			self.active_pokemon -= 1
+	if self.fourth_pokemon != null:
+		if self.fourth_pokemon.fainted == false:
+			self.active_pokemon += 1
+		else:
+			self.active_pokemon -= 1
+	if self.fifth_pokemon != null:
+		if self.fifth_pokemon.fainted == false:
+			self.active_pokemon += 1
+		else:
+			self.active_pokemon -= 1
+	if self.sixth_pokemon != null:
+		if self.sixth_pokemon.fainted == false:
+			self.active_pokemon += 1
+		else:
+			self.active_pokemon -= 1
 func _check_evolution():
 	if self.first_pokemon != null:
 		self.first_pokemon.evolve()
@@ -66,12 +100,7 @@ func _check_move_learning():
 
 func _ready():
 	yield(get_tree().create_timer(2),"timeout")
-	pokemon1 = first_pokemon
-	pokemon2 = second_pokemon
-	pokemon3 = third_pokemon
-	pokemon4 = fourth_pokemon
-	pokemon5 = fifth_pokemon
-	pokemon6 = sixth_pokemon
+	_active_pokemon()
 
 func _switch(selected_pokemon_1,selected_pokemon_2):
 	var tmp = selected_pokemon_1.change_path

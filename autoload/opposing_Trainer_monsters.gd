@@ -8,6 +8,8 @@ var third_pokemon
 
 var opposing_pokemon 
 
+var num_active_pokemon = []
+
 func _ready():
 	pass
 
