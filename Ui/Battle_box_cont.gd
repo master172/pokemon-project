@@ -63,12 +63,16 @@ func _input(event):
 					
 			Options.Switch:
 				if self.Pokemon_cont != null:
-					if BattleManager.in_battle == true:
-						PlayerPokemon.current_pokemon = Pokemon_cont
-						PlayerPokemon.current_pokemon._calc_weak_and_res()
-						OpposingTrainerMonsters.pokemon._calc_weak_and_res()
-						self.controller._kill()
-					_kill()
+					if Pokemon_cont.fainted == false:
+						if BattleManager.in_battle == true:
+							PlayerPokemon.current_pokemon = Pokemon_cont
+							PlayerPokemon.current_pokemon._calc_weak_and_res()
+							OpposingTrainerMonsters.pokemon._calc_weak_and_res()
+							self.controller._kill()
+						_kill()
+					else:
+						print("The pokemon has no energy to battle")
+						_kill()
 	elif event.is_action_pressed("decline"):
 		if self.controller != null:
 			_kill()

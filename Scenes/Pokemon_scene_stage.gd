@@ -1,5 +1,9 @@
 extends Control
 
+onready var Do_You_want = $Do_you_want_to
+onready var Do_you_yes = $Do_you_want_to/Option_container/VBoxContainer/Yes/Sprite
+onready var Do_you_no = $Do_you_want_to/Option_container/VBoxContainer/No/Sprite
+
 onready var Bag_layer = $Bag_layer
 const pokemon_scene = preload("res://Scenes/Battle_pokemon.tscn")
 const Bag = preload("res://Game resources/InventoryUi.tscn")
@@ -22,7 +26,8 @@ var max_num = 4
 
 var max_pokemon_number = 6
 
-enum Ui_state { Main,Battle,Pokemon,Selection,Bag}
+var option_num = 0
+enum Ui_state { Main,Battle,Pokemon,Selection,Bag,Option}
 
 var ui_state = Ui_state.Main
 
@@ -47,6 +52,16 @@ func _single_battle():
 				OpposingTrainerMonsters.pokemon._lose()
 				yield(get_tree().create_timer(0.2),"timeout")
 				win()
+		if PlayerPokemon.current_pokemon != null:
+			if PlayerPokemon.current_pokemon.Current_health_points <= 0:
+				PlayerPokemon._active_pokemon()
+				if PlayerPokemon.active_pokemon > 0:
+					PlayerPokemon.current_pokemon._lose()
+					yield(get_tree().create_timer(0.2),"timeout")
+					_option()
+				else:
+					_run()
+					
 		
 		if PlayerPokemon.current_pokemon != null:
 			player_pokemon = PlayerPokemon.current_pokemon
@@ -107,7 +122,15 @@ func _single_battle():
 							PlayerPokemon.current_pokemon.Learned_moves[3]._calculate_damage()
 							BattleManager.turns += 1
 							BattleManager.Enemy_turn()
-
+				elif ui_state == Ui_state.Option:
+					if option_num == 0:
+						Do_you_yes.frame = 1
+					else:
+						Do_you_no.frame = 0
+					if option_num == 1:
+						Do_you_no.frame = 1
+					else:
+						Do_you_no.frame = 0
 func _bag():
 	var Bag_scene = Bag.instance()
 	Bag_layer.add_child(Bag_scene)
@@ -122,6 +145,9 @@ func _change_pokemon():
 
 func _attack_inp():
 	ui_state = Ui_state.Battle
+
+func _option():
+	ui_state = Ui_state.Option
 
 func win():
 	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
@@ -227,12 +253,37 @@ func _input(event):
 					if ui_state == Ui_state.Battle:
 						if battle_mouse_num < max_num:
 							battle_mouse_num += 1
-							for i in range(0,battle_box.get_child_count()):
-								battle_box.get_child(i).position.x -= 101
 						else:
-							for i in range(0,battle_box.get_child_count()):
-								battle_box.get_child(i).position.x -= 101
 							battle_mouse_num = 0
-
+			elif ui_state == Ui_state.Option:
+				if event.is_action_pressed("A"):
+					if ui_state == Ui_state.Battle:
+						if option_num != 0:
+							option_num -= 1
+						else:
+							option_num = 1
+				elif event.is_action_pressed("D"):
+					if ui_state == Ui_state.Battle:
+						if option_num < 1:
+							option_num += 1
+						else:
+							option_num = 0
+				elif event.is_action_pressed("S"):
+					if ui_state == Ui_state.Battle:
+						if option_num != 0:
+							option_num -= 1
+						else:
+							option_num = 1
+				elif event.is_action_pressed("W"):
+					if ui_state == Ui_state.Battle:
+						if option_num < 1:
+							option_num += 1
+						else:
+							option_num = 0
+				if event.is_action_pressed("accept"):
+					if option_num == 0:
+						_change_pokemon()
+					elif option_num == 1:
+						_run()
 
 
