@@ -1,15 +1,19 @@
 extends CanvasLayer
 
 const PokemonPartyScreen = preload("res://Scenes/PokemonPartyScene.tscn")
+const BagScene = preload("res://Game resources/InventoryUi.tscn")
 
 onready var select_arrow = $Control/NinePatchRect/TextureRect
 onready var menu = $Control
 
-enum ScreenLoaded {Nothing,Menu_only,Party_screen,}
+enum ScreenLoaded {Nothing,Menu_only,Party_screen,Bag_screen}
 var screen_loaded = ScreenLoaded.Nothing
 
 var selected_option :int = 0
 var party_screen
+var bag_screen
+
+var Name = "Menu"
 
 func load_party_screen():
 	menu.visible = false
@@ -23,7 +27,18 @@ func unload_party_screen():
 	screen_loaded = ScreenLoaded.Menu_only
 	remove_child(party_screen)
 	
+func load_bag_scene():
+	menu.visible = false
+	Utils.get_player().set_physics_process(false)
+	screen_loaded = ScreenLoaded.Bag_screen
+	bag_screen = BagScene.instance()
+	bag_screen.controller = self
+	add_child(bag_screen)
 
+func unload_bag_screen():
+	menu.visible = true
+	screen_loaded = ScreenLoaded.Menu_only
+	remove_child(bag_screen)
 
 func _ready():
 	menu.visible = false
@@ -66,6 +81,9 @@ func _input(event):
 			elif event.is_action_pressed("accept") and selected_option == 6:
 				SaveAndLoad._save_menu()
 				GameSaver.save_game()
+			elif event.is_action_pressed("accept") and selected_option== 2:
+				get_parent().transition_to_bag_scene()
 		ScreenLoaded.Party_screen:
 			if event.is_action_pressed("decline"):
 				get_parent().transition_exit_party_scene()
+		

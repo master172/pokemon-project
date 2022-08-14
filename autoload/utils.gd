@@ -1,5 +1,7 @@
 extends Node
 
+var current_rest_shelter
+
 var save_path = "user://Utils_save.json"
 
 var Utils_data
@@ -23,7 +25,8 @@ func get_dialog_layer():
 func _save_data():
 	#the data needed to be saved
 	var data = {
-		"Num_loaded_pokemon":Num_loaded_pokemon
+		"Num_loaded_pokemon":Num_loaded_pokemon,
+		"current_rest_shelter": current_rest_shelter,
 	}
 
 	#creating the file and saving the data

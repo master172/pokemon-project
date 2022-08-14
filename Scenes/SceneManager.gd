@@ -11,7 +11,7 @@ var need_move_to_learn = false
 
 var transition_queue : Array = []
 
-enum Transition_Type  {NEW_SCENE, PARTY_SCENE, MENU_ONLY, POKEMON_SCENE,EXIT_POKEMON_SCENE,MOVE_LEARNER,EXIT_MOVE_LEARNER,PC,EXIT_PC}
+enum Transition_Type  {NEW_SCENE, PARTY_SCENE, MENU_ONLY, POKEMON_SCENE,EXIT_POKEMON_SCENE,MOVE_LEARNER,EXIT_MOVE_LEARNER,PC,EXIT_PC,BAG_SCENE }
 var transition_type = Transition_Type.NEW_SCENE
 
 enum Move_learn_transtion_type {MOVE_LEARNER,EXIT_MOVE_LEARNER}
@@ -66,6 +66,15 @@ func transition_exit_pokemon_scene():
 	BattleManager.fainted = false
 	BattleManager.turns = 0
 
+func transition_to_bag_scene():
+	_fade_in()
+	transition_type = Transition_Type.BAG_SCENE
+	
+
+func transition_exit_bag_scene():
+	_fade_in()
+	transition_type = Transition_Type.MENU_ONLY
+
 func transition_to_scene(new_scene:String, spawn_location, spawn_direction):
 	SaveAndLoad.save_game()
 	Utils.get_player().is_moving = false
@@ -101,10 +110,13 @@ func finished_fading():
 			Transition_Type.MENU_ONLY:
 				if$Menu.screen_loaded == $Menu.ScreenLoaded.Party_screen:
 					$Menu.unload_party_screen()
+				if$Menu.screen_loaded == $Menu.ScreenLoaded.Bag_screen:
+					$Menu.unload_bag_screen()
 			Transition_Type.EXIT_POKEMON_SCENE:
 				$Pokemon_scene.unload_pokemon_scene()
 				BattleManager.in_battle = false
-				
+			Transition_Type.BAG_SCENE:
+				$Menu.load_bag_scene()
 		
 		$ScreenTransition/ColorRect/AnimationPlayer.play("fade_out")
 	else:

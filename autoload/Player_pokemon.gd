@@ -179,6 +179,8 @@ func switch(first_slot, second_slot):
 
 
 func _physics_process(_delta):
+
+	
 	
 	if current_pokemon != null:
 		if current_pokemon.opposing_pokemon == null and OpposingTrainerMonsters.pokemon != null:

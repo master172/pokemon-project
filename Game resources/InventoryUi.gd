@@ -300,6 +300,8 @@ func _input(event):
 					if self.controller.Name == "Pokemon_scene_stage":
 						self.controller.ui_state = self.controller.Ui_state.Main
 						queue_free()
+					elif self.controller.Name == "Menu":
+						_bag_kill()
 			if event.is_action_pressed("W"):
 				current_to_display_text = ""
 				if current_pocket != null:
@@ -367,10 +369,13 @@ func _input(event):
 		
 		elif state == states.Poke_selection:
 			if event.is_action_pressed("decline"):
-				if self.controller != null:
-					if self.controller.Name == "Pokemon_scene_stage":
-						self.controller.ui_state = self.controller.Ui_state.Main
-						queue_free()
+				if event.is_action_pressed("decline"):
+					if self.controller != null:
+						if self.controller.Name == "Pokemon_scene_stage":
+							self.controller.ui_state = self.controller.Ui_state.Main
+							queue_free()
+						elif self.controller.Name == "Menu":
+							_bag_kill()
 			if event.is_action_pressed("W"):
 				current_to_display_text = ""
 				if current_selected < max_selecctable:
@@ -685,3 +690,10 @@ func _kill():
 				self.controller.ui_state = self.controller.Ui_state.Main
 				PokeHelper.Pokemon_scene_done = false
 				queue_free()
+
+
+func _bag_kill():
+	if self.controller != null:
+		if self.controller.Name == "Menu":
+			Utils.Get_Scene_Manager().transition_exit_bag_scene()
+
