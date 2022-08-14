@@ -1,14 +1,17 @@
 extends YSort
 
-const SAVE_PATH = "user://World_data.json"
+const SAVE_DIR = "user://Saves/Over_world/"
+const SAVE_PATH = SAVE_DIR + "World_data.json"
 var _settings = {}
 
 
-func _ready():
-	load_game()
 
 
 func save_game():
+
+	var dir = Directory.new()
+	if !dir.dir_exists(SAVE_DIR):
+		dir.make_dir_recursive(SAVE_DIR)
 	# Get all the save data from persistent nodes
 	var save_dict = {}
 	var nodes_to_save = get_tree().get_nodes_in_group("World_data")
@@ -43,6 +46,8 @@ func load_game():
 				node.set_pos(Vector2(data[node_path]['pos_x']['x'],data[node_path]['pos_y']['y']))
 			else:
 				node.set(attribute,data[node_path][attribute])
+		if node.has_method("_apply_data"):
+			node._apply_data()
 
 	pass
 

@@ -23,11 +23,8 @@ var set_choice
 
 var used = false
 
-func _ready():
-	yield(get_tree().create_timer(0.2),"timeout")
-	if self.used == false:
-		pass
-	elif self.used == true:
+func _apply_data():
+	if self.used == true:
 		self.visible = false
 		$CollisionShape2D.disabled = true
 

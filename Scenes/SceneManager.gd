@@ -22,6 +22,7 @@ func _fade_in():
 		$ScreenTransition/ColorRect/AnimationPlayer.stop()
 	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
 
+
 func transition_to_Pc():
 	SaveAndLoad.save_game()
 	Utils.get_player().is_moving = false
@@ -91,16 +92,21 @@ func transition_to_scene(new_scene:String, spawn_location, spawn_direction):
 
 
 func finished_fading():
+	
+
 	if need_move_to_learn == false:
 		match transition_type:
 			Transition_Type.NEW_SCENE:
 				
 				$CurrentScene.get_child(0).queue_free()
 				$CurrentScene.add_child(load(next_scene).instance())
-		
+				
 				var player = $CurrentScene.get_children().back().find_node("ash")
 				player.set_spawn(player_location,player_direction)
 				SceneLoaded.current_scene = String(next_scene)
+				yield(get_tree().create_timer(0.1),"timeout")
+				$CurrentScene._apply_data()
+				
 
 			Transition_Type.PARTY_SCENE:
 				$Menu.load_party_screen()
@@ -120,6 +126,7 @@ func finished_fading():
 		
 		$ScreenTransition/ColorRect/AnimationPlayer.play("fade_out")
 	else:
+		
 		match move_learn_transtion_type:
 			Move_learn_transtion_type.EXIT_MOVE_LEARNER:
 				$MoveLearner/Move_learner.current_option = $MoveLearner/Move_learner.Options.Main

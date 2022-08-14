@@ -16,7 +16,7 @@
 [ext_resource path="res://Game_pokemon/Charmander.tscn" type="PackedScene" id=14]
 [ext_resource path="res://libraries/TileMap3.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assests/libraries/door.png" type="Texture" id=16]
-[ext_resource path="res://main/main.gd" type="Script" id=17]
+[ext_resource path="res://main/overworld.gd" type="Script" id=17]
 [ext_resource path="res://Interactable.tscn" type="PackedScene" id=18]
 [ext_resource path="res://libraries/Day_and_night/Day_And_night_cycle.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Items/Overworld Item.tscn" type="PackedScene" id=20]

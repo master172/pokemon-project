@@ -44,6 +44,32 @@ func _ready():
 	menu.visible = false
 	select_arrow.rect_position.y = 6+ (selected_option % 7) * 15
 
+func _save_game():
+	print("Saving game")
+	var player = get_parent().get_node("CurrentScene").get_children().back().find_node("ash")
+	var currentScene = Utils.Get_Scene_Manager()
+
+	player._save_data()
+	GameSaver.save_game()
+	SceneLoaded._save_data()
+	SaveAndLoad._save_menu()
+	Utils._save_data()
+	if currentScene.get_child(0).get_child(0).has_method("save_game"):
+		currentScene.get_child(0).get_child(0).save_game()
+	else:
+		print("no world_data save")
+	
+	
+	player.set_physics_process(true)
+	menu.visible = false		
+	screen_loaded = ScreenLoaded.Nothing
+
+func _exit():
+	var player = get_parent().get_node("CurrentScene").get_children().back().find_node("ash")
+	player.set_physics_process(true)
+	menu.visible = false		
+	screen_loaded = ScreenLoaded.Nothing
+
 func _input(event):
 	match screen_loaded:
 		ScreenLoaded.Nothing:
@@ -73,16 +99,13 @@ func _input(event):
 				select_arrow.rect_position.y = 6 + (selected_option % 7) * 15
 			elif event.is_action_pressed("accept") and selected_option == 0:
 				get_parent().transition_to_party_scene()
-			elif event.is_action_pressed("accept") and selected_option == 6:
-				var player = get_parent().get_node("CurrentScene").get_children().back().find_node("ash")
-				player.set_physics_process(true)
-				menu.visible = false
-				screen_loaded = ScreenLoaded.Nothing
-			elif event.is_action_pressed("accept") and selected_option == 6:
-				SaveAndLoad._save_menu()
-				GameSaver.save_game()
 			elif event.is_action_pressed("accept") and selected_option== 2:
 				get_parent().transition_to_bag_scene()
+			elif event.is_action_pressed("accept") and selected_option == 4:
+				_save_game()
+			elif event.is_action_pressed("accept") and selected_option == 6:
+				_exit()
+			
 		ScreenLoaded.Party_screen:
 			if event.is_action_pressed("decline"):
 				get_parent().transition_exit_party_scene()

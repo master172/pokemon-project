@@ -8,7 +8,6 @@ var current_weather = weathers[1]
 
 var player_badjes :int = 0
 
-var save_path = "user://Inventory.json"
 
 var Inventory_data
 var Pokeballs = []
