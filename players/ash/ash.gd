@@ -4,7 +4,8 @@ extends KinematicBody2D
 
 #variables-->save_directory
 
-var save_path = "user://player_save.json"
+const SAVE_DIR = "user://Saves/Player/"
+const save_path = SAVE_DIR + "player_save.json"
 
 var player_data
 #variables-->signals
@@ -559,6 +560,11 @@ func _save_data():
 	}
 
 	#creating the file and saving the data
+
+	var dir = Directory.new()
+	if !dir.dir_exists(SAVE_DIR):
+		dir.make_dir_recursive(SAVE_DIR)
+	
 	var file = File.new()
 	var error = file.open(save_path,File.WRITE)
 	if error == OK:

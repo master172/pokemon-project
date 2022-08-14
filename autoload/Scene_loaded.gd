@@ -1,6 +1,7 @@
 extends Node
 
-var save_path = "user://save.txt"
+const SAVE_DIR = "user://Saves/Scene/"
+const save_path = SAVE_DIR +"scene.save"
 var current_scene
 
 func _ready():
@@ -9,6 +10,9 @@ func _ready():
 func _save_data():
 	var data = current_scene
 
+	var dir = Directory.new()
+	if !dir.dir_exists(SAVE_DIR):
+		dir.make_dir_recursive(SAVE_DIR)
 
 	var file = File.new()
 	var error = file.open(save_path,File.WRITE)

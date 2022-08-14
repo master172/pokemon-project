@@ -1,6 +1,7 @@
 extends Node
 
-const SAVE_PATH = "user://save.json"
+const SAVE_DIR = "user://Saves/Pokemon_data/Pokemon/"
+const SAVE_PATH = SAVE_DIR +"Pokemon.json"
 var _settings = {}
 
 
@@ -16,6 +17,11 @@ func save_game():
 		save_dict[nodes.get_path()] = nodes.save()
 		pass
 	# Create a file
+
+	var dir = Directory.new()
+	if !dir.dir_exists(SAVE_DIR):
+		dir.make_dir_recursive(SAVE_DIR)
+
 	var save_file = File.new()
 	save_file.open(SAVE_PATH, File.WRITE)
 	# Serialize the data dictionary to JSON

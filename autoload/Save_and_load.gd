@@ -1,6 +1,7 @@
 extends Node
 
-
+const SAVE_DIR = "user://Saves/Pokemon_data/Moves/"
+const SAVE_PATH = SAVE_DIR +"Moves.json"
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -24,8 +25,11 @@ func _notification(what):
 		save_game()
 
 func save_game():
+	var dir = Directory.new()
+	if !dir.dir_exists(SAVE_DIR):
+		dir.make_dir_recursive(SAVE_DIR)
 	var save_game = File.new()
-	save_game.open("user://savegame.json", File.WRITE)
+	save_game.open(SAVE_PATH, File.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group("Presist")
 	for node in save_nodes:
 		# Check the node is an instanced scene so it can be instanced again during load.
@@ -47,7 +51,7 @@ func save_game():
 
 func load_game():
 	var save_game = File.new()
-	if not save_game.file_exists("user://savegame.json"):
+	if not save_game.file_exists(SAVE_PATH):
 		return # Error! We don't have a save to load.
 
 	# We need to revert the game state so we're not cloning objects
@@ -60,7 +64,7 @@ func load_game():
 
 	# Load the file line by line and process that dictionary to restore
 	# the object it represents.
-	save_game.open("user://savegame.json", File.READ)
+	save_game.open(SAVE_PATH, File.READ)
 	while save_game.get_position() < save_game.get_len():
 		# Get the saved dictionary from the next line in the save file
 		var node_data = parse_json(save_game.get_line())
