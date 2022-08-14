@@ -70,9 +70,11 @@ func _input(event):
 							OpposingTrainerMonsters.pokemon._calc_weak_and_res()
 							self.controller._kill()
 						_kill()
-					else:
+					elif Pokemon_cont.fainted == true:
 						print("The pokemon has no energy to battle")
-						_kill()
+
+						
+						
 	elif event.is_action_pressed("decline"):
 		if self.controller != null:
 			_kill()

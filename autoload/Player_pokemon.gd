@@ -37,39 +37,29 @@ var pc_pokemon : Array
 
 var active_pokemon :int = 0
 
-var num_active_pokemon = []
+
 
 func _active_pokemon():
+	active_pokemon = 0
 	if self.first_pokemon != null:
 		if self.first_pokemon.fainted == false:
 			self.active_pokemon += 1
-		else:
-			self.active_pokemon -= 1
 	if self.second_pokemon != null:
 		if self.second_pokemon.fainted == false:
 			self.active_pokemon += 1
-		else:
-			self.active_pokemon -= 1
 	if self.third_pokemon != null:
 		if self.third_pokemon.fainted == false:
 			self.active_pokemon += 1
-		else:
-			self.active_pokemon -= 1
 	if self.fourth_pokemon != null:
 		if self.fourth_pokemon.fainted == false:
 			self.active_pokemon += 1
-		else:
-			self.active_pokemon -= 1
 	if self.fifth_pokemon != null:
 		if self.fifth_pokemon.fainted == false:
 			self.active_pokemon += 1
-		else:
-			self.active_pokemon -= 1
 	if self.sixth_pokemon != null:
 		if self.sixth_pokemon.fainted == false:
 			self.active_pokemon += 1
-		else:
-			self.active_pokemon -= 1
+
 func _check_evolution():
 	if self.first_pokemon != null:
 		self.first_pokemon.evolve()

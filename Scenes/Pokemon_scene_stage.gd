@@ -35,6 +35,8 @@ onready var scroll_container = $Node2D
 
 var charecter
 
+var reset_pokemon = false
+
 func _ready():
 	ui_state = Ui_state.Selection
 
@@ -53,14 +55,15 @@ func _single_battle():
 				yield(get_tree().create_timer(0.2),"timeout")
 				win()
 		if PlayerPokemon.current_pokemon != null:
-			if PlayerPokemon.current_pokemon.Current_health_points <= 0:
-				PlayerPokemon._active_pokemon()
-				if PlayerPokemon.active_pokemon > 0:
+				if PlayerPokemon.current_pokemon.Current_health_points <= 0:
 					PlayerPokemon.current_pokemon._lose()
-					yield(get_tree().create_timer(0.2),"timeout")
-					_option()
-				else:
-					_run()
+					PlayerPokemon._active_pokemon()
+					if PlayerPokemon.active_pokemon > 0:
+						if reset_pokemon == false:		
+							Do_You_want.visible = true
+							ui_state = Ui_state.Option
+					else:
+						_run()
 					
 		
 		if PlayerPokemon.current_pokemon != null:
@@ -83,6 +86,18 @@ func _single_battle():
 			elif ui_state == Ui_state.Battle:
 				main_box.visible = false
 				battle_box.visible = true
+
+			elif ui_state == Ui_state.Option:
+				if option_num == 0:
+					Do_you_yes.frame = 0
+				else:
+					Do_you_yes.frame = 1
+				if option_num == 1:
+					Do_you_no.frame = 0
+				else:
+					Do_you_no.frame = 1
+			if ui_state != Ui_state.Option:
+					Do_You_want.visible = false
 			if Input.is_action_just_pressed("decline"):
 				if ui_state == Ui_state.Battle:
 					ui_state = Ui_state.Main
@@ -98,6 +113,14 @@ func _single_battle():
 						_capture()
 					elif current_mouse_num == 4:
 						_change_pokemon()
+				
+				elif ui_state == Ui_state.Option:
+					if option_num == 0:
+						ui_state = Ui_state.Pokemon
+						reset_pokemon = true
+						_change_pokemon()
+					elif option_num == 1:
+						_run() 
 
 				elif ui_state == Ui_state.Battle:
 					if battle_mouse_num == 3:
@@ -122,15 +145,9 @@ func _single_battle():
 							PlayerPokemon.current_pokemon.Learned_moves[3]._calculate_damage()
 							BattleManager.turns += 1
 							BattleManager.Enemy_turn()
-				elif ui_state == Ui_state.Option:
-					if option_num == 0:
-						Do_you_yes.frame = 1
-					else:
-						Do_you_no.frame = 0
-					if option_num == 1:
-						Do_you_no.frame = 1
-					else:
-						Do_you_no.frame = 0
+			
+					
+					
 func _bag():
 	var Bag_scene = Bag.instance()
 	Bag_layer.add_child(Bag_scene)
@@ -139,15 +156,17 @@ func _bag():
 
 func _change_pokemon():
 	var Pokemon_scene = pokemon_scene.instance()
-	add_child(Pokemon_scene)
 	Pokemon_scene.controller = self
 	ui_state = Ui_state.Pokemon
+	print("memory")
+	add_child(Pokemon_scene)
+
+	
+	
 
 func _attack_inp():
 	ui_state = Ui_state.Battle
 
-func _option():
-	ui_state = Ui_state.Option
 
 func win():
 	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
@@ -253,37 +272,38 @@ func _input(event):
 					if ui_state == Ui_state.Battle:
 						if battle_mouse_num < max_num:
 							battle_mouse_num += 1
+							for i in range(0,battle_box.get_child_count()):
+								battle_box.get_child(i).position.x -= 101
 						else:
 							battle_mouse_num = 0
+							for i in range(0,battle_box.get_child_count()):
+								battle_box.get_child(i).position.x -= 101
 			elif ui_state == Ui_state.Option:
+				print(option_num)
 				if event.is_action_pressed("A"):
-					if ui_state == Ui_state.Battle:
+					if ui_state == Ui_state.Option:
 						if option_num != 0:
 							option_num -= 1
 						else:
 							option_num = 1
 				elif event.is_action_pressed("D"):
-					if ui_state == Ui_state.Battle:
+					if ui_state == Ui_state.Option:
 						if option_num < 1:
 							option_num += 1
 						else:
 							option_num = 0
 				elif event.is_action_pressed("S"):
-					if ui_state == Ui_state.Battle:
+					if ui_state == Ui_state.Option:
 						if option_num != 0:
 							option_num -= 1
 						else:
 							option_num = 1
 				elif event.is_action_pressed("W"):
-					if ui_state == Ui_state.Battle:
+					if ui_state == Ui_state.Option:
 						if option_num < 1:
 							option_num += 1
 						else:
 							option_num = 0
-				if event.is_action_pressed("accept"):
-					if option_num == 0:
-						_change_pokemon()
-					elif option_num == 1:
-						_run()
+				
 
 

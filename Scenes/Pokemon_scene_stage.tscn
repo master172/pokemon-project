@@ -316,6 +316,7 @@ position = Vector2( 1, 1 )
 texture = ExtResource( 26 )
 centered = false
 vframes = 2
+frame = 1
 
 [node name="No" type="TextureRect" parent="Do_you_want_to/Option_container/VBoxContainer"]
 margin_top = 23.0
