@@ -94,8 +94,8 @@ tracks/1/keys = {
 "values": [ Color( 0.192157, 0.180392, 0.180392, 1 ) ]
 }
 
-[node name="Attack_box_4" type="Node2D"]
-position = Vector2( 274, 120 )
+[node name="Attack_box_1" type="Node2D"]
+position = Vector2( -29, 123 )
 scale = Vector2( 0.8, 0.8 )
 script = ExtResource( 2 )
 
@@ -112,13 +112,10 @@ region_rect = Rect2( 1, 1, 1, 1 )
 region_filter_clip = true
 
 [node name="Control" type="Control" parent="."]
-margin_left = -58.75
+margin_left = -60.0
 margin_top = -20.0
-margin_right = -18.75
-margin_bottom = 20.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_right = 60.0
+margin_bottom = 21.0
 
 [node name="Description_box" type="Label" parent="Control"]
 margin_left = 40.0
@@ -130,26 +127,26 @@ theme = SubResource( 1 )
 custom_fonts/font = SubResource( 2 )
 text = "Try To Capture The Pokemon With a 
 
-Regular Pokeball If You Have One"
+Regular Pokeball If You Have One "
 autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Main_Label" type="Label" parent="Control"]
 anchor_right = 0.128
-margin_left = 4.0
+margin_left = 5.0
 margin_top = 3.0
-margin_right = 59.0
-margin_bottom = 17.0
+margin_right = 43.64
+margin_bottom = 18.0
 rect_scale = Vector2( 0.6, 0.6 )
 theme = SubResource( 1 )
 custom_fonts/font = SubResource( 2 )
 text = "Capture
 "
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+margin_left = 6.25
+margin_top = 23.75
+margin_right = 38.25
+margin_bottom = 35.75
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Default"

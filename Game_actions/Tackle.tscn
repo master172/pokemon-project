@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Game_script_resources/Actions.gd" type="Script" id=1]
+[ext_resource path="res://assests/libraries/Ui/Status_Type_icons/Types/normal.png" type="Texture" id=2]
 
 [node name="Tackle" type="Node2D" groups=["presistent"]]
 script = ExtResource( 1 )
@@ -9,3 +10,4 @@ Name = "Tackle"
 Types = 1
 pp = 40
 description = "The pokemon attacks head on the opponent"
+type_image = ExtResource( 2 )

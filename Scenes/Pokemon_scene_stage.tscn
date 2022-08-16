@@ -186,10 +186,13 @@ position = Vector2( 45, 16 )
 position = Vector2( -29, 120 )
 
 [node name="Attack_box_2" parent="Battle_box" instance=ExtResource( 11 )]
+position = Vector2( 72, 120 )
 
 [node name="Attack_box_3" parent="Battle_box" instance=ExtResource( 12 )]
+position = Vector2( 173, 120 )
 
 [node name="Attack_box_4" parent="Battle_box" instance=ExtResource( 13 )]
+position = Vector2( 274, 120 )
 
 [node name="Poke_box" parent="." instance=ExtResource( 14 )]
 
@@ -282,6 +285,7 @@ playback_process_mode = 0
 environment = SubResource( 3 )
 
 [node name="Do_you_want_to" type="Node2D" parent="."]
+visible = false
 z_index = 1
 
 [node name="Back-ground" type="TextureRect" parent="Do_you_want_to"]
@@ -333,3 +337,5 @@ frame = 1
 
 [node name="Bag_layer" type="Node2D" parent="."]
 z_index = 20
+
+[node name="Dialog_layer" type="Node2D" parent="."]

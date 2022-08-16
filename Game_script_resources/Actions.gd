@@ -38,6 +38,8 @@ export(float,0,100) var Accuracy = 100.0
 
 var unlearned = false
 
+export(Texture) var type_image
+
 
 
 func save():
@@ -54,58 +56,59 @@ func save():
 
 
 func _calculate_damage():
-	if self.current_holder.opposing_pokemon.Weak_to.has(self.Types):
-		effectiveness = 4
-	elif self.current_holder.opposing_pokemon.Resistant_to.has(self.Types):
-		effectiveness = 0.5
-	else:
-		effectiveness = 1
-	var crit : int = 1
-	var critical = RandomNumberGenerator.new()
-	critical.randomize()
-	var critical_damage = critical.randi_range(0,8)
-	if critical_damage == 8:
-		crit = 2
-	else:
-		crit = 1
-	var stab : float 
-	if self.Types == current_holder.Type_1[0] and self.Types == current_holder.Type_2[0]:
-		stab = 2.0
-	elif self.Types == current_holder.Type_1[0] and self.Types != current_holder.Type_2[0]:
-		stab = 1.5
-	elif self.Types != current_holder.Type_1[0] and self.Types != current_holder.Type_2[0]:
-		stab = 1.0
-	else:
-		stab = 0.5
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-	var random_number = rng.randi_range(1,100)
+	if self.special_effects == null:
+		if self.current_holder.opposing_pokemon.Weak_to.has(self.Types):
+			effectiveness = 4
+		elif self.current_holder.opposing_pokemon.Resistant_to.has(self.Types):
+			effectiveness = 0.5
+		else:
+			effectiveness = 1
+		var crit : int = 1
+		var critical = RandomNumberGenerator.new()
+		critical.randomize()
+		var critical_damage = critical.randi_range(0,8)
+		if critical_damage == 8:
+			crit = 2
+		else:
+			crit = 1
+		var stab : float 
+		if self.Types == current_holder.Type_1[0] and self.Types == current_holder.Type_2[0]:
+			stab = 2.0
+		elif self.Types == current_holder.Type_1[0] and self.Types != current_holder.Type_2[0]:
+			stab = 1.5
+		elif self.Types != current_holder.Type_1[0] and self.Types != current_holder.Type_2[0]:
+			stab = 1.0
+		else:
+			stab = 0.5
+		var rng = RandomNumberGenerator.new()
+		rng.randomize()
+		var random_number = rng.randi_range(1,100)
 
-	if PokeHelper.current_weather == PokeHelper.weathers[1]:
-		weather = 1
-	elif PokeHelper.current_weather == PokeHelper.weathers[0]:
-		if self.Types == Types[2]:
-			weather = 2
-		elif self.Types == Types[11]:
-			weather = 0.5
-		else:
+		if PokeHelper.current_weather == PokeHelper.weathers[1]:
 			weather = 1
-	elif PokeHelper.current_weather == PokeHelper.weathers[2]:
-		if self.Types == Types[11]:
+		elif PokeHelper.current_weather == PokeHelper.weathers[0]:
+			if self.Types == Types[2]:
 				weather = 2
-		elif self.Types == Types[2]:
-			weather = 0.5
-		else:
-			weather = 1
+			elif self.Types == Types[11]:
+				weather = 0.5
+			else:
+				weather = 1
+		elif PokeHelper.current_weather == PokeHelper.weathers[2]:
+			if self.Types == Types[11]:
+					weather = 2
+			elif self.Types == Types[2]:
+				weather = 0.5
+			else:
+				weather = 1
+			
+		if current_holder.get_parent() == PlayerPokemon:
+			targets = PlayerPokemon.targets
+		elif current_holder.get_parent() == OpposingTrainerMonsters:
+			targets = OpposingTrainerMonsters.targets
 		
-	if current_holder.get_parent() == PlayerPokemon:
-		targets = PlayerPokemon.targets
-	elif current_holder.get_parent() == OpposingTrainerMonsters:
-		targets = OpposingTrainerMonsters.targets
-	
-	damage = ((((((2 * current_holder.level)/5)+2)*current_holder.Current_attack * power / current_holder.opposing_pokemon.Current_defense)/50)+2)* stab * current_holder.Weakness * current_holder.Resistance * random_number/ 100
-	damage = damage / targets * weather * (PokeHelper.player_badjes + 1) * crit* effectiveness
-	_apply_damage()
+		damage = ((((((2 * current_holder.level)/5)+2)*current_holder.Current_attack * power / current_holder.opposing_pokemon.Current_defense)/50)+2)* stab * current_holder.Weakness * current_holder.Resistance * random_number/ 100
+		damage = damage / targets * weather * (PokeHelper.player_badjes + 1) * crit* effectiveness
+		_apply_damage()
 
 
 func _apply_damage():
