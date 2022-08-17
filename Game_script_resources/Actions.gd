@@ -128,6 +128,8 @@ func _apply_damage():
 			print("evaded")
 			if self.get_parent().get_parent() == PlayerPokemon:
 				BattleManager.PlayerLastMoveEvaded = true
+			elif self.get_parent().get_parent() == OpposingTrainerMonsters:
+				BattleManager.EnemyLastMoveEvaded = true
 			
 		elif damage >= 1:
 			self.current_holder.opposing_pokemon.Current_health_points -= damage
@@ -135,6 +137,8 @@ func _apply_damage():
 		print("missed")
 		if self.get_parent().get_parent() == PlayerPokemon:
 			BattleManager.PlayerLastMoveMissed = true
+		elif self.get_parent().get_parent() ==OpposingTrainerMonsters:
+			BattleManager.EnemyLastMoveMissed = true
 		
 
 func _physics_process(_delta):

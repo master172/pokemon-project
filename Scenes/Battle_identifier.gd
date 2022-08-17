@@ -15,7 +15,7 @@ var Enemy_health_set = false
 
 var Player_health_set = false	
 var temp_player_health
-
+var initial_set = true
 func _ready():
 	yield(get_tree().create_timer(0.2),"timeout")
 	if PlayerPokemon.current_pokemon != null:
@@ -46,7 +46,7 @@ func _physics_process(_delta):
 		Enemy_sprite.texture = (OpposingTrainerMonsters.pokemon.sprite)
 		if temp_enemy_health  != OpposingTrainerMonsters.pokemon.Current_health_points:
 			tween.interpolate_property(Enemy_health, "value",
-					temp_enemy_health, OpposingTrainerMonsters.pokemon.Current_health_points, 0.5,
+					temp_enemy_health, OpposingTrainerMonsters.pokemon.Current_health_points, 1,
 					Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			tween.start()
 			temp_enemy_health = OpposingTrainerMonsters.pokemon.Current_health_points
@@ -56,11 +56,16 @@ func _physics_process(_delta):
 
 func _on_Tween_tween_completed(object:Object, key:NodePath):
 	if BattleManager.multi_battle == false:
+
 		if object == Enemy_health:
 			if PlayerPokemon.current_pokemon != null:
 				print("enemy turn starting")
 				BattleManager.Enemy_turn()
 		elif object == Player_health:
 			if PlayerPokemon.current_pokemon != null:
-				get_parent().ui_state = get_parent().Ui_state.Battle
+				if initial_set == true:
+					get_parent().ui_state = get_parent().Ui_state.Main
+					initial_set = false
+				elif initial_set == false:
+					get_parent().ui_state = get_parent().ui_state
 				BattleManager.Ally_turn()

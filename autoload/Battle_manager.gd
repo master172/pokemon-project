@@ -14,6 +14,9 @@ var in_battle = false
 var PlayerLastMoveEvaded = false
 var PlayerLastMoveMissed = false
 
+var EnemyLastMoveEvaded = false
+var EnemyLastMoveMissed = false
+
 enum  what_turn {ALLY_TURN, ENEMY_TURN}
 var current_turn = what_turn.ALLY_TURN
 

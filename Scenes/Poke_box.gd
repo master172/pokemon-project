@@ -23,6 +23,9 @@ onready var Pokemon_4 = $Poke_selector/HBoxContainer/Poke_ball_4/Pokemon_sprite
 onready var Pokemon_5 = $Poke_selector/HBoxContainer/Poke_ball_5/Pokemon_sprite
 onready var Pokemon_6 = $Poke_selector/HBoxContainer/Poke_ball_6/Pokemon_sprite
 
+var Dialogue
+
+
 func _ready():
 	visible = true
 func _kill():
@@ -30,17 +33,20 @@ func _kill():
 	visible= false
 
 func _say_choosing_dialogue(pokemon):
+	can_select = false
+	pokemon_selected = true
 	self.get_parent().ui_state = self.get_parent().Ui_state.Dialogue
-	var Dialogue = self.get_parent().Dialog.instance()
+	Dialogue = self.get_parent().Dialog.instance()
+	Dialogue.connect("Dialog_ended",self,"_finish_choosing_dialogue",[pokemon])	
 	Dialogue.text_to_diaplay = [pokemon.Name + "I choose you", 0]
 	self.get_parent().Dialogue_layer.add_child(Dialogue)
-	Dialogue.connect("Dialog_ended",self,"_finish_choosing_dialogue",[pokemon])	
+	
 
 func _finish_choosing_dialogue(pokemon):
+	self.get_parent()._Dialog_end(self.get_parent().Ui_state.Main)
 	PlayerPokemon.current_pokemon = pokemon
 	PlayerPokemon.current_pokemon._calc_weak_and_res()
 	OpposingTrainerMonsters.pokemon._calc_weak_and_res()
-	self.get_parent().ui_state = self.get_parent().Ui_state.Main
 	_kill()
 
 func _input(event):
