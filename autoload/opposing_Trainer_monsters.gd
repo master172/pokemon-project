@@ -10,6 +10,8 @@ var opposing_pokemon
 
 var num_active_pokemon = []
 
+var pokemons = []
+
 func _ready():
 	pass
 
@@ -25,6 +27,10 @@ func _change_parent():
 	self.get_child(0).change_parent()
 
 func _attack():
+	print("start_attack")
 	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
+		print("wild")
 		if self.pokemon != null:
+			print("not_null")
 			pokemon._wild_battle()
+			print("started")

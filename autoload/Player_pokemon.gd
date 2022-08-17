@@ -37,7 +37,7 @@ var pc_pokemon : Array
 
 var active_pokemon :int = 0
 
-
+var pokemons = []
 
 func _active_pokemon():
 	active_pokemon = 0

@@ -4,6 +4,8 @@ var pokemon_selected = false
 
 var current_selected:int = 1
 
+var can_select = false
+
 const main_sprite = preload("res://assests/items/pngwing.com.png")
 const SecondarySprite = preload("res://assests/items/clipart1298464 (1).png")
 
@@ -29,101 +31,102 @@ func _kill():
 	visible= false
 
 func _input(event):
-	if pokemon_selected == false:
-		if Input.is_action_pressed("decline"):
-			if PlayerPokemon.first_pokemon == null:
-				_kill()
-			else:
-				print("you have to choose a pokemon")
-		if Input.is_action_pressed("accept"):
-			if current_selected == 1:
-				if PlayerPokemon.first_pokemon != null:
-					if PlayerPokemon.first_pokemon.fainted == false:
-						PlayerPokemon.current_pokemon = PlayerPokemon.first_pokemon
-						PlayerPokemon.current_pokemon._calc_weak_and_res()
-						OpposingTrainerMonsters.pokemon._calc_weak_and_res()
-						_kill()
-					else:
-						print("Pokemon has no energy to battle")
+	if can_select == true:
+		if pokemon_selected == false:
+			if Input.is_action_pressed("decline"):
+				if PlayerPokemon.first_pokemon == null:
+					_kill()
 				else:
-					print("no_pokemon_selected")
-			elif current_selected == 2:
-				if PlayerPokemon.second_pokemon != null:
-					if PlayerPokemon.second_pokemon.fainted == false:
-						PlayerPokemon.current_pokemon = PlayerPokemon.second_pokemon
-						PlayerPokemon.current_pokemon._calc_weak_and_res()
-						OpposingTrainerMonsters.pokemon._calc_weak_and_res()
-						_kill()
+					print("you have to choose a pokemon")
+			if Input.is_action_pressed("accept"):
+				if current_selected == 1:
+					if PlayerPokemon.first_pokemon != null:
+						if PlayerPokemon.first_pokemon.fainted == false:
+							PlayerPokemon.current_pokemon = PlayerPokemon.first_pokemon
+							PlayerPokemon.current_pokemon._calc_weak_and_res()
+							OpposingTrainerMonsters.pokemon._calc_weak_and_res()
+							_kill()
+						else:
+							print("Pokemon has no energy to battle")
 					else:
-						print("Pokemon has no energy to battle")
-				else:
-					print("no_pokemon_selected")
-			elif current_selected == 3:
-				if PlayerPokemon.third_pokemon != null:
-					if PlayerPokemon.third_pokemon.fainted == false:
-						PlayerPokemon.current_pokemon = PlayerPokemon.third_pokemon
-						PlayerPokemon.current_pokemon._calc_weak_and_res()
-						OpposingTrainerMonsters.pokemon._calc_weak_and_res()
-						_kill()
+						print("no_pokemon_selected")
+				elif current_selected == 2:
+					if PlayerPokemon.second_pokemon != null:
+						if PlayerPokemon.second_pokemon.fainted == false:
+							PlayerPokemon.current_pokemon = PlayerPokemon.second_pokemon
+							PlayerPokemon.current_pokemon._calc_weak_and_res()
+							OpposingTrainerMonsters.pokemon._calc_weak_and_res()
+							_kill()
+						else:
+							print("Pokemon has no energy to battle")
 					else:
-						print("Pokemon has no energy to battle")
-				else:
-					print("no_pokemon_selected")
-			elif current_selected == 4:
-				if PlayerPokemon.fourth_pokemon != null:
-					if PlayerPokemon.fourth_pokemon.fainted == false:
-						PlayerPokemon.current_pokemon = PlayerPokemon.fourth_pokemon
-						PlayerPokemon.current_pokemon._calc_weak_and_res()
-						OpposingTrainerMonsters.pokemon._calc_weak_and_res()
-						_kill()
+						print("no_pokemon_selected")
+				elif current_selected == 3:
+					if PlayerPokemon.third_pokemon != null:
+						if PlayerPokemon.third_pokemon.fainted == false:
+							PlayerPokemon.current_pokemon = PlayerPokemon.third_pokemon
+							PlayerPokemon.current_pokemon._calc_weak_and_res()
+							OpposingTrainerMonsters.pokemon._calc_weak_and_res()
+							_kill()
+						else:
+							print("Pokemon has no energy to battle")
 					else:
-						print("Pokemon has no energy to battle")
-				else:
-					print("no_pokemon_selected")
-			elif current_selected == 5:
-				if PlayerPokemon.fifth_pokemon != null:
-					if PlayerPokemon.fifth_pokemon.fainted:
-						PlayerPokemon.current_pokemon = PlayerPokemon.fifth_pokemon
-						PlayerPokemon.current_pokemon._calc_weak_and_res()
-						OpposingTrainerMonsters.pokemon._calc_weak_and_res()
-						_kill()
+						print("no_pokemon_selected")
+				elif current_selected == 4:
+					if PlayerPokemon.fourth_pokemon != null:
+						if PlayerPokemon.fourth_pokemon.fainted == false:
+							PlayerPokemon.current_pokemon = PlayerPokemon.fourth_pokemon
+							PlayerPokemon.current_pokemon._calc_weak_and_res()
+							OpposingTrainerMonsters.pokemon._calc_weak_and_res()
+							_kill()
+						else:
+							print("Pokemon has no energy to battle")
 					else:
-						print("Pokemon has no energy to battle")
-				else:
-					print("no_pokemon_selected")
-			elif current_selected == 6:
-				if PlayerPokemon.sixth_pokemon != null:
-					if PlayerPokemon.sixth_pokemon.fainted == false:
-						PlayerPokemon.current_pokemon = PlayerPokemon.sixth_pokemon
-						PlayerPokemon.current_pokemon._calc_weak_and_res()
-						OpposingTrainerMonsters.pokemon._calc_weak_and_res()
-						_kill()
+						print("no_pokemon_selected")
+				elif current_selected == 5:
+					if PlayerPokemon.fifth_pokemon != null:
+						if PlayerPokemon.fifth_pokemon.fainted:
+							PlayerPokemon.current_pokemon = PlayerPokemon.fifth_pokemon
+							PlayerPokemon.current_pokemon._calc_weak_and_res()
+							OpposingTrainerMonsters.pokemon._calc_weak_and_res()
+							_kill()
+						else:
+							print("Pokemon has no energy to battle")
 					else:
-						print("Pokemon has no energy to battle")
-				else:
-					print("no_pokemon_selected")
+						print("no_pokemon_selected")
+				elif current_selected == 6:
+					if PlayerPokemon.sixth_pokemon != null:
+						if PlayerPokemon.sixth_pokemon.fainted == false:
+							PlayerPokemon.current_pokemon = PlayerPokemon.sixth_pokemon
+							PlayerPokemon.current_pokemon._calc_weak_and_res()
+							OpposingTrainerMonsters.pokemon._calc_weak_and_res()
+							_kill()
+						else:
+							print("Pokemon has no energy to battle")
+					else:
+						print("no_pokemon_selected")
+				
 			
-		
-		if event.is_action_pressed("W"):
-			if current_selected == 6:
-				current_selected = 1
-			else:
-				current_selected += 1
-		elif event.is_action_pressed("S"):
-			if current_selected == 1:
-				current_selected = 6
-			else:
-				current_selected -= 1
-		elif event.is_action_pressed("D"):
-			if current_selected == 6:
-				current_selected = 1
-			else:
-				current_selected += 1
-		elif event.is_action_pressed("A"):
-			if current_selected == 1:
-				current_selected = 6
-			else:
-				current_selected -= 1
+			if event.is_action_pressed("W"):
+				if current_selected == 6:
+					current_selected = 1
+				else:
+					current_selected += 1
+			elif event.is_action_pressed("S"):
+				if current_selected == 1:
+					current_selected = 6
+				else:
+					current_selected -= 1
+			elif event.is_action_pressed("D"):
+				if current_selected == 6:
+					current_selected = 1
+				else:
+					current_selected += 1
+			elif event.is_action_pressed("A"):
+				if current_selected == 1:
+					current_selected = 6
+				else:
+					current_selected -= 1
 
 func _physics_process(_delta):
 	if pokemon_selected == false:

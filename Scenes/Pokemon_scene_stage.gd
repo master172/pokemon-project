@@ -3,10 +3,13 @@ extends Control
 onready var Do_You_want = $Do_you_want_to
 onready var Do_you_yes = $Do_you_want_to/Option_container/VBoxContainer/Yes/Sprite
 onready var Do_you_no = $Do_you_want_to/Option_container/VBoxContainer/No/Sprite
-
+onready var Dialogue_layer = $Dialog_layer
 onready var Bag_layer = $Bag_layer
+
 const pokemon_scene = preload("res://Scenes/Battle_pokemon.tscn")
 const Bag = preload("res://Game resources/InventoryUi.tscn")
+const Dialog = preload("res://UI UX/Dialogue_bar.tscn")
+
 
 var Name = "Pokemon_scene_stage"
 var player_pokemon
@@ -27,7 +30,7 @@ var max_num = 4
 var max_pokemon_number = 6
 
 var option_num = 0
-enum Ui_state { Main,Battle,Pokemon,Selection,Bag,Option}
+enum Ui_state { Main,Battle,Pokemon,Selection,Bag,Option,Dialogue}
 
 var ui_state = Ui_state.Main
 
@@ -38,7 +41,9 @@ var charecter
 var reset_pokemon = false
 
 func _ready():
-	ui_state = Ui_state.Selection
+	ui_state = Ui_state.Dialogue
+	_initial_dialogue()
+	
 
 func _need_to_switch():
 	pass
@@ -46,8 +51,32 @@ func _physics_process(_delta):
 	if BattleManager.multi_battle == false:
 		_single_battle()
 
+func _initial_dialogue():
+	if ui_state == Ui_state.Dialogue:
+		if BattleManager.multi_battle == false:
+			if OpposingTrainerMonsters.pokemon != null:
+				
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = ["A wild " + OpposingTrainerMonsters.pokemon.Name + " appeared","What pokemon will ash send", 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"_finish_Init_dialogue")
+
+func _finish_Init_dialogue():
+	ui_state = Ui_state.Selection
+	$Poke_box.can_select = true
+
+func _finish_player_attack_dialogue(move):
+	ui_state = Ui_state.Battle
+	PlayerPokemon.current_pokemon.Learned_moves[move]._calculate_damage()
+	BattleManager.turns += 1
+	BattleManager.Enemy_turn()
 func _single_battle():
 	if PlayerPokemon.current_learning_pokemon == null:
+
+		if ui_state == Ui_state.Selection:
+			$Poke_box.visible = true
+		else:
+			$Poke_box.visible = false
 	
 		if OpposingTrainerMonsters.pokemon != null:
 			if OpposingTrainerMonsters.pokemon.Current_health_points <= 0:
@@ -127,24 +156,33 @@ func _single_battle():
 						ui_state = Ui_state.Main
 					elif battle_mouse_num == 4:
 						if PlayerPokemon.current_pokemon.Learned_moves.size() >= 1:
-							PlayerPokemon.current_pokemon.Learned_moves[0]._calculate_damage()
-							BattleManager.turns += 1
-							BattleManager.Enemy_turn()
+							ui_state = Ui_state.Dialogue
+							var Dialogue = Dialog.instance()
+							Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name + " used "+PlayerPokemon.current_pokemon.Learned_moves[0].Name, 0]
+							Dialogue_layer.add_child(Dialogue)
+							Dialogue.connect("Dialog_ended",self,"_finish_player_attack_dialogue",[0])
+							
 					elif battle_mouse_num == 0:
 						if PlayerPokemon.current_pokemon.Learned_moves.size() >= 2:
-							PlayerPokemon.current_pokemon.Learned_moves[1]._calculate_damage()
-							BattleManager.turns += 1
-							BattleManager.Enemy_turn()
+							ui_state = Ui_state.Dialogue
+							var Dialogue = Dialog.instance()
+							Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name + " used "+PlayerPokemon.current_pokemon.Learned_moves[1].Name, 0]
+							Dialogue_layer.add_child(Dialogue)
+							Dialogue.connect("Dialog_ended",self,"_finish_player_attack_dialogue",[1])
 					elif battle_mouse_num == 1:
 						if PlayerPokemon.current_pokemon.Learned_moves.size() >= 3:
-							PlayerPokemon.current_pokemon.Learned_moves[2]._calculate_damage()
-							BattleManager.turns += 1
-							BattleManager.Enemy_turn()
+							ui_state = Ui_state.Dialogue
+							var Dialogue = Dialog.instance()
+							Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name + " used "+PlayerPokemon.current_pokemon.Learned_moves[2].Name, 0]
+							Dialogue_layer.add_child(Dialogue)
+							Dialogue.connect("Dialog_ended",self,"_finish_player_attack_dialogue",[2])
 					elif battle_mouse_num == 2:
 						if PlayerPokemon.current_pokemon.Learned_moves.size() >= 4:
-							PlayerPokemon.current_pokemon.Learned_moves[3]._calculate_damage()
-							BattleManager.turns += 1
-							BattleManager.Enemy_turn()
+							ui_state = Ui_state.Dialogue
+							var Dialogue = Dialog.instance()
+							Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name + " used "+PlayerPokemon.current_pokemon.Learned_moves[3].Name, 0]
+							Dialogue_layer.add_child(Dialogue)
+							Dialogue.connect("Dialog_ended",self,"_finish_player_attack_dialogue",[3])
 			
 					
 					
@@ -158,7 +196,6 @@ func _change_pokemon():
 	var Pokemon_scene = pokemon_scene.instance()
 	Pokemon_scene.controller = self
 	ui_state = Ui_state.Pokemon
-	print("memory")
 	add_child(Pokemon_scene)
 
 	

@@ -126,12 +126,8 @@ func _apply_damage():
 	if is_missed == false:
 		if damage <= 1:
 			print("evaded")
-			print(damage)
 		elif damage >= 1:
 			self.current_holder.opposing_pokemon.Current_health_points -= damage
-			print("damaged")
-			print("damage :", " ",damage)
-			print("opposistions_health :"," ",self.current_holder.opposing_pokemon.Current_health_points)
 	elif is_missed == true:
 		print("missed")
 

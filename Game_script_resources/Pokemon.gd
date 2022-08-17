@@ -413,84 +413,61 @@ func _unlearn(move):
 
 func _calc_weak_and_res():
 	if self.get_parent() == OpposingTrainerMonsters:
-		print("Opposition")
 		if OpposingTrainerMonsters.pokemon == self:
-			print("Opposition set")
 			if OpposingTrainerMonsters.opposing_pokemon != null:
-				print("Opposition set of opposition")
 				self.opposing_pokemon = OpposingTrainerMonsters.opposing_pokemon
-				print("Self Opposition set")
 				if self.opposing_pokemon != null and PlayerPokemon.current_pokemon != null:
-					print("Srarting opposition")
 					if self.opposing_pokemon.id == self.id:
-						print("same Opposition")
 						self.Weakness = 1
 						self.Resistance = 1
 					elif self.opposing_pokemon.id != self.id:
-						print("Not same Oppositions")
 						for i in self.opposing_pokemon.Weak_to.size():
 							if self.opposing_pokemon.Weak_to[i] == self.Type_1[0]:
-								print("Oppositiion weak to")
 								self.Weakness = 2
 								self.Resistance = 2
 						for i in self.opposing_pokemon.Resistant_to.size():
 							if self.opposing_pokemon.Resistant_to[i] == self.Type_1[0]:
-								print("Oppositiion resistant to")
 								self.Resistance = 0.5
 								self.Weakness = 2
 						for i in self.opposing_pokemon.Damage_normally_by.size():
 							if self.opposing_pokemon.Damage_normally_by[i] == self.Type_1[0]:
-								print("Oppositiion damage normaly by")
 								self.Resistance = 1
 								self.Weakness = 1
 						for i in self.opposing_pokemon.Immune_to.size():
 							if self.opposing_pokemon.Immune_to[i] == self.Type_1[0]:
-								print("Oppositiion Immune to")
 								self.Resistance = 0
 								self.Weakness = 0
 			else:
 				self.opposing_pokemon = null
 	
 	elif self.get_parent() == PlayerPokemon:
-		print("PlayerPokemon")
 		if PlayerPokemon.current_pokemon == self:
-			print("Current pokemon")
 			if PlayerPokemon.opposing_pokemon != null:
-				print("Opposing pokemon")
 				self.opposing_pokemon = PlayerPokemon.opposing_pokemon
-				print("Set opposing_pokemon")
 				if self.opposing_pokemon != null and OpposingTrainerMonsters.pokemon != null:
-					print("Starting")
 					if self.opposing_pokemon.id == self.id:
-						print("Same")
 						self.Weakness = 1
 						self.Resistance = 1
 					elif self.opposing_pokemon.id != self.id:
-						print("Not same")
 						for i in self.opposing_pokemon.Weak_to.size():
 							if self.opposing_pokemon.Weak_to[i] == self.Type_1[0]:
-								print("weak to")
 								self.Weakness = 2
 								self.Resistance = 2
 						for i in self.opposing_pokemon.Resistant_to.size():
 							if self.opposing_pokemon.Resistant_to[i] == self.Type_1[0]:
-								print("resistant to")
 								self.Resistance = 0.5
 								self.Weakness = 2
 						for i in self.opposing_pokemon.Damage_normally_by.size():
 							if self.opposing_pokemon.Damage_normally_by[i] == self.Type_1[0]:
-								print("damage normaly by")
 								self.Resistance = 1
 								self.Weakness = 1
 						for i in self.opposing_pokemon.Immune_to.size():
 							if self.opposing_pokemon.Immune_to[i] == self.Type_1[0]:
-								print("Immune to")
 								self.Resistance = 0
 								self.Weakness = 0
 		elif PlayerPokemon.current_pokemon != self:
 			self.opposing_pokemon = null
 	
-	print(self.Name, " ",Weakness, " ", Resistance) 
 	
 func _physics_process(_delta):
 
@@ -625,6 +602,10 @@ func evolve():
 	return
 
 func _wild_battle():
-	for i in range(0,(self.Learned_moves.size()-1)):
-		self.Learned_moves[i]._calculate_damage()
-		BattleManager.Ally_turn()
+	print("Wild attacking")
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	print("Wild attacking random starting")
+	self.Learned_moves[rng.randi_range(0,(self.Learned_moves.size() -1))]._calculate_damage()
+	print("Wild attacking random started")
+	BattleManager.Ally_turn()

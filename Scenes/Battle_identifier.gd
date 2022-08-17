@@ -52,3 +52,7 @@ func _physics_process(_delta):
 			temp_enemy_health = OpposingTrainerMonsters.pokemon.Current_health_points
 	else:
 		Enemy_sprite.texture = null
+
+
+func _on_Tween_tween_completed(object:Object, key:NodePath):
+	pass # Replace with function body.

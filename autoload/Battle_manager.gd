@@ -15,9 +15,11 @@ enum  what_turn {ALLY_TURN, ENEMY_TURN}
 var current_turn = what_turn.ALLY_TURN
 
 func Ally_turn():
+	print("Ally_turn")
 	current_turn = what_turn.ALLY_TURN
 
 func Enemy_turn():
+	print("enemy_turn")
 	current_turn = what_turn.ENEMY_TURN
 	OpposingTrainerMonsters._attack()
 
