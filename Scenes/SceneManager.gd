@@ -11,8 +11,8 @@ var need_move_to_learn = false
 
 var transition_queue : Array = []
 
-enum Transition_Type  {NEW_SCENE, PARTY_SCENE, MENU_ONLY, POKEMON_SCENE,EXIT_POKEMON_SCENE,MOVE_LEARNER,EXIT_MOVE_LEARNER,PC,EXIT_PC,BAG_SCENE }
-var transition_type = Transition_Type.NEW_SCENE
+enum Transition_Type  {NONE,NEW_SCENE, PARTY_SCENE, MENU_ONLY, POKEMON_SCENE,EXIT_POKEMON_SCENE,MOVE_LEARNER,EXIT_MOVE_LEARNER,PC,EXIT_PC,BAG_SCENE }
+var transition_type = Transition_Type.NONE
 
 enum Move_learn_transtion_type {MOVE_LEARNER,EXIT_MOVE_LEARNER}
 var move_learn_transtion_type = Move_learn_transtion_type.MOVE_LEARNER

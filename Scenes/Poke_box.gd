@@ -27,8 +27,21 @@ func _ready():
 	visible = true
 func _kill():
 	pokemon_selected = true
-	self.get_parent().ui_state = self.get_parent().Ui_state.Main
 	visible= false
+
+func _say_choosing_dialogue(pokemon):
+	self.get_parent().ui_state = self.get_parent().Ui_state.Dialogue
+	var Dialogue = self.get_parent().Dialog.instance()
+	Dialogue.text_to_diaplay = [pokemon.Name + "I choose you", 0]
+	self.get_parent().Dialogue_layer.add_child(Dialogue)
+	Dialogue.connect("Dialog_ended",self,"_finish_choosing_dialogue",[pokemon])	
+
+func _finish_choosing_dialogue(pokemon):
+	PlayerPokemon.current_pokemon = pokemon
+	PlayerPokemon.current_pokemon._calc_weak_and_res()
+	OpposingTrainerMonsters.pokemon._calc_weak_and_res()
+	self.get_parent().ui_state = self.get_parent().Ui_state.Main
+	_kill()
 
 func _input(event):
 	if can_select == true:
@@ -42,10 +55,7 @@ func _input(event):
 				if current_selected == 1:
 					if PlayerPokemon.first_pokemon != null:
 						if PlayerPokemon.first_pokemon.fainted == false:
-							PlayerPokemon.current_pokemon = PlayerPokemon.first_pokemon
-							PlayerPokemon.current_pokemon._calc_weak_and_res()
-							OpposingTrainerMonsters.pokemon._calc_weak_and_res()
-							_kill()
+							_say_choosing_dialogue(PlayerPokemon.first_pokemon)	
 						else:
 							print("Pokemon has no energy to battle")
 					else:
@@ -53,10 +63,7 @@ func _input(event):
 				elif current_selected == 2:
 					if PlayerPokemon.second_pokemon != null:
 						if PlayerPokemon.second_pokemon.fainted == false:
-							PlayerPokemon.current_pokemon = PlayerPokemon.second_pokemon
-							PlayerPokemon.current_pokemon._calc_weak_and_res()
-							OpposingTrainerMonsters.pokemon._calc_weak_and_res()
-							_kill()
+							_say_choosing_dialogue(PlayerPokemon.second_pokemon)
 						else:
 							print("Pokemon has no energy to battle")
 					else:
@@ -64,10 +71,7 @@ func _input(event):
 				elif current_selected == 3:
 					if PlayerPokemon.third_pokemon != null:
 						if PlayerPokemon.third_pokemon.fainted == false:
-							PlayerPokemon.current_pokemon = PlayerPokemon.third_pokemon
-							PlayerPokemon.current_pokemon._calc_weak_and_res()
-							OpposingTrainerMonsters.pokemon._calc_weak_and_res()
-							_kill()
+							_say_choosing_dialogue(PlayerPokemon.third_pokemon)
 						else:
 							print("Pokemon has no energy to battle")
 					else:
@@ -75,10 +79,7 @@ func _input(event):
 				elif current_selected == 4:
 					if PlayerPokemon.fourth_pokemon != null:
 						if PlayerPokemon.fourth_pokemon.fainted == false:
-							PlayerPokemon.current_pokemon = PlayerPokemon.fourth_pokemon
-							PlayerPokemon.current_pokemon._calc_weak_and_res()
-							OpposingTrainerMonsters.pokemon._calc_weak_and_res()
-							_kill()
+							_say_choosing_dialogue(PlayerPokemon.fourth_pokemon)
 						else:
 							print("Pokemon has no energy to battle")
 					else:
@@ -86,10 +87,7 @@ func _input(event):
 				elif current_selected == 5:
 					if PlayerPokemon.fifth_pokemon != null:
 						if PlayerPokemon.fifth_pokemon.fainted:
-							PlayerPokemon.current_pokemon = PlayerPokemon.fifth_pokemon
-							PlayerPokemon.current_pokemon._calc_weak_and_res()
-							OpposingTrainerMonsters.pokemon._calc_weak_and_res()
-							_kill()
+							_say_choosing_dialogue(PlayerPokemon.fifth_pokemon)
 						else:
 							print("Pokemon has no energy to battle")
 					else:
@@ -97,10 +95,7 @@ func _input(event):
 				elif current_selected == 6:
 					if PlayerPokemon.sixth_pokemon != null:
 						if PlayerPokemon.sixth_pokemon.fainted == false:
-							PlayerPokemon.current_pokemon = PlayerPokemon.sixth_pokemon
-							PlayerPokemon.current_pokemon._calc_weak_and_res()
-							OpposingTrainerMonsters.pokemon._calc_weak_and_res()
-							_kill()
+							_say_choosing_dialogue(PlayerPokemon.sixth_pokemon)
 						else:
 							print("Pokemon has no energy to battle")
 					else:

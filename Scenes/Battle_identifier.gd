@@ -55,4 +55,12 @@ func _physics_process(_delta):
 
 
 func _on_Tween_tween_completed(object:Object, key:NodePath):
-	pass # Replace with function body.
+	if BattleManager.multi_battle == false:
+		if object == Enemy_health:
+			if PlayerPokemon.current_pokemon != null:
+				print("enemy turn starting")
+				BattleManager.Enemy_turn()
+		elif object == Player_health:
+			if PlayerPokemon.current_pokemon != null:
+				get_parent().ui_state = get_parent().Ui_state.Battle
+				BattleManager.Ally_turn()

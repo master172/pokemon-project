@@ -11,6 +11,9 @@ var fainted =  false
 
 var in_battle = false
 
+var PlayerLastMoveEvaded = false
+var PlayerLastMoveMissed = false
+
 enum  what_turn {ALLY_TURN, ENEMY_TURN}
 var current_turn = what_turn.ALLY_TURN
 
@@ -23,7 +26,15 @@ func Enemy_turn():
 	current_turn = what_turn.ENEMY_TURN
 	OpposingTrainerMonsters._attack()
 
+func switch_turns():
+	print("switch_turns")
+	if current_turn == what_turn.ALLY_TURN:
+		Enemy_turn()
+	elif current_turn == what_turn.ENEMY_TURN:
+		Ally_turn()
+
 func _physics_process(_delta):
+	
 	if OpposingTrainerMonsters.pokemon != null:
 		PlayerPokemon.opposing_pokemon = OpposingTrainerMonsters.pokemon
 	else:

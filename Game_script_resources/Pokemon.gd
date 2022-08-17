@@ -1,6 +1,8 @@
 extends Node2D
 class_name Pokemon
 
+var rng_move
+
 var evolver
 
 var exp_given :bool = false
@@ -601,11 +603,13 @@ func evolve():
 		pass
 	return
 
+signal Enemy_attacked(pokemon,move)
+
 func _wild_battle():
-	print("Wild attacking")
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	print("Wild attacking random starting")
-	self.Learned_moves[rng.randi_range(0,(self.Learned_moves.size() -1))]._calculate_damage()
-	print("Wild attacking random started")
-	BattleManager.Ally_turn()
+	rng_move = rng.randi_range(0,(self.Learned_moves.size() -1))
+	emit_signal("Enemy_attacked",self,rng_move)
+
+func _wild_battle_attack():
+	self.Learned_moves[rng_move]._calculate_damage()

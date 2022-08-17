@@ -40,13 +40,54 @@ var charecter
 
 var reset_pokemon = false
 
+var enemy_dialogue_connected = false
+
 func _ready():
 	ui_state = Ui_state.Dialogue
 	_initial_dialogue()
 	
+func _display_enemy_attack_dialogue(pokemon,move):
+	ui_state = Ui_state.Dialogue
+	if ui_state == Ui_state.Dialogue:
+		if BattleManager.multi_battle == false:
+			if OpposingTrainerMonsters.pokemon != null:
+				
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = ["The opposing "+ pokemon.Name + " used "+ pokemon.Learned_moves[move].Name, 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"_finish_Enemy_attack_dialogue")
+
+func _finish_Enemy_attack_dialogue():
+	if BattleManager.multi_battle == false:
+		OpposingTrainerMonsters.pokemon._wild_battle_attack()
+
+func _attack_missed():
+	var Dialogue = Dialog.instance()
+	Dialogue.text_to_diaplay = ["But it missed", 0]
+	Dialogue_layer.add_child(Dialogue)
+	Dialogue.connect("Dialog_ended",self,"_finish_attack_missed")
+	
+
+func _finish_attack_missed():
+	BattleManager.Enemy_turn()
+	BattleManager.PlayerLastMoveMissed = false
+
+func _attack_evaded():
+	var Dialogue = Dialog.instance()
+	Dialogue.text_to_diaplay = ["But it was evaded", 0]
+	Dialogue_layer.add_child(Dialogue)
+	Dialogue.connect("Dialog_ended",self,"_finish_attack_evaded")
+
+
+func _finish_attack_evaded():
+	BattleManager.Enemy_turn()
+	BattleManager.PlayerLastMoveEvaded = false
+
 
 func _need_to_switch():
 	pass
+
+
 func _physics_process(_delta):
 	if BattleManager.multi_battle == false:
 		_single_battle()
@@ -62,14 +103,27 @@ func _initial_dialogue():
 				Dialogue.connect("Dialog_ended",self,"_finish_Init_dialogue")
 
 func _finish_Init_dialogue():
+	
 	ui_state = Ui_state.Selection
 	$Poke_box.can_select = true
+
+func _player_attack_dialogue(move):
+	ui_state = Ui_state.Dialogue
+	var Dialogue = Dialog.instance()
+	Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name + " used "+PlayerPokemon.current_pokemon.Learned_moves[3].Name, 0]
+	Dialogue_layer.add_child(Dialogue)
+	Dialogue.connect("Dialog_ended",self,"_finish_player_attack_dialogue",[move])
 
 func _finish_player_attack_dialogue(move):
 	ui_state = Ui_state.Battle
 	PlayerPokemon.current_pokemon.Learned_moves[move]._calculate_damage()
+	if BattleManager.PlayerLastMoveEvaded == true:
+		_attack_evaded()
+	elif BattleManager.PlayerLastMoveMissed == true:
+		_attack_missed()
 	BattleManager.turns += 1
-	BattleManager.Enemy_turn()
+	
+
 func _single_battle():
 	if PlayerPokemon.current_learning_pokemon == null:
 
@@ -83,6 +137,7 @@ func _single_battle():
 				OpposingTrainerMonsters.pokemon._lose()
 				yield(get_tree().create_timer(0.2),"timeout")
 				win()
+
 		if PlayerPokemon.current_pokemon != null:
 				if PlayerPokemon.current_pokemon.Current_health_points <= 0:
 					PlayerPokemon.current_pokemon._lose()
@@ -103,6 +158,9 @@ func _single_battle():
 			player_pokemon_sprite.texture = null
 		if OpposingTrainerMonsters.pokemon != null:
 			enemy_pokemon = OpposingTrainerMonsters.pokemon
+			if enemy_dialogue_connected == false:
+				OpposingTrainerMonsters.pokemon.connect("Enemy_attacked",self,"_display_enemy_attack_dialogue")
+				enemy_dialogue_connected = true
 			opposing_pokemon_sprite.texture = enemy_pokemon.sprite
 		else:
 			enemy_pokemon = null
@@ -156,35 +214,18 @@ func _single_battle():
 						ui_state = Ui_state.Main
 					elif battle_mouse_num == 4:
 						if PlayerPokemon.current_pokemon.Learned_moves.size() >= 1:
-							ui_state = Ui_state.Dialogue
-							var Dialogue = Dialog.instance()
-							Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name + " used "+PlayerPokemon.current_pokemon.Learned_moves[0].Name, 0]
-							Dialogue_layer.add_child(Dialogue)
-							Dialogue.connect("Dialog_ended",self,"_finish_player_attack_dialogue",[0])
+							_player_attack_dialogue(0)
 							
 					elif battle_mouse_num == 0:
 						if PlayerPokemon.current_pokemon.Learned_moves.size() >= 2:
-							ui_state = Ui_state.Dialogue
-							var Dialogue = Dialog.instance()
-							Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name + " used "+PlayerPokemon.current_pokemon.Learned_moves[1].Name, 0]
-							Dialogue_layer.add_child(Dialogue)
-							Dialogue.connect("Dialog_ended",self,"_finish_player_attack_dialogue",[1])
+							_player_attack_dialogue(1)
 					elif battle_mouse_num == 1:
 						if PlayerPokemon.current_pokemon.Learned_moves.size() >= 3:
-							ui_state = Ui_state.Dialogue
-							var Dialogue = Dialog.instance()
-							Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name + " used "+PlayerPokemon.current_pokemon.Learned_moves[2].Name, 0]
-							Dialogue_layer.add_child(Dialogue)
-							Dialogue.connect("Dialog_ended",self,"_finish_player_attack_dialogue",[2])
+							_player_attack_dialogue(2)
 					elif battle_mouse_num == 2:
 						if PlayerPokemon.current_pokemon.Learned_moves.size() >= 4:
-							ui_state = Ui_state.Dialogue
-							var Dialogue = Dialog.instance()
-							Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name + " used "+PlayerPokemon.current_pokemon.Learned_moves[3].Name, 0]
-							Dialogue_layer.add_child(Dialogue)
-							Dialogue.connect("Dialog_ended",self,"_finish_player_attack_dialogue",[3])
+							_player_attack_dialogue(3)
 			
-					
 					
 func _bag():
 	var Bag_scene = Bag.instance()
@@ -208,6 +249,8 @@ func _attack_inp():
 func win():
 	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
 		Utils.Num_loaded_pokemon -= 1
+		OpposingTrainerMonsters.pokemon.disconnect("Enemy_attacked",self,"_display_enemy_attack_dialogue",[enemy_pokemon,enemy_pokemon.rng_move])
+		enemy_dialogue_connected = false
 		OpposingTrainerMonsters.pokemon = null
 		OpposingTrainerMonsters._remove_children()
 		PlayerPokemon.current_pokemon = null
@@ -295,7 +338,7 @@ func _input(event):
 								scroll_container.get_child(i).position.x -= 101
 							current_mouse_num = 0
 			elif ui_state == Ui_state.Battle:
-				if event.is_action_pressed("A"):
+				if event.is_action_pressed("A"):					
 					if ui_state == Ui_state.Battle:
 						if battle_mouse_num != 0:
 							battle_mouse_num -= 1

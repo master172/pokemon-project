@@ -339,3 +339,5 @@ frame = 1
 z_index = 20
 
 [node name="Dialog_layer" type="Node2D" parent="."]
+
+[connection signal="tween_completed" from="Battle_identifier/Tween" to="Battle_identifier" method="_on_Tween_tween_completed"]
