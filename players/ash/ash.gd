@@ -124,6 +124,8 @@ func _ready():
 	#calling_the_load_function
 	_load_data()
 
+	
+
 	#variables-->setter_variables-->setting
 	$Sprite.visible = true
 	anim_player.active = true
@@ -131,15 +133,47 @@ func _ready():
 	velocity = position
 	shadow.visible = false
 
+	if self.facing_direction == Facing_direction.up:
+		anim_player.set("parameters/idle/blend_position",Vector2(0,-1))
+		anim_player.set("parameters/walk/blend_position",Vector2(0,-1))
+		anim_player.set("parameters/turn/blend_position",Vector2(0,-1))
+		anim_player.set("parameters/run/blend_position",Vector2(0,-1))
+		anim_player.set("parameters/cycle/blend_position",Vector2(0,-1))
+		anim_player.set("parameters/cycle_idle/blend_position",Vector2(0,-1))
+		anim_player.set("parameters/surf/blend_position",Vector2(0,-1))
+		anim_player.set("parameters/run_turn/blend_position",Vector2(0,-1))
+	
+	elif self.facing_direction == Facing_direction.left:
+		anim_player.set("parameters/idle/blend_position",Vector2(1,0))
+		anim_player.set("parameters/walk/blend_position",Vector2(1,0))
+		anim_player.set("parameters/turn/blend_position",Vector2(1,0))
+		anim_player.set("parameters/run/blend_position",Vector2(1,0))
+		anim_player.set("parameters/cycle/blend_position",Vector2(1,0))
+		anim_player.set("parameters/cycle_idle/blend_position",Vector2(1,0))
+		anim_player.set("parameters/surf/blend_position",Vector2(1,0))
+		anim_player.set("parameters/run_turn/blend_position",Vector2(1,0))
+	
+	elif self.facing_direction == Facing_direction.right:
+		anim_player.set("parameters/idle/blend_position",Vector2(-1,0))
+		anim_player.set("parameters/walk/blend_position",Vector2(-1,0))
+		anim_player.set("parameters/turn/blend_position",Vector2(-1,0))
+		anim_player.set("parameters/run/blend_position",Vector2(-1,0))
+		anim_player.set("parameters/cycle/blend_position",Vector2(-1,0))
+		anim_player.set("parameters/cycle_idle/blend_position",Vector2(-1,0))
+		anim_player.set("parameters/surf/blend_position",Vector2(-1,0))
+		anim_player.set("parameters/run_turn/blend_position",Vector2(-1,0))
+	
+	elif self.facing_direction == Facing_direction.down:
+		anim_player.set("parameters/idle/blend_position",Vector2(0,1))
+		anim_player.set("parameters/walk/blend_position",Vector2(0,1))
+		anim_player.set("parameters/turn/blend_position",Vector2(0,1))
+		anim_player.set("parameters/run/blend_position",Vector2(0,1))
+		anim_player.set("parameters/cycle/blend_position",Vector2(0,1))
+		anim_player.set("parameters/cycle_idle/blend_position",Vector2(0,1))
+		anim_player.set("parameters/surf/blend_position",Vector2(0,1))
+		anim_player.set("parameters/run_turn/blend_position",Vector2(0,1))
+
 	#setting_the_anim_player_playback_method
-	anim_player.set("parameters/idle/blend_position",input_direction)
-	anim_player.set("parameters/walk/blend_position",input_direction)
-	anim_player.set("parameters/turn/blend_position",input_direction)
-	anim_player.set("parameters/run/blend_position",input_direction)
-	anim_player.set("parameters/cycle/blend_position",input_direction)
-	anim_player.set("parameters/cycle_idle/blend_position",input_direction)
-	anim_player.set("parameters/surf/blend_position",input_direction)
-	anim_player.set("parameters/run_turn/blend_position",input_direction)
 
 func set_spawn(location: Vector2, direction: Vector2):
 
@@ -568,7 +602,7 @@ func _save_data():
 	var file = File.new()
 	var error = file.open(save_path,File.WRITE)
 	if error == OK:
-		file.store_var(data)
+		file.store_line(to_json(data))
 		file.close()
 
 #loading the player_data
@@ -577,7 +611,7 @@ func _load_data():
 	if file.file_exists(save_path):
 		var error = file.open(save_path,File.READ)
 		if error == OK:
-			player_data = file.get_var()
+			player_data = JSON.parse(file.get_as_text()).result
 			file.close()
 			_apply_data()
 
@@ -598,3 +632,5 @@ func _apply_data():
 		self.is_running = player_data.is_running
 		self.is_cycling = player_data.is_cycling
 		player_data = null
+	
+

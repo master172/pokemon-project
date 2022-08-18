@@ -1,7 +1,7 @@
 extends Node
 
 const SAVE_DIR = "user://Saves/Scene/"
-const save_path = SAVE_DIR +"scene.save"
+const save_path = SAVE_DIR +"scene.json"
 var current_scene
 
 func _ready():

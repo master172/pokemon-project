@@ -67,7 +67,8 @@ func load_game():
 	save_game.open(SAVE_PATH, File.READ)
 	while save_game.get_position() < save_game.get_len():
 		# Get the saved dictionary from the next line in the save file
-		var node_data = parse_json(save_game.get_line())
+		var node_data = {}
+		node_data = JSON.parse(save_game.get_as_text()).result
 
 		# Firstly, we need to create the object and add it to the tree and set its position.
 		var new_object = load(node_data["filename"]).instance()

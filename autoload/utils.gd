@@ -39,7 +39,7 @@ func _save_data():
 	var file = File.new()
 	var error = file.open(save_path,File.WRITE)
 	if error == OK:
-		file.store_var(data)
+		file.store_line(JsonBeautifier.beautify_json(to_json(data)))
 		file.close()
 
 #loading the player_data
@@ -48,7 +48,7 @@ func _load_data():
 	if file.file_exists(save_path):
 		var error = file.open(save_path,File.READ)
 		if error == OK:
-			Utils_data = file.get_var()
+			Utils_data = JSON.parse(file.get_as_text()).result
 			file.close()
 
 			_apply_data()
@@ -62,3 +62,4 @@ func _notification(what):
 func _apply_data():
 	if Utils_data != null:
 		self.Num_loaded_pokemon = Utils_data.Num_loaded_pokemon
+		self.current_rest_shelter = Utils_data.current_rest_shelter

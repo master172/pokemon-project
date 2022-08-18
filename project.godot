@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "",
-"class": "GitAPI",
-"language": "NativeScript",
-"path": "res://addons/godot-git-plugin/git_api.gdns"
-}, {
 "base": "Node",
 "class": "Learned_moves",
 "language": "GDScript",
@@ -40,7 +35,6 @@ _global_script_classes=[ {
 "path": "res://Items/Potion.gd"
 } ]
 _global_script_class_icons={
-"GitAPI": "",
 "Learned_moves": "",
 "Moves": "",
 "Pokemon": "",
@@ -69,6 +63,7 @@ SceneLoaded="*res://autoload/Scene_loaded.gd"
 GameSaver="*res://autoload/GameSaver.gd"
 PokeHelper="*res://autoload/Poke_helper.gd"
 MoveLearner="*res://autoload/Move_learner.gd"
+JsonBeautifier="*res://autoload/json_beautifier.gd"
 
 [debug]
 
@@ -94,7 +89,7 @@ enabled=PoolStringArray(  )
 
 [gdnative]
 
-singletons=[ "res://addons/godot-git-plugin/git_api.gdnlib" ]
+singletons=[  ]
 
 [global]
 
