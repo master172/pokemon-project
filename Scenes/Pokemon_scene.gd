@@ -12,10 +12,13 @@ func _ready():
 
 
 func load_pokemon_scene():
-	screen_loaded = Screen_loaded.Pokemon_stage
-	pokemon_scene = Pokemon_stage.instance()
-	add_child(pokemon_scene)
-	BattleManager.in_battle = true
+	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
+		if BattleManager.multi_battle == false:
+			screen_loaded = Screen_loaded.Pokemon_stage
+			pokemon_scene = Pokemon_stage.instance()
+			add_child(pokemon_scene)
+			BattleManager.in_battle = true
+
 func unload_pokemon_scene():
 	screen_loaded = Screen_loaded.Nothing
 	remove_child(pokemon_scene)

@@ -98,9 +98,7 @@ func encounter():
 		Utils.parent_to_change = OpposingTrainerMonsters
 		LoadedPokemon._change_parent()
 		set_properties()
-	elif OpposingTrainerMonsters.pokemon != null:
-		current_pokemon = OpposingTrainerMonsters.pokemon
-		set_properties()
+
 
 
 func set_properties():

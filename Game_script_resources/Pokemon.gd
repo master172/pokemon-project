@@ -164,7 +164,11 @@ func _calculate_exp_poits_to_give():
 	else:	
 		exp_gainied = exp_gainied
 
+signal enemy_lost(exp_to_give)
+
 func _lose():
+	if self.get_parent() == OpposingTrainerMonsters:
+		emit_signal("enemy_lost",exp_gainied)
 	_calculate_exp_poits_to_give()
 	if self.opposing_pokemon != null:
 		self.opposing_pokemon.experince_gained += exp_gainied
@@ -172,6 +176,7 @@ func _lose():
 		self.opposing_pokemon._update_level()
 	if self.get_parent() == PlayerPokemon:
 		PlayerPokemon._active_pokemon()
+	
 
 			
 

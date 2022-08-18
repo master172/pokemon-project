@@ -42,6 +42,8 @@ var reset_pokemon = false
 
 var enemy_dialogue_connected = false
 
+var enemy_lost_dialogue_connected = false
+
 func _ready():
 	ui_state = Ui_state.Dialogue
 	_initial_dialogue()
@@ -145,7 +147,6 @@ func _finish_Init_dialogue():
 	$Poke_box.can_select = true
 
 func _player_attack_dialogue(move):
-	print(move)
 	ui_state = Ui_state.Dialogue
 	var Dialogue = Dialog.instance()
 	Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name + " used "+PlayerPokemon.current_pokemon.Learned_moves[move].Name, 0]
@@ -153,7 +154,6 @@ func _player_attack_dialogue(move):
 	Dialogue.connect("Dialog_ended",self,"_finish_player_attack_dialogue",[move])
 
 func _finish_player_attack_dialogue(move):
-	print(move)
 	ui_state = Ui_state.Battle
 	PlayerPokemon.current_pokemon.Learned_moves[move]._calculate_damage()
 	if BattleManager.PlayerLastMoveEvaded == true:
@@ -174,8 +174,7 @@ func _single_battle():
 		if OpposingTrainerMonsters.pokemon != null:
 			if OpposingTrainerMonsters.pokemon.Current_health_points <= 0:
 				OpposingTrainerMonsters.pokemon._lose()
-				yield(get_tree().create_timer(0.2),"timeout")
-				win()
+
 
 		if PlayerPokemon.current_pokemon != null:
 				if PlayerPokemon.current_pokemon.Current_health_points <= 0:
@@ -200,6 +199,9 @@ func _single_battle():
 			if enemy_dialogue_connected == false:
 				OpposingTrainerMonsters.pokemon.connect("Enemy_attacked",self,"_display_enemy_attack_dialogue")
 				enemy_dialogue_connected = true
+			if enemy_lost_dialogue_connected == false:
+				OpposingTrainerMonsters.pokemon.connect("enemy_lost",self," _win_dialog")
+				enemy_lost_dialogue_connected = true
 			opposing_pokemon_sprite.texture = enemy_pokemon.sprite
 		else:
 			enemy_pokemon = null
@@ -278,8 +280,14 @@ func _change_pokemon():
 	ui_state = Ui_state.Pokemon
 	add_child(Pokemon_scene)
 
-	
-	
+func _win_dialog(exp_points):
+	ui_state = Ui_state.Dialogue
+	var Dialogue = Dialog.instance()
+	Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+exp_points+ " experience points"), 0]
+	Dialogue_layer.add_child(Dialogue)
+	Dialogue.connect("Dialog_ended",self,"_win")	
+
+
 
 func _attack_inp():
 	ui_state = Ui_state.Battle
@@ -287,7 +295,9 @@ func _attack_inp():
 
 func win():
 	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
+
 		Utils.Num_loaded_pokemon -= 1
+		OpposingTrainerMonsters.pokemon.disconnect("enemy_lost",self,"_win_dialog")
 		OpposingTrainerMonsters.pokemon.disconnect("Enemy_attacked",self,"_display_enemy_attack_dialogue")
 		enemy_dialogue_connected = false
 		OpposingTrainerMonsters.pokemon = null

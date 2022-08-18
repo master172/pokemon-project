@@ -3,7 +3,7 @@
 [ext_resource path="res://libraries/red_house/door.gd" type="Script" id=1]
 [ext_resource path="res://assests/libraries/door.png" type="Texture" id=2]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=7]
 resource_name = "close_door"
 length = 0.3
 tracks/0/type = "value"
@@ -45,7 +45,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=8]
 resource_name = "door open"
 length = 0.3
 tracks/0/type = "value"
@@ -73,7 +73,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 8, 8 )
 
 [node name="door" type="Area2D" groups=["door"]]
@@ -87,11 +87,11 @@ vframes = 3
 frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-anims/close_door = SubResource( 4 )
-"anims/door open" = SubResource( 5 )
+anims/close_door = SubResource( 7 )
+"anims/door open" = SubResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 6 )
+shape = SubResource( 9 )
 
 [connection signal="body_entered" from="." to="." method="_on_door_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_door_body_exited"]

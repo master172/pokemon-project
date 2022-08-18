@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assests/libraries/buildings/all_buildings.png" type="Texture" id=1]
+
+[node name="Pokemon-center" type="StaticBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 501.718, 234.791, 80.5371, 70.5671 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 0, 6, 6, 0, 74, 0, 80, 5, 80, 39, 79, 40, 79, 63, 74, 69, 48, 69, 48, 54, 33, 54, 33, 69, 7, 69, 1, 63, 1, 41, 0, 40 )

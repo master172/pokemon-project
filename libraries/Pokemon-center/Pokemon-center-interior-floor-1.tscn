@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://players/ash/ash.tscn" type="PackedScene" id=1]
+
+[node name="Pokemon-center-interior-floor-1" type="YSort"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -300.0
+margin_top = -300.0
+margin_right = 300.0
+margin_bottom = 300.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="ash" parent="." instance=ExtResource( 1 )]
+position = Vector2( 8, 16 )

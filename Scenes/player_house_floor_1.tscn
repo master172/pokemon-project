@@ -30,9 +30,6 @@ margin_top = -300.0
 margin_right = 300.0
 margin_bottom = 300.0
 color = Color( 0.0117647, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ash" parent="." instance=ExtResource( 2 )]
 position = Vector2( -64, 56 )
