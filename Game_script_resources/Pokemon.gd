@@ -47,6 +47,8 @@ export(Array,Resource) var Learned_moves
 
 export(Array,Resource) var Moves
 
+
+
 export(float) var catch_rate
 
 export(String,"Fast","Slow","Medium_slow","Medium_fast","Erratic","Fluctuating") var Levelling_rate 
