@@ -1,7 +1,7 @@
 extends Node
 
-const SAVE_DIR = "user://Saves/Pokemon_data/Moves/"
-const SAVE_PATH = SAVE_DIR +"Moves.json"
+const SAVE_DIR = "user://Saves/Pokemon_data/Pokemon_and_items/"
+const SAVE_PATH = SAVE_DIR +"Pokemon_and_items.json"
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -18,16 +18,19 @@ func _save_menu():
 	save_game()
 
 func _notification(what):
-	if what == NOTIFICATION_WM_QUIT_REQUEST or what == NOTIFICATION_WM_GO_BACK_REQUEST:
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST or what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
 		var save_nodes = get_tree().get_nodes_in_group("Presist")
 		for i in save_nodes:
 			i.save()
 		save_game()
 
 func save_game():
+
 	var dir = Directory.new()
 	if !dir.dir_exists(SAVE_DIR):
 		dir.make_dir_recursive(SAVE_DIR)
+
+	
 	var save_game = File.new()
 	save_game.open(SAVE_PATH, File.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group("Presist")
@@ -43,7 +46,7 @@ func save_game():
 			continue
 
 		# Call the node's save function.
-		var node_data = node.call("save")
+		var node_data = node.save()
 
 		# Store the save dictionary as a new line in the save file.
 		save_game.store_line(to_json(node_data))
@@ -67,18 +70,18 @@ func load_game():
 	save_game.open(SAVE_PATH, File.READ)
 	while save_game.get_position() < save_game.get_len():
 		# Get the saved dictionary from the next line in the save file
-		var node_data = {}
-		node_data = JSON.parse(save_game.get_as_text()).result
+		var node_data = parse_json(save_game.get_line())
 
-		# Firstly, we need to create the object and add it to the tree and set its position.
+        # Firstly, we need to create the object and add it to the tree and set its position.
 		var new_object = load(node_data["filename"]).instance()
 		get_node(node_data["parent"]).add_child(new_object)
 		new_object.position = Vector2(node_data["pos_x"], node_data["pos_y"])
 
-		# Now we set the remaining variables.
+        # Now we set the remaining variables.
 		for i in node_data.keys():
 			if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y":
 				continue
 			new_object.set(i, node_data[i])
-
+	
+		
 	save_game.close()

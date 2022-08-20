@@ -8,8 +8,8 @@ onready var arrow = $Arrow
 
 onready var Option_container = $Option_container
 
-var display_item = null
-var display_pokemon = null
+var display_item :Texture = null
+var display_pokemon :Texture = null
 
 onready var Picture_frame = $Picture_frame
 onready var item_displayer = $Picture_frame/Border/Item_displayer
@@ -53,6 +53,8 @@ signal displaying
 func _ready():
 	emit_signal("Dialog_started")
 	Option_container.visible = false
+	item_displayer.texture = display_item
+	Pokemon_displayer.texture = display_pokemon
 
 	if text_to_diaplay.size() > 0:
 		RichTextLabel.text = text_to_diaplay[0]

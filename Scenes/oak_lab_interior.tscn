@@ -1,10 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assests/libraries/buildings/oaks_lab_interior.png" type="Texture" id=1]
 [ext_resource path="res://assests/libraries/buildings/mat.png" type="Texture" id=2]
 [ext_resource path="res://players/ash/ash.tscn" type="PackedScene" id=3]
 [ext_resource path="res://libraries/red_house/door.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Items/Overworld Item.tscn" type="PackedScene" id=5]
+[ext_resource path="res://libraries/oak_lab/Pokemon-ball.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game_pokemon/Bulbasaur.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game_pokemon/Charmander.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game_pokemon/Squirtle.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/oak_lab_interior.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 104 )
@@ -22,6 +26,7 @@ extents = Vector2( 24, 16 )
 extents = Vector2( 8, 16 )
 
 [node name="oak_lab_interior" type="YSort"]
+script = ExtResource( 9 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_left = -300.0
@@ -29,9 +34,6 @@ margin_top = -300.0
 margin_right = 300.0
 margin_bottom = 300.0
 color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -82,14 +84,17 @@ is_invisible = true
 spawn_location = Vector2( 136, 160 )
 spawn_direction = Vector2( 0, 1 )
 
-[node name="Overworld Item" parent="." instance=ExtResource( 5 )]
+[node name="Pokemon-ball" parent="." instance=ExtResource( 5 )]
 position = Vector2( 32, -28 )
 z_index = 1
+Pokemon = ExtResource( 7 )
 
-[node name="Overworld Item2" parent="." instance=ExtResource( 5 )]
+[node name="Pokemon-ball2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 48, -28 )
 z_index = 1
+Pokemon = ExtResource( 8 )
 
-[node name="Overworld Item3" parent="." instance=ExtResource( 5 )]
+[node name="Pokemon-ball3" parent="." instance=ExtResource( 5 )]
 position = Vector2( 64, -28 )
 z_index = 1
+Pokemon = ExtResource( 6 )

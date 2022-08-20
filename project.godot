@@ -57,13 +57,12 @@ OpposingTrainerMonsters="*res://autoload/opposing_Trainer_monsters.gd"
 PlayerPokemon="*res://autoload/Player_pokemon.gd"
 BattleManager="*res://autoload/Battle_manager.gd"
 Choices="*res://autoload/Choices.gd"
-SaveAndLoad="*res://autoload/Save_and_load.gd"
 LoadedPokemon="*res://autoload/Loaded_pokemon.gd"
 SceneLoaded="*res://autoload/Scene_loaded.gd"
 GameSaver="*res://autoload/GameSaver.gd"
 PokeHelper="*res://autoload/Poke_helper.gd"
 MoveLearner="*res://autoload/Move_learner.gd"
-JsonBeautifier="*res://autoload/json_beautifier.gd"
+SaveAndLoad="*res://autoload/Save_and_load.gd"
 
 [debug]
 
