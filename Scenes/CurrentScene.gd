@@ -13,7 +13,7 @@ func _apply_data():
 		self.get_child(0).load_game()
 
 func _instance():
-	scene= load(String(SceneLoaded.current_scene))
+	scene = load(String(SceneLoaded.current_scene))
 	var scene_instance = scene.instance()
 	self.add_child(scene_instance)
 	if scene_instance.has_method("load_game"):

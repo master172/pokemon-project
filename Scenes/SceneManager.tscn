@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/player_house_floor_1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/SceneManager.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/Pokemon_scene.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/CurrentScene.gd" type="Script" id=5]
 [ext_resource path="res://UI UX/Control_tab.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Debug.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assests/libraries/pkmnfl.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://UI UX/Move_learner.gd" type="Script" id=9]
 [ext_resource path="res://assests/libraries/Ui/Place_box1.png" type="Texture" id=10]
@@ -114,8 +115,6 @@ anims/fade_in = SubResource( 1 )
 anims/fade_out = SubResource( 2 )
 
 [node name="Control_tab" parent="." instance=ExtResource( 6 )]
-
-[node name="TextBubble" type="CanvasLayer" parent="."]
 
 [node name="MoveLearner" type="CanvasLayer" parent="."]
 
@@ -409,7 +408,11 @@ custom_fonts/font = SubResource( 10 )
 text = "Back"
 align = 1
 
+[node name="Dialog" type="CanvasLayer" parent="."]
+
+[node name="Debug" parent="." instance=ExtResource( 7 )]
+layer = 20
+visible = false
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 8 )
-
-[node name="Dialog" type="CanvasLayer" parent="."]

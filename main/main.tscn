@@ -243,7 +243,7 @@ tracks/1/keys = {
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 8, 8 )
 
-[node name="Node2D" type="YSort"]
+[node name="Main" type="YSort"]
 script = ExtResource( 17 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ]

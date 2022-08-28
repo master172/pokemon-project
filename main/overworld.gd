@@ -25,7 +25,6 @@ func save_game():
 	save_file.store_line(to_json(save_dict))
 	# Write the JSON to the file and save to disk
 	save_file.close()
-	pass
 
 func load_game():
 	# Try to load a saved file

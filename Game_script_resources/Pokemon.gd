@@ -45,10 +45,6 @@ export(Array,Resource) var abilites
 
 export(Array,Resource) var Learned_moves
 
-export(Array,Resource) var Moves
-
-
-
 export(float) var catch_rate
 
 export(String,"Fast","Slow","Medium_slow","Medium_fast","Erratic","Fluctuating") var Levelling_rate 
@@ -358,7 +354,6 @@ func save():
 		"parent" : get_parent().get_path(),
 
 		"level" : level,
-		"Moves":Moves,
 		"experince_gained" : experince_gained,
 		"experince_to_next_level" : experince_to_next_level,
 		"gender" : gender,

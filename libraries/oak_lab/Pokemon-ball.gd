@@ -10,10 +10,10 @@ var talked = false
 const Dialog = preload("res://UI UX/Dialogue_bar.tscn")
 
 
-onready var first_dialog :Array = ["Ash went to the"  + pokemon.Name ,3,"do you want to choose the "+pokemon.Name + "  as your first pokemon",1,2,0]
+onready var first_dialog :Array = ["Ash went to the"  + pokemon.Name ,3," do you want to choose the "+pokemon.Name + "  as your first pokemon",1,2,0]
 
 
-onready var question :Array = [["yes","Ash choosed the "+ pokemon.Name,"congratulations on choosing your first pokemon" + "Take good care of it",1],["no","choose wisely ash this decesion is very important",1]]
+onready var question :Array = [["yes","Ash choosed the "+ pokemon.Name," congratulations on choosing your first pokemon " + " Take good care of it",1],["no","choose wisely ash this decesion is very important",1]]
 
 onready var first_functions :Array = ["add_pokemon"]
 
@@ -50,25 +50,35 @@ func _apply_data():
 
 
 func _Start_dialog():
-	
-	if question != [["yes","Ash choosed the "+ pokemon.Name,"congratulations on choosing your first pokemon" + "Take good care of it",1],["no","choose wisely ash this decesion is very important",1]]:
-		print("changed")
 
-	if dialog != null:
-		dialog = dialog
-	else:
-		dialog = Dialog.instance()
-	
-	dialog.text_to_diaplay = first_dialog
-	dialog.choices = question
-	dialog.functions = first_functions
-	dialog.display_pokemon = pokemon.sprite
-	Utils.get_dialog_layer().add_child(dialog)
+	if PlayerPokemon.first_pokemon == null:
 
+		if dialog != null:
+			dialog = dialog
+		else:
+			dialog = Dialog.instance()
 		
-	dialog.connect("Dialog_ended",self,"_finish_dialog")
-	dialog.connect("_function",self,"_selected")
-	dialog.connect("_choice_number",self,"_set_choice")
+		dialog.text_to_diaplay = first_dialog
+		dialog.choices = question
+		dialog.functions = first_functions
+		dialog.display_pokemon = pokemon.sprite
+		Utils.get_dialog_layer().add_child(dialog)
+
+			
+		dialog.connect("Dialog_ended",self,"_finish_dialog")
+		dialog.connect("_function",self,"_selected")
+		dialog.connect("_choice_number",self,"_set_choice")
+	else:
+
+		if dialog != null:
+			dialog = dialog
+		else:
+			dialog = Dialog.instance()
+		
+		dialog.text_to_diaplay = ["you may only choose one pokemon",0]
+		Utils.get_dialog_layer().add_child(dialog)
+	
+		dialog.connect("Dialog_ended",self,"_finish_dialog")
 
 func save():
 	var save_dict = {

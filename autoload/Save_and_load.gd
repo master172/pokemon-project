@@ -2,6 +2,7 @@ extends Node
 
 const SAVE_DIR = "user://Saves/Pokemon_data/Pokemon_and_items/"
 const SAVE_PATH = SAVE_DIR +"Pokemon_and_items.json"
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"

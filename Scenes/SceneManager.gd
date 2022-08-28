@@ -98,6 +98,8 @@ func finished_fading():
 		match transition_type:
 			Transition_Type.NEW_SCENE:
 				
+				if $CurrentScene.get_child(0).has_method("save_game"):
+					$CurrentScene.get_child(0).save_game()
 				$CurrentScene.get_child(0).queue_free()
 				$CurrentScene.add_child(load(next_scene).instance())
 				

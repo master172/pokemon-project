@@ -16,7 +16,7 @@ export(int) var learned_level
 
 var current_holder
 
-export(int) var pp 
+export(int) var pp
 
 var learned = false
 
@@ -44,6 +44,7 @@ export(Texture) var type_image
 
 func save():
 	var save_dict = {
+
 		"learned":learned,
 		"pp":pp,
 		"added":added,
