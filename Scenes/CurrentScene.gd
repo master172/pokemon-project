@@ -22,10 +22,12 @@ func _instance():
 
 
 func _check_pokemon():
-	if OpposingTrainerMonsters.pokemon != null:
+	print("checking")
+	if OpposingTrainerMonsters.get_child_count() != 0:
+		print("has_pokemon")
 		if Utils.get_player().inside_grass == true:
 			BattleManager.type_of_battle = BattleManager.types_of_battle.Wild
-		current_pokemon = OpposingTrainerMonsters.pokemon
+		OpposingTrainerMonsters.pokemon = OpposingTrainerMonsters.get_child(0)
 		after_done()
 
 func after_done():
@@ -37,4 +39,4 @@ func after_done():
 	elif Utils.get_player().is_cycling == false:
 		Utils.get_player().anim_state.travel("idle")
 		Utils.get_player().stop_input = true
-	Utils.Get_Scene_Manager().transition_to_pokemon_scene()
+	Utils.Get_Scene_Manager()._direct_change(Utils.get_scene_manager().Transition_Type.POKEMON_SCENE)

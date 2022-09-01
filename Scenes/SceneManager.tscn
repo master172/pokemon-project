@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/player_house_floor_1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/SceneManager.gd" type="Script" id=2]
@@ -12,6 +12,21 @@
 [ext_resource path="res://assests/libraries/Ui/Place_box1.png" type="Texture" id=10]
 [ext_resource path="res://assests/libraries/Ui/Tackle_box2.png" type="Texture" id=11]
 [ext_resource path="res://assests/libraries/battle_pokemon_selecter.png" type="Texture" id=12]
+
+[sub_resource type="Animation" id=11]
+resource_name = "Init_fade_out"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_in"
@@ -77,8 +92,11 @@ font_data = ExtResource( 8 )
 size = 12
 font_data = ExtResource( 8 )
 
+[sub_resource type="ProceduralSky" id=12]
+
 [sub_resource type="Environment" id=8]
-background_mode = 4
+background_mode = 2
+background_sky = SubResource( 12 )
 glow_enabled = true
 glow_intensity = 8.0
 glow_strength = 0.5
@@ -111,6 +129,7 @@ margin_bottom = 160.0
 color = Color( 0, 0, 0, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenTransition/ColorRect"]
+anims/Init_fade_out = SubResource( 11 )
 anims/fade_in = SubResource( 1 )
 anims/fade_out = SubResource( 2 )
 

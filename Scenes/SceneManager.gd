@@ -22,6 +22,12 @@ func _fade_in():
 		$ScreenTransition/ColorRect/AnimationPlayer.stop()
 	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_in")
 
+func _direct_change(scene):
+	if scene == Transition_Type.POKEMON_SCENE:
+		transition_type = Transition_Type.Pokemon_scene
+		$ScreenTransition/ColorRect/AnimationPlayer.play("Init_fade_out")
+		$Pokemon_scene.load_pokemon_scene()
+		BattleManager.in_battle = true
 
 func transition_to_Pc():
 	SaveAndLoad.save_game()
