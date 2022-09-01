@@ -39,7 +39,7 @@ func _save_data():
 	var file = File.new()
 	var error = file.open(save_path,File.WRITE)
 	if error == OK:
-		file.store_line(JsonBeautifier.beautify_json(to_json(data)))
+		file.store_line(to_json(data))
 		file.close()
 
 #loading the player_data

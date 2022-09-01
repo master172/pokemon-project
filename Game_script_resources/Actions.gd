@@ -16,7 +16,7 @@ export(int) var learned_level
 
 var current_holder
 
-export(int) var pp 
+export(int) var pp
 
 var learned = false
 
@@ -44,8 +44,8 @@ export(Texture) var type_image
 
 func save():
 	var save_dict = {
+
 		"learned":learned,
-		"current_holder" : current_holder,
 		"pp":pp,
 		"added":added,
 		"to_add":to_add,
@@ -164,7 +164,10 @@ func _start_learning():
 					
 
 func _ready():
+	
 	yield(get_tree().create_timer(0.2),"timeout")
+	if self.get_parent() != null:
+		current_holder = self.get_parent()
 	if to_add == true:
 		current_holder.learn(self)
 	

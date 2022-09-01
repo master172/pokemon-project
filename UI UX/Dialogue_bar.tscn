@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assests/libraries/Ui/new_streamtexture.tres" type="Texture" id=1]
 [ext_resource path="res://Fonts/Pokemon_16.tres" type="DynamicFont" id=2]
 [ext_resource path="res://UI UX/Dialogue_bar.gd" type="Script" id=3]
 [ext_resource path="res://assests/libraries/ui_arrow_left_right.png" type="Texture" id=4]
+[ext_resource path="res://Pokemon/Charmander.png" type="Texture" id=5]
 [ext_resource path="res://assests/libraries/new_background_top.png" type="Texture" id=7]
 [ext_resource path="res://assests/libraries/new_background_bottom.png" type="Texture" id=8]
 
@@ -170,6 +171,39 @@ margin_bottom = 20.0
 rect_min_size = Vector2( 55, 10 )
 texture = ExtResource( 8 )
 expand = true
+
+[node name="Picture_frame" type="ColorRect" parent="."]
+visible = false
+margin_left = 13.0
+margin_top = 26.0
+margin_right = 93.0
+margin_bottom = 104.0
+color = Color( 0.101961, 0.101961, 0.101961, 1 )
+
+[node name="Border" type="ColorRect" parent="Picture_frame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+color = Color( 0.231373, 0.231373, 0.231373, 1 )
+
+[node name="Item_displayer" type="TextureRect" parent="Picture_frame/Border"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -3.0
+expand = true
+stretch_mode = 6
+
+[node name="Pokemon_displayer" type="Sprite" parent="Picture_frame/Border/Item_displayer"]
+position = Vector2( 34.3409, 32.6292 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 0.482079, 34.6825, 62.9001, 62.3969 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_started"]

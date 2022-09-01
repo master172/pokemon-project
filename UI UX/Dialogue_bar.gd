@@ -8,9 +8,16 @@ onready var arrow = $Arrow
 
 onready var Option_container = $Option_container
 
+var display_item :Texture = null
+var display_pokemon :Texture = null
+
+onready var Picture_frame = $Picture_frame
+onready var item_displayer = $Picture_frame/Border/Item_displayer
+onready var Pokemon_displayer = $Picture_frame/Border/Item_displayer/Pokemon_displayer
+
 var text_to_diaplay : Array = ["Hello, World! Spam and Eggs this is gonna be exilirating lets get excited",
 "Progress has been made", "We reached to infinite and beyond","lets try choices",1,"we finished choices",
-"We started functions",2,"We finished functions",0]
+"We started functions",2,"We finished functions","we started item displaying",3,"we finished item displaying",0]
 
 var current_set = 0
 
@@ -26,6 +33,7 @@ var choosed = false
 
 var choice_var = 0
 
+var item_displaying = false
 var handling_choice = false
 
 signal Dialog_started
@@ -39,15 +47,27 @@ signal choice_selected
 signal _function(function)
 signal _choice_number(choice)
 signal choice_ended
+signal displayed 
+signal displaying
 
 func _ready():
 	emit_signal("Dialog_started")
 	Option_container.visible = false
+	item_displayer.texture = display_item
+	Pokemon_displayer.texture = display_pokemon
 
 	if text_to_diaplay.size() > 0:
 		RichTextLabel.text = text_to_diaplay[0]
 		$Arrow/AnimationPlayer.play("Still")
 		Text_displayer.play("Text_display")
+
+func _start_displaying():
+	$Picture_frame.visible = true
+	emit_signal("displaying")
+
+func _finish_displaying():
+	$Picture_frame.visible = false
+	emit_signal("displayed")
 
 func _physics_process(_delta):
 	if to_choice == false:
@@ -58,6 +78,7 @@ func _physics_process(_delta):
 		elif Input.is_action_just_pressed("accept") and RichTextLabel.percent_visible == 1:
 			if current_set < text_to_diaplay.size() - 1:
 				if typeof(text_to_diaplay[current_set + 1]) != TYPE_INT:
+					_finish_displaying()
 					current_set += 1
 					RichTextLabel.percent_visible = 0
 					RichTextLabel.text = text_to_diaplay[current_set]
@@ -65,6 +86,7 @@ func _physics_process(_delta):
 					emit_signal("Dialog_changed")
 				elif typeof(text_to_diaplay[current_set + 1]) == TYPE_INT:
 					if text_to_diaplay[current_set + 1] == 1:
+						_finish_displaying()
 						if choices != null:
 							to_choice = true
 							_ask_choice()
@@ -72,9 +94,14 @@ func _physics_process(_delta):
 						else:
 							current_set += 1
 					elif text_to_diaplay[current_set + 1] == 2:
+						_finish_displaying()
 						emit_signal("_function",functions)
 						current_set += 1
+					elif text_to_diaplay[current_set + 1] == 3:
+						_start_displaying()
+						current_set += 1
 					elif text_to_diaplay[current_set + 1] == 0:
+						_finish_displaying()
 						emit_signal("Dialog_ended")
 						self.queue_free()
 		

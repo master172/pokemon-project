@@ -25,6 +25,7 @@ export(Array,String,FILE) var pokemons
 var current_pokemon
 
 func _ready():
+	visible = false
 	if is_invisible:
 		visible = false
 	var player = Utils.get_player()
@@ -120,3 +121,20 @@ func after_done():
 		Utils.get_player().anim_state.travel("idle")
 		Utils.get_player().stop_input = true
 	Utils.Get_Scene_Manager().transition_to_pokemon_scene()
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	if is_invisible == false:
+		visible = true
+		set_physics_process(true)
+		set_process(true)
+	elif is_invisible == true:
+		set_physics_process(true)
+		set_process(true)
+		visible = false
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	visible = false
+	set_physics_process(false)
+	set_process(false)

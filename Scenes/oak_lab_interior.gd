@@ -1,28 +1,24 @@
-extends Node
+extends YSort
 
-const SAVE_DIR = "user://Saves/Pokemon_data/Moves/"
-const SAVE_PATH = SAVE_DIR +"Moves.json"
+const SAVE_DIR = "user://Saves/Oak_lab/"
+const SAVE_PATH = SAVE_DIR + "World_data.json"
 var _settings = {}
 
 
-func _ready():
-	yield(get_tree().create_timer(0.2),"timeout")
-	load_game()
 
 
 func save_game():
-	# Get all the save data from persistent nodes
-	var save_dict = {}
-	var nodes_to_save = get_tree().get_nodes_in_group("presistent")
-	for nodes in nodes_to_save:
-		save_dict[nodes.get_path()] = nodes.save()
-		pass
-	# Create a file
 
 	var dir = Directory.new()
 	if !dir.dir_exists(SAVE_DIR):
 		dir.make_dir_recursive(SAVE_DIR)
-
+	# Get all the save data from persistent nodes
+	var save_dict = {}
+	var nodes_to_save = get_tree().get_nodes_in_group("oak_lab_data")
+	for nodes in nodes_to_save:
+		save_dict[nodes.get_path()] = nodes.save()
+		pass
+	# Create a file
 	var save_file = File.new()
 	save_file.open(SAVE_PATH, File.WRITE)
 	# Serialize the data dictionary to JSON
@@ -50,6 +46,8 @@ func load_game():
 				node.set_pos(Vector2(data[node_path]['pos_x']['x'],data[node_path]['pos_y']['y']))
 			else:
 				node.set(attribute,data[node_path][attribute])
+		if node.has_method("_apply_data"):
+			node._apply_data()
 
 	pass
 
