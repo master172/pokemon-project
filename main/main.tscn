@@ -241,7 +241,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 8, 8 )
+extents = Vector2( 8, 7 )
 
 [node name="Main" type="YSort"]
 script = ExtResource( 17 )
@@ -1673,6 +1673,7 @@ anims/close_door = SubResource( 7 )
 "anims/door open" = SubResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pokemon-center/door"]
+position = Vector2( 0.223404, -1.209 )
 shape = SubResource( 9 )
 
 [node name="Oak_lab" type="StaticBody2D" parent="."]

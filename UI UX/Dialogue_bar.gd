@@ -230,3 +230,5 @@ func _on_AnimationPlayer_animation_finished(anim_name:String):
 func _on_AnimationPlayer_animation_started(anim_name:String):
 	if anim_name == "Text_display":
 		$Arrow/AnimationPlayer.play("Still")
+
+

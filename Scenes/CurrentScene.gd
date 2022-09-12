@@ -39,4 +39,4 @@ func after_done():
 	elif Utils.get_player().is_cycling == false:
 		Utils.get_player().anim_state.travel("idle")
 		Utils.get_player().stop_input = true
-	Utils.Get_Scene_Manager()._direct_change(Utils.get_scene_manager().Transition_Type.POKEMON_SCENE)
+	Utils.Get_Scene_Manager()._direct_change(Utils.Get_Scene_Manager().Transition_Type.POKEMON_SCENE)

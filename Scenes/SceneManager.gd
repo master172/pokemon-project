@@ -24,8 +24,9 @@ func _fade_in():
 
 func _direct_change(scene):
 	if scene == Transition_Type.POKEMON_SCENE:
-		transition_type = Transition_Type.Pokemon_scene
+		transition_type = Transition_Type.POKEMON_SCENE
 		$ScreenTransition/ColorRect/AnimationPlayer.play("Init_fade_out")
+		BattleManager.type_of_battle = BattleManager.types_of_battle.Wild
 		$Pokemon_scene.load_pokemon_scene()
 		BattleManager.in_battle = true
 

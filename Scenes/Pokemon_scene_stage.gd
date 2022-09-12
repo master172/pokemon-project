@@ -433,6 +433,3 @@ func _input(event):
 							option_num += 1
 						else:
 							option_num = 0
-				
-
-
