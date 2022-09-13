@@ -125,9 +125,11 @@ func _physics_process(_delta):
 						_finish_choices()
 
 func _handle_choice():
-	RichTextLabel.text = choices[selected_choice][1]
-	$Arrow/AnimationPlayer.play("Still")
-	Text_displayer.play("Text_display")
+	if typeof(choices[selected_choice][1]) != TYPE_INT:
+		RichTextLabel.text = choices[selected_choice][1]
+		$Arrow/AnimationPlayer.play("Still")
+		Text_displayer.play("Text_display")
+
 
 func _finish_choices():	
 	current_set += 1

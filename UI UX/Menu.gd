@@ -1,10 +1,12 @@
 extends CanvasLayer
 
 const PokemonPartyScreen = preload("res://Scenes/PokemonPartyScene.tscn")
+const Dialog = preload("res://UI UX/Dialogue_bar.tscn")
 const BagScene = preload("res://Game resources/InventoryUi.tscn")
 
 onready var select_arrow = $Control/NinePatchRect/TextureRect
 onready var menu = $Control
+onready var dialog = Dialog.instance()
 
 enum ScreenLoaded {Nothing,Menu_only,Party_screen,Bag_screen}
 var screen_loaded = ScreenLoaded.Nothing
@@ -14,6 +16,9 @@ var party_screen
 var bag_screen
 
 var Name = "Menu"
+
+var save_dialog = ["Do you want to save the game",1,0]
+var save_question = [["Yes","ash saved the game",1],["No",1]]
 
 func load_party_screen():
 	menu.visible = false
@@ -45,7 +50,43 @@ func _ready():
 	select_arrow.rect_position.y = 6+ (selected_option % 7) * 15
 
 func _save_game():
-	print("Saving game")
+	
+	if dialog != null:
+		dialog = dialog
+	else:
+		dialog = Dialog.instance()
+	
+	dialog.text_to_diaplay = save_dialog
+	dialog.choices = save_question
+	Utils.get_dialog_layer().add_child(dialog)
+
+	menu.visible = false		
+	screen_loaded = ScreenLoaded.Nothing
+
+		
+	dialog.connect("Dialog_ended",self,"_finish_save_dialog")
+	dialog.connect("_choice_number",self,"decide_save_choice",[dialog.selected_choice])
+	
+
+func decide_save_choice(choice,_choice_extra):
+	if choice == 0:
+		 Save_game_yes()
+	elif choice == 1:
+		Save_game_no()
+	
+
+func Save_game_no():
+	print("not saving  the game")
+	var player = get_parent().get_node("CurrentScene").get_children().back().find_node("ash")
+	var currentScene = Utils.Get_Scene_Manager()
+
+	
+	player.set_physics_process(true)
+	menu.visible = false		
+	screen_loaded = ScreenLoaded.Nothing
+
+func Save_game_yes():
+	print("saving the game")
 	var player = get_parent().get_node("CurrentScene").get_children().back().find_node("ash")
 	var currentScene = Utils.Get_Scene_Manager()
 
@@ -59,10 +100,12 @@ func _save_game():
 	else:
 		print("no world_data save")
 	
-	
 	player.set_physics_process(true)
 	menu.visible = false		
 	screen_loaded = ScreenLoaded.Nothing
+
+func _finish_save_dialog():
+	dialog = null
 
 func _exit():
 	var player = get_parent().get_node("CurrentScene").get_children().back().find_node("ash")
