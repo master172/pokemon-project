@@ -54,9 +54,9 @@ func choice_results(choice):
 		if player != null:
 			player.interacting = true
 			player.is_talking = true
+		_heal_pokemon()
 		_ending_dialog()
 	else:
-		print("ok")
 		_ending_dialog()
 
 func _ending_dialog():
@@ -67,3 +67,18 @@ func _ending_dialog():
 		if dialog != null:
 			greetings_dialog.remove(3)
 	dialog.text_to_diaplay = greetings_dialog
+
+func _heal_pokemon():
+	if PlayerPokemon.first_pokemon != null:
+		PlayerPokemon.first_pokemon.Current_health_points = PlayerPokemon.first_pokemon.Max_health_points
+	if PlayerPokemon.second_pokemon != null:
+		PlayerPokemon.second_pokemon.Current_health_points = PlayerPokemon.second_pokemon.Max_health_points
+	if PlayerPokemon.third_pokemon != null:
+		PlayerPokemon.third_pokemon.Current_health_points = PlayerPokemon.third_pokemon.Max_health_points
+	if PlayerPokemon.fourth_pokemon != null:
+		PlayerPokemon.fourth_pokemon.Current_health_points = PlayerPokemon.fourth_pokemon.Max_health_points
+	if PlayerPokemon.fifth_pokemon != null:
+		PlayerPokemon.fifth_pokemon.Current_health_points = PlayerPokemon.fifth_pokemon.Max_health_points
+	if PlayerPokemon.sixth_pokemon != null:
+		PlayerPokemon.sixth_pokemon.Current_health_points = PlayerPokemon.sixth_pokemon.Max_health_points
+	return
