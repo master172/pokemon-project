@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assests/npc_misc/Nurse-joy/Nurse-joy.png" type="Texture" id=1]
+[ext_resource path="res://npc's/Nurse-Interaction.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -171,6 +172,9 @@ tracks/1/keys = {
 "values": [ Vector2( -1, 1 ) ]
 }
 
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 8, 8 )
+
 [node name="Nurse-joy" type="KinematicBody2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -190,3 +194,13 @@ anims/RESET = SubResource( 4 )
 anims/bow-down = SubResource( 5 )
 anims/look-left = SubResource( 6 )
 anims/look-right = SubResource( 7 )
+
+[node name="InteractionArea" type="Area2D" parent="." groups=["Interactable"]]
+position = Vector2( 0, 24 )
+z_index = 4
+collision_layer = 17
+collision_mask = 17
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource( 8 )
