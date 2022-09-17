@@ -44,6 +44,8 @@ var enemy_dialogue_connected = false
 
 var enemy_lost_dialogue_connected = false
 
+var current_attack_locked = false
+
 func _ready():
 	ui_state = Ui_state.Dialogue
 	_initial_dialogue()
@@ -51,6 +53,7 @@ func _ready():
 func _display_enemy_attack_dialogue(pokemon,move):
 	ui_state = Ui_state.Dialogue
 	if ui_state == Ui_state.Dialogue:
+
 		if BattleManager.multi_battle == false:
 			if OpposingTrainerMonsters.pokemon != null:
 				
@@ -64,57 +67,65 @@ func _finish_Enemy_attack_dialogue():
 		ui_state = Ui_state.Battle
 		OpposingTrainerMonsters.pokemon._wild_battle_attack()
 		if BattleManager.EnemyLastMoveEvaded == true:
+			ui_state = Ui_state.Dialogue
 			_enemy_attack_evaded()
 		elif BattleManager.EnemyLastMoveMissed == true:
+			ui_state = Ui_state.Dialogue
 			_enemy_attack_missed()
 		elif BattleManager.EnemyLastMoveEvaded == false and BattleManager.EnemyLastMoveMissed == false:
 			BattleManager.Ally_turn()
+			current_attack_locked = false
 
 func _enemy_attack_missed():
-	ui_state = Ui_state.Dialogue
-	var Dialogue = Dialog.instance()
-	Dialogue.text_to_diaplay = ["But it missed", 0]
-	Dialogue_layer.add_child(Dialogue)
-	Dialogue.connect("Dialog_ended",self,"_enemy_finish_attack_missed")
+	if ui_state == Ui_state.Dialogue:
+		
+		var Dialogue = Dialog.instance()
+		Dialogue.text_to_diaplay = ["But it missed", 0]
+		Dialogue_layer.add_child(Dialogue)
+		Dialogue.connect("Dialog_ended",self,"_enemy_finish_attack_missed")
 	
 
 func _enemy_finish_attack_missed():
+	
 	ui_state = Ui_state.Battle
 	BattleManager.Ally_turn()
+	current_attack_locked = false
 	BattleManager.EnemyLastMoveMissed = false
 
 func _enemy_attack_evaded():
-	ui_state = Ui_state.Dialogue
-	var Dialogue = Dialog.instance()
-	Dialogue.text_to_diaplay = ["But it was evaded", 0]
-	Dialogue_layer.add_child(Dialogue)
-	Dialogue.connect("Dialog_ended",self,"_enemy_finish_attack_evaded")
+	if ui_state == Ui_state.Dialogue:
+		var Dialogue = Dialog.instance()
+		Dialogue.text_to_diaplay = ["But it was evaded", 0]
+		Dialogue_layer.add_child(Dialogue)
+		Dialogue.connect("Dialog_ended",self,"_enemy_finish_attack_evaded")
 
 
 func _enemy_finish_attack_evaded():
 	ui_state = Ui_state.Battle
 	BattleManager.Ally_turn()
+	current_attack_locked = false
 	BattleManager.EnemyLastMoveEvaded = false
 
 func _attack_missed():
-	ui_state = Ui_state.Dialogue
-	var Dialogue = Dialog.instance()
-	Dialogue.text_to_diaplay = ["But it missed", 0]
-	Dialogue_layer.add_child(Dialogue)
-	Dialogue.connect("Dialog_ended",self,"_finish_attack_missed")
+	if ui_state == Ui_state.Dialogue:
+		var Dialogue = Dialog.instance()
+		Dialogue.text_to_diaplay = ["But it missed", 0]
+		Dialogue_layer.add_child(Dialogue)
+		Dialogue.connect("Dialog_ended",self,"_finish_attack_missed")
 	
 
 func _finish_attack_missed():
+	
 	ui_state = Ui_state.Battle
 	BattleManager.Enemy_turn()
 	BattleManager.PlayerLastMoveMissed = false
 
 func _attack_evaded():
-	ui_state = Ui_state.Dialogue
-	var Dialogue = Dialog.instance()
-	Dialogue.text_to_diaplay = ["But it was evaded", 0]
-	Dialogue_layer.add_child(Dialogue)
-	Dialogue.connect("Dialog_ended",self,"_finish_attack_evaded")
+	if ui_state == Ui_state.Dialogue:
+		var Dialogue = Dialog.instance()
+		Dialogue.text_to_diaplay = ["But it was evaded", 0]
+		Dialogue_layer.add_child(Dialogue)
+		Dialogue.connect("Dialog_ended",self,"_finish_attack_evaded")
 
 
 func _finish_attack_evaded():
@@ -154,11 +165,14 @@ func _player_attack_dialogue(move):
 	Dialogue.connect("Dialog_ended",self,"_finish_player_attack_dialogue",[move])
 
 func _finish_player_attack_dialogue(move):
+	
 	ui_state = Ui_state.Battle
 	PlayerPokemon.current_pokemon.Learned_moves[move]._calculate_damage()
 	if BattleManager.PlayerLastMoveEvaded == true:
+		ui_state = Ui_state.Dialogue
 		_attack_evaded()
 	elif BattleManager.PlayerLastMoveMissed == true:
+		ui_state = Ui_state.Dialogue
 		_attack_missed()
 	BattleManager.turns += 1
 	
@@ -197,6 +211,7 @@ func _single_battle():
 		if OpposingTrainerMonsters.pokemon != null:
 			enemy_pokemon = OpposingTrainerMonsters.pokemon
 			if enemy_dialogue_connected == false:
+				
 				OpposingTrainerMonsters.pokemon.connect("Enemy_attacked",self,"_display_enemy_attack_dialogue")
 				enemy_dialogue_connected = true
 			if enemy_lost_dialogue_connected == false:
@@ -255,16 +270,20 @@ func _single_battle():
 						if battle_mouse_num == 3:
 							ui_state = Ui_state.Main
 						elif battle_mouse_num == 4:
-							if PlayerPokemon.current_pokemon.Learned_moves.size() >= 1:
+							if PlayerPokemon.current_pokemon.Learned_moves.size() >= 1 and current_attack_locked == false:
+								current_attack_locked = true
 								_player_attack_dialogue(0)					
 						elif battle_mouse_num == 0:
-							if PlayerPokemon.current_pokemon.Learned_moves.size() >= 2:
+							if PlayerPokemon.current_pokemon.Learned_moves.size() >= 2 and current_attack_locked == false:
+								current_attack_locked = true
 								_player_attack_dialogue(1)
 						elif battle_mouse_num == 1:
-							if PlayerPokemon.current_pokemon.Learned_moves.size() >= 3:
+							if PlayerPokemon.current_pokemon.Learned_moves.size() >= 3 and current_attack_locked == false: 
+								current_attack_locked = true
 								_player_attack_dialogue(2)
 						elif battle_mouse_num == 2:
-							if PlayerPokemon.current_pokemon.Learned_moves.size() >= 4:
+							if PlayerPokemon.current_pokemon.Learned_moves.size() >= 4 and current_attack_locked == false:
+								current_attack_locked = true
 								_player_attack_dialogue(3)
 			
 					
