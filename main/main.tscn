@@ -1686,7 +1686,7 @@ texture = ExtResource( 9 )
 polygon = PoolVector2Array( -56, -24, 56, -24, 56, 40, 8, 40, 8, 24, -8, 24, -8, 40, -56, 40 )
 
 [node name="door" type="Area2D" parent="Oak_lab" groups=["door"]]
-position = Vector2( 0, 32 )
+position = Vector2( 0, 31 )
 collision_layer = 8
 collision_mask = 8
 script = ExtResource( 4 )

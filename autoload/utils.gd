@@ -11,6 +11,11 @@ var parent_to_change
 
 var Num_loaded_pokemon : int = 0
 
+var pc_state = null
+var pc_num = null
+
+var pc
+
 func get_player():
 	return get_node("/root/SceneManager/CurrentScene").get_children().back().find_node("ash")
 
@@ -63,3 +68,31 @@ func _apply_data():
 	if Utils_data != null:
 		self.Num_loaded_pokemon = Utils_data.Num_loaded_pokemon
 		self.current_rest_shelter = Utils_data.current_rest_shelter
+
+func _set_pc_reload_data(state,num):
+	
+	pc_state = state
+	pc_num = num
+	print_debug("data_set data: ", pc_state, " ", pc_num)
+
+func make_pc_connection():
+	pc.connect("instantated",self,"_make_reload_provisions")
+
+
+func destroy_pc_connection():
+	pc.disconnect("instantated",self,"_make_reload_provisions")
+	pc = null
+
+func _make_reload_provisions():
+	print_debug("reloading")
+	if pc_state and pc_num != null:
+		print_debug("setting_data")
+		pc.state = pc_state
+		if pc_state == 6:
+			pc.Toggle_control.color = Color("0b042a")
+			pc.Toggle_definer.color = Color("00ffffff")
+			pc.Pokemon_control.color = Color("b8ff00b9")
+			pc.Pokemon_definer.color  = Color("ff00b9")
+		pc.current_selected = pc_num
+		pc_state = null
+		pc_num = null

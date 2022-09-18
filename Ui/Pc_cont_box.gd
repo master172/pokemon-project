@@ -13,6 +13,8 @@ onready var Back = $Node2D/Back
 
 var controller
 
+var selected_pokemon
+
 onready var options: Dictionary = {
 	Options.Summary: Summary,
 	Options.Withdraw: Withdraw,
@@ -60,7 +62,11 @@ func _input(event):
 			Options.Back:
 				self.controller._remove_controller()
 			Options.Withdraw:
-				self.controller._withdraw(self.controller.selected_pokemon)
+				self.controller._withdraw(selected_pokemon)
+				self.controller.state = self.controller.states.Party_navigation
+				self.controller.current_selected = 0
+				self.controller._remove_controller()
+
 	elif event.is_action_pressed("decline"):
 		if self.controller != null:
 			pass

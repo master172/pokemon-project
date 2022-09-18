@@ -75,18 +75,23 @@ func _ready():
 	yield(get_tree().create_timer(0.2),"timeout")
 	for i in PlayerPokemon.pc_pokemon:
 		var pokemon_card = Pokemon_card.instance()
+		pokemon_card.Pokemon_to_set = i
+		pokemon_card.name = "Pokemon_card" + String(grid_container.get_child_count())
 		pokemon_card.num = number
 		number += 1
-		pokemon_card.Pokemon_to_set = i
 		grid_container.add_child(pokemon_card)
+	number = 0
 
 func _update():
 	for i in grid_container.get_children():
 		i.queue_free()		
 	for i in PlayerPokemon.pc_pokemon:
 		var pokemon_card = Pokemon_card.instance()
+		pokemon_card.Pokemon_to_set = i
+		
+		pokemon_card.name = "Pokemon_card" + String(grid_container.get_child_count())
 		pokemon_card.num = number
 		number += 1
-		pokemon_card.Pokemon_to_set = i
 		grid_container.add_child(pokemon_card)
+	number = 0
 	

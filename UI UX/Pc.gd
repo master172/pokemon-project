@@ -8,6 +8,7 @@ var state = states.Navigation
 
 onready var Home = $Control/Home
 onready var Pokemons = $Control/Pokemon
+onready var Back_timer = $Back_timer
 
 var selected_pokemon
 
@@ -125,10 +126,17 @@ var controller_active = false
 
 var cont_box	
 
-
+var party_wait_timer = false
 
 
 var temp_pokemon
+
+signal instantated
+
+func _ready():
+	Utils.pc = self
+	Utils.make_pc_connection()
+	emit_signal("instantated")
 
 
 
@@ -142,20 +150,27 @@ func _withdraw(selecPokemon):
 	selecPokemon.change_path = null
 	selecPokemon.change_pc_poke = null
 	if PlayerPokemon.second_pokemon == null:
-		selecPokemon.change_path = "second_pokemon"		
+		selecPokemon.change_path = "second_pokemon"
+		selecPokemon.change_pc_poke = null		
 		PlayerPokemon.second_pokemon = selecPokemon
 	elif PlayerPokemon.third_pokemon == null:
 		selecPokemon.change_path = "third_pokemon"
+		selecPokemon.change_pc_poke = null
 		PlayerPokemon.third_pokemon = selecPokemon
 	elif PlayerPokemon.fourth_pokemon == null:
 		selecPokemon.change_path = "fourth_pokemon"
+		selecPokemon.change_pc_poke = null
 		PlayerPokemon.fourth_pokemon = selecPokemon
 	elif PlayerPokemon.fifth_pokemon == null:
 		selecPokemon.change_path = " fifth_pokemon"
+		selecPokemon.change_pc_poke = null
 		PlayerPokemon.fifth_pokemon = selecPokemon
 	elif PlayerPokemon.sixth_pokemon == null:
 		selecPokemon.change_path = "sixth_pokemon"
+		selecPokemon.change_pc_poke = null
 		PlayerPokemon.sixth_pokemon = selecPokemon
+	PlayerPokemon.pc_pokemon.erase(selecPokemon)
+	Pokemons._update()
 			
 func _input(event):
 	if state == states.Switching_pokemon:
@@ -171,7 +186,7 @@ func _input(event):
 			else:
 				current_selected = 0
 		if event.is_action_pressed("decline"):
-			state = states.Pokemon_box
+			state = states.Party_selection
 		elif event.is_action_pressed("accept"):
 			_switch_pokemon(selected_pokemon,PlayerPokemon.pc_pokemon[current_selected])
 			state = states.Party_selection
@@ -181,7 +196,7 @@ func _input(event):
 		if event.is_action_pressed("accept"):
 			if current_selected == 0:
 				Utils.Num_loaded_pokemon += 1
-				if selected_pokemon == PlayerPokemon.first_pokemon:
+				if selected_pokemon == PlayerPokemon.first_pokemon and PlayerPokemon.first_pokemon != null and PlayerPokemon.second_pokemon != null:
 					PlayerPokemon.first_pokemon.change_path = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
 					PlayerPokemon.first_pokemon.change_pc_poke = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
 					PlayerPokemon.pc_pokemon.append(PlayerPokemon.first_pokemon)
@@ -192,7 +207,7 @@ func _input(event):
 					PlayerPokemon.fifth_pokemon = PlayerPokemon.sixth_pokemon
 					PlayerPokemon.sixth_pokemon = null
 					$Control/Pokemon._update()
-				elif selected_pokemon == PlayerPokemon.second_pokemon:
+				elif selected_pokemon == PlayerPokemon.second_pokemon and PlayerPokemon.second_pokemon != null:
 					PlayerPokemon.second_pokemon.change_path = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
 					PlayerPokemon.second_pokemon.change_pc_poke = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
 					PlayerPokemon.pc_pokemon.append(PlayerPokemon.second_pokemon)
@@ -202,7 +217,7 @@ func _input(event):
 					PlayerPokemon.fifth_pokemon = PlayerPokemon.sixth_pokemon
 					PlayerPokemon.sixth_pokemon = null
 					$Control/Pokemon._update()
-				elif selected_pokemon == PlayerPokemon.third_pokemon:
+				elif selected_pokemon == PlayerPokemon.third_pokemon and PlayerPokemon.third_pokemon != null:
 					PlayerPokemon.third_pokemon.change_path = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
 					PlayerPokemon.third_pokemon.change_pc_poke = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
 					PlayerPokemon.pc_pokemon.append(PlayerPokemon.third_pokemon)
@@ -211,7 +226,7 @@ func _input(event):
 					PlayerPokemon.fifth_pokemon = PlayerPokemon.sixth_pokemon
 					PlayerPokemon.sixth_pokemon = null
 					$Control/Pokemon._update()
-				elif selected_pokemon == PlayerPokemon.fourth_pokemon:
+				elif selected_pokemon == PlayerPokemon.fourth_pokemon and PlayerPokemon.fourth_pokemon != null:
 					PlayerPokemon.fourth_pokemon.change_path = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
 					PlayerPokemon.fourth_pokemon.change_pc_poke = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
 					PlayerPokemon.pc_pokemon.append(PlayerPokemon.fourth_pokemon)
@@ -219,27 +234,36 @@ func _input(event):
 					PlayerPokemon.fifth_pokemon = PlayerPokemon.sixth_pokemon
 					PlayerPokemon.sixth_pokemon = null
 					$Control/Pokemon._update()
-				elif selected_pokemon == PlayerPokemon.fifth_pokemon:
+				elif selected_pokemon == PlayerPokemon.fifth_pokemon and PlayerPokemon.fifth_pokemon != null:
 					PlayerPokemon.fifth_pokemon.change_path = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
 					PlayerPokemon.fifth_pokemon.change_pc_poke = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
 					PlayerPokemon.pc_pokemon.append(PlayerPokemon.fifth_pokemon)
 					PlayerPokemon.fifth_pokemon = PlayerPokemon.sixth_pokemon
 					PlayerPokemon.sixth_pokemon = null
 					$Control/Pokemon._update()
-				elif selected_pokemon == PlayerPokemon.sixth_pokemon:
+				elif selected_pokemon == PlayerPokemon.sixth_pokemon  and PlayerPokemon.sixth_pokemon != null:
 					PlayerPokemon.sixth_pokemon.change_path = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
 					PlayerPokemon.sixth_pokemon.change_pc_poke = "pc_pokemon" + String(Utils.Num_loaded_pokemon)
 					PlayerPokemon.pc_pokemon.append(PlayerPokemon.sixth_pokemon)
 					PlayerPokemon.sixth_pokemon = null
 					$Control/Pokemon._update()
-			if event.is_action_pressed("decline") and current_selected == 3:
+				
+				party_wait_timer = true
+				state = states.Party_navigation
+				current_to_change.color = Color("250080")
+				current_selected = 0
+				Back_timer.start(0.2)
+			if event.is_action_pressed("accept") and current_selected == 3:
+				party_wait_timer = true
 				current_to_change.color = Color("250080")
 				state = states.Party_navigation
+				
 				current_selected = 0
-			if event.is_action_pressed("accept") and current_selected == 1:
+				Back_timer.start(0.2)
+			if event.is_action_pressed("accept") and current_selected == 1 and PlayerPokemon.pc_pokemon.size() > 0:
 				_pre_switch()
 	
-	if event.is_action_pressed("accept") and state == states.Party_navigation:
+	if event.is_action_pressed("accept") and state == states.Party_navigation and party_wait_timer == false:
 		if current_selected == 0:
 			selected_pokemon = PlayerPokemon.first_pokemon
 		elif current_selected == 1:
@@ -261,6 +285,7 @@ func _input(event):
 			controller_active = true
 			cont_box = (Cont_box).instance()
 			cont_box.controller = self
+			cont_box.selected_pokemon = PlayerPokemon.pc_pokemon[current_selected]
 			self.add_child(cont_box)
 		
 	if state == states.PC_selection:
@@ -275,6 +300,7 @@ func _input(event):
 				state = states.Navigation
 				current_selected = 4
 			elif current_selected == 3:
+				Utils.destroy_pc_connection()
 				get_tree().change_scene_to(load("res://Scenes/SceneManager.tscn"))
 	
 	if event.is_action_pressed("W"):
@@ -298,7 +324,7 @@ func _input(event):
 			elif current_selected == 1:
 				state = states.PC_selection
 			elif current_selected == 2:
-				state = states.Pokemon_box
+				state = states.Party_navigation
 			current_selected = 0
 		elif state == states.Pokemon_box:
 			if current_selected != max_selected:
@@ -307,7 +333,7 @@ func _input(event):
 				current_selected = 0
 		
 		elif state == states.Party_navigation:
-			if current_selected == 3 or current_selected == 4 or current_selected == 5 or current_selected == 6 or current_selected == 7 or current_selected == 8 or current_selected == 9:
+			if (current_selected == 3 or current_selected == 4 or current_selected == 5) and PlayerPokemon.pc_pokemon.size() > 0:
 				state = states.Pokemon_box
 				current_selected = 0
 				current_to_change.color = Color("250080")
@@ -350,7 +376,7 @@ func _input(event):
 			state = states.Party_navigation
 			current_to_change.color = Color("250080")
 			current_selected = 0
-
+		
 func _pre_switch():
 	state = states.Switching_pokemon
 	current_selected = 0
@@ -362,7 +388,9 @@ func _switch_pokemon(pokemon_1,pokemon_2):
 	$Control/Pokemon._update()
 	pokemon_1 = null
 	pokemon_2 = null
+	Utils._set_pc_reload_data(states.Party_navigation,current_selected)
 	get_tree().reload_current_scene()
+
 
 func _function():
 	if state == states.Navigation:
@@ -541,3 +569,7 @@ func _physics_process(_delta):
 		else:
 			Returns.color = Color("250080")
 		
+
+
+func _on_Back_timer_timeout():
+	party_wait_timer = false
