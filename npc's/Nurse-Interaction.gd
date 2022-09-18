@@ -7,25 +7,31 @@ onready var dialog = Dialog.instance()
 
 var dialog_functions = []
 
-var greetings_dialog = ["Greetings, would you like to rest your pokemon",1,2,"",0]
+var greeting_dialog = true
+var greetings_dialog = ["Greetings, would you like to rest your pokemon",1,2,0]
 var greetings_question = [["yes","very well please give us your pokemon for a few seconds",1],["no","very well, Please take care",1]]
 
-var endings_dialog = ["We have healed your pokemon, Please take care"]
+var endings_dialog = ["We have healed your pokemon, Please take care",0]
 
 var set_choice = ""
+
+export var Cut_scene_player :NodePath
+
+var healing = false
 
 func _ready():
 	pass
 
 func _Start_dialog():
-	dialog = Dialog.instance()
-	dialog.text_to_diaplay = greetings_dialog
-	dialog.choices = greetings_question
-	Utils.get_dialog_layer().add_child(dialog)
-		
-	dialog.connect("Dialog_ended",self,"_finish_dialog")
-	dialog.connect("_choice_number",self,"_set_choice")
-	dialog.connect("_function",self,"_function_manager")
+	if healing == false and greeting_dialog == true:
+		dialog = Dialog.instance()
+		dialog.text_to_diaplay = greetings_dialog
+		dialog.choices = greetings_question
+		Utils.get_dialog_layer().add_child(dialog)
+			
+		dialog.connect("Dialog_ended",self,"_finish_dialog")
+		dialog.connect("_choice_number",self,"_set_choice")
+		dialog.connect("_function",self,"_function_manager")
 			
 
 func _set_choice(choice):
@@ -37,8 +43,8 @@ func _set_choice(choice):
 	dialog.functions = dialog_functions
 
 func _finish_dialog():
-	greetings_dialog =["Greetings, would you like to rest your pokemon",1,2,"",0]
 	if player != null:
+		greeting_dialog = true
 		yield(get_tree().create_timer(0.2),"timeout")
 		player.interacting = false
 		player.is_talking = false
@@ -55,20 +61,25 @@ func choice_results(choice):
 			player.interacting = true
 			player.is_talking = true
 		_heal_pokemon()
-		_ending_dialog()
+		_healing_animation()
 	else:
 		_ending_dialog()
 
 func _ending_dialog():
-	if set_choice == "yes":
-		if dialog != null:
-			greetings_dialog[3] = endings_dialog[0]
-	elif set_choice == "no":
-		if dialog != null:
-			greetings_dialog.remove(3)
-	dialog.text_to_diaplay = greetings_dialog
+	if set_choice == "yes" and healing == false:
+		greeting_dialog = not greeting_dialog
+		if greeting_dialog == false:
+			if Cut_scene_player != null:
+				var cut_scene_player = get_node(Cut_scene_player)
+				cut_scene_player.disconnect("animation_finished",self,"_finish_healing_animation")
+		dialog = Dialog.instance()
+		dialog.text_to_diaplay = endings_dialog
+		Utils.get_dialog_layer().add_child(dialog)
+		
+		dialog.connect("Dialog_ended",self,"_finish_dialog")
 
 func _heal_pokemon():
+	healing = true
 	if PlayerPokemon.first_pokemon != null:
 		PlayerPokemon.first_pokemon.Current_health_points = PlayerPokemon.first_pokemon.Max_health_points
 	if PlayerPokemon.second_pokemon != null:
@@ -82,3 +93,14 @@ func _heal_pokemon():
 	if PlayerPokemon.sixth_pokemon != null:
 		PlayerPokemon.sixth_pokemon.Current_health_points = PlayerPokemon.sixth_pokemon.Max_health_points
 	return
+
+func _healing_animation():
+	if Cut_scene_player != null:
+		var cut_scene_player = get_node(Cut_scene_player)
+		cut_scene_player.play("Heal")
+		cut_scene_player.connect("animation_finished",self,"_finish_healing_animation")
+	
+func _finish_healing_animation(anim_name:String):
+	if anim_name == "Heal":
+		healing = false
+		_ending_dialog()
