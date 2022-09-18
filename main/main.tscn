@@ -1605,7 +1605,7 @@ position = Vector2( -136, -56 )
 z_index = 0
 
 [node name="door" type="Area2D" parent="red_house" groups=["door"]]
-position = Vector2( -16, 32 )
+position = Vector2( -16, 31 )
 collision_layer = 8
 collision_mask = 8
 script = ExtResource( 4 )

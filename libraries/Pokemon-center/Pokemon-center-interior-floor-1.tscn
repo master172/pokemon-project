@@ -148,6 +148,30 @@ tracks/2/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Pokemon-center-panel:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2.3, 2.4, 2.5, 2.6, 6.5, 6.6, 6.7, 6.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 0, 1, 2, 3, 3, 2, 1, 0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pokemon-center-panel:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "Default" ]
+}
 
 [sub_resource type="Animation" id=29]
 length = 0.001
@@ -174,6 +198,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Pokemon-center-panel:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
 }
 
 [node name="Pokemon-center-interior-floor-1" type="YSort"]
@@ -301,8 +337,7 @@ z_index = 1
 texture = ExtResource( 6 )
 
 [node name="Pokemon-center-panel" parent="." instance=ExtResource( 9 )]
-position = Vector2( 7, -55.468 )
-z_index = 1
+speed_scale = 0.0
 
 [node name="Poke-ball-sort" type="YSort" parent="."]
 visible = false
