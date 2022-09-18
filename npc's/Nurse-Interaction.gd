@@ -60,6 +60,7 @@ func choice_results(choice):
 		if player != null:
 			player.interacting = true
 			player.is_talking = true
+		_pre_requirements()
 		_heal_pokemon()
 		_healing_animation()
 	else:
@@ -104,3 +105,8 @@ func _finish_healing_animation(anim_name:String):
 	if anim_name == "Heal":
 		healing = false
 		_ending_dialog()
+
+func _pre_requirements():
+	dialog._finish_displaying()
+	dialog.emit_signal("Dialog_ended")
+	dialog.queue_free()
