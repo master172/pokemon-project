@@ -59,9 +59,6 @@ func _load_data():
 			_apply_data()
 
 #calling  the save function while close the game
-func _notification(what):
-	if what == NOTIFICATION_WM_QUIT_REQUEST or what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		_save_data()
 
 #applying the saved data to the player
 func _apply_data():
@@ -73,7 +70,7 @@ func _set_pc_reload_data(state,num):
 	
 	pc_state = state
 	pc_num = num
-	print_debug("data_set data: ", pc_state, " ", pc_num)
+
 
 func make_pc_connection():
 	pc.connect("instantated",self,"_make_reload_provisions")
@@ -84,9 +81,7 @@ func destroy_pc_connection():
 	pc = null
 
 func _make_reload_provisions():
-	print_debug("reloading")
 	if pc_state and pc_num != null:
-		print_debug("setting_data")
 		pc.state = pc_state
 		if pc_state == 6:
 			pc.Toggle_control.color = Color("0b042a")

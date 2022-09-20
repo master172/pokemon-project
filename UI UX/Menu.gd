@@ -88,17 +88,14 @@ func Save_game_no():
 func Save_game_yes():
 	print("saving the game")
 	var player = get_parent().get_node("CurrentScene").get_children().back().find_node("ash")
-	var currentScene = Utils.Get_Scene_Manager()
+	var currentScene = Utils.Get_Scene_Manager().get_child(0)
 
 	player._save_data()
 	GameSaver.save_game()
 	SceneLoaded._save_data()
 	SaveAndLoad._save_menu()
 	Utils._save_data()
-	if currentScene.get_child(0).get_child(0).has_method("save_game"):
-		currentScene.get_child(0).get_child(0).save_game()
-	else:
-		print("no world_data save")
+	currentScene.save_game()
 	
 	player.set_physics_process(true)
 	menu.visible = false		

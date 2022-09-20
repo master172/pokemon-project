@@ -18,12 +18,6 @@ func _save_menu():
 		i.save()
 	save_game()
 
-func _notification(what):
-	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST or what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
-		var save_nodes = get_tree().get_nodes_in_group("Presist")
-		for i in save_nodes:
-			i.save()
-		save_game()
 
 func save_game():
 

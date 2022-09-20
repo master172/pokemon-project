@@ -11,6 +11,8 @@ var need_move_to_learn = false
 
 var transition_queue : Array = []
 
+onready var current_scene = $CurrentScene
+
 enum Transition_Type  {NONE,NEW_SCENE, PARTY_SCENE, MENU_ONLY, POKEMON_SCENE,EXIT_POKEMON_SCENE,MOVE_LEARNER,EXIT_MOVE_LEARNER,PC,EXIT_PC,BAG_SCENE }
 var transition_type = Transition_Type.NONE
 
@@ -105,16 +107,15 @@ func finished_fading():
 		match transition_type:
 			Transition_Type.NEW_SCENE:
 				
-				if $CurrentScene.get_child(0).has_method("save_game"):
-					$CurrentScene.get_child(0).save_game()
-				$CurrentScene.get_child(0).queue_free()
-				$CurrentScene.add_child(load(next_scene).instance())
+				current_scene.save_game()
+				current_scene.get_child(0).queue_free()
+				current_scene.add_child(load(next_scene).instance())
 				
-				var player = $CurrentScene.get_children().back().find_node("ash")
+				var player = current_scene.get_children().back().find_node("ash")
 				player.set_spawn(player_location,player_direction)
 				SceneLoaded.current_scene = String(next_scene)
 				yield(get_tree().create_timer(0.1),"timeout")
-				$CurrentScene._apply_data()
+				current_scene._apply_data()
 				
 
 			Transition_Type.PARTY_SCENE:
@@ -145,10 +146,10 @@ func finished_fading():
 				match transition_type:
 					Transition_Type.NEW_SCENE:
 						
-						$CurrentScene.get_child(0).queue_free()
-						$CurrentScene.add_child(load(next_scene).instance())
+						current_scene.get_child(0).queue_free()
+						current_scene.add_child(load(next_scene).instance())
 				
-						var player = $CurrentScene.get_children().back().find_node("ash")
+						var player = current_scene.get_children().back().find_node("ash")
 						player.set_spawn(player_location,player_direction)
 						SceneLoaded.current_scene = String(next_scene)
 		

@@ -50,7 +50,3 @@ func load_game():
 			node._apply_data()
 
 	pass
-
-func _notification(what):
-	if what == NOTIFICATION_WM_QUIT_REQUEST or what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		save_game()

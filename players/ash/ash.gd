@@ -615,10 +615,6 @@ func _load_data():
 			file.close()
 			_apply_data()
 
-#calling  the save function while close the game
-func _notification(what):
-	if what == NOTIFICATION_WM_QUIT_REQUEST or what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		_save_data()
 
 #applying the saved data to the player
 func _apply_data():

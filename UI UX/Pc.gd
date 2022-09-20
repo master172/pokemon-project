@@ -171,6 +171,11 @@ func _withdraw(selecPokemon):
 		PlayerPokemon.sixth_pokemon = selecPokemon
 	PlayerPokemon.pc_pokemon.erase(selecPokemon)
 	Pokemons._update()
+	party_wait_timer = true
+	state = states.Party_navigation
+	current_to_change.color = Color("250080")
+	current_selected = current_selected
+	Back_timer.start(0.2)
 			
 func _input(event):
 	if state == states.Switching_pokemon:

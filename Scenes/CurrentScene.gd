@@ -40,3 +40,9 @@ func after_done():
 		Utils.get_player().anim_state.travel("idle")
 		Utils.get_player().stop_input = true
 	Utils.Get_Scene_Manager()._direct_change(Utils.Get_Scene_Manager().Transition_Type.POKEMON_SCENE)
+		
+
+func save_game():
+	if self.get_child_count() > 0:
+		if self.get_child(0).has_method("save_game"):
+			self.get_child(0).save_game()

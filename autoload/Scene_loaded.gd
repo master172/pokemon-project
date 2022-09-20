@@ -28,7 +28,4 @@ func _load_data():
 			current_scene = file.get_var()
 			file.close()
 
-func _notification(what):
-	if what == NOTIFICATION_WM_QUIT_REQUEST or what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		_save_data()
 
