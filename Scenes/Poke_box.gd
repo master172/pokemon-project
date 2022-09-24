@@ -92,7 +92,7 @@ func _input(event):
 						print("no_pokemon_selected")
 				elif current_selected == 5:
 					if PlayerPokemon.fifth_pokemon != null:
-						if PlayerPokemon.fifth_pokemon.fainted:
+						if PlayerPokemon.fifth_pokemon.fainted == false:
 							_say_choosing_dialogue(PlayerPokemon.fifth_pokemon)
 						else:
 							print("Pokemon has no energy to battle")

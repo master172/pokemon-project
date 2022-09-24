@@ -39,6 +39,8 @@ func save_game():
 		if !node.has_method("save"):
 			print("persistent node '%s' is missing a save() function, skipped" % node.name)
 			continue
+		
+		
 
 		# Call the node's save function.
 		var node_data = node.save()

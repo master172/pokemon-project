@@ -6,19 +6,7 @@ var current_learning_pokemon
 var lost = false
 var won = false
 
-var first_pokemon_fainted = false
-var second_pokemon_fainted = false
-var third_pokemon_fainted = false
-var fourth_pokemon_fainted = false
-var fifth_pokemon_fainted = false
-var sixth_pokemon_fainted = false
 
-var pokemon1 
-var pokemon2 
-var pokemon3 
-var pokemon4 
-var pokemon5 
-var pokemon6 
 
 var targets : int = 1
 

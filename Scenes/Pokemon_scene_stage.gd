@@ -115,7 +115,7 @@ func _attack_missed():
 	
 
 func _finish_attack_missed():
-	
+	print_debug("attack missed")
 	ui_state = Ui_state.Battle
 	BattleManager.Enemy_turn()
 	BattleManager.PlayerLastMoveMissed = false
@@ -129,6 +129,7 @@ func _attack_evaded():
 
 
 func _finish_attack_evaded():
+	print_debug("attack evaded")
 	ui_state = Ui_state.Battle
 	BattleManager.Enemy_turn()
 	BattleManager.PlayerLastMoveEvaded = false
@@ -185,9 +186,6 @@ func _single_battle():
 		else:
 			$Poke_box.visible = false
 	
-		if OpposingTrainerMonsters.pokemon != null:
-			if OpposingTrainerMonsters.pokemon.Current_health_points <= 0:
-				OpposingTrainerMonsters.pokemon._lose()
 
 
 		if PlayerPokemon.current_pokemon != null:
@@ -215,7 +213,7 @@ func _single_battle():
 				OpposingTrainerMonsters.pokemon.connect("Enemy_attacked",self,"_display_enemy_attack_dialogue")
 				enemy_dialogue_connected = true
 			if enemy_lost_dialogue_connected == false:
-				OpposingTrainerMonsters.pokemon.connect("enemy_lost",self," _win_dialog")
+				OpposingTrainerMonsters.pokemon.connect("enemy_lost",self,"_win_dialog")
 				enemy_lost_dialogue_connected = true
 			opposing_pokemon_sprite.texture = enemy_pokemon.sprite
 		else:
@@ -302,9 +300,9 @@ func _change_pokemon():
 func _win_dialog(exp_points):
 	ui_state = Ui_state.Dialogue
 	var Dialogue = Dialog.instance()
-	Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+exp_points+ " experience points"), 0]
+	Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(exp_points)+ " experience points"), 0]
 	Dialogue_layer.add_child(Dialogue)
-	Dialogue.connect("Dialog_ended",self,"_win")	
+	Dialogue.connect("Dialog_ended",self,"win")	
 
 
 
@@ -314,7 +312,6 @@ func _attack_inp():
 
 func win():
 	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
-
 		Utils.Num_loaded_pokemon -= 1
 		OpposingTrainerMonsters.pokemon.disconnect("enemy_lost",self,"_win_dialog")
 		OpposingTrainerMonsters.pokemon.disconnect("Enemy_attacked",self,"_display_enemy_attack_dialogue")

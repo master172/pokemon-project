@@ -15,6 +15,8 @@ func save_game():
 	var save_dict = {}
 	var nodes_to_save = get_tree().get_nodes_in_group("presistent")
 	for nodes in nodes_to_save:
+		if nodes.has_method("_check_to_add"):
+			nodes._check_to_add()
 		save_dict[nodes.get_path()] = nodes.save()
 		pass
 	# Create a file

@@ -25,12 +25,12 @@ func Ally_turn():
 	current_turn = what_turn.ALLY_TURN
 
 func Enemy_turn():
-	print("enemy_turn")
+	print("Enemy_turn")
 	current_turn = what_turn.ENEMY_TURN
 	OpposingTrainerMonsters._attack()
 
 func switch_turns():
-	print("switch_turns")
+	print("Switch turns")
 	if current_turn == what_turn.ALLY_TURN:
 		Enemy_turn()
 	elif current_turn == what_turn.ENEMY_TURN:

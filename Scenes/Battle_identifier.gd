@@ -59,8 +59,9 @@ func _on_Tween_tween_completed(object:Object, key:NodePath):
 
 		if object == Enemy_health:
 			if PlayerPokemon.current_pokemon != null:
-				print("enemy turn starting")
-				BattleManager.Enemy_turn()
+				if OpposingTrainerMonsters.pokemon != null and OpposingTrainerMonsters.pokemon.Current_health_points >= 1:
+					print_debug("Tween completed")
+					BattleManager.Enemy_turn()
 		elif object == Player_health:
 			if PlayerPokemon.current_pokemon != null:
 				if initial_set == true:

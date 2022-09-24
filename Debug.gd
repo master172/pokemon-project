@@ -27,3 +27,15 @@ func _on_VsyncBuuton_toggled(button_pressed:bool):
 	elif button_pressed == false:
 		OS.set_use_vsync(false)
 		print(OS.is_vsync_enabled())
+
+
+
+
+
+func _on_Winbutton_pressed():
+	if OpposingTrainerMonsters.pokemon != null:
+		OpposingTrainerMonsters.pokemon.Current_health_points -= OpposingTrainerMonsters.pokemon.Current_health_points
+		get_node("%Win_button").pressed = false
+	else:
+		get_node("%Win_button").pressed = false
+		

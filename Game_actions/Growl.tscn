@@ -10,6 +10,9 @@ Name = "Growl"
 Types = 1
 learned_level = 5
 pp = 40
-special_effects = ExtResource( 2 )
+special_effects = NodePath("Growl_special")
 description = "Lowers opponent's Attack."
 type_image = ExtResource( 3 )
+
+[node name="Growl_special" type="Node" parent="."]
+script = ExtResource( 2 )

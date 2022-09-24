@@ -7,7 +7,7 @@ var evolver
 
 var exp_given :bool = false
 
-var exp_gainied : float = 0
+var exp_gained : float = 0
 
 export(float) var base_experience_yeild
 
@@ -133,7 +133,7 @@ export(String) var evolving_attributes
 export(Texture) var stage_2
 export(Texture) var stage_3
 
-func _calculate_exp_poits_to_give():
+func _calculate_exp_points_to_give():
 	var _opposition_level
 	var _battle_type
 	var _targets
@@ -155,25 +155,28 @@ func _calculate_exp_poits_to_give():
 	else:
 		_battle_type = 2
 
-	exp_gainied = (((self.base_experience_yeild * self.level) * int(rand_range(1,2))) *  int(rand_range(1,2)))/7
+	exp_gained = (((self.base_experience_yeild * self.level) * int(rand_range(1,2))) *  int(rand_range(1,2)))/7
 	
-	if exp_gainied < 0:
-		exp_gainied = exp_gainied*-1
+	if exp_gained < 0:
+		exp_gained = exp_gained*-1
 	else:	
-		exp_gainied = exp_gainied
+		exp_gained = exp_gained
 
 signal enemy_lost(exp_to_give)
 
 func _lose():
+	_calculate_exp_points_to_give()
 	if self.get_parent() == OpposingTrainerMonsters:
-		emit_signal("enemy_lost",exp_gainied)
-	_calculate_exp_poits_to_give()
+		print("enemy lost")
+		emit_signal("enemy_lost",exp_gained)
+	
 	if self.opposing_pokemon != null:
-		self.opposing_pokemon.experince_gained += exp_gainied
+		self.opposing_pokemon.experince_gained += exp_gained
 		_add_ev_yield()
-		self.opposing_pokemon._update_level()
+		self.opposing_pokemon._level_up()
 	if self.get_parent() == PlayerPokemon:
 		PlayerPokemon._active_pokemon()
+
 	
 
 			
@@ -490,8 +493,8 @@ func _physics_process(_delta):
 	else:
 		self.fainted = false
 	
-	if fainted:
-		if not exp_given:
+	if fainted == true:
+		if exp_given == false:
 			_lose()
 			exp_given = true
 

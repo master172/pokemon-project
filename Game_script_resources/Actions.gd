@@ -30,7 +30,7 @@ var weather
 
 var effectiveness
 
-export(Resource) var special_effects 
+export(NodePath) var special_effects = null
 
 export(String, MULTILINE) var description
 
@@ -109,7 +109,8 @@ func _calculate_damage():
 		damage = ((((((2 * current_holder.level)/5)+2)*current_holder.Current_attack * power / current_holder.opposing_pokemon.Current_defense)/50)+2)* stab * current_holder.Weakness * current_holder.Resistance * random_number/ 100
 		damage = damage / targets * weather * (PokeHelper.player_badjes + 1) * crit* effectiveness
 		_apply_damage()
-
+	elif self.special_effects != null :
+		get_node(special_effects)._attack()
 
 func _apply_damage():
 	var Missing = RandomNumberGenerator.new()
@@ -172,9 +173,8 @@ func _ready():
 		current_holder.learn(self)
 	
 
-func _notification(what):
-	if what == NOTIFICATION_WM_QUIT_REQUEST or what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		if learned == true and to_add == false:
-			to_add = true
-		elif learned == true and to_add == true:
-			to_add = true
+func _check_to_add():
+	if learned == true and to_add == false:
+		to_add = true
+	elif learned == true and to_add == true:
+		to_add = true
