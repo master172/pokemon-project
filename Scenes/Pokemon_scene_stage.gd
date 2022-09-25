@@ -242,47 +242,48 @@ func _single_battle():
 			if Input.is_action_just_pressed("decline"):
 				if ui_state == Ui_state.Battle:
 					ui_state = Ui_state.Main
-			if Input.is_action_just_pressed("accept"):
-				if ui_state != Ui_state.Dialogue:
-					if ui_state == Ui_state.Main:
-						if current_mouse_num == 0:
-							_attack_inp()
-						elif current_mouse_num == 1:
-							_bag()
-						elif current_mouse_num == 2:
-							_run()
-						elif current_mouse_num == 3:
-							_capture()
-						elif current_mouse_num == 4:
-							_change_pokemon()
-					
-					elif ui_state == Ui_state.Option:
-						if option_num == 0:
-							ui_state = Ui_state.Pokemon
-							reset_pokemon = true
-							_change_pokemon()
-						elif option_num == 1:
-							_run() 
+			if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN:
+				if Input.is_action_just_pressed("accept"):
+					if ui_state != Ui_state.Dialogue:
+						if ui_state == Ui_state.Main:
+							if current_mouse_num == 0:
+								_attack_inp()
+							elif current_mouse_num == 1:
+								_bag()
+							elif current_mouse_num == 2:
+								_run()
+							elif current_mouse_num == 3:
+								_capture()
+							elif current_mouse_num == 4:
+								_change_pokemon()
+						
+						elif ui_state == Ui_state.Option:
+							if option_num == 0:
+								ui_state = Ui_state.Pokemon
+								reset_pokemon = true
+								_change_pokemon()
+							elif option_num == 1:
+								_run() 
 
-					elif ui_state == Ui_state.Battle:
-						if battle_mouse_num == 3:
-							ui_state = Ui_state.Main
-						elif battle_mouse_num == 4:
-							if PlayerPokemon.current_pokemon.Learned_moves.size() >= 1 and current_attack_locked == false:
-								current_attack_locked = true
-								_player_attack_dialogue(0)					
-						elif battle_mouse_num == 0:
-							if PlayerPokemon.current_pokemon.Learned_moves.size() >= 2 and current_attack_locked == false:
-								current_attack_locked = true
-								_player_attack_dialogue(1)
-						elif battle_mouse_num == 1:
-							if PlayerPokemon.current_pokemon.Learned_moves.size() >= 3 and current_attack_locked == false: 
-								current_attack_locked = true
-								_player_attack_dialogue(2)
-						elif battle_mouse_num == 2:
-							if PlayerPokemon.current_pokemon.Learned_moves.size() >= 4 and current_attack_locked == false:
-								current_attack_locked = true
-								_player_attack_dialogue(3)
+						elif ui_state == Ui_state.Battle:
+							if battle_mouse_num == 3:
+								ui_state = Ui_state.Main
+							elif battle_mouse_num == 4:
+								if PlayerPokemon.current_pokemon.Learned_moves.size() >= 1 and current_attack_locked == false:
+									current_attack_locked = true
+									_player_attack_dialogue(0)					
+							elif battle_mouse_num == 0:
+								if PlayerPokemon.current_pokemon.Learned_moves.size() >= 2 and current_attack_locked == false:
+									current_attack_locked = true
+									_player_attack_dialogue(1)
+							elif battle_mouse_num == 1:
+								if PlayerPokemon.current_pokemon.Learned_moves.size() >= 3 and current_attack_locked == false: 
+									current_attack_locked = true
+									_player_attack_dialogue(2)
+							elif battle_mouse_num == 2:
+								if PlayerPokemon.current_pokemon.Learned_moves.size() >= 4 and current_attack_locked == false:
+									current_attack_locked = true
+									_player_attack_dialogue(3)
 			
 					
 func _bag():
@@ -298,6 +299,7 @@ func _change_pokemon():
 	add_child(Pokemon_scene)
 
 func _win_dialog(exp_points):
+	print("Win dialogs")
 	ui_state = Ui_state.Dialogue
 	var Dialogue = Dialog.instance()
 	Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(exp_points)+ " experience points"), 0]
@@ -346,106 +348,107 @@ func _run():
 		print("cant escape an trainer battle")
 
 func _input(event):
-	if BattleManager.multi_battle == false:	
-		if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN:		
-			if event is InputEventMouseButton:
-				if event.is_pressed():
-					if ui_state ==  Ui_state.Main:
-						if event.button_index == BUTTON_WHEEL_UP:
-							if current_mouse_num < max_num:
-								current_mouse_num += 1
-								for i in range(0,scroll_container.get_child_count()):
-									scroll_container.get_child(i).position.x -= 101
-							else:
-								current_mouse_num = 0
-						elif event.button_index == BUTTON_WHEEL_DOWN:
+	if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN :
+		if BattleManager.multi_battle == false:	
+			if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN:		
+				if event is InputEventMouseButton:
+					if event.is_pressed():
+						if ui_state ==  Ui_state.Main:
+							if event.button_index == BUTTON_WHEEL_UP:
+								if current_mouse_num < max_num:
+									current_mouse_num += 1
+									for i in range(0,scroll_container.get_child_count()):
+										scroll_container.get_child(i).position.x -= 101
+								else:
+									current_mouse_num = 0
+							elif event.button_index == BUTTON_WHEEL_DOWN:
+								if current_mouse_num != 0:
+									current_mouse_num -= 1
+									for i in range(0,scroll_container.get_child_count()):
+										scroll_container.get_child(i).position.x += 101
+								else:
+									current_mouse_num = max_num
+						elif ui_state == Ui_state.Battle:
+							if event.button_index == BUTTON_WHEEL_UP:
+								if battle_mouse_num < max_num:
+									battle_mouse_num += 1
+									for i in range(0,battle_box.get_child_count()):
+										battle_box.get_child(i).position.x -= 101
+								else:
+									battle_mouse_num = 0
+							elif event.button_index == BUTTON_WHEEL_DOWN:
+								if battle_mouse_num != 0:
+									battle_mouse_num -= 1
+									for i in range(0,battle_box.get_child_count()):
+										battle_box.get_child(i).position.x += 101
+								else:
+									battle_mouse_num = max_num
+
+				if ui_state == Ui_state.Main:
+					if event.is_action_pressed("A"):
+						if ui_state == Ui_state.Main:
 							if current_mouse_num != 0:
 								current_mouse_num -= 1
 								for i in range(0,scroll_container.get_child_count()):
 									scroll_container.get_child(i).position.x += 101
 							else:
+								for i in range(0,scroll_container.get_child_count()):
+									scroll_container.get_child(i).position.x += 101
 								current_mouse_num = max_num
-					elif ui_state == Ui_state.Battle:
-						if event.button_index == BUTTON_WHEEL_UP:
+					elif event.is_action_pressed("D"):
+						if ui_state == Ui_state.Main:
+							if current_mouse_num < max_num:
+								current_mouse_num += 1
+								for i in range(0,scroll_container.get_child_count()):
+									scroll_container.get_child(i).position.x -= 101
+							else:
+								for i in range(0,scroll_container.get_child_count()):
+									scroll_container.get_child(i).position.x -= 101
+								current_mouse_num = 0
+				elif ui_state == Ui_state.Battle:
+					if event.is_action_pressed("A"):					
+						if ui_state == Ui_state.Battle:
+							if battle_mouse_num != 0:
+								battle_mouse_num -= 1
+								for i in range(0,battle_box.get_child_count()):
+									battle_box.get_child(i).position.x += 101
+							else:
+								for i in range(0,battle_box.get_child_count()):
+									battle_box.get_child(i).position.x += 101
+								battle_mouse_num = max_num
+					elif event.is_action_pressed("D"):
+						if ui_state == Ui_state.Battle:
 							if battle_mouse_num < max_num:
 								battle_mouse_num += 1
 								for i in range(0,battle_box.get_child_count()):
 									battle_box.get_child(i).position.x -= 101
 							else:
 								battle_mouse_num = 0
-						elif event.button_index == BUTTON_WHEEL_DOWN:
-							if battle_mouse_num != 0:
-								battle_mouse_num -= 1
 								for i in range(0,battle_box.get_child_count()):
-									battle_box.get_child(i).position.x += 101
+									battle_box.get_child(i).position.x -= 101
+				elif ui_state == Ui_state.Option:
+					print(option_num)
+					if event.is_action_pressed("A"):
+						if ui_state == Ui_state.Option:
+							if option_num != 0:
+								option_num -= 1
 							else:
-								battle_mouse_num = max_num
-
-			if ui_state == Ui_state.Main:
-				if event.is_action_pressed("A"):
-					if ui_state == Ui_state.Main:
-						if current_mouse_num != 0:
-							current_mouse_num -= 1
-							for i in range(0,scroll_container.get_child_count()):
-								scroll_container.get_child(i).position.x += 101
-						else:
-							for i in range(0,scroll_container.get_child_count()):
-								scroll_container.get_child(i).position.x += 101
-							current_mouse_num = max_num
-				elif event.is_action_pressed("D"):
-					if ui_state == Ui_state.Main:
-						if current_mouse_num < max_num:
-							current_mouse_num += 1
-							for i in range(0,scroll_container.get_child_count()):
-								scroll_container.get_child(i).position.x -= 101
-						else:
-							for i in range(0,scroll_container.get_child_count()):
-								scroll_container.get_child(i).position.x -= 101
-							current_mouse_num = 0
-			elif ui_state == Ui_state.Battle:
-				if event.is_action_pressed("A"):					
-					if ui_state == Ui_state.Battle:
-						if battle_mouse_num != 0:
-							battle_mouse_num -= 1
-							for i in range(0,battle_box.get_child_count()):
-								battle_box.get_child(i).position.x += 101
-						else:
-							for i in range(0,battle_box.get_child_count()):
-								battle_box.get_child(i).position.x += 101
-							battle_mouse_num = max_num
-				elif event.is_action_pressed("D"):
-					if ui_state == Ui_state.Battle:
-						if battle_mouse_num < max_num:
-							battle_mouse_num += 1
-							for i in range(0,battle_box.get_child_count()):
-								battle_box.get_child(i).position.x -= 101
-						else:
-							battle_mouse_num = 0
-							for i in range(0,battle_box.get_child_count()):
-								battle_box.get_child(i).position.x -= 101
-			elif ui_state == Ui_state.Option:
-				print(option_num)
-				if event.is_action_pressed("A"):
-					if ui_state == Ui_state.Option:
-						if option_num != 0:
-							option_num -= 1
-						else:
-							option_num = 1
-				elif event.is_action_pressed("D"):
-					if ui_state == Ui_state.Option:
-						if option_num < 1:
-							option_num += 1
-						else:
-							option_num = 0
-				elif event.is_action_pressed("S"):
-					if ui_state == Ui_state.Option:
-						if option_num != 0:
-							option_num -= 1
-						else:
-							option_num = 1
-				elif event.is_action_pressed("W"):
-					if ui_state == Ui_state.Option:
-						if option_num < 1:
-							option_num += 1
-						else:
-							option_num = 0
+								option_num = 1
+					elif event.is_action_pressed("D"):
+						if ui_state == Ui_state.Option:
+							if option_num < 1:
+								option_num += 1
+							else:
+								option_num = 0
+					elif event.is_action_pressed("S"):
+						if ui_state == Ui_state.Option:
+							if option_num != 0:
+								option_num -= 1
+							else:
+								option_num = 1
+					elif event.is_action_pressed("W"):
+						if ui_state == Ui_state.Option:
+							if option_num < 1:
+								option_num += 1
+							else:
+								option_num = 0

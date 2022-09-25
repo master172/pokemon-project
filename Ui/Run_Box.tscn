@@ -118,7 +118,6 @@ texture = ExtResource( 1 )
 modulate = Color( 1, 0, 0, 1 )
 self_modulate = Color( 1, 0, 0, 1 )
 position = Vector2( -43.75, 1.25 )
-z_index = 1
 texture = ExtResource( 2 )
 region_rect = Rect2( 1, 1, 1, 1 )
 region_filter_clip = true

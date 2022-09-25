@@ -4,7 +4,7 @@ class_name potion
 export(int)var healing_points = 20
 
 func _use(_pokemon):
-	if _pokemon.Current_health_points <= _pokemon.Max_health_points - self.healing_points:
+	if _pokemon.Current_health_points < _pokemon.Max_health_points:
 		if _pokemon.Max_health_points - self.healing_points <= _pokemon.Current_health_points:
 			_pokemon.Current_health_points += 20
 			self.count -= 1

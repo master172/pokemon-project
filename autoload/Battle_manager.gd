@@ -18,7 +18,7 @@ var EnemyLastMoveEvaded = false
 var EnemyLastMoveMissed = false
 
 enum  what_turn {ALLY_TURN, ENEMY_TURN}
-var current_turn = what_turn.ALLY_TURN
+var current_turn = what_turn.ENEMY_TURN
 
 func Ally_turn():
 	print("Ally_turn")
