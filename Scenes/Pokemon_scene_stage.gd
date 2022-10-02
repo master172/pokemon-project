@@ -178,6 +178,15 @@ func _finish_player_attack_dialogue(move):
 		_attack_missed()
 	BattleManager.turns += 1
 	
+func _Run_dialogue():
+	if ui_state == Ui_state.Dialogue:
+		if BattleManager.multi_battle == false:
+			if PlayerPokemon.current_pokemon != null:
+				
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = ["Got away safely", 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"_run")
 
 func _Init_lose_dialogue():
 	
@@ -295,7 +304,8 @@ func _single_battle():
 							elif current_mouse_num == 1:
 								_bag()
 							elif current_mouse_num == 2:
-								_run()
+								ui_state = Ui_state.Dialogue
+								_Run_dialogue()
 							elif current_mouse_num == 3:
 								_capture()
 							elif current_mouse_num == 4:
@@ -307,7 +317,8 @@ func _single_battle():
 								reset_pokemon = true
 								_change_pokemon()
 							elif option_num == 1:
-								_run() 
+								ui_state = Ui_state.Dialogue
+								_Run_dialogue()
 
 						elif ui_state == Ui_state.Battle:
 							if battle_mouse_num == 3:
