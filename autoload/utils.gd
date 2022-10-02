@@ -16,6 +16,9 @@ var pc_num = null
 
 var pc
 
+func _ready():
+	_load_data()
+
 func get_player():
 	return get_node("/root/SceneManager/CurrentScene").get_children().back().find_node("ash")
 

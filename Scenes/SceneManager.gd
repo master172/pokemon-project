@@ -170,5 +170,24 @@ func finished_fading():
 				$MoveLearner/Move_learner.current_option = $MoveLearner/Move_learner.Options.Selection
 		$ScreenTransition/ColorRect/AnimationPlayer.play("fade_out")
 
+func _to_Pokemon_center():
+	current_scene.save_game()
+	current_scene.get_child(0).queue_free()
+	current_scene.add_child(load(Utils.current_rest_shelter).instance())
+				
+	var player = current_scene.get_children().back().find_node("ash")
+	player.set_spawn(Vector2(0,8),Vector2(0,-1))
+	SceneLoaded.current_scene = String(Utils.current_rest_shelter)
+	yield(get_tree().create_timer(0.1),"timeout")
+	current_scene._apply_data()
 
+	var nurse = current_scene.get_child(0).get_node("%Nurse-joy")
+	var nurse_interaction = nurse.get_node("%InteractionArea")
+	nurse_interaction.player = player
+	nurse_interaction.player.interacting = true
+	nurse_interaction.player.is_talking = true
+	nurse_interaction.set_choice = "yes"
+	nurse_interaction._pre_requirements()
+	nurse_interaction._heal_pokemon()
+	nurse_interaction._healing_animation()
 

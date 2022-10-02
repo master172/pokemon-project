@@ -63,6 +63,7 @@ func choice_results(choice):
 		_pre_requirements()
 		_heal_pokemon()
 		_healing_animation()
+		
 	else:
 		_ending_dialog()
 
@@ -96,12 +97,14 @@ func _heal_pokemon():
 	return
 
 func _healing_animation():
+	print("healing_animation")
 	if Cut_scene_player != null:
 		var cut_scene_player = get_node(Cut_scene_player)
 		cut_scene_player.play("Heal")
 		cut_scene_player.connect("animation_finished",self,"_finish_healing_animation")
 	
 func _finish_healing_animation(anim_name:String):
+	print("finish healing_animation")
 	if anim_name == "Heal":
 		healing = false
 		_ending_dialog()
@@ -110,3 +113,5 @@ func _pre_requirements():
 	dialog._finish_displaying()
 	dialog.emit_signal("Dialog_ended")
 	dialog.queue_free()
+	Utils.current_rest_shelter = String(self.get_parent().get_parent().filename)
+

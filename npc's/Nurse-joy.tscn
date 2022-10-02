@@ -192,6 +192,7 @@ anims/look-left = SubResource( 6 )
 anims/look-right = SubResource( 7 )
 
 [node name="InteractionArea" type="Area2D" parent="." groups=["Interactable"]]
+unique_name_in_owner = true
 position = Vector2( 0, 24 )
 z_index = 4
 collision_layer = 17

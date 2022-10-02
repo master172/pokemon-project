@@ -186,7 +186,7 @@ func _Init_lose_dialogue():
 			if OpposingTrainerMonsters.pokemon != null:
 				
 				var Dialogue = Dialog.instance()
-				Dialogue.text_to_diaplay = [ PlayerPokemon.current_pokemon.Name + " fainted","will ash switch pokemons", 0]
+				Dialogue.text_to_diaplay = [ PlayerPokemon.current_pokemon.Name + " fainted", 0]
 				Dialogue_layer.add_child(Dialogue)
 				Dialogue.connect("Dialog_ended",self,"_lose_process")
 
@@ -199,9 +199,29 @@ func _lose_process():
 			ui_state = Ui_state.Option
 			
 	else:
-		_run()
+		ui_state = Ui_state.Dialogue
+		total_loss()
 
+func total_loss():
+	if ui_state == Ui_state.Dialogue:
+		if BattleManager.multi_battle == false:
+			if OpposingTrainerMonsters.pokemon != null:
+				
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = ["Ash was defeated by the opponent","Ash whited out", 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"_total_loss_process")
 
+func _total_loss_process():
+	yield(get_tree().create_timer(0.2),"timeout")
+	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
+		Utils.Num_loaded_pokemon -= 1
+		Utils.Get_Scene_Manager().transition_exit_pokemon_scene()
+		OpposingTrainerMonsters.pokemon = null
+		OpposingTrainerMonsters._remove_children()
+		PlayerPokemon.current_pokemon = null
+		var SceneManager = Utils.Get_Scene_Manager()
+		SceneManager._to_Pokemon_center()
 
 func _single_battle():
 	if PlayerPokemon.current_learning_pokemon == null:

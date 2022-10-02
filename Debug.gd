@@ -47,3 +47,9 @@ func _on_Lose_button_pressed():
 		get_node("%Lose_button").pressed = false
 	else:
 		get_node("%Lose_button").pressed = false
+
+
+func _on_Total_loss_pressed():
+	var SceneManager = Utils.Get_Scene_Manager()
+	if SceneManager.get_child(1).get_child_count() > 0:
+		SceneManager.get_child(1).get_child(0)._total_loss_process()
