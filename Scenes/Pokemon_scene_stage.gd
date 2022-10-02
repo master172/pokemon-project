@@ -46,6 +46,9 @@ var enemy_lost_dialogue_connected = false
 
 var current_attack_locked = false
 
+var lose_oneshot = false
+
+
 func _ready():
 	ui_state = Ui_state.Dialogue
 	_initial_dialogue()
@@ -115,7 +118,6 @@ func _attack_missed():
 	
 
 func _finish_attack_missed():
-	print_debug("attack missed")
 	ui_state = Ui_state.Battle
 	BattleManager.Enemy_turn()
 	BattleManager.PlayerLastMoveMissed = false
@@ -129,7 +131,6 @@ func _attack_evaded():
 
 
 func _finish_attack_evaded():
-	print_debug("attack evaded")
 	ui_state = Ui_state.Battle
 	BattleManager.Enemy_turn()
 	BattleManager.PlayerLastMoveEvaded = false
@@ -178,6 +179,30 @@ func _finish_player_attack_dialogue(move):
 	BattleManager.turns += 1
 	
 
+func _Init_lose_dialogue():
+	
+	if ui_state == Ui_state.Dialogue:
+		if BattleManager.multi_battle == false:
+			if OpposingTrainerMonsters.pokemon != null:
+				
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = [ PlayerPokemon.current_pokemon.Name + " fainted","will ash switch pokemons", 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"_lose_process")
+
+
+func _lose_process():
+	yield(get_tree().create_timer(0.2),"timeout")
+	if PlayerPokemon.active_pokemon > 0:
+		if reset_pokemon == false:
+			Do_You_want.visible = true	
+			ui_state = Ui_state.Option
+			
+	else:
+		_run()
+
+
+
 func _single_battle():
 	if PlayerPokemon.current_learning_pokemon == null:
 
@@ -190,14 +215,13 @@ func _single_battle():
 
 		if PlayerPokemon.current_pokemon != null:
 				if PlayerPokemon.current_pokemon.Current_health_points <= 0:
-					PlayerPokemon.current_pokemon._lose()
-					PlayerPokemon._active_pokemon()
-					if PlayerPokemon.active_pokemon > 0:
-						if reset_pokemon == false:		
-							Do_You_want.visible = true
-							ui_state = Ui_state.Option
-					else:
-						_run()
+					if lose_oneshot == false:
+						PlayerPokemon.current_pokemon._lose()
+						ui_state = Ui_state.Dialogue
+						_Init_lose_dialogue()
+						lose_oneshot = true
+						
+						
 					
 		
 		if PlayerPokemon.current_pokemon != null:
@@ -299,7 +323,6 @@ func _change_pokemon():
 	add_child(Pokemon_scene)
 
 func _win_dialog(exp_points):
-	print("Win dialogs")
 	ui_state = Ui_state.Dialogue
 	var Dialogue = Dialog.instance()
 	Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(exp_points)+ " experience points"), 0]
@@ -427,7 +450,6 @@ func _input(event):
 								for i in range(0,battle_box.get_child_count()):
 									battle_box.get_child(i).position.x -= 101
 				elif ui_state == Ui_state.Option:
-					print(option_num)
 					if event.is_action_pressed("A"):
 						if ui_state == Ui_state.Option:
 							if option_num != 0:

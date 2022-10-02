@@ -54,13 +54,12 @@ func _physics_process(_delta):
 		Enemy_sprite.texture = null
 
 
-func _on_Tween_tween_completed(object:Object, key:NodePath):
+func _change_turn(object:Object, _key:NodePath):
 	if BattleManager.multi_battle == false:
 
 		if object == Enemy_health:
 			if PlayerPokemon.current_pokemon != null:
 				if OpposingTrainerMonsters.pokemon != null and OpposingTrainerMonsters.pokemon.Current_health_points >= 1:
-					print_debug("Tween completed")
 					BattleManager.Enemy_turn()
 		elif object == Player_health:
 			if PlayerPokemon.current_pokemon != null:
@@ -70,3 +69,6 @@ func _on_Tween_tween_completed(object:Object, key:NodePath):
 				elif initial_set == false:
 					get_parent().ui_state = get_parent().ui_state
 				BattleManager.Ally_turn()
+
+func _on_Tween_tween_completed(object:Object, key:NodePath):
+	_change_turn(object, key)

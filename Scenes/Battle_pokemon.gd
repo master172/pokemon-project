@@ -16,6 +16,7 @@ func _kill():
 	yield(get_tree().create_timer(0.1),"timeout")
 	self.controller.ui_state = self.controller.Ui_state.Main
 	self.controller.reset_pokemon = false
+	self.controller.lose_oneshot = false
 	queue_free()
 	print("queue_free")
 

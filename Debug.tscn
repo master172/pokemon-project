@@ -59,5 +59,21 @@ margin_top = -5.0
 margin_right = 44.0
 margin_bottom = 19.0
 
+[node name="Lose" type="Label" parent="Control"]
+margin_left = 186.0
+margin_top = 32.0
+margin_right = 206.0
+margin_bottom = 46.0
+custom_fonts/font = ExtResource( 1 )
+text = "Lose"
+
+[node name="Lose_button" type="CheckBox" parent="Control/Lose"]
+unique_name_in_owner = true
+margin_left = 20.0
+margin_top = -5.0
+margin_right = 44.0
+margin_bottom = 19.0
+
 [connection signal="toggled" from="Control/V-sync/V-sync-Buuton" to="." method="_on_VsyncBuuton_toggled"]
 [connection signal="pressed" from="Control/Win/Win_button" to="." method="_on_Winbutton_pressed"]
+[connection signal="pressed" from="Control/Lose/Lose_button" to="." method="_on_Lose_button_pressed"]

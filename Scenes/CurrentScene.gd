@@ -22,9 +22,9 @@ func _instance():
 
 
 func _check_pokemon():
-	print("checking")
+
 	if OpposingTrainerMonsters.get_child_count() != 0:
-		print("has_pokemon")
+
 		if Utils.get_player().inside_grass == true:
 			BattleManager.type_of_battle = BattleManager.types_of_battle.Wild
 		OpposingTrainerMonsters.pokemon = OpposingTrainerMonsters.get_child(0)

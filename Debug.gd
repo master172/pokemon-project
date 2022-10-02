@@ -33,11 +33,17 @@ func _on_VsyncBuuton_toggled(button_pressed:bool):
 
 
 func _on_Winbutton_pressed():
-	print("calling function")
 	if OpposingTrainerMonsters.pokemon != null:
 		OpposingTrainerMonsters.pokemon.Current_health_points -= OpposingTrainerMonsters.pokemon.Current_health_points
-		print("reducing hralth points")
 		get_node("%Win_button").pressed = false
 	else:
 		get_node("%Win_button").pressed = false
 		
+
+
+func _on_Lose_button_pressed():
+	if PlayerPokemon.current_pokemon != null:
+		PlayerPokemon.current_pokemon.Current_health_points -= PlayerPokemon.current_pokemon.Current_health_points
+		get_node("%Lose_button").pressed = false
+	else:
+		get_node("%Lose_button").pressed = false

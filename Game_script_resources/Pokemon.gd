@@ -167,14 +167,14 @@ signal enemy_lost(exp_to_give)
 func _lose():
 	_calculate_exp_points_to_give()
 	if self.get_parent() == OpposingTrainerMonsters:
-		print("enemy lost")
 		emit_signal("enemy_lost",exp_gained)
 	
-	if self.opposing_pokemon != null:
-		self.opposing_pokemon.experince_gained += exp_gained
-		_add_ev_yield()
-		self.opposing_pokemon._level_up()
-	if self.get_parent() == PlayerPokemon:
+		if self.opposing_pokemon != null:
+			self.opposing_pokemon.experince_gained += exp_gained
+			_add_ev_yield()
+			self.opposing_pokemon._level_up()
+	
+	elif self.get_parent() == PlayerPokemon:
 		PlayerPokemon._active_pokemon()
 
 	
