@@ -77,6 +77,7 @@ window/size/height=320
 window/size/test_width=540
 window/size/test_height=960
 window/dpi/allow_hidpi=true
+window/vsync/use_vsync=false
 window/vsync/vsync_via_compositor=true
 window/energy_saving/keep_screen_on=false
 window/handheld/orientation="portrait"

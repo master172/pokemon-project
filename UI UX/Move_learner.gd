@@ -108,9 +108,9 @@ func _input(event):
 				else:
 					selected_option += 1
 		elif event.is_action_pressed("accept"):
-				if selected_option == 0:
-					current_option = Options.Main
-				elif selected_option == 1:
+				if selected_option == 0: # selecting the learn option
+					pass
+				elif selected_option == 1: #Selecting the forget option
 					if move_selected == 0:
 						MoveLearner._make_to_learn(0,MoveLearner.target_pokemon.Learned_moves[0])
 						
@@ -136,9 +136,9 @@ func _input(event):
 						
 						current_pokemon = null
 
-				elif selected_option == 2:
+				elif selected_option == 2: #selecting the info option
 					pass
-				elif selected_option == 3:
+				elif selected_option == 3: #selecting the back option
 					current_option = Options.Selection
 					selected_option = 0
 		

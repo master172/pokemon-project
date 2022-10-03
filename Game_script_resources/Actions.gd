@@ -157,6 +157,7 @@ func _start_learning():
 				if current_holder.Learned_moves.size() <= 3:
 					current_holder.learn(self)
 					learned = true
+					Utils.Get_Scene_Manager().PokemonSceneMoveLearningDialog(self)
 				elif current_holder.Learned_moves.size() == 4:
 					PlayerPokemon.current_learning_pokemon = self.current_holder
 					MoveLearner.target_pokemon = self.current_holder

@@ -50,6 +50,8 @@ var lose_oneshot = false
 
 var learning_a_move = false
 
+var win_exp_points
+
 func _ready():
 	ui_state = Ui_state.Dialogue
 	_initial_dialogue()
@@ -272,7 +274,7 @@ func _single_battle():
 
 		if PlayerPokemon.current_pokemon != null:
 				if PlayerPokemon.current_pokemon.Current_health_points <= 0:
-					if lose_oneshot == false and learning_a_move == false:
+					if lose_oneshot == false:
 						PlayerPokemon.current_pokemon._lose()
 						ui_state = Ui_state.Dialogue
 						_Init_lose_dialogue()
@@ -323,8 +325,8 @@ func _single_battle():
 			if Input.is_action_just_pressed("decline"):
 				if ui_state == Ui_state.Battle:
 					ui_state = Ui_state.Main
-			if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN:
-				if Input.is_action_just_pressed("accept"):
+			if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN :
+				if Input.is_action_just_pressed("accept") and Dialogue_layer.get_child_count() == 0:
 					if ui_state != Ui_state.Dialogue:
 						if ui_state == Ui_state.Main:
 							if current_mouse_num == 0:
@@ -384,11 +386,23 @@ func _change_pokemon():
 	ui_state = Ui_state.Pokemon
 	add_child(Pokemon_scene)
 
-func _win_dialog(exp_points):
-	var Dialogue = Dialog.instance()
-	Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(exp_points)+ " experience points"), 0]
-	Dialogue_layer.add_child(Dialogue)
-	Dialogue.connect("Dialog_ended",self,"win")	
+func _win_dialog(exp_points = 0):
+	if exp_points != 0:
+		win_exp_points = exp_points
+
+	yield(get_tree().create_timer(0.2),"timeout")
+	if learning_a_move == false and Dialogue_layer.get_child_count() == 0:
+		if exp_points != 0:
+			var Dialogue = Dialog.instance()
+			Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"), 0]
+			Dialogue_layer.add_child(Dialogue)
+			Dialogue.connect("Dialog_ended",self,"win")
+		elif exp_points == 0:
+			var Dialogue = Dialog.instance()
+			Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"), 0]
+			Dialogue_layer.add_child(Dialogue)
+			Dialogue.connect("Dialog_ended",self,"win")
+			win_exp_points = 0
 
 
 
@@ -402,9 +416,7 @@ func win():
 		OpposingTrainerMonsters.pokemon.disconnect("enemy_lost",self,"_win_dialog")
 		OpposingTrainerMonsters.pokemon.disconnect("Enemy_attacked",self,"_display_enemy_attack_dialogue")
 		enemy_dialogue_connected = false
-		OpposingTrainerMonsters.pokemon = null
-		OpposingTrainerMonsters._remove_children()
-		PlayerPokemon.current_pokemon = null
+		
 		BattleManager.fainted = true
 		Utils.Get_Scene_Manager().transition_exit_pokemon_scene()
 		
@@ -551,4 +563,26 @@ func MoveLearningProcess():
 	ui_state = Ui_state.MoveLearner
 	var scenceManager = Utils.Get_Scene_Manager()
 	scenceManager.PokemonSceneMoveLearning()
+
+func FinishMoveLearningProcess():
+	learning_a_move = false
+	if BattleManager.multi_battle == false:
+		if PlayerPokemon.current_pokemon != null:
+			_win_dialog(0)
+
+func StartMoveLearnDialogue(move):
+	if ui_state == Ui_state.Dialogue:
+		if BattleManager.multi_battle == false:
+			if PlayerPokemon.current_pokemon != null:
+				learning_a_move = true
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name +" learned " + move.Name, 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"StartMoveLearnProcess")
+	
+func StartMoveLearnProcess():
+	learning_a_move = false
+	if BattleManager.multi_battle == false:
+		if PlayerPokemon.current_pokemon != null:
+			_win_dialog(0)
 	

@@ -121,7 +121,6 @@ func transition_to_scene(new_scene:String, spawn_location, spawn_direction):
 
 
 func finished_fading():
-	print(transition_type)
 	match transition_type:
 		Transition_Type.NEW_SCENE:
 				
@@ -148,15 +147,18 @@ func finished_fading():
 				$Menu.unload_party_screen()
 			if$Menu.screen_loaded == $Menu.ScreenLoaded.Bag_screen:
 				$Menu.unload_bag_screen()
+
 		Transition_Type.EXIT_POKEMON_SCENE:
 			$Pokemon_scene.unload_pokemon_scene()
 			BattleManager.in_battle = false
+			OpposingTrainerMonsters.pokemon = null
+			OpposingTrainerMonsters._remove_children()
+			PlayerPokemon.current_pokemon = null
 
 		Transition_Type.BAG_SCENE:
 			$Menu.load_bag_scene()
 			
 		Transition_Type.MOVE_LEARNER:
-			print("learning a move")
 			Utils.get_player().set_physics_process(false)
 			$MoveLearner/Move_learner.current_pokemon = MoveLearner.target_pokemon
 			$MoveLearner/Move_learner.current_option = $MoveLearner/Move_learner.Options.Selection
@@ -165,13 +167,14 @@ func finished_fading():
 			$MoveLearner/Move_learner.current_option = $MoveLearner/Move_learner.Options.Main
 			$MoveLearner/Move_learner.selected_option = 0
 			$MoveLearner/Move_learner.move_selected = 0
+			PlayerPokemon.current_learning_pokemon = null
 		
 		Transition_Type.EXIT_BATTLE_MOVE_LEARNER:
 			$MoveLearner/Move_learner.current_option = $MoveLearner/Move_learner.Options.Main
 			$MoveLearner/Move_learner.selected_option = 0
 			$MoveLearner/Move_learner.move_selected = 0
-			$Pokemon_scene.unload_pokemon_scene()
-			BattleManager.in_battle = false
+			$Pokemon_scene.get_child(0).FinishMoveLearningProcess()
+			PlayerPokemon.current_learning_pokemon = null
 
 		
 	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_out")
@@ -197,3 +200,8 @@ func _to_Pokemon_center():
 	nurse_interaction._heal_pokemon()
 	nurse_interaction._healing_animation()
 
+func PokemonSceneMoveLearningDialog(move):
+	if $Pokemon_scene.get_child_count() > 0:
+		$Pokemon_scene.get_child(0).ui_state = $Pokemon_scene.get_child(0).Ui_state.Dialogue
+		$Pokemon_scene.get_child(0).learning_a_move = true
+		$Pokemon_scene.get_child(0).StartMoveLearnDialogue(move)
