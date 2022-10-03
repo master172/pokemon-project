@@ -30,7 +30,7 @@ var max_num = 4
 var max_pokemon_number = 6
 
 var option_num = 0
-enum Ui_state { Main,Battle,Pokemon,Selection,Bag,Option,Dialogue}
+enum Ui_state { Main,Battle,Pokemon,Selection,Bag,Option,Dialogue,MoveLearner}
 
 var ui_state = Ui_state.Main
 
@@ -48,6 +48,7 @@ var current_attack_locked = false
 
 var lose_oneshot = false
 
+var learning_a_move = false
 
 func _ready():
 	ui_state = Ui_state.Dialogue
@@ -271,7 +272,7 @@ func _single_battle():
 
 		if PlayerPokemon.current_pokemon != null:
 				if PlayerPokemon.current_pokemon.Current_health_points <= 0:
-					if lose_oneshot == false:
+					if lose_oneshot == false and learning_a_move == false:
 						PlayerPokemon.current_pokemon._lose()
 						ui_state = Ui_state.Dialogue
 						_Init_lose_dialogue()
@@ -384,7 +385,6 @@ func _change_pokemon():
 	add_child(Pokemon_scene)
 
 func _win_dialog(exp_points):
-	ui_state = Ui_state.Dialogue
 	var Dialogue = Dialog.instance()
 	Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(exp_points)+ " experience points"), 0]
 	Dialogue_layer.add_child(Dialogue)
@@ -535,3 +535,20 @@ func _input(event):
 								option_num += 1
 							else:
 								option_num = 0
+
+func start_move_learning(move):
+	
+	if ui_state == Ui_state.Dialogue:
+		if BattleManager.multi_battle == false:
+			if PlayerPokemon.current_pokemon != null:
+				learning_a_move = true
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name +" wants to learn " + move.Name," how ever "+ PlayerPokemon.current_pokemon.Name + " already knows four moves please choose what to do", 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"MoveLearningProcess")
+
+func MoveLearningProcess():
+	ui_state = Ui_state.MoveLearner
+	var scenceManager = Utils.Get_Scene_Manager()
+	scenceManager.PokemonSceneMoveLearning()
+	

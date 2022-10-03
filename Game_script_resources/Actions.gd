@@ -161,7 +161,7 @@ func _start_learning():
 					PlayerPokemon.current_learning_pokemon = self.current_holder
 					MoveLearner.target_pokemon = self.current_holder
 					MoveLearner.move_to_learn = self
-					Utils.Get_Scene_Manager().transition_to_Move_learner()
+					Utils.Get_Scene_Manager().transition_to_Move_learner(self)
 					
 
 func _ready():

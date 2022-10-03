@@ -140,8 +140,7 @@ anims/fade_out = SubResource( 2 )
 [node name="Move_learner" type="Control" parent="MoveLearner"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 1.0
-margin_bottom = -160.0
+margin_bottom = -161.0
 script = ExtResource( 9 )
 
 [node name="Background" type="Sprite" parent="MoveLearner/Move_learner"]
