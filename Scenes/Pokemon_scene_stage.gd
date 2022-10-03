@@ -232,6 +232,33 @@ func _total_loss_process():
 		var SceneManager = Utils.Get_Scene_Manager()
 		SceneManager._to_Pokemon_center()
 
+func Pokemon_Comeback_Init():
+	if ui_state == Ui_state.Dialogue:
+		if BattleManager.multi_battle == false:
+			if PlayerPokemon.current_pokemon != null:
+				
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = ["Ash called " +PlayerPokemon.current_pokemon.Name +" back", 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"PokemonComebackProcess")
+
+func PokemonComebackProcess():
+	yield(get_tree().create_timer(0.2),"timeout")
+	_change_pokemon()
+
+func IchoosePokemon(pokemon):
+	if ui_state == Ui_state.Dialogue:
+		if BattleManager.multi_battle == false:
+				
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = [pokemon.Name +" I choose you", 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"PokemonChoosingProcess")
+
+func PokemonChoosingProcess():
+	yield(get_tree().create_timer(0.2),"timeout")
+	ui_state = Ui_state.Main
+
 func _single_battle():
 	if PlayerPokemon.current_learning_pokemon == null:
 
@@ -309,13 +336,16 @@ func _single_battle():
 							elif current_mouse_num == 3:
 								_capture()
 							elif current_mouse_num == 4:
-								_change_pokemon()
+								ui_state = Ui_state.Dialogue
+								Pokemon_Comeback_Init()
+								
 						
 						elif ui_state == Ui_state.Option:
 							if option_num == 0:
 								ui_state = Ui_state.Pokemon
 								reset_pokemon = true
-								_change_pokemon()
+								ui_state = Ui_state.Dialogue
+								Pokemon_Comeback_Init()
 							elif option_num == 1:
 								ui_state = Ui_state.Dialogue
 								_Run_dialogue()

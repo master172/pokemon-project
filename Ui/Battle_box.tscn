@@ -75,7 +75,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0.192157, 0.180392, 0.180392, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -107,7 +107,6 @@ tracks/1/keys = {
 }
 
 [node name="Battle_box" type="Node2D"]
-modulate = Color( 0.192157, 0.180392, 0.180392, 1 )
 position = Vector2( 72, 120 )
 scale = Vector2( 0.8, 0.8 )
 script = ExtResource( 4 )

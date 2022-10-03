@@ -68,7 +68,7 @@ func _input(event):
 							PlayerPokemon.current_pokemon = Pokemon_cont
 							PlayerPokemon.current_pokemon._calc_weak_and_res()
 							OpposingTrainerMonsters.pokemon._calc_weak_and_res()
-							self.controller._kill()
+							self.controller._kill(Pokemon_cont)
 						_kill()
 					elif Pokemon_cont.fainted == true:
 						print("The pokemon has no energy to battle")

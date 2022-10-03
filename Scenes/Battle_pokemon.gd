@@ -11,14 +11,14 @@ const poke_cont_box = preload("res://Ui/Battle_box_cont.tscn")
 
 var current_selected:int = 1
 
-func _kill():
+func _kill( pokemon = PlayerPokemon.first_pokemon):
 	
 	yield(get_tree().create_timer(0.1),"timeout")
-	self.controller.ui_state = self.controller.Ui_state.Main
+	self.controller.ui_state = self.controller.Ui_state.Dialogue
 	self.controller.reset_pokemon = false
 	self.controller.lose_oneshot = false
+	self.controller.IchoosePokemon(pokemon)
 	queue_free()
-	print("queue_free")
 
 func _input(event):
 	if controller != null:
