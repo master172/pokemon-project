@@ -634,3 +634,5 @@ func _heal():
 	Current_speed = Max_speed
 	status_effect = 5
 	print(status_effect)
+	for i in self.Learned_moves:
+		i._heal()
