@@ -38,7 +38,7 @@ func _say_choosing_dialogue(pokemon):
 	self.get_parent().ui_state = self.get_parent().Ui_state.Dialogue
 	Dialogue = self.get_parent().Dialog.instance()
 	Dialogue.connect("Dialog_ended",self,"_finish_choosing_dialogue",[pokemon])	
-	Dialogue.text_to_diaplay = [pokemon.Name + "I choose you", 0]
+	Dialogue.text_to_diaplay = [pokemon.Name + " I choose you", 0]
 	self.get_parent().Dialogue_layer.add_child(Dialogue)
 	
 

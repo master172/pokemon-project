@@ -1,5 +1,6 @@
 extends Node2D
 
+
 var player_location = Vector2(0,0)
 var player_direction = Vector2(0,0)
 
@@ -14,6 +15,9 @@ onready var current_scene = $CurrentScene
 
 enum Transition_Type  {NONE,NEW_SCENE, PARTY_SCENE, MENU_ONLY, POKEMON_SCENE,EXIT_POKEMON_SCENE,MOVE_LEARNER,EXIT_MOVE_LEARNER,PC,EXIT_PC,BAG_SCENE,EXIT_BATTLE_MOVE_LEARNER }
 var transition_type = Transition_Type.NONE
+
+func _ready():
+	self.set_meta("Name","SceneManager")
 
 func _fade_in():
 	if $ScreenTransition/ColorRect/AnimationPlayer.is_playing():
@@ -154,6 +158,7 @@ func finished_fading():
 			OpposingTrainerMonsters.pokemon = null
 			OpposingTrainerMonsters._remove_children()
 			PlayerPokemon.current_pokemon = null
+			PlayerPokemon._start_evolution()
 
 		Transition_Type.BAG_SCENE:
 			$Menu.load_bag_scene()
@@ -168,6 +173,7 @@ func finished_fading():
 			$MoveLearner/Move_learner.selected_option = 0
 			$MoveLearner/Move_learner.move_selected = 0
 			PlayerPokemon.current_learning_pokemon = null
+			PlayerPokemon._start_evolution()
 		
 		Transition_Type.EXIT_BATTLE_MOVE_LEARNER:
 			$MoveLearner/Move_learner.current_option = $MoveLearner/Move_learner.Options.Main
@@ -175,6 +181,7 @@ func finished_fading():
 			$MoveLearner/Move_learner.move_selected = 0
 			$Pokemon_scene.get_child(0).FinishMoveLearningProcess()
 			PlayerPokemon.current_learning_pokemon = null
+			PlayerPokemon._start_evolution()
 
 		
 	$ScreenTransition/ColorRect/AnimationPlayer.play("fade_out")

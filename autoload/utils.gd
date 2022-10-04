@@ -23,7 +23,11 @@ func get_player():
 	return get_node("/root/SceneManager/CurrentScene").get_children().back().find_node("ash")
 
 func Get_Scene_Manager():
-	return get_node("/root/SceneManager")
+	if get_tree().current_scene.has_meta("Name"): 
+		if get_tree().current_scene.get_meta("Name") == "SceneManager":
+			return get_node("/root/SceneManager")
+		else:
+			return null
 
 func Get_Pokemon_Manger():
 	return get_node("/root/SceneManager/Pokemon_scene")

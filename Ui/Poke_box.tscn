@@ -21,9 +21,9 @@ expand = true
 [node name="HBoxContainer" type="HBoxContainer" parent="Poke_selector"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
+margin_left = 5.0
 margin_top = 9.0
-margin_right = -5.0
+margin_right = -4.0
 custom_constants/separation = 27
 
 [node name="Poke_ball_1" type="TextureRect" parent="Poke_selector/HBoxContainer"]
@@ -33,10 +33,10 @@ rect_min_size = Vector2( 16, 16 )
 texture = ExtResource( 3 )
 
 [node name="Pokemon_sprite" type="Sprite" parent="Poke_selector/HBoxContainer/Poke_ball_1"]
-position = Vector2( 9, 27 )
+position = Vector2( 5, 27 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 33.6576, 9.60972, 30.2207, 22.8413 )
+region_rect = Rect2( 25.6114, 9.60972, 38.2669, 22.8413 )
 
 [node name="Poke_ball_2" type="TextureRect" parent="Poke_selector/HBoxContainer"]
 margin_left = 43.0
@@ -46,10 +46,10 @@ rect_min_size = Vector2( 16, 16 )
 texture = ExtResource( 3 )
 
 [node name="Pokemon_sprite" type="Sprite" parent="Poke_selector/HBoxContainer/Poke_ball_2"]
-position = Vector2( 9, 27 )
+position = Vector2( 5, 27 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 33.6576, 9.60972, 30.2207, 22.8413 )
+region_rect = Rect2( 25.6114, 9.60972, 38.2669, 22.8413 )
 
 [node name="Poke_ball_3" type="TextureRect" parent="Poke_selector/HBoxContainer"]
 margin_left = 86.0
@@ -59,10 +59,10 @@ rect_min_size = Vector2( 16, 16 )
 texture = ExtResource( 3 )
 
 [node name="Pokemon_sprite" type="Sprite" parent="Poke_selector/HBoxContainer/Poke_ball_3"]
-position = Vector2( 9, 27 )
+position = Vector2( 5, 27 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 33.6576, 9.60972, 30.2207, 22.8413 )
+region_rect = Rect2( 25.6114, 9.60972, 38.2669, 22.8413 )
 
 [node name="Poke_ball_4" type="TextureRect" parent="Poke_selector/HBoxContainer"]
 margin_left = 129.0
@@ -72,10 +72,10 @@ rect_min_size = Vector2( 16, 16 )
 texture = ExtResource( 3 )
 
 [node name="Pokemon_sprite" type="Sprite" parent="Poke_selector/HBoxContainer/Poke_ball_4"]
-position = Vector2( 9, 27 )
+position = Vector2( 5, 27 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 33.6576, 9.60972, 30.2207, 22.8413 )
+region_rect = Rect2( 25.6114, 9.60972, 38.2669, 22.8413 )
 
 [node name="Poke_ball_5" type="TextureRect" parent="Poke_selector/HBoxContainer"]
 margin_left = 172.0
@@ -85,10 +85,10 @@ rect_min_size = Vector2( 16, 16 )
 texture = ExtResource( 3 )
 
 [node name="Pokemon_sprite" type="Sprite" parent="Poke_selector/HBoxContainer/Poke_ball_5"]
-position = Vector2( 9, 27 )
+position = Vector2( 5, 27 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 33.6576, 9.60972, 30.2207, 22.8413 )
+region_rect = Rect2( 25.6114, 9.60972, 38.2669, 22.8413 )
 
 [node name="Poke_ball_6" type="TextureRect" parent="Poke_selector/HBoxContainer"]
 margin_left = 215.0
@@ -98,7 +98,7 @@ rect_min_size = Vector2( 16, 16 )
 texture = ExtResource( 3 )
 
 [node name="Pokemon_sprite" type="Sprite" parent="Poke_selector/HBoxContainer/Poke_ball_6"]
-position = Vector2( 9, 27 )
+position = Vector2( 5, 27 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 33.6576, 9.60972, 30.2207, 22.8413 )
+region_rect = Rect2( 25.6114, 9.60972, 38.2669, 22.8413 )

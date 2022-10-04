@@ -257,8 +257,7 @@ func _calculate_experience():
 			experince_to_next_level = (pow(level,3)*((level+14)/50.0))
 		elif 36 < level and level < 100:
 			experince_to_next_level = pow(level,3)*(((level/2.0)+32)/50)
-	if experince_to_next_level >= experince_to_next_level:
-		_update_level()
+
 
 func _update_level():
 	if experince_to_next_level != 0:
@@ -266,8 +265,10 @@ func _update_level():
 			level += 1
 			_calculate_experience()
 	if self.get_parent() == PlayerPokemon:
-		PlayerPokemon._check_evolution()
-		PlayerPokemon._check_move_learning()
+		PlayerPokemon._check_move_learning(self)
+		if self.level >= self.level_to_next_form and self.next_form != null:
+			PlayerPokemon._check_evolution(self)
+		
 
 func _calculate_stats():
 	var stats_calculated : bool = false
@@ -563,50 +564,52 @@ func _notification(what):
 func evolve():
 	if self.level >= self.level_to_next_form and self.next_form != null:
 		if self.next_form != null:
-			self.current_stage += 1
-			#reassigning the values
+			Utils.get_player().set_physics_process(false)
 			evolver = self.next_form.instance()
-			self.id = self.evolver.id
-			self.Name = self.evolver.name
-			self.Type_1 = self.evolver.Type_1
-			self.Type_2 = self.evolver.Type_2
-			self.Damage_normally_by = self.evolver.Damage_normally_by
-			self.Weak_to = self.evolver.Weak_to
-			self.Resistant_to = self.evolver.Resistant_to
-			self.Immune_to = self.evolver.Immune_to
-			self.level_to_next_form = self.evolver.level_to_next_form
-			self.abilites = self.evolver.abilites
-			self.catch_rate = self.evolver.catch_rate
-			self.Levelling_rate = self.evolver.Levelling_rate
-			self.Min_Hatch_time = self.evolver.Min_Hatch_time
-			self.Max_Hatch_time = self.evolver.Max_Hatch_time
-			self.gender_ratio = self.evolver.gender_ratio
-			self.egg_groups = self.evolver.egg_groups
-			self.base_friend_ship = self.evolver.base_friend_ship
-			self.height = self.evolver.height
-			self.weight = self.evolver.weight
-			self.base_Health_points = self.evolver.base_Health_points
-			self.base_attack = self.evolver.base_attack
-			self.base_defense = self.evolver.base_defense
-			self.base_special_attack = self.evolver.base_special_attack
-			self.base_special_defense = self.evolver.base_special_defense
-			self.base_speed = self.evolver.base_speed
-			self.hp_yield = self.evolver.hp_yield
-			self.attack_yield = self.evolver.attack_yield
-			self.sp_attack_yield = self.evolver.sp_attack_yield
-			self.sp_defense_yield = self.evolver.sp_defense_yield
-			self.defense_yield = self.evolver.defense_yield
-			self.speed_yield = self.evolver.speed_yield
-			self.pokemon_entry = self.evolver.pokemon_entry
-
-			_update_level()
-			_calculate_stats()
-			_add_stats()
-		else:
-			print("Max staged reached")
+			Utils.Get_Scene_Manager().get_child(9).get_child(0).start_evolutuon(self, self.sprite, self.evolver.sprite)
 	else:
 		pass
-	return
+
+func evolution_value_change():
+	if self.next_form != null:
+		self.current_stage += 1
+		#reassigning the values
+		evolver = self.next_form.instance()
+		self.id = self.evolver.id
+		self.Name = self.evolver.Name
+		self.Type_1 = self.evolver.Type_1
+		self.Type_2 = self.evolver.Type_2
+		self.Damage_normally_by = self.evolver.Damage_normally_by
+		self.Weak_to = self.evolver.Weak_to
+		self.Resistant_to = self.evolver.Resistant_to
+		self.Immune_to = self.evolver.Immune_to
+		self.level_to_next_form = self.evolver.level_to_next_form
+		self.abilites = self.evolver.abilites
+		self.catch_rate = self.evolver.catch_rate
+		self.Levelling_rate = self.evolver.Levelling_rate
+		self.Min_Hatch_time = self.evolver.Min_Hatch_time
+		self.Max_Hatch_time = self.evolver.Max_Hatch_time
+		self.gender_ratio = self.evolver.gender_ratio
+		self.egg_groups = self.evolver.egg_groups
+		self.base_friend_ship = self.evolver.base_friend_ship
+		self.height = self.evolver.height
+		self.weight = self.evolver.weight
+		self.base_Health_points = self.evolver.base_Health_points
+		self.base_attack = self.evolver.base_attack
+		self.base_defense = self.evolver.base_defense
+		self.base_special_attack = self.evolver.base_special_attack
+		self.base_special_defense = self.evolver.base_special_defense
+		self.base_speed = self.evolver.base_speed
+		self.hp_yield = self.evolver.hp_yield
+		self.attack_yield = self.evolver.attack_yield
+		self.sp_attack_yield = self.evolver.sp_attack_yield
+		self.sp_defense_yield = self.evolver.sp_defense_yield
+		self.defense_yield = self.evolver.defense_yield
+		self.speed_yield = self.evolver.speed_yield
+		self.pokemon_entry = self.evolver.pokemon_entry
+
+	else:
+		print("Max staged reached")
 
 signal Enemy_attacked(pokemon,move)
 

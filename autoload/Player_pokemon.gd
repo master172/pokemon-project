@@ -6,7 +6,7 @@ var current_learning_pokemon
 var lost = false
 var won = false
 
-
+onready var sceneManager = Utils.Get_Scene_Manager()
 
 var targets : int = 1
 
@@ -26,6 +26,8 @@ var pc_pokemon : Array
 var active_pokemon :int = 0
 
 var pokemons = []
+
+var evolution_queue = []
 
 func _active_pokemon():
 	active_pokemon = 0
@@ -48,33 +50,16 @@ func _active_pokemon():
 		if self.sixth_pokemon.fainted == false:
 			self.active_pokemon += 1
 
-func _check_evolution():
-	if self.first_pokemon != null:
-		self.first_pokemon.evolve()
-	if self.second_pokemon != null:
-		self.second_pokemon.evolve()
-	if self.third_pokemon != null:
-		self.third_pokemon.evolve()
-	if self.fourth_pokemon != null:
-		self.fourth_pokemon.evolve()
-	if self.fifth_pokemon != null:
-		self.fifth_pokemon.evolve()
-	if self.sixth_pokemon != null:
-		self.sixth_pokemon.evolve()
+func _check_evolution(pokemon):
+	sceneManager = Utils.Get_Scene_Manager()
+	if sceneManager.get_child(1).get_child_count() == 0:
+		pokemon.evolve()
+	else:
+		evolution_queue.append(pokemon)
 
-func _check_move_learning():
-	if self.first_pokemon != null:
-		self.first_pokemon._check_move_to_learn()
-	if self.second_pokemon != null:
-		self.second_pokemon._check_move_to_learn()
-	if self.third_pokemon != null:
-		self.third_pokemon._check_move_to_learn()
-	if self.fourth_pokemon != null:
-		self.fourth_pokemon._check_move_to_learn()
-	if self.fifth_pokemon != null:
-		self.fifth_pokemon._check_move_to_learn()
-	if self.sixth_pokemon != null:
-		self.sixth_pokemon._check_move_to_learn()
+func _check_move_learning(pokemon):
+	pokemon._check_move_to_learn()
+
 
 func _ready():
 	yield(get_tree().create_timer(2),"timeout")
@@ -165,9 +150,25 @@ func switch(first_slot, second_slot):
 		sixth_pokemon.change_path = "sixth_pokemon"
 	return
 
+func _start_evolution():
+	sceneManager = Utils.Get_Scene_Manager()
+	if sceneManager != null:
+		if sceneManager.get_child(1).get_child_count() == 0:
+			if evolution_queue.size() > 0:
+				
+				for i in evolution_queue:
+					i.evolve()
+					yield(sceneManager.get_child(9).get_child(0),"evolution_done")
+					evolution_queue.erase(i)
+				Utils.get_player().set_physics_process(true)
+	return
 
 func _physics_process(_delta):
 	if current_pokemon != null:
 		if current_pokemon.opposing_pokemon == null and OpposingTrainerMonsters.pokemon != null:
 			current_pokemon.opposing_pokemon = OpposingTrainerMonsters.pokemon
+
+	
+	
+	
 
