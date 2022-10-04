@@ -10,5 +10,6 @@ Name = "Test_move_2"
 Types = 2
 learned_level = 12
 pp = 40
+max_pp = 40
 description = "None"
 type_image = ExtResource( 2 )

@@ -10,5 +10,6 @@ Name = "Skull bash"
 Types = 1
 learned_level = 15
 pp = 30
+max_pp = 30
 description = "The user charges on at full speed at the oponent with his skull"
 type_image = ExtResource( 2 )

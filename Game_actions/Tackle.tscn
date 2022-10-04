@@ -9,5 +9,6 @@ power = 50
 Name = "Tackle"
 Types = 1
 pp = 40
+max_pp = 40
 description = "The pokemon attacks head on the opponent"
 type_image = ExtResource( 2 )

@@ -10,5 +10,6 @@ Name = "Scratch"
 Types = 1
 learned_level = 4
 pp = 35
+max_pp = 35
 description = "The pokemon scratches it's opponent"
 type_image = ExtResource( 2 )
