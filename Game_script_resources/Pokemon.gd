@@ -60,7 +60,7 @@ export(int)var  base_friend_ship
 export(float)var  height
 export(float)var  weight
 
-export(int,"confused","frozen","burned","paralyzed","poisoned","none") var status_effect
+export(int,"confused","frozen","burned","paralyzed","poisoned","none") var status_effect 
 
 var Max_health_points
 var Max_attack
@@ -257,7 +257,10 @@ func _calculate_experience():
 			experince_to_next_level = (pow(level,3)*((level+14)/50.0))
 		elif 36 < level and level < 100:
 			experince_to_next_level = pow(level,3)*(((level/2.0)+32)/50)
-
+	if experince_to_next_level != 0:
+		if experince_gained >= experince_to_next_level:
+			level += 1
+			_calculate_experience()
 
 func _update_level():
 	if experince_to_next_level != 0:
@@ -621,3 +624,13 @@ func _wild_battle():
 
 func _wild_battle_attack():
 	self.Learned_moves[rng_move]._calculate_damage()
+
+func _heal():
+	Current_health_points = Max_health_points
+	Current_attack = Max_attack
+	Current_defense = Max_defense
+	Current_special_attack = Max_special_attack
+	Current_special_defense = Max_special_defense
+	Current_speed = Max_speed
+	status_effect = 5
+	print(status_effect)

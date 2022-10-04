@@ -47,9 +47,9 @@ func _finish_dialog():
 		greeting_dialog = true
 		yield(get_tree().create_timer(0.2),"timeout")
 		player.interacting = false
-		player.is_talking = false
-		player = null
+		player.is_talking = false	
 	dialog = null
+		
 
 func _function_manager(function):
 	if function[0] == "Choice":
@@ -83,28 +83,26 @@ func _ending_dialog():
 func _heal_pokemon():
 	healing = true
 	if PlayerPokemon.first_pokemon != null:
-		PlayerPokemon.first_pokemon.Current_health_points = PlayerPokemon.first_pokemon.Max_health_points
+		PlayerPokemon.first_pokemon._heal()
 	if PlayerPokemon.second_pokemon != null:
-		PlayerPokemon.second_pokemon.Current_health_points = PlayerPokemon.second_pokemon.Max_health_points
+		PlayerPokemon.second_pokemon._heal()
 	if PlayerPokemon.third_pokemon != null:
-		PlayerPokemon.third_pokemon.Current_health_points = PlayerPokemon.third_pokemon.Max_health_points
+		PlayerPokemon.third_pokemon._heal()
 	if PlayerPokemon.fourth_pokemon != null:
-		PlayerPokemon.fourth_pokemon.Current_health_points = PlayerPokemon.fourth_pokemon.Max_health_points
+		PlayerPokemon.fourth_pokemon._heal()
 	if PlayerPokemon.fifth_pokemon != null:
-		PlayerPokemon.fifth_pokemon.Current_health_points = PlayerPokemon.fifth_pokemon.Max_health_points
+		PlayerPokemon.fifth_pokemon._heal()
 	if PlayerPokemon.sixth_pokemon != null:
-		PlayerPokemon.sixth_pokemon.Current_health_points = PlayerPokemon.sixth_pokemon.Max_health_points
+		PlayerPokemon.sixth_pokemon._heal()
 	return
 
 func _healing_animation():
-	print("healing_animation")
 	if Cut_scene_player != null:
 		var cut_scene_player = get_node(Cut_scene_player)
 		cut_scene_player.play("Heal")
 		cut_scene_player.connect("animation_finished",self,"_finish_healing_animation")
 	
 func _finish_healing_animation(anim_name:String):
-	print("finish healing_animation")
 	if anim_name == "Heal":
 		healing = false
 		_ending_dialog()
