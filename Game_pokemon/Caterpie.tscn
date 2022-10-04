@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Game_script_resources/Pokemon.gd" type="Script" id=1]
-[ext_resource path="res://Pokemon_NO/Pokemon/Pokemon10.png" type="Texture" id=2]
+[ext_resource path="res://Pokemon/Caterpie.png" type="Texture" id=2]
 [ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=3]
 
 [node name="Caterpie" type="Node2D" groups=["Presist"]]
@@ -16,7 +16,6 @@ Damage_normally_by = [ 1, 13, 6, 16, 9, 10, 3, 7, 15, 8, 17, 18 ]
 Weak_to = [ 4, 14, 2 ]
 Resistant_to = [ 12, 5, 10 ]
 Immune_to = [ 0 ]
-Moves = [ ExtResource( 3 ) ]
 catch_rate = 255.0
 Levelling_rate = "Medium_fast"
 Min_Hatch_time = 2805

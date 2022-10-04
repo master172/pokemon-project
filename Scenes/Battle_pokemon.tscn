@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assests/libraries/battle_pokemon.png" type="Texture" id=1]
-[ext_resource path="res://Pokemon_NO/Pokemon/Pokemon3.png" type="Texture" id=2]
+[ext_resource path="res://Pokemon/Venasaur.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Battle_pokemon.gd" type="Script" id=3]
 [ext_resource path="res://assests/libraries/battle_pokemon_selecter.png" type="Texture" id=4]
 
@@ -25,6 +25,7 @@ position = Vector2( 1, 2 )
 
 [node name="Pokemon_Sprite" type="Sprite" parent="Control/Pokemons/Pokemon1"]
 position = Vector2( 38, 35 )
+texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 32.8181, 9.00197, 27.6203, 23.8754 )
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assests/libraries/Ui/Poke_selector_bg.png" type="Texture" id=1]
-[ext_resource path="res://Pokemon_NO/Pokemon/Pokemon1.png" type="Texture" id=2]
+[ext_resource path="res://Pokemon/Bulbasaur.png" type="Texture" id=2]
 [ext_resource path="res://assests/items/pngwing.com.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Poke_box.gd" type="Script" id=4]
 

@@ -14,9 +14,8 @@
 [ext_resource path="res://Ui/battle_boxes/Attack_box_3.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Ui/battle_boxes/Attack_box_4.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Ui/Poke_box.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Pokemon_NO/Pokemon/Pokemon1.png" type="Texture" id=15]
+[ext_resource path="res://Pokemon/Venasaur.png" type="Texture" id=15]
 [ext_resource path="res://Ui/Capture_box.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Pokemon_NO/Pokemon/Pokemon3.png" type="Texture" id=17]
 [ext_resource path="res://assests/libraries/health.png" type="Texture" id=18]
 [ext_resource path="res://assests/libraries/Ui/Battle identifier.png" type="Texture" id=19]
 [ext_resource path="res://assests/libraries/Ui/Battle identifier 0.png" type="Texture" id=20]
@@ -27,6 +26,7 @@
 [ext_resource path="res://assests/libraries/Ui/Do-you-want-t0.png" type="Texture" id=25]
 [ext_resource path="res://assests/libraries/Ui/Do-you-want-to-yes.png" type="Texture" id=26]
 [ext_resource path="res://Fonts/Pokemon_16.tres" type="DynamicFont" id=27]
+[ext_resource path="res://Pokemon/Bulbasaur.png" type="Texture" id=28]
 
 [sub_resource type="Animation" id=5]
 resource_name = "Day_night_cycle"
@@ -126,13 +126,13 @@ texture = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 183, 47 )
-texture = ExtResource( 15 )
+texture = ExtResource( 28 )
 region_enabled = true
 region_rect = Rect2( 0, 34, 64, 64 )
 
 [node name="Sprite2" type="Sprite" parent="."]
 position = Vector2( 63, 100 )
-texture = ExtResource( 15 )
+texture = ExtResource( 28 )
 region_enabled = true
 region_rect = Rect2( -1, 100, 64, 59 )
 
@@ -206,7 +206,7 @@ scale = Vector2( 0.4, 0.4 )
 
 [node name="Poke_Sprite" type="Sprite" parent="Battle_identifier/Player_pokemon_0"]
 scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 17 )
+texture = ExtResource( 15 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0.590935, 33.9263, 62.9813, 63.7719 )
@@ -251,7 +251,7 @@ scale = Vector2( -0.4, 0.4 )
 [node name="Poke_Sprite" type="Sprite" parent="Battle_identifier/Enemy_pokemon_0"]
 rotation = 3.14159
 scale = Vector2( -0.7, -0.7 )
-texture = ExtResource( 17 )
+texture = ExtResource( 15 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0.590935, 33.9263, 62.9813, 63.7719 )

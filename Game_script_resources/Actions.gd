@@ -17,6 +17,7 @@ export(int) var learned_level
 var current_holder
 
 export(int) var pp
+export(int) var max_pp
 
 var learned = false
 
@@ -179,3 +180,6 @@ func _check_to_add():
 		to_add = true
 	elif learned == true and to_add == true:
 		to_add = true
+
+func _heal():
+	pp = max_pp
