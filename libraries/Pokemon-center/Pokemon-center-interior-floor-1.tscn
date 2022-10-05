@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://players/ash/ash.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assests/libraries/buildings/Pokemon-center_interior.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://npc's/Nurse-joy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assests/libraries/buildings/Pokemon-center-table-cover.png" type="Texture" id=6]
 [ext_resource path="res://libraries/Pokemon-center/Poke-ball-sort.gd" type="Script" id=7]
+[ext_resource path="res://libraries/Pc.tscn" type="PackedScene" id=8]
 [ext_resource path="res://npc's/Npc-misc/Pokemon-center-panel.tscn" type="PackedScene" id=9]
 [ext_resource path="res://npc's/Npc-misc/Glowing-poke-ball.tscn" type="PackedScene" id=10]
 
@@ -409,6 +410,10 @@ anims/Heal = SubResource( 27 )
 anims/RESET = SubResource( 29 )
 
 [node name="Position2D" type="Position2D" parent="."]
+
+[node name="StaticBody2D" parent="." instance=ExtResource( 8 )]
+position = Vector2( 64, -48 )
+z_index = 1
 
 [connection signal="body_entered" from="Collision/door" to="Collision/door" method="_on_door_body_entered"]
 [connection signal="body_exited" from="Collision/door" to="Collision/door" method="_on_door_body_exited"]
