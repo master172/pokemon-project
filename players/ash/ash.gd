@@ -190,20 +190,24 @@ func set_spawn(location: Vector2, direction: Vector2):
 	
 
 func _interact():
+	
 
 	if interaction_ray.is_colliding():
 		if !is_moving:
 			if interaction_ray.get_collider().is_in_group("Interactable"):
 				if Input.is_action_just_pressed("accept") and interacting == false:
-					interacting = true
-					is_talking = true
-					if interaction_ray.get_collider().has_method("_Start_dialog"):
-						interaction_ray.get_collider()._Start_dialog()
-						interaction_ray.get_collider().player = self
-					elif interaction_ray.get_collider().has_method("_interact_out_put"):
-						interaction_ray.get_collider()._interact_out_put()
-						interacting = false
-						is_talking = false
+					var sceneManager = Utils.Get_Scene_Manager()
+					if sceneManager.get_child(6).get_child_count() == 0:
+					
+						interacting = true
+						is_talking = true
+						if interaction_ray.get_collider().has_method("_Start_dialog"):
+							interaction_ray.get_collider()._Start_dialog()
+							interaction_ray.get_collider().player = self
+						elif interaction_ray.get_collider().has_method("_interact_out_put"):
+							interaction_ray.get_collider()._interact_out_put()
+							interacting = false
+							is_talking = false
 		
 
 func interact_update():
