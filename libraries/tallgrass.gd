@@ -1,6 +1,6 @@
 extends Node2D
 
-export(int,"1","1/2","1/3","1/4") var encounter_rate
+export(String,"1","1/2","1/3","1/4") var encounter_rate
 
 var rng = RandomNumberGenerator.new()
 var rng_new = RandomNumberGenerator.new()
@@ -22,9 +22,22 @@ export(int) var max_level
 
 export(Array,String,FILE) var pokemons
 
+export(Array,float,0,100) var pokemon_chances
+
+var encounter_chance : int
+
 var current_pokemon
 
 func _ready():
+	if encounter_rate == "1":
+		encounter_chance = 1
+	elif encounter_rate == "1/2":
+		encounter_chance = 2
+	elif encounter_rate == "1/3":
+		encounter_chance = 3
+	elif encounter_rate == "1/4":
+		encounter_chance = 4
+	
 	visible = false
 	if is_invisible:
 		visible = false
@@ -77,7 +90,7 @@ func _on_Area2D_body_exited(_body):
 func randomize_pokemon():
 	rng.randomize()
 	var in_battle : bool = false
-	var rng_0 = rng.randi_range(0,3)
+	var rng_0 = rng.randi_range(0,encounter_chance)
 	if rng_0 == 0:
 		in_battle = true
 	else:
@@ -91,14 +104,17 @@ func randomize_pokemon():
 func encounter():
 	if OpposingTrainerMonsters.pokemon == null:
 		rng_new.randomize()
-		var rng_1 = rng_new.randi_range(0,(pokemons.size()-1))
-		current_pokemon = pokemons[rng_1].instance()
-		LoadedPokemon.add_child(current_pokemon)
-		LoadedPokemon.current_loaded_pokemon = LoadedPokemon.get_child(0)
+		var rng_1 = rng_new.randf_range(0.0,100.0)
+		for i in range(0,pokemon_chances.size()):
+			if rng_1 < pokemon_chances[i]:
+				current_pokemon = pokemons[i].instance()
+				LoadedPokemon.add_child(current_pokemon)
+				LoadedPokemon.current_loaded_pokemon = LoadedPokemon.get_child(0)
 
-		Utils.parent_to_change = OpposingTrainerMonsters
-		LoadedPokemon._change_parent()
-		set_properties()
+				Utils.parent_to_change = OpposingTrainerMonsters
+				LoadedPokemon._change_parent()
+				set_properties()
+				break
 
 
 
