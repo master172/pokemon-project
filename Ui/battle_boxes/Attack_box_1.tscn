@@ -118,9 +118,9 @@ margin_right = 60.0
 margin_bottom = 21.0
 
 [node name="Description_box" type="Label" parent="Control"]
-margin_left = 40.0
+margin_left = 43.0
 margin_top = 3.0
-margin_right = 230.0
+margin_right = 228.0
 margin_bottom = 90.0
 rect_scale = Vector2( 0.4, 0.4 )
 theme = SubResource( 1 )

@@ -26,6 +26,8 @@ export(Texture) var sprite
 export(String) var Name = ""
 export(int) var id 
 
+export var nature : String
+
 export(Array, int,"None","Normal","Fire","Electric","Flying","Ground","Bug","Psychic","Dragon","Steel","Grass","Water","Fighting","Poison","Rock","Ice","Ghost","Dark","Fairy") var Type_1
 
 export(Array, int,"None","Normal","Fire","Electric","Flying","Ground","Bug","Psychic","Dragon","Steel","Grass","Water","Fighting","Poison","Rock","Ice","Ghost","Dark","Fairy") var Type_2
@@ -54,7 +56,7 @@ export(int) var Max_Hatch_time
 
 export(String,"50.0%_male","87.5%_male","25.0%_male","0%_male","100%_male") var gender_ratio
 
-export(int,FLAGS,"Monster","Human-Like","Water 1","Water 3","Bug","MineralFlying","Amorphous","Field","Water 2","Fairy","Ditto","Grass","Dragon","No Eggs Discovered","Gender unknown") var egg_groups
+export(int,FLAGS,"Monster","Human-Like","Water 1","Water 3","Bug","Mineral","Flying","Amorphous","Field","Water 2","Fairy","Ditto","Grass","Dragon","No Eggs Discovered","Gender unknown") var egg_groups
 
 export(int)var  base_friend_ship
 export(float)var  height
@@ -110,7 +112,6 @@ export(int)var sp_defense_yield
 export(String,MULTILINE) var pokemon_entry 
 
 export(PackedScene) var next_form
-export(PackedScene) var last_form
 
 var can_battle :bool = false
 var fainted = false
@@ -119,6 +120,7 @@ var Weakness : float = 1
 var Resistance : float = 1
 
 var gender
+
 
 var level : int = 0
 var experince_gained :int = 0
@@ -129,9 +131,6 @@ var opposing_pokemon
 
 var current_holder
 
-export(String) var evolving_attributes
-export(Texture) var stage_2
-export(Texture) var stage_3
 
 func _calculate_exp_points_to_give():
 	var _opposition_level
@@ -196,12 +195,12 @@ func _add_ev_yield():
 		self.opposing_pokemon.Current_speed += self.speed_yield
 
 func _add_stats():
-	self.Current_health_points += ((self.base_Health_points / 20) + (self.EV_Health_points/50)/7)
-	self.Current_attack += (self.base_attack / 20) + (self.EV_attack / 50)
-	self.Current_defense += (self.base_defense / 20) + (self.EV_defense / 50)
-	self.Current_special_attack += (self.base_special_attack / 20) + (self.EV_special_attack / 50)
-	self.Current_special_defense += (self.base_special_defense / 20) + (self.EV_special_defense / 50)
-	self.Current_speed += (self.base_speed / 20) + (self.EV_speed / 50)
+	self.Current_health_points += ((((self.base_Health_points *2 + self.IV_Health_points + (self.EV_Health_points/4))*self.level)/100 )+ 10 + level) 
+	self.Current_attack += ((((self.base_attack * 2 + self.IV_attack + (self.EV_attack/4))*self.level)/100) + 5) * 1
+	self.Current_defense += ((((self.base_defense * 2 + self.IV_defense + (self.EV_defense/4))*self.level)/100) + 5) * 1
+	self.Current_special_attack += ((((self.base_special_attack * 2 + self.IV_special_attack + (self.EV_special_attack/4))*self.level)/100) + 5) * 1
+	self.Current_special_defense += ((((self.base_special_defense * 2 + self.IV_special_defense + (self.EV_special_defense/4))*self.level)/100) + 5) * 1
+	self.Current_speed += ((((self.base_speed * 2 + self.IV_speed + (self.EV_speed/4))*self.level)/100) + 5) * 1
 	
 func _ready():
 	
@@ -283,49 +282,51 @@ func _calculate_stats():
 		_calculate_special_defense()
 		_calculate_speed()
 		stats_calculated = true
-		return 
+		Claculate_Init_stats()
+
+func Claculate_Init_stats():
+	self.Current_health_points += ((((self.base_Health_points *2 + self.IV_Health_points + (self.EV_Health_points/4))*self.level)/100 )+ 10 + level) 
+	self.Current_attack += ((((self.base_attack * 2 + self.IV_attack + (self.EV_attack/4))*self.level)/100) + 5) * 1
+	self.Current_defense += ((((self.base_defense * 2 + self.IV_defense + (self.EV_defense/4))*self.level)/100) + 5) * 1
+	self.Current_special_attack += ((((self.base_special_attack * 2 + self.IV_special_attack + (self.EV_special_attack/4))*self.level)/100) + 5) * 1
+	self.Current_special_defense += ((((self.base_special_defense * 2 + self.IV_special_defense + (self.EV_special_defense/4))*self.level)/100) + 5) * 1
+	self.Current_speed += ((((self.base_speed * 2 + self.IV_speed + (self.EV_speed/4))*self.level)/100) + 5) * 1
 
 func _calculate_speed():
 	var stats_rng_6 = RandomNumberGenerator.new()
 	stats_rng_6.randomize()
 	EV_attack += stats_rng_6.randi_range(0,32)
-	Current_speed += base_speed + EV_speed + IV_speed
-	Max_speed = Current_speed
+	Max_speed = ((((self.base_speed * 2 + self.IV_speed + (self.EV_speed/4))*self.level)/100) + 5) * 1
 
 func _calculate_attack():
 	var stats_rng_2 = RandomNumberGenerator.new()
 	stats_rng_2.randomize()
 	EV_attack += stats_rng_2.randi_range(0,32)
-	Current_attack += base_attack + EV_attack + IV_attack
-	Max_attack = Current_attack
+	Max_attack = ((((self.base_attack * 2 + self.IV_attack + (self.EV_attack/4))*self.level)/100) + 5) * 1
 
 func _calculate_health_points():
 	var stats_rng_1 = RandomNumberGenerator.new()
 	stats_rng_1.randomize()
 	EV_Health_points += stats_rng_1.randi_range(0,32)
-	Current_health_points += base_Health_points + EV_Health_points + IV_Health_points
-	Max_health_points = Current_health_points
+	Max_health_points = ((((self.base_Health_points *2 + self.IV_Health_points + (self.EV_Health_points/4))*self.level)/100 )+ 10 + level) 
 
 func _calculate_defense():
 	var stats_rng_3 = RandomNumberGenerator.new()
 	stats_rng_3.randomize()
 	EV_defense += stats_rng_3.randi_range(0,32)
-	Current_defense += base_defense + EV_defense + IV_defense
-	Max_defense = Current_defense
+	Max_defense = ((((self.base_defense * 2 + self.IV_defense + (self.EV_defense/4))*self.level)/100) + 5) * 1
 
 func _calculate_special_attack():
 	var stats_rng_4 = RandomNumberGenerator.new()
 	stats_rng_4.randomize()
 	EV_special_attack += stats_rng_4.randi_range(0,32)
-	Current_special_attack += base_special_attack + EV_special_attack + IV_special_attack
-	Max_special_attack = Current_special_attack
+	Max_special_attack = ((((self.base_special_attack * 2 + self.IV_special_attack + (self.EV_special_attack/4))*self.level)/100) + 5) * 1
 
 func _calculate_special_defense():
 	var stats_rng_5 = RandomNumberGenerator.new()
 	stats_rng_5.randomize()
 	EV_special_defense += stats_rng_5.randi_range(0,32)
-	Current_special_defense += base_special_defense + EV_special_defense + IV_special_defense
-	Max_special_defense = Current_special_defense
+	Max_special_defense = ((((self.base_special_defense * 2 + self.IV_special_defense + (self.EV_special_defense/4))*self.level)/100) + 5) * 1
 
 func save():
 	var save_dict = {
@@ -482,15 +483,6 @@ func _calc_weak_and_res():
 	
 func _physics_process(_delta):
 
-	if current_stage == 1:
-		self.sprite = self.sprite
-		next_form = next_form
-	elif current_stage == 2 and stage_2 != null:
-		self.sprite = self.stage_2
-		next_form = last_form
-	elif current_stage == 3 and stage_3 != null:
-		self.sprite = self.stage_3
-		next_form = null
 
 	if self.Current_health_points <= 0:
 		self.fainted = true
@@ -580,6 +572,8 @@ func evolution_value_change():
 		evolver = self.next_form.instance()
 		self.id = self.evolver.id
 		self.Name = self.evolver.Name
+		self.sprite = self.evolver.sprite
+		self.next_form = self.evolver.next_form
 		self.Type_1 = self.evolver.Type_1
 		self.Type_2 = self.evolver.Type_2
 		self.Damage_normally_by = self.evolver.Damage_normally_by

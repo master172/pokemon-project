@@ -54,154 +54,14 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 35 ) ],
-"loop": true,
-"name": "cycle_idle_down",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 8 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 1 ) ],
-"loop": true,
-"name": "walk_left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "walk_up",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 28 ) ],
-"loop": true,
-"name": "cycle_idle_up",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 16 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 14 ) ],
-"loop": true,
-"name": "run_up",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 32 ), ExtResource( 33 ), ExtResource( 32 ), ExtResource( 34 ) ],
-"loop": true,
-"name": "cycle_left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 16 ), ExtResource( 14 ) ],
-"loop": true,
-"name": "run_turn_up",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "walk_down",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "idle_1",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 18 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 17 ) ],
-"loop": true,
-"name": "run_left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 42 ), ExtResource( 43 ) ],
-"loop": true,
-"name": "surf_up",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "idle_3",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 12 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "turn right",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 45 ), ExtResource( 40 ) ],
-"loop": true,
-"name": "surf_left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 48 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 46 ), ExtResource( 49 ) ],
-"loop": true,
-"name": "hm_call",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 44 ), ExtResource( 41 ) ],
-"loop": true,
-"name": "surf_right",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 24 ), ExtResource( 23 ), ExtResource( 25 ), ExtResource( 23 ) ],
-"loop": true,
-"name": "run_right",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 12 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "walk_right",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 31 ) ],
-"loop": true,
-"name": "cycle_idle_right",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 22 ), ExtResource( 21 ), ExtResource( 20 ), ExtResource( 21 ) ],
-"loop": true,
-"name": "run_down",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "idle_4",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "turn up",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 39 ), ExtResource( 38 ) ],
-"loop": true,
-"name": "surf_down",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "idle_2",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 24 ), ExtResource( 23 ) ],
-"loop": true,
-"name": "run_turn_right",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 8 ), ExtResource( 1 ) ],
-"loop": true,
-"name": "turn left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "turn down",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 18 ), ExtResource( 17 ) ],
-"loop": true,
-"name": "run_turn_left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 30 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ) ],
-"loop": true,
-"name": "cycle_right",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 36 ), ExtResource( 35 ), ExtResource( 37 ), ExtResource( 35 ) ],
 "loop": true,
 "name": "cycle_down",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 35 ) ],
+"loop": true,
+"name": "cycle_idle_down",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 34 ) ],
@@ -209,14 +69,154 @@ animations = [ {
 "name": "cycle_idle_left",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 31 ) ],
+"loop": true,
+"name": "cycle_idle_right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 28 ) ],
+"loop": true,
+"name": "cycle_idle_up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 32 ), ExtResource( 33 ), ExtResource( 32 ), ExtResource( 34 ) ],
+"loop": true,
+"name": "cycle_left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 30 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ) ],
+"loop": true,
+"name": "cycle_right",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 26 ), ExtResource( 27 ), ExtResource( 26 ), ExtResource( 28 ) ],
 "loop": true,
 "name": "cycle_up",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 48 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 46 ), ExtResource( 49 ) ],
+"loop": true,
+"name": "hm_call",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "idle_1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "idle_2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "idle_3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "idle_4",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 22 ), ExtResource( 21 ), ExtResource( 20 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "run_down",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "run_left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 24 ), ExtResource( 23 ), ExtResource( 25 ), ExtResource( 23 ) ],
+"loop": true,
+"name": "run_right",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 22 ), ExtResource( 21 ) ],
 "loop": true,
 "name": "run_turn_down",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "run_turn_left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 24 ), ExtResource( 23 ) ],
+"loop": true,
+"name": "run_turn_right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "run_turn_up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "run_up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 39 ), ExtResource( 38 ) ],
+"loop": true,
+"name": "surf_down",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 45 ), ExtResource( 40 ) ],
+"loop": true,
+"name": "surf_left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 44 ), ExtResource( 41 ) ],
+"loop": true,
+"name": "surf_right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 42 ), ExtResource( 43 ) ],
+"loop": true,
+"name": "surf_up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "turn down",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "turn left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "turn right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "turn up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "walk_down",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "walk_left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "walk_right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "walk_up",
 "speed": 5.0
 } ]
 

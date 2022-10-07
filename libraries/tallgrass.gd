@@ -20,7 +20,7 @@ var player_inside :bool = false
 export(int) var min_level
 export(int) var max_level
 
-export(Array,String,FILE) var pokemons
+export(Array,PackedScene) var pokemons
 
 export(Array,float,0,100) var pokemon_chances
 

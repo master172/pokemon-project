@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game_script_resources/Actions.gd" type="Script" id=1]
+[ext_resource path="res://assests/libraries/Ui/Status_Type_icons/Types/flying.png" type="Texture" id=2]
+
+[node name="WingAttack" type="Node2D" groups=["presistent"]]
+script = ExtResource( 1 )
+power = 60
+Name = "WingAttack"
+Types = 4
+learned_level = 16
+pp = 35
+max_pp = 35
+description = "The foe is struck with large, imposing wings spread wide."
+type_image = ExtResource( 2 )

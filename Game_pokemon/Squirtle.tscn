@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Game_script_resources/Pokemon.gd" type="Script" id=1]
 [ext_resource path="res://Pokemon/Squirtle.png" type="Texture" id=2]
 [ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Game_actions/Pound.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game_actions/WaterGun.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game_actions/Skull bash.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game_pokemon/Wartortle.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game_actions/RapidSpin.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game_actions/HydroPump.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Game_actions/TailWhip.tscn" type="PackedScene" id=9]
 
 [node name="Squirtle" type="Node2D" groups=["Presist"]]
 script = ExtResource( 1 )
@@ -18,7 +22,6 @@ Damage_normally_by = [ 1, 12, 4, 13, 5, 14, 6, 16, 7, 8, 17, 18 ]
 Weak_to = [ 10, 3 ]
 Resistant_to = [ 9, 2, 11, 15 ]
 Immune_to = [ 0 ]
-Moves = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]
 catch_rate = 45.0
 Levelling_rate = "Medium_slow"
 Min_Hatch_time = 5140
@@ -36,13 +39,20 @@ base_defense = 50
 base_special_defense = 65
 base_speed = 43
 defense_yield = 1
+sp_defense_yield = 1
 pokemon_entry = "Its shell is not just for protection. Its rounded shape and the grooves on its surface minimize resistance in water, enabling Squirtle to swim at high speeds."
+next_form = ExtResource( 6 )
 
 [node name="Tackle" parent="." instance=ExtResource( 3 )]
 Types = 0
 
-[node name="Pound" parent="." instance=ExtResource( 4 )]
-Types = 0
-
 [node name="Skull bash" parent="." instance=ExtResource( 5 )]
 Types = 0
+
+[node name="RapidSpin" parent="." instance=ExtResource( 7 )]
+
+[node name="WaterGun" parent="." instance=ExtResource( 4 )]
+
+[node name="HydroPump" parent="." instance=ExtResource( 8 )]
+
+[node name="TailWhip" parent="." instance=ExtResource( 9 )]

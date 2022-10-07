@@ -12,8 +12,9 @@ learned_level = 5
 pp = 40
 max_pp = 40
 special_effects = NodePath("Growl_special")
-description = "Lowers opponent's Attack."
+description = "Lowers opponent's Defense."
 type_image = ExtResource( 3 )
+category = 1
 
 [node name="Growl_special" type="Node" parent="."]
 script = ExtResource( 2 )

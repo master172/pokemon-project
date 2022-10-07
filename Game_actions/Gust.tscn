@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game_script_resources/Actions.gd" type="Script" id=1]
+[ext_resource path="res://assests/libraries/Ui/Status_Type_icons/Types/flying.png" type="Texture" id=2]
+
+[node name="Gust" type="Node2D" groups=["presistent"]]
+script = ExtResource( 1 )
+power = 40
+Name = "Gust"
+Types = 4
+learned_level = 9
+pp = 35
+max_pp = 35
+description = "Strikes the foe with a gust of wind whipped up by wings."
+type_image = ExtResource( 2 )
+category = 2

@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Game_script_resources/Pokemon.gd" type="Script" id=1]
+[ext_resource path="res://Pokemon/Ratta.png" type="Texture" id=2]
+[ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game_pokemon/Raticate.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game_actions/TailWhip.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game_actions/QuickAttack.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game_actions/Bite.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game_actions/SuperFang.tscn" type="PackedScene" id=8]
+
+[node name="Rattata" type="Node2D" groups=["Presist"]]
+script = ExtResource( 1 )
+base_experience_yeild = 57.0
+sprite = ExtResource( 2 )
+Name = "Rattata"
+id = 19
+Type_1 = [ 1 ]
+Type_2 = [ 0 ]
+Damage_normally_by = [ 1, 14, 4, 13, 5, 6, 9, 2, 11, 10, 3, 7, 15, 8, 17, 18 ]
+Weak_to = [ 12 ]
+Resistant_to = [ 0 ]
+Immune_to = [ 16 ]
+level_to_next_form = 20
+catch_rate = 255.0
+Levelling_rate = "Medium_fast"
+Min_Hatch_time = 3855
+Max_Hatch_time = 4111
+gender_ratio = "50.0%_male"
+egg_groups = 128
+base_friend_ship = 70
+height = 0.3
+weight = 3.5
+status_effect = 5
+base_Health_points = 30
+base_attack = 56
+base_special_attack = 25
+base_defense = 35
+base_special_defense = 35
+base_speed = 72
+defense_yield = 1
+pokemon_entry = "A Forest Pokémon, Rattata. It likes cheese, nuts, fruits, and berries. It also comes out into open fields to steal food from stupid travelers."
+next_form = ExtResource( 4 )
+
+[node name="Tackle" parent="." instance=ExtResource( 3 )]
+
+[node name="TailWhip" parent="." instance=ExtResource( 5 )]
+
+[node name="QuickAttack" parent="." instance=ExtResource( 6 )]
+
+[node name="Bite" parent="." instance=ExtResource( 7 )]
+
+[node name="SuperFang" parent="." instance=ExtResource( 8 )]

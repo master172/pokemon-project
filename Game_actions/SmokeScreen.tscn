@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Game_script_resources/Actions.gd" type="Script" id=1]
+[ext_resource path="res://Game_actions/Special_effects/SmokeScreenSpecial.gd" type="Script" id=2]
+[ext_resource path="res://assests/libraries/Ui/Status_Type_icons/Types/fire.png" type="Texture" id=3]
+
+[node name="SmokeScreen" type="Node2D" groups=["presistent"]]
+script = ExtResource( 1 )
+Name = "SmokeScreen"
+Types = 2
+learned_level = 6
+pp = 20
+max_pp = 20
+special_effects = NodePath("SmokeScreenSpecial")
+description = "An obscuring cloud of smoke or ink reduces the foe's accuracy."
+type_image = ExtResource( 3 )
+category = 1
+
+[node name="SmokeScreenSpecial" type="Node" parent="."]
+script = ExtResource( 2 )

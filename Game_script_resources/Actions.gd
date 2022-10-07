@@ -41,7 +41,7 @@ var unlearned = false
 
 export(Texture) var type_image
 
-
+export(int,"physical","status","special") var category
 
 func save():
 	var save_dict = {

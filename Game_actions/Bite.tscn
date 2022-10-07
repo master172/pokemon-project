@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game_script_resources/Actions.gd" type="Script" id=1]
+[ext_resource path="res://assests/libraries/Ui/Status_Type_icons/Types/dark.png" type="Texture" id=2]
+
+[node name="Bite" type="Node2D" groups=["presistent"]]
+script = ExtResource( 1 )
+power = 60
+Name = "Bite"
+Types = 17
+learned_level = 10
+pp = 25
+max_pp = 25
+description = "The user bites with vicious fangs. It may make the foe flinch."
+type_image = ExtResource( 2 )

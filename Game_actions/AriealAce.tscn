@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game_script_resources/Actions.gd" type="Script" id=1]
+[ext_resource path="res://assests/libraries/Ui/Status_Type_icons/Types/flying.png" type="Texture" id=2]
+
+[node name="AriealAce" type="Node2D" groups=["presistent"]]
+script = ExtResource( 1 )
+power = 60
+Name = "AriealAce"
+Types = 4
+learned_level = 23
+pp = 20
+max_pp = 20
+description = "An extremely fast attack against one target. It can't be evaded."
+type_image = ExtResource( 2 )

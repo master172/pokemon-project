@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game_script_resources/Actions.gd" type="Script" id=1]
+[ext_resource path="res://assests/libraries/Ui/Status_Type_icons/Types/water.png" type="Texture" id=2]
+
+[node name="HydroPump" type="Node2D" groups=["presistent"]]
+script = ExtResource( 1 )
+power = 110
+Name = "Hydro Pump"
+Types = 11
+learned_level = 19
+pp = 10
+max_pp = 10
+description = "	A high volume of water is blasted at the foe under great pressure."
+Accuracy = 85.0
+type_image = ExtResource( 2 )
+category = 2
