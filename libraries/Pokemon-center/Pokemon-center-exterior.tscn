@@ -5,10 +5,12 @@
 [node name="Pokemon-center" type="StaticBody2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -40, -38.3 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 501.718, 234.791, 80.5371, 70.5671 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 0, 6, 6, 0, 74, 0, 80, 5, 80, 39, 79, 40, 79, 63, 74, 69, 48, 69, 48, 54, 33, 54, 33, 69, 7, 69, 1, 63, 1, 41, 0, 40 )
+position = Vector2( -40, -38.3 )
+polygon = PoolVector2Array( 0, 23.3, 0, 14.3, 80, 14.3, 80, 26.3, 80, 39, 80, 40.3, 80, 63.3, 80, 70.3, 48, 70.3, 48, 54.3, 32, 54.3, 32, 70.3, 0, 70.3, 0, 63.3, 0, 41.3, 0, 39.3 )

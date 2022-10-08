@@ -484,7 +484,7 @@ func _calc_weak_and_res():
 func _physics_process(_delta):
 
 
-	if self.Current_health_points <= 0:
+	if is_zero_approx(self.Current_health_points) or self.Current_health_points < 0:
 		self.fainted = true
 	else:
 		self.fainted = false

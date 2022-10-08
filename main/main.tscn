@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://players/ash/ash.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/Pallet_town.tscn" type="PackedScene" id=2]
+[ext_resource path="res://main/viridian_city.tscn" type="PackedScene" id=3]
 [ext_resource path="res://main/Route_1.tscn" type="PackedScene" id=6]
 [ext_resource path="res://main/overworld.gd" type="Script" id=17]
 [ext_resource path="res://libraries/Day_and_night/Day_And_night_cycle.tscn" type="PackedScene" id=19]
@@ -15,6 +16,9 @@ __meta__ = {
 [node name="Pallet_town" parent="." instance=ExtResource( 2 )]
 
 [node name="Route_1" parent="." instance=ExtResource( 6 )]
+
+[node name="Viridian_city" parent="." instance=ExtResource( 3 )]
+position = Vector2( -16, -1216 )
 
 [node name="ash" parent="." instance=ExtResource( 1 )]
 position = Vector2( -152, 0 )
