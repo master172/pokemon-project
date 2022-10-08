@@ -1,6 +1,8 @@
 extends Node2D
 class_name Pokemon
 
+var stats_calculated : bool = false
+
 var rng_move
 
 var evolver
@@ -182,25 +184,31 @@ func _lose():
 
 func _level_up():
 	_update_level()
-	_calculate_stats()
 	_add_stats()
 
 func _add_ev_yield():
 	if self.opposing_pokemon != null:
-		self.opposing_pokemon.Current_health_points += self.hp_yield
-		self.opposing_pokemon.Current_attack += self.attack_yield
-		self.opposing_pokemon.Current_defense += self.defense_yield
-		self.opposing_pokemon.Current_special_attack += self.sp_attack_yield
-		self.opposing_pokemon.Current_special_defense += self.sp_defense_yield
-		self.opposing_pokemon.Current_speed += self.speed_yield
+		self.opposing_pokemon.IV_Health_points += self.hp_yield
+		self.opposing_pokemon.IV_attack += self.attack_yield
+		self.opposing_pokemon.IV_defense += self.defense_yield
+		self.opposing_pokemon.IV_special_attack += self.sp_attack_yield
+		self.opposing_pokemon.IV_special_defense += self.sp_defense_yield
+		self.opposing_pokemon.IV_speed += self.speed_yield
 
 func _add_stats():
-	self.Current_health_points += ((((self.base_Health_points *2 + self.IV_Health_points + (self.EV_Health_points/4))*self.level)/100 )+ 10 + level) 
-	self.Current_attack += ((((self.base_attack * 2 + self.IV_attack + (self.EV_attack/4))*self.level)/100) + 5) * 1
-	self.Current_defense += ((((self.base_defense * 2 + self.IV_defense + (self.EV_defense/4))*self.level)/100) + 5) * 1
-	self.Current_special_attack += ((((self.base_special_attack * 2 + self.IV_special_attack + (self.EV_special_attack/4))*self.level)/100) + 5) * 1
-	self.Current_special_defense += ((((self.base_special_defense * 2 + self.IV_special_defense + (self.EV_special_defense/4))*self.level)/100) + 5) * 1
-	self.Current_speed += ((((self.base_speed * 2 + self.IV_speed + (self.EV_speed/4))*self.level)/100) + 5) * 1
+	self.Current_health_points += self.IV_Health_points
+	self.Current_attack += self.IV_attack 
+	self.Current_defense += self.IV_defense 
+	self.Current_special_attack += self.IV_special_attack
+	self.Current_special_defense += self.IV_special_defense
+	self.Current_speed +=  self.IV_speed
+
+	self.IV_Health_points = 0
+	self.IV_attack = 0
+	self.IV_defense = 0
+	self.IV_special_attack = 0
+	self.IV_special_defense = 0
+	self.IV_speed = 0
 	
 func _ready():
 	
@@ -211,6 +219,8 @@ func _ready():
 	
 	
 	yield(get_tree().create_timer(0.2),"timeout")
+
+	_calculate_stats()
 	
 	_check_move_to_learn()
 
@@ -273,7 +283,7 @@ func _update_level():
 		
 
 func _calculate_stats():
-	var stats_calculated : bool = false
+	
 	if stats_calculated == false:
 		_calculate_health_points()
 		_calculate_attack()
@@ -281,8 +291,9 @@ func _calculate_stats():
 		_calculate_special_attack()
 		_calculate_special_defense()
 		_calculate_speed()
-		stats_calculated = true
 		Claculate_Init_stats()
+		stats_calculated = true
+		
 
 func Claculate_Init_stats():
 	self.Current_health_points += ((((self.base_Health_points *2 + self.IV_Health_points + (self.EV_Health_points/4))*self.level)/100 )+ 10 + level) 
@@ -396,6 +407,8 @@ func save():
 		"weight":weight,
 		"pokemon_entry":pokemon_entry,
 		"abilites":abilites,
+
+		"stats_calculated":stats_calculated,
 
 	}
 	return save_dict
