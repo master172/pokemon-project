@@ -210,8 +210,8 @@ pointing/emulate_touch_from_mouse=true
 
 [layer_names]
 
-2d_physics/layer_1="environment"
-2d_physics/layer_2="water"
+2d_physics/layer_1="water"
+2d_physics/layer_2="environment"
 2d_physics/layer_3="ledge"
 2d_physics/layer_4="doors"
 2d_physics/layer_5="interactable"
