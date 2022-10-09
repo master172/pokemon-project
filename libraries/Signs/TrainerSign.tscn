@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assests/libraries/buildings/all_buildings.png" type="Texture" id=1]
+[ext_resource path="res://libraries/Signs/SignInfo.gd" type="Script" id=2]
+
+[node name="TrainerSign" type="StaticBody2D" groups=["Interactable"]]
+collision_layer = 17
+collision_mask = 17
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 44.7116, 407.742, 16.4908, 16.3619 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -8, 8, 8, 8, 8, -8, -8, -8 )

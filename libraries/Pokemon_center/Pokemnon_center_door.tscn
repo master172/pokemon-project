@@ -1,0 +1,104 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://libraries/red_house/door.gd" type="Script" id=1]
+[ext_resource path="res://assests/libraries/buildings/doors/Pokemon_center_door.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=70]
+resource_name = "close_door"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "door_closed"
+} ]
+}
+
+[sub_resource type="Animation" id=71]
+resource_name = "door open"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="RectangleShape2D" id=72]
+extents = Vector2( 8, 7 )
+
+[node name="door" type="Area2D" groups=["door"]]
+position = Vector2( 39.7766, 62.209 )
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 1 )
+next_scene_path = "res://libraries/Pokemon-center/Pokemon-center-interior-floor-1.tscn"
+spawn_location = Vector2( 0, 72 )
+spawn_direction = Vector2( 0, -1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( -39.7766, -38.209 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+anims/close_door = SubResource( 70 )
+"anims/door open" = SubResource( 71 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -39.7766, -38.209 )
+shape = SubResource( 72 )
+
+[connection signal="body_entered" from="." to="." method="_on_door_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_door_body_exited"]

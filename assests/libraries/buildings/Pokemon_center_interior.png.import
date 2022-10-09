@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Pokemon-center-door.png-e9ff8881b4b9b154d900bb499e0b1839.stex"
+path="res://.import/Pokemon_center_interior.png-8a7379d53081d5f98b3b4065bc0d2bb8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assests/libraries/buildings/doors/Pokemon-center-door.png"
-dest_files=[ "res://.import/Pokemon-center-door.png-e9ff8881b4b9b154d900bb499e0b1839.stex" ]
+source_file="res://assests/libraries/buildings/Pokemon_center_interior.png"
+dest_files=[ "res://.import/Pokemon_center_interior.png-8a7379d53081d5f98b3b4065bc0d2bb8.stex" ]
 
 [params]
 

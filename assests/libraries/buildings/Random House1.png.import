@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/33690.png-997df3bab06526110a16fded6ad299d5.stex"
+path="res://.import/Random House1.png-5a9c0b136f2e578ebe6f425c45689dd2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assests/libraries/33690.png"
-dest_files=[ "res://.import/33690.png-997df3bab06526110a16fded6ad299d5.stex" ]
+source_file="res://assests/libraries/buildings/Random House1.png"
+dest_files=[ "res://.import/Random House1.png-5a9c0b136f2e578ebe6f425c45689dd2.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

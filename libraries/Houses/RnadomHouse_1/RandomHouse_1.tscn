@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assests/libraries/buildings/all_buildings.png" type="Texture" id=1]
+
+[node name="RandomHouse_1" type="StaticBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 23.7545, 21.5541, 80.4486, 64.5188 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -40, -16, 40, -16, 40, 32, -8, 32, -8, 8, -24, 8, -24, 32, -40, 32 )

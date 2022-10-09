@@ -21,7 +21,6 @@ __meta__ = {
 position = Vector2( -16, -1216 )
 
 [node name="ash" parent="." instance=ExtResource( 1 )]
-position = Vector2( -152, 0 )
-z_index = 0
+position = Vector2( 40, -1472 )
 
 [node name="Day_And_night_cycle" parent="." instance=ExtResource( 19 )]
