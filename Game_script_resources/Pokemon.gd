@@ -130,7 +130,7 @@ var experince_to_next_level :float = 0
 var max_level:int = 100
 
 var opposing_pokemon
-
+signal enemy_lost(exp_to_give)
 var current_holder
 
 
@@ -163,7 +163,9 @@ func _calculate_exp_points_to_give():
 	else:	
 		exp_gained = exp_gained
 
-signal enemy_lost(exp_to_give)
+
+
+
 
 func _lose():
 	_calculate_exp_points_to_give()
@@ -179,7 +181,38 @@ func _lose():
 		PlayerPokemon._active_pokemon()
 
 	
+func _calculate_gender():
+	var tempGender
+	var genderRng = RandomNumberGenerator.new()
+	genderRng.randomize()
+	if self.gender_ratio == "50.0%_male":
+		tempGender = genderRng.randi_range(0,1)
+		if tempGender == 0:
+			gender = "male"
+		else:
+			gender = "female"
 
+	elif self.gender_ratio == "25.0%_male":
+		tempGender = genderRng.randi_range(0,3)
+		if tempGender == 0:
+			gender = "male"
+		else:
+			gender = "female"
+
+	elif self.gender_ratio == "87.5%_male":
+		tempGender = genderRng.randi_range(0,3)
+		if tempGender != 0:
+			gender = "male"
+		else:
+			gender = "female"
+	
+	elif self.gender_ratio == "0%_male":
+		gender = "female"
+	
+	elif self.gender_ratio == "100%_male":
+		gender = "male"
+	
+	
 			
 
 func _level_up():

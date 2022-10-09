@@ -75,31 +75,91 @@ func _physics_process(_delta):
 		$Pokemon_1.visible = true
 		$Pokemon_1/Pokemon_sprite.texture = PlayerPokemon.first_pokemon.sprite
 		$Pokemon_1/Level.text = String(PlayerPokemon.first_pokemon.level)
+		$Pokemon_1/Current_health.text = String(PlayerPokemon.first_pokemon.Current_health_points)
+		$Pokemon_1/Out_of.text = String(PlayerPokemon.first_pokemon.Max_health_points)
+		if PlayerPokemon.first_pokemon.gender == "male":
+			$Pokemon_1/gender.frame = 0
+		elif PlayerPokemon.first_pokemon.gender == "female":
+			$Pokemon_1/gender.frame = 1
+		
+		$Pokemon_1/HealthBarHolder/HealthBar.max_value = PlayerPokemon.first_pokemon.Max_health_points
+		$Pokemon_1/HealthBarHolder/HealthBar.value = PlayerPokemon.first_pokemon.Current_health_points
+
 		p1 = true
 	if PlayerPokemon.second_pokemon != null:
 		$Pokemon_2.visible = true
 		$Pokemon_2/Pokemon_sprite.texture = PlayerPokemon.second_pokemon.sprite
 		$Pokemon_2/Level.text = String(PlayerPokemon.second_pokemon.level)
+		$Pokemon_2/Current_health.text = String(PlayerPokemon.second_pokemon.Current_health_points)
+		$Pokemon_2/Out_of.text = String(PlayerPokemon.second_pokemon.Max_health_points)
+		if PlayerPokemon.second_pokemon.gender == "male":
+			$Pokemon_2/gender.frame = 0
+		elif PlayerPokemon.second_pokemon.gender == "female":
+			$Pokemon_2/gender.frame = 1
+		
+		$Pokemon_2/HealthBarHolder/HealthBar.max_value = PlayerPokemon.second_pokemon.Max_health_points
+		$Pokemon_2/HealthBarHolder/HealthBar.value = PlayerPokemon.second_pokemon.Current_health_points
+
 		p2 = true
 	if PlayerPokemon.third_pokemon != null:
 		$Pokemon_3.visible = true
 		$Pokemon_3/Pokemon_sprite.texture = PlayerPokemon.third_pokemon.sprite
 		$Pokemon_3/Level.text = String(PlayerPokemon.third_pokemon.level)
+		$Pokemon_3/Current_health.text = String(PlayerPokemon.third_pokemon.Current_health_points)
+		$Pokemon_3/Out_of.text = String(PlayerPokemon.third_pokemon.Max_health_points)
+		if PlayerPokemon.second_pokemon.gender == "male":
+			$Pokemon_3/gender.frame = 0
+		elif PlayerPokemon.second_pokemon.gender == "female":
+			$Pokemon_3/gender.frame = 1
+
+		$Pokemon_3/HealthBarHolder/HealthBar.max_value = PlayerPokemon.third_pokemon.Max_health_points
+		$Pokemon_3/HealthBarHolder/HealthBar.value = PlayerPokemon.third_pokemon.Current_health_points
+
 		p3 = true
 	if PlayerPokemon.fourth_pokemon != null:
 		$Pokemon_4.visible = true
 		$Pokemon_4/Pokemon_sprite.texture = PlayerPokemon.fourth_pokemon.sprite
 		$Pokemon_4/Level.text = String(PlayerPokemon.fourth_pokemon.level)
+		$Pokemon_4/Current_health.text = String(PlayerPokemon.fourth_pokemon.Current_health_points)
+		$Pokemon_4/Out_of.text = String(PlayerPokemon.fourth_pokemon.Max_health_points)
+		if PlayerPokemon.fourth_pokemon.gender == "male":
+			$Pokemon_4/gender.frame = 0
+		elif PlayerPokemon.fourth_pokemon.gender == "female":
+			$Pokemon_4/gender.frame = 1
+
+		$Pokemon_4/HealthBarHolder/HealthBar.max_value = PlayerPokemon.fourth_pokemon.Max_health_points
+		$Pokemon_4/HealthBarHolder/HealthBar.value = PlayerPokemon.fourth_pokemon.Current_health_points
+
 		p4 = true
 	if PlayerPokemon.fifth_pokemon != null:
 		$Pokemon_5.visible = true
 		$Pokemon_5/Pokemon_sprite.texture = PlayerPokemon.fifth_pokemon.sprite
 		$Pokemon_5/Level.text = String(PlayerPokemon.fifth_pokemon.level)
+		$Pokemon_5/Current_health.text = String(PlayerPokemon.fifth_pokemon.Current_health_points)
+		$Pokemon_5/Out_of.text = String(PlayerPokemon.fifth_pokemon.Max_health_points)
+		if PlayerPokemon.fifth_pokemon.gender == "male":
+			$Pokemon_5/gender.frame = 0
+		elif PlayerPokemon.fifth_pokemon.gender == "female":
+			$Pokemon_5/gender.frame = 1
+
+		$Pokemon_5/HealthBarHolder/HealthBar.max_value = PlayerPokemon.fifth_pokemon.Max_health_points
+		$Pokemon_5/HealthBarHolder/HealthBar.value = PlayerPokemon.ftfth_pokemon.Current_health_points
+
 		p5 = true
 	if PlayerPokemon.sixth_pokemon != null:
 		$Pokemon_6.visible = true
 		$Pokemon_6/Pokemon_sprite.texture = PlayerPokemon.sixth_pokemon.sprite
 		$Pokemon_6/Level.text = String(PlayerPokemon.sixth_pokemon.level)
+		$Pokemon_6/Current_health.text = String(PlayerPokemon.sixth_pokemon.Current_health_points)
+		$Pokemon_6/Out_of.text = String(PlayerPokemon.sixth_pokemon.Max_health_points)
+		if PlayerPokemon.sixth_pokemon.gender == "male":
+			$Pokemon_6/gender.frame = 0
+		elif PlayerPokemon.sixth_pokemon.gender == "female":
+			$Pokemon_6/gender.frame = 1
+
+		$Pokemon_6/HealthBarHolder/HealthBar.max_value = PlayerPokemon.sixth_pokemon.Max_health_points
+		$Pokemon_6/HealthBarHolder/HealthBar.value = PlayerPokemon.sixth_pokemon.Current_health_points
+
 		p6 = true
 
 

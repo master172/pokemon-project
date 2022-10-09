@@ -227,9 +227,9 @@ texture_progress = ExtResource( 18 )
 [node name="Exp_bar" type="TextureProgress" parent="Battle_identifier/Player_pokemon_0"]
 modulate = Color( 0.0745098, 0.847059, 0.776471, 1 )
 margin_left = 60.0
-margin_top = 13.0
+margin_top = 15.0
 margin_right = 120.0
-margin_bottom = 17.0
+margin_bottom = 19.0
 rect_scale = Vector2( 2.5, 2.7 )
 value = 100.0
 texture_progress = ExtResource( 18 )

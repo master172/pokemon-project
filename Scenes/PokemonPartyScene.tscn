@@ -1,12 +1,16 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assests/libraries/party_background.png" type="Texture" id=1]
+[ext_resource path="res://assests/libraries/health.png" type="Texture" id=2]
 [ext_resource path="res://assests/libraries/main_pokemon_background.png" type="Texture" id=3]
 [ext_resource path="res://assests/libraries/pkmnfl.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://libraries/Themes/ProgressBarTheme.tres" type="Theme" id=5]
 [ext_resource path="res://assests/libraries/gender_icons.png" type="Texture" id=6]
 [ext_resource path="res://assests/libraries/standby_pokemon_background.png" type="Texture" id=7]
 [ext_resource path="res://assests/libraries/exit_background_button.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/PokemonPartyScene.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/HealthBar.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/HealthBar.gd" type="Script" id=11]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Breath"
@@ -27,6 +31,13 @@ tracks/0/keys = {
 [sub_resource type="DynamicFont" id=2]
 size = 10
 font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 60, 4 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 1, 1, 1, 0 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "Breath"
@@ -149,9 +160,6 @@ margin_top = 49.4977
 margin_right = 56.0058
 margin_bottom = 57.4977
 custom_fonts/font = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Current_health" type="Label" parent="Pokemon_1"]
 margin_left = 48.0058
@@ -172,6 +180,22 @@ position = Vector2( 76.0092, 52.8726 )
 z_index = 2
 texture = ExtResource( 6 )
 hframes = 2
+
+[node name="HealthBarHolder" type="Node2D" parent="Pokemon_1"]
+position = Vector2( 0, -0.264484 )
+
+[node name="HealthBar" type="ProgressBar" parent="Pokemon_1/HealthBarHolder"]
+margin_left = 32.0
+margin_top = 60.0
+margin_right = 80.0
+margin_bottom = 68.0
+rect_scale = Vector2( 0.999889, 0.376637 )
+theme = ExtResource( 5 )
+custom_styles/fg = SubResource( 8 )
+custom_styles/bg = SubResource( 9 )
+value = 100.0
+percent_visible = false
+script = ExtResource( 10 )
 
 [node name="Pokemon_2" type="Node2D" parent="."]
 position = Vector2( 135.723, -2.3811 )
@@ -227,14 +251,29 @@ margin_top = 26.005
 margin_right = 89.3008
 margin_bottom = 34.005
 custom_fonts/font = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="gender" type="Sprite" parent="Pokemon_2"]
 position = Vector2( 34.9644, 29.3799 )
 texture = ExtResource( 6 )
 hframes = 2
+
+[node name="HealthBarHolder" type="Node2D" parent="Pokemon_2"]
+position = Vector2( 0.285233, 0.384449 )
+
+[node name="HealthBar" type="ProgressBar" parent="Pokemon_2/HealthBarHolder"]
+modulate = Color( 0, 1, 0.321569, 1 )
+margin_left = 48.4707
+margin_top = 20.4752
+margin_right = 96.4707
+margin_bottom = 28.4752
+rect_scale = Vector2( 1, 0.377 )
+theme = ExtResource( 5 )
+custom_styles/fg = SubResource( 8 )
+custom_styles/bg = SubResource( 9 )
+step = 0.107
+value = 100.0
+percent_visible = false
+script = ExtResource( 11 )
 
 [node name="Pokemon_3" type="Node2D" parent="."]
 position = Vector2( 135.723, 24.6189 )
@@ -295,6 +334,24 @@ position = Vector2( 34.9644, 27.1287 )
 texture = ExtResource( 6 )
 hframes = 2
 
+[node name="HealthBarHolder" type="Node2D" parent="Pokemon_3"]
+position = Vector2( -0.739594, -2.65001 )
+
+[node name="HealthBar" type="ProgressBar" parent="Pokemon_3/HealthBarHolder"]
+modulate = Color( 0, 1, 0.321569, 1 )
+margin_left = 48.4707
+margin_top = 20.4752
+margin_right = 96.4707
+margin_bottom = 28.4752
+rect_scale = Vector2( 1, 0.377 )
+theme = ExtResource( 5 )
+custom_styles/fg = SubResource( 8 )
+custom_styles/bg = SubResource( 9 )
+step = 0.107
+value = 100.0
+percent_visible = false
+script = ExtResource( 11 )
+
 [node name="Pokemon_4" type="Node2D" parent="."]
 position = Vector2( 135.723, 51.6189 )
 
@@ -353,6 +410,24 @@ __meta__ = {
 position = Vector2( 34.9644, 22.6277 )
 texture = ExtResource( 6 )
 hframes = 2
+
+[node name="HealthBarHolder" type="Node2D" parent="Pokemon_4"]
+position = Vector2( -0.702728, -5.59557 )
+
+[node name="HealthBar" type="ProgressBar" parent="Pokemon_4/HealthBarHolder"]
+modulate = Color( 0, 1, 0.321569, 1 )
+margin_left = 48.4707
+margin_top = 20.4752
+margin_right = 96.4707
+margin_bottom = 28.4752
+rect_scale = Vector2( 1, 0.377 )
+theme = ExtResource( 5 )
+custom_styles/fg = SubResource( 8 )
+custom_styles/bg = SubResource( 9 )
+step = 0.107
+value = 100.0
+percent_visible = false
+script = ExtResource( 11 )
 
 [node name="Pokemon_5" type="Node2D" parent="."]
 position = Vector2( 135.723, 78.6189 )
@@ -413,6 +488,24 @@ position = Vector2( 34.9644, 20.3765 )
 texture = ExtResource( 6 )
 hframes = 2
 
+[node name="HealthBarHolder" type="Node2D" parent="Pokemon_5"]
+position = Vector2( -0.768677, -8.62332 )
+
+[node name="HealthBar" type="ProgressBar" parent="Pokemon_5/HealthBarHolder"]
+modulate = Color( 0, 1, 0.321569, 1 )
+margin_left = 48.4707
+margin_top = 20.4752
+margin_right = 96.4707
+margin_bottom = 28.4752
+rect_scale = Vector2( 1, 0.377 )
+theme = ExtResource( 5 )
+custom_styles/fg = SubResource( 8 )
+custom_styles/bg = SubResource( 9 )
+step = 0.107
+value = 100.0
+percent_visible = false
+script = ExtResource( 11 )
+
 [node name="Pokemon_6" type="Node2D" parent="."]
 position = Vector2( 135.723, 105.619 )
 
@@ -471,6 +564,24 @@ __meta__ = {
 position = Vector2( 34.9644, 17.0003 )
 texture = ExtResource( 6 )
 hframes = 2
+
+[node name="HealthBarHolder" type="Node2D" parent="Pokemon_6"]
+position = Vector2( -0.713989, -11.5922 )
+
+[node name="HealthBar" type="ProgressBar" parent="Pokemon_6/HealthBarHolder"]
+modulate = Color( 0, 1, 0.321569, 1 )
+margin_left = 48.4707
+margin_top = 20.4752
+margin_right = 96.4707
+margin_bottom = 28.4752
+rect_scale = Vector2( 1, 0.377 )
+theme = ExtResource( 5 )
+custom_styles/fg = SubResource( 8 )
+custom_styles/bg = SubResource( 9 )
+step = 0.107
+value = 100.0
+percent_visible = false
+script = ExtResource( 11 )
 
 [node name="Cancel_sprite" type="Sprite" parent="."]
 position = Vector2( 181.355, 131.619 )

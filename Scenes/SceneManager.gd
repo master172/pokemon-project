@@ -137,6 +137,8 @@ func finished_fading():
 			SceneLoaded.current_scene = String(next_scene)
 			yield(get_tree().create_timer(0.1),"timeout")
 			current_scene._apply_data()
+
+			
 				
 
 		Transition_Type.PARTY_SCENE:

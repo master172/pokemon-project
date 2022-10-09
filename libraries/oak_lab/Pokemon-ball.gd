@@ -28,6 +28,7 @@ func _ready():
 	pokemon.level = 5
 	pokemon._calculate_stats()
 	pokemon._calculate_experience()
+	pokemon._calculate_gender()
 	
 
 func _selected(_no_idea):

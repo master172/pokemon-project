@@ -125,6 +125,7 @@ func set_properties():
 		current_pokemon.level = rng_2
 		current_pokemon._calculate_stats()
 		current_pokemon._calculate_experience()
+		current_pokemon._calculate_gender()
 		after_done()
 
 func after_done():
