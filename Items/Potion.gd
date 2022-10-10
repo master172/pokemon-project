@@ -7,6 +7,8 @@ func _use(_pokemon):
 	if _pokemon.Current_health_points < _pokemon.Max_health_points:
 		if _pokemon.Max_health_points - self.healing_points <= _pokemon.Current_health_points:
 			_pokemon.Current_health_points += 20
+			if _pokemon.Current_health_points > _pokemon.Max_health_points:
+				_pokemon.Current_health_points = _pokemon.Max_health_points
 			self.count -= 1
 		else:
 			_pokemon.Current_health_points = _pokemon.Max_health_points

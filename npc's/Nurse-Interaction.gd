@@ -105,7 +105,7 @@ func _healing_animation():
 func _finish_healing_animation(anim_name:String):
 	if anim_name == "Heal":
 		healing = false
-		var _player = get_parent().get_node("CurrentScene").get_children().back().find_node("ash")
+		var _player = Utils.get_player()
 		var currentScene = Utils.Get_Scene_Manager().get_child(0)
 
 		_player._save_data()

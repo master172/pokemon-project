@@ -89,20 +89,20 @@ export(int) var base_special_defense
 export(int) var base_speed
 
 
-var IV_Health_points = 0
-var IV_attack = 0
-var IV_special_attack = 0
-var IV_defense = 0
-var IV_special_defense = 0
-var IV_speed = 0
-
-
 var EV_Health_points = 0
 var EV_attack = 0
 var EV_special_attack = 0
 var EV_defense = 0
 var EV_special_defense = 0
 var EV_speed = 0
+
+
+var IV_Health_points = 0
+var IV_attack = 0
+var IV_special_attack = 0
+var IV_defense = 0
+var IV_special_defense = 0
+var IV_speed = 0
 
 export(int)var hp_yield 
 export(int)var attack_yield 
@@ -216,32 +216,30 @@ func _calculate_gender():
 			
 
 func _level_up():
-	_update_level()
-	_add_stats()
+	if experince_to_next_level != 0:
+		if experince_gained >= experince_to_next_level:
+			_update_level()
+			_add_stats()
 
 func _add_ev_yield():
-	if self.opposing_pokemon != null:
-		self.opposing_pokemon.IV_Health_points += self.hp_yield
-		self.opposing_pokemon.IV_attack += self.attack_yield
-		self.opposing_pokemon.IV_defense += self.defense_yield
-		self.opposing_pokemon.IV_special_attack += self.sp_attack_yield
-		self.opposing_pokemon.IV_special_defense += self.sp_defense_yield
-		self.opposing_pokemon.IV_speed += self.speed_yield
+	
+	if BattleManager.multi_battle == false:
+		if PlayerPokemon.current_pokemon != null:
+			PlayerPokemon.current_pokemon.EV_Health_points += self.hp_yield 
+			PlayerPokemon.current_pokemon.EV_attack += self.attack_yield
+			PlayerPokemon.current_pokemon.EV_defense += self.defense_yield
+			PlayerPokemon.current_pokemon.EV_special_attack += self.sp_attack_yield
+			PlayerPokemon.current_pokemon.EV_special_defense += self.sp_defense_yield
+			PlayerPokemon.current_pokemon.EV_speed += self.speed_yield
 
 func _add_stats():
-	self.Current_health_points += self.IV_Health_points
-	self.Current_attack += self.IV_attack 
-	self.Current_defense += self.IV_defense 
-	self.Current_special_attack += self.IV_special_attack
-	self.Current_special_defense += self.IV_special_defense
-	self.Current_speed +=  self.IV_speed
+	self.Max_health_points += self.EV_Health_points
+	self.Max_attack += self.EV_attack 
+	self.Max_defense += self.EV_defense 
+	self.Max_special_attack += self.EV_special_attack
+	self.Max_special_defense += self.EV_special_defense
+	self.Max_speed +=  self.EV_speed
 
-	self.IV_Health_points = 0
-	self.IV_attack = 0
-	self.IV_defense = 0
-	self.IV_special_attack = 0
-	self.IV_special_defense = 0
-	self.IV_speed = 0
 	
 func _ready():
 	
@@ -339,37 +337,37 @@ func Claculate_Init_stats():
 func _calculate_speed():
 	var stats_rng_6 = RandomNumberGenerator.new()
 	stats_rng_6.randomize()
-	EV_attack += stats_rng_6.randi_range(0,32)
+	IV_attack += stats_rng_6.randi_range(0,32)
 	Max_speed = ((((self.base_speed * 2 + self.IV_speed + (self.EV_speed/4))*self.level)/100) + 5) * 1
 
 func _calculate_attack():
 	var stats_rng_2 = RandomNumberGenerator.new()
 	stats_rng_2.randomize()
-	EV_attack += stats_rng_2.randi_range(0,32)
+	IV_attack += stats_rng_2.randi_range(0,32)
 	Max_attack = ((((self.base_attack * 2 + self.IV_attack + (self.EV_attack/4))*self.level)/100) + 5) * 1
 
 func _calculate_health_points():
 	var stats_rng_1 = RandomNumberGenerator.new()
 	stats_rng_1.randomize()
-	EV_Health_points += stats_rng_1.randi_range(0,32)
+	IV_Health_points += stats_rng_1.randi_range(0,32)
 	Max_health_points = ((((self.base_Health_points *2 + self.IV_Health_points + (self.EV_Health_points/4))*self.level)/100 )+ 10 + level) 
 
 func _calculate_defense():
 	var stats_rng_3 = RandomNumberGenerator.new()
 	stats_rng_3.randomize()
-	EV_defense += stats_rng_3.randi_range(0,32)
+	IV_defense += stats_rng_3.randi_range(0,32)
 	Max_defense = ((((self.base_defense * 2 + self.IV_defense + (self.EV_defense/4))*self.level)/100) + 5) * 1
 
 func _calculate_special_attack():
 	var stats_rng_4 = RandomNumberGenerator.new()
 	stats_rng_4.randomize()
-	EV_special_attack += stats_rng_4.randi_range(0,32)
+	IV_special_attack += stats_rng_4.randi_range(0,32)
 	Max_special_attack = ((((self.base_special_attack * 2 + self.IV_special_attack + (self.EV_special_attack/4))*self.level)/100) + 5) * 1
 
 func _calculate_special_defense():
 	var stats_rng_5 = RandomNumberGenerator.new()
 	stats_rng_5.randomize()
-	EV_special_defense += stats_rng_5.randi_range(0,32)
+	IV_special_defense += stats_rng_5.randi_range(0,32)
 	Max_special_defense = ((((self.base_special_defense * 2 + self.IV_special_defense + (self.EV_special_defense/4))*self.level)/100) + 5) * 1
 
 func save():
@@ -388,19 +386,19 @@ func save():
 		"Max_special_attack":Max_special_attack,
 		"Max_special_defense":Max_special_defense,
 
-		"EV_Health_points": EV_Health_points,
-		"EV_speed":EV_speed,
-		"EV_attack":EV_attack,
-		"EV_defense":EV_defense,
-		"EV_special_attack":EV_special_attack,
-		"EV_special_defense":EV_special_defense,
-
 		"IV_Health_points": IV_Health_points,
-		"IV_speed": IV_speed,
-		"IV_attack": IV_attack,
-		"IV_defense": IV_defense,
-		"IV_special_attack": IV_special_attack,
-		"IV_special_defense": IV_special_defense,
+		"IV_speed":IV_speed,
+		"IV_attack":IV_attack,
+		"IV_defense":IV_defense,
+		"IV_special_attack":IV_special_attack,
+		"IV_special_defense":IV_special_defense,
+
+		"EV_Health_points": EV_Health_points,
+		"EV_speed": EV_speed,
+		"EV_attack": EV_attack,
+		"EV_defense": EV_defense,
+		"EV_special_attack": EV_special_attack,
+		"EV_special_defense": EV_special_defense,
 
 		"filename" : get_filename(),
 		"parent" : get_parent().get_path(),
@@ -530,7 +528,7 @@ func _calc_weak_and_res():
 func _physics_process(_delta):
 
 
-	if is_zero_approx(self.Current_health_points) or self.Current_health_points < 0:
+	if self.Current_health_points < 0.9:
 		self.fainted = true
 	else:
 		self.fainted = false

@@ -21,16 +21,16 @@ enum  what_turn {ALLY_TURN, ENEMY_TURN}
 var current_turn = what_turn.ENEMY_TURN
 
 func Ally_turn():
-	print("Ally_turn")
+	#print("Ally_turn")
 	current_turn = what_turn.ALLY_TURN
 
 func Enemy_turn():
-	print("Enemy_turn")
+	#print("Enemy_turn")
 	current_turn = what_turn.ENEMY_TURN
 	OpposingTrainerMonsters._attack()
 
 func switch_turns():
-	print("Switch turns")
+	#print("Switch turns")
 	if current_turn == what_turn.ALLY_TURN:
 		Enemy_turn()
 	elif current_turn == what_turn.ENEMY_TURN:

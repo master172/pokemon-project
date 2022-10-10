@@ -62,22 +62,12 @@ centered = false
 hframes = 2
 
 [node name="Name" type="Label" parent="Move_container/Move1"]
-margin_left = 28.0
-margin_top = 2.0
-margin_right = 90.0
-margin_bottom = 16.0
-rect_scale = Vector2( 0.42722, 0.433317 )
+margin_left = 6.0
+margin_top = 8.0
+margin_right = 68.0
+margin_bottom = 22.0
 custom_fonts/font = SubResource( 5 )
 text = "Tackle"
-
-[node name="Description" type="Label" parent="Move_container/Move1"]
-margin_left = 28.0
-margin_top = 8.0
-margin_right = 239.0
-margin_bottom = 57.0
-rect_scale = Vector2( 0.331731, 0.41125 )
-custom_fonts/font = SubResource( 5 )
-text = "Description"
 
 [node name="Move2" type="TextureRect" parent="Move_container"]
 margin_left = 120.0
@@ -95,22 +85,12 @@ centered = false
 hframes = 2
 
 [node name="Name" type="Label" parent="Move_container/Move2"]
-margin_left = 28.0
-margin_top = 2.0
-margin_right = 90.0
-margin_bottom = 16.0
-rect_scale = Vector2( 0.42722, 0.433317 )
+margin_left = 6.0
+margin_top = 8.0
+margin_right = 68.0
+margin_bottom = 22.0
 custom_fonts/font = SubResource( 5 )
 text = "Tackle"
-
-[node name="Description" type="Label" parent="Move_container/Move2"]
-margin_left = 28.0
-margin_top = 8.0
-margin_right = 239.0
-margin_bottom = 57.0
-rect_scale = Vector2( 0.331731, 0.41125 )
-custom_fonts/font = SubResource( 5 )
-text = "Description"
 
 [node name="Move3" type="TextureRect" parent="Move_container"]
 margin_top = 47.0
@@ -128,22 +108,12 @@ centered = false
 hframes = 2
 
 [node name="Name" type="Label" parent="Move_container/Move3"]
-margin_left = 28.0
-margin_top = 2.0
-margin_right = 90.0
-margin_bottom = 16.0
-rect_scale = Vector2( 0.42722, 0.433317 )
+margin_left = 6.0
+margin_top = 8.0
+margin_right = 68.0
+margin_bottom = 22.0
 custom_fonts/font = SubResource( 5 )
 text = "Tackle"
-
-[node name="Description" type="Label" parent="Move_container/Move3"]
-margin_left = 28.0
-margin_top = 8.0
-margin_right = 239.0
-margin_bottom = 57.0
-rect_scale = Vector2( 0.331731, 0.41125 )
-custom_fonts/font = SubResource( 5 )
-text = "Description"
 
 [node name="Move4" type="TextureRect" parent="Move_container"]
 margin_left = 120.0
@@ -162,22 +132,12 @@ centered = false
 hframes = 2
 
 [node name="Name" type="Label" parent="Move_container/Move4"]
-margin_left = 28.0
-margin_top = 2.0
-margin_right = 90.0
-margin_bottom = 16.0
-rect_scale = Vector2( 0.42722, 0.433317 )
+margin_left = 6.0
+margin_top = 8.0
+margin_right = 68.0
+margin_bottom = 22.0
 custom_fonts/font = SubResource( 5 )
 text = "Tackle"
-
-[node name="Description" type="Label" parent="Move_container/Move4"]
-margin_left = 28.0
-margin_top = 8.0
-margin_right = 239.0
-margin_bottom = 57.0
-rect_scale = Vector2( 0.331731, 0.41125 )
-custom_fonts/font = SubResource( 5 )
-text = "Description"
 
 [node name="Forgetter" type="HBoxContainer" parent="."]
 anchor_top = 1.0
@@ -202,22 +162,12 @@ centered = false
 hframes = 2
 
 [node name="Name" type="Label" parent="Forgetter/Move"]
-margin_left = 31.0
-margin_top = 3.0
-margin_right = 211.0
-margin_bottom = 19.0
-rect_scale = Vector2( 0.42722, 0.433317 )
+margin_left = 6.0
+margin_top = 12.0
+margin_right = 38.0
+margin_bottom = 22.0
 custom_fonts/font = SubResource( 5 )
 text = "Tackle"
-
-[node name="Description" type="Label" parent="Forgetter/Move"]
-margin_left = 31.0
-margin_top = 10.0
-margin_right = 263.0
-margin_bottom = 68.0
-rect_scale = Vector2( 0.331731, 0.41125 )
-custom_fonts/font = SubResource( 5 )
-text = "Description"
 
 [node name="Buttons" type="GridContainer" parent="Forgetter"]
 margin_left = 114.0

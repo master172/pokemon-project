@@ -162,7 +162,7 @@ tile_data = PoolIntArray( -2883595, 0, 0, -2883594, 0, 1, -2883593, 0, 1, -28835
 
 [node name="Route_1_fences" parent="." instance=ExtResource( 4 )]
 tile_set = ExtResource( 1 )
-tile_data = PoolIntArray( -786443, 8, 0, -786442, 8, 0, -786441, 8, 0, -786440, 8, 0, -786439, 8, 0, -786438, 8, 0, -786437, 8, 0, -786436, 8, 0, -786435, 12, 0, -786434, 9, 0, -851967, 7, 0, -851966, 8, 0, -851965, 8, 0, -851964, 8, 0, -851963, 8, 0, -851962, 8, 0, -851961, 8, 0, -851960, 8, 0, -851959, 8, 0, -851958, 8, 0, -720898, 10, 0, -786431, 14, 0, 196601, 5, 0, 196602, 5, 1, 196603, 5, 131073, 196606, 5, 0, 393209, 5, 0 )
+tile_data = PoolIntArray( -786443, 8, 0, -786442, 8, 0, -786441, 8, 0, -786440, 8, 0, -786439, 8, 0, -786438, 8, 0, -786437, 8, 0, -786436, 8, 0, -786435, 12, 0, -786434, 9, 0, -851967, 7, 0, -851966, 8, 0, -851965, 8, 0, -851964, 8, 0, -851963, 8, 0, -851962, 8, 0, -851961, 8, 0, -851960, 8, 0, -851959, 8, 0, -851958, 8, 0, -720898, 10, 0, -786431, 14, 0, -458753, 8, 0, -524288, 8, 0, 196601, 5, 0, 196602, 5, 1, 196603, 5, 131073, 196606, 5, 0, 393209, 5, 0 )
 
 [node name="Route_1_grass" type="YSort" parent="."]
 position = Vector2( 0, -128 )
@@ -171,7 +171,7 @@ z_index = -1
 [node name="tallgrass" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -8, -24 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -179,7 +179,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass2" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 8, -24 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -187,7 +187,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass3" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 8, -40 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -195,7 +195,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass4" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -8, -40 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -203,7 +203,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass5" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -8, -56 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -211,7 +211,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass6" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 8, -56 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -219,7 +219,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass7" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 8, -72 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -227,7 +227,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass8" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -8, -72 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -235,7 +235,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass9" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 8, -88 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -243,7 +243,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass10" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -8, -88 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -251,7 +251,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass11" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 56, -88 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -259,7 +259,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass12" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 40, -88 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -267,7 +267,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass13" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 56, -104 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -275,7 +275,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass14" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 40, -104 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -283,7 +283,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass15" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -88 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -291,7 +291,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass16" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 72, -88 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -299,7 +299,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass17" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -104 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -307,7 +307,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass18" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 72, -104 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -315,7 +315,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass19" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -120 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -323,7 +323,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass20" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 72, -120 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -331,7 +331,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass21" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -136 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -339,7 +339,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass22" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 72, -136 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -347,7 +347,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass23" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 120, -120 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -355,7 +355,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass24" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -120 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -363,7 +363,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass25" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 120, -136 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -371,7 +371,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass27" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 136, -120 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -379,7 +379,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass28" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 136, -136 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -387,7 +387,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass29" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -88 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -395,7 +395,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass30" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -104 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -403,7 +403,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass26" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -136 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -411,7 +411,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass31" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -136, -88 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -419,7 +419,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass32" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -152, -88 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -427,7 +427,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass33" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -136, -104 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -435,7 +435,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass34" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -152, -104 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -443,7 +443,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass51" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -168, -88 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -451,7 +451,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass52" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -168, -104 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -459,7 +459,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass35" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -104, -88 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -467,7 +467,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass36" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -120, -88 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -475,7 +475,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass37" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -104, -104 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -483,7 +483,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass38" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -120, -104 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -491,7 +491,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass39" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -104, -120 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -499,7 +499,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass40" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -120, -120 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -507,7 +507,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass41" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -104, -136 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -515,7 +515,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass42" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -120, -136 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -523,7 +523,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass53" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -136, -120 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -531,7 +531,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass54" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -136, -136 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -539,7 +539,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass43" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -72, -120 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -547,7 +547,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass44" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -88, -120 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -555,7 +555,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass45" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -72, -136 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -563,7 +563,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass46" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -56, -120 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -571,7 +571,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass47" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -56, -136 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -579,7 +579,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass55" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -200 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -587,7 +587,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass56" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -216 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -595,7 +595,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass57" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -232 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -603,7 +603,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass58" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -248 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -611,7 +611,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass59" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -264 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -619,7 +619,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass60" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -200 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -627,7 +627,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass61" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -216 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -635,7 +635,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass62" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -232 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -643,7 +643,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass63" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -248 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -651,7 +651,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass64" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -264 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -659,7 +659,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass65" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 72, -200 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -667,7 +667,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass66" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 72, -216 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -675,7 +675,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass67" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 72, -232 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -683,7 +683,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass68" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 72, -248 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -691,7 +691,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass69" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 72, -264 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -699,7 +699,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass70" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 56, -200 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -707,7 +707,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass71" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 56, -216 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -715,7 +715,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass72" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 56, -232 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -723,7 +723,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass73" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 56, -248 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -731,7 +731,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass74" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 56, -264 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -739,7 +739,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass75" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 40, -200 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -747,7 +747,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass76" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 40, -216 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -755,7 +755,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass77" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 40, -232 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -763,7 +763,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass78" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 40, -248 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -771,7 +771,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass79" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 40, -264 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -779,7 +779,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass80" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 24, -200 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -787,7 +787,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass81" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 24, -216 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -795,7 +795,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass82" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 24, -232 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -803,7 +803,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass83" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 24, -248 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -811,7 +811,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass84" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 24, -264 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -819,7 +819,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass85" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 152, -392 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -827,7 +827,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass86" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 152, -408 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -835,7 +835,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass87" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 152, -424 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -843,7 +843,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass88" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 152, -440 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -851,7 +851,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass89" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 152, -456 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -859,7 +859,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass115" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 168, -392 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -867,7 +867,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass116" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 168, -408 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -875,7 +875,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass117" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 168, -424 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -883,7 +883,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass118" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 168, -440 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -891,7 +891,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass119" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 168, -456 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -899,7 +899,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass90" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 136, -392 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -907,7 +907,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass91" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 136, -408 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -915,7 +915,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass92" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 136, -424 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -923,7 +923,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass93" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 136, -440 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -931,7 +931,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass94" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 136, -456 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -939,7 +939,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass95" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 120, -392 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -947,7 +947,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass96" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 120, -408 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -955,7 +955,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass97" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 120, -424 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -963,7 +963,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass98" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 120, -440 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -971,7 +971,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass99" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 120, -456 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -979,7 +979,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass100" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -392 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -987,7 +987,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass101" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -408 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -995,7 +995,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass102" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -424 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1003,7 +1003,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass103" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -440 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1011,7 +1011,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass104" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -456 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1019,7 +1019,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass105" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -392 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1027,7 +1027,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass106" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -408 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1035,7 +1035,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass107" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -424 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1043,7 +1043,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass108" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -440 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1051,7 +1051,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass109" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -456 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1059,7 +1059,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass110" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 152, -504 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1067,7 +1067,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass111" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 152, -520 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1075,7 +1075,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass112" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 152, -536 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1083,7 +1083,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass113" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 152, -552 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1091,7 +1091,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass114" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 152, -568 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1099,7 +1099,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass120" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 168, -504 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1107,7 +1107,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass121" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 168, -520 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1115,7 +1115,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass122" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 168, -536 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1123,7 +1123,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass123" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 168, -552 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1131,7 +1131,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass124" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 168, -568 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1139,7 +1139,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass125" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 136, -504 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1147,7 +1147,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass126" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 136, -520 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1155,7 +1155,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass127" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 136, -536 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1163,7 +1163,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass128" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 136, -552 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1171,7 +1171,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass129" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 136, -568 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1179,7 +1179,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass130" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 120, -504 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1187,7 +1187,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass131" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 120, -520 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1195,7 +1195,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass132" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 120, -536 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1203,7 +1203,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass133" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 120, -552 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1211,7 +1211,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass134" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 120, -568 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1219,7 +1219,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass135" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -504 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1227,7 +1227,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass136" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -520 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1235,7 +1235,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass137" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -536 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1243,7 +1243,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass138" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -552 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1251,7 +1251,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass139" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 104, -568 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1259,7 +1259,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass140" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -504 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1267,7 +1267,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass141" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -520 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1275,7 +1275,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass142" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -536 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1283,7 +1283,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass143" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -552 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1291,7 +1291,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass144" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 88, -568 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1299,7 +1299,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass145" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 56, -504 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1307,7 +1307,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass146" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 56, -520 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1315,7 +1315,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass147" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 56, -536 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1323,7 +1323,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass148" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 56, -552 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1331,7 +1331,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass149" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 56, -568 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1339,7 +1339,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass150" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 72, -504 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1347,7 +1347,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass151" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 72, -520 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1355,7 +1355,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass152" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 72, -536 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1363,7 +1363,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass153" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 72, -552 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1371,7 +1371,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass154" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 72, -568 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1379,7 +1379,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass155" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 40, -504 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1387,7 +1387,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass156" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 40, -520 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1395,7 +1395,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass157" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 40, -536 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1403,7 +1403,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass158" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 40, -552 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1411,7 +1411,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass159" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 40, -568 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1419,7 +1419,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass160" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 24, -504 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1427,7 +1427,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass161" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 24, -520 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1435,7 +1435,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass162" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 24, -536 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1443,7 +1443,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass163" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 24, -552 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1451,7 +1451,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass164" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 24, -568 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1459,7 +1459,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass165" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 8, -504 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1467,7 +1467,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass166" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 8, -520 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1475,7 +1475,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass167" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 8, -536 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1483,7 +1483,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass168" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 8, -552 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1491,7 +1491,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass169" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( 8, -568 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1499,7 +1499,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass170" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -8, -504 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1507,7 +1507,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass171" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -8, -520 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1515,7 +1515,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass172" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -8, -536 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1523,7 +1523,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass173" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -8, -552 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1531,7 +1531,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass174" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -8, -568 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1539,7 +1539,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass48" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -88, -88 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1547,7 +1547,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass49" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -88, -104 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]
@@ -1555,7 +1555,7 @@ pokemon_chances = [ 35.194, 67.058, 100.0 ]
 [node name="tallgrass50" parent="Route_1_grass" instance=ExtResource( 6 )]
 position = Vector2( -88, -136 )
 z_index = 0
-min_level = 2
+min_level = 3
 max_level = 4
 pokemons = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 2 ) ]
 pokemon_chances = [ 35.194, 67.058, 100.0 ]

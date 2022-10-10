@@ -54,6 +54,7 @@ texture = ExtResource( 2 )
 
 [node name="ash" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, 104 )
+z_index = 1
 can_cycle = false
 can_surf = false
 

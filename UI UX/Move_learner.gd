@@ -20,10 +20,6 @@ onready var Move_2_Name = $Move_container/Move2/Name
 onready var Move_3_Name = $Move_container/Move3/Name
 onready var Move_4_Name = $Move_container/Move4/Name
 
-onready var Move_1_Description = $Move_container/Move1/Description
-onready var Move_2_Description = $Move_container/Move2/Description
-onready var Move_3_Description = $Move_container/Move3/Description
-onready var Move_4_Description = $Move_container/Move4/Description
 
 onready var learn = $Forgetter/Buttons/Learn/Selected
 onready var info = $Forgetter/Buttons/Info/Selected
@@ -149,16 +145,12 @@ func _physics_process(_delta):
 	if self.current_pokemon != null:
 		if current_pokemon.Learned_moves.size() >= 1:
 			Move_1_Name.text = current_pokemon.Learned_moves[0].name
-			Move_1_Description.text = current_pokemon.Learned_moves[0].description
 		if current_pokemon.Learned_moves.size() >- 2:
 			Move_2_Name.text = current_pokemon.Learned_moves[1].name
-			Move_2_Description.text = current_pokemon.Learned_moves[1].description
 		if current_pokemon.Learned_moves.size () >=  3:
 			Move_3_Name.text = current_pokemon.Learned_moves[2].name
-			Move_3_Description.text = current_pokemon.Learned_moves[2].description
 		if current_pokemon.Learned_moves.size() >= 4:
 			Move_4_Name.text = current_pokemon.Learned_moves[3].name
-			Move_4_Description.text = current_pokemon.Learned_moves[3].description
 		if MoveLearner.move_to_learn != null:
 			move_to_learn_Name.text = MoveLearner.move_to_learn.name
 			move_to_learn_Description.text = MoveLearner.move_to_learn.description

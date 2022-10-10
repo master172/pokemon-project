@@ -73,17 +73,13 @@ func _calculate_damage():
 		else:
 			crit = 1
 		var stab : float 
-		if self.Types == current_holder.Type_1[0] and self.Types == current_holder.Type_2[0]:
-			stab = 2.0
-		elif self.Types == current_holder.Type_1[0] and self.Types != current_holder.Type_2[0]:
+		if self.Types == current_holder.Type_1[0]:
 			stab = 1.5
-		elif self.Types != current_holder.Type_1[0] and self.Types != current_holder.Type_2[0]:
-			stab = 1.0
 		else:
-			stab = 0.5
+			stab = 1
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
-		var random_number = rng.randi_range(1,100)
+		var random_number = rng.randi_range(85,100)
 
 		if PokeHelper.current_weather == PokeHelper.weathers[1]:
 			weather = 1
@@ -107,8 +103,12 @@ func _calculate_damage():
 		elif current_holder.get_parent() == OpposingTrainerMonsters:
 			targets = OpposingTrainerMonsters.targets
 		
-		damage = ((((((2 * current_holder.level)/5)+2)*current_holder.Current_attack * power / current_holder.opposing_pokemon.Current_defense)/50)+2)* stab * current_holder.Weakness * current_holder.Resistance * random_number/ 100
-		damage = damage / targets * weather * (PokeHelper.player_badjes + 1) * crit* effectiveness
+		damage = ((((2 * current_holder.level/5+2)*current_holder.Current_attack * power / current_holder.opposing_pokemon.Current_defense)/50)+2)* stab * current_holder.Weakness * current_holder.Resistance * random_number/ 100
+		if self.get_parent().get_parent() == PlayerPokemon:
+			damage = damage * (PokeHelper.player_badjes + 1)
+		damage = damage / targets * weather  * crit* effectiveness
+
+		print(self.get_parent().Name + " : damage =  " + String(damage) + " random number: " + String(random_number /100) + " stab = " + String(stab) + " weather = " + String(weather) + " crit = " + String(crit) + " effectiveness = " + String(effectiveness))
 		_apply_damage()
 	elif self.special_effects != null :
 		get_node(special_effects)._attack()
@@ -134,7 +134,7 @@ func _apply_damage():
 				BattleManager.EnemyLastMoveEvaded = true
 			
 		elif damage >= 1:
-			self.current_holder.opposing_pokemon.Current_health_points -= damage
+			self.current_holder.opposing_pokemon.Current_health_points -= int(damage)
 	elif is_missed == true:
 		print("missed")
 		if self.get_parent().get_parent() == PlayerPokemon:

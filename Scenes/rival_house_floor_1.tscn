@@ -40,6 +40,7 @@ flip_h = true
 
 [node name="ash" parent="." instance=ExtResource( 2 )]
 position = Vector2( -64, -24 )
+z_index = 1
 can_cycle = false
 can_surf = false
 

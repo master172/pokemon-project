@@ -214,3 +214,13 @@ func PokemonSceneMoveLearningDialog(move):
 		$Pokemon_scene.get_child(0).ui_state = $Pokemon_scene.get_child(0).Ui_state.Dialogue
 		$Pokemon_scene.get_child(0).learning_a_move = true
 		$Pokemon_scene.get_child(0).StartMoveLearnDialogue(move)
+
+func _Call_save():
+	var player = current_scene.get_children().back().find_node("ash")
+
+	player._save_data()
+	GameSaver.save_game()
+	SceneLoaded._save_data()
+	SaveAndLoad._save_menu()
+	Utils._save_data()
+	current_scene.save_game()

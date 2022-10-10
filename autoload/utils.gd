@@ -1,5 +1,6 @@
 extends Node
 
+var default_rest_shelter = "res://libraries/Pokemon_center/Pokemon_center_interior_floor_1.tscn"
 var current_rest_shelter
 
 const SAVE_DIR = "user://Saves/Utilities/"
@@ -17,6 +18,8 @@ var pc_num = null
 var pc
 
 func _ready():
+	if current_rest_shelter == null:
+		current_rest_shelter = default_rest_shelter
 	_load_data()
 
 func get_player():
