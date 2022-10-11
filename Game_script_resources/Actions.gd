@@ -73,7 +73,7 @@ func _calculate_damage():
 		else:
 			crit = 1
 		var stab : float 
-		if self.Types == current_holder.Type_1[0]:
+		if self.Types == current_holder.Type_1[0] or self.Types == current_holder.Type_1[1]:
 			stab = 1.5
 		else:
 			stab = 1
