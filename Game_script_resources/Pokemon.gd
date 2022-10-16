@@ -156,7 +156,7 @@ func _calculate_exp_points_to_give():
 	else:
 		_battle_type = 2
 
-	exp_gained = (((self.base_experience_yeild * self.level) * int(rand_range(1,2))) *  int(rand_range(1,2)))/7
+	exp_gained = ((self.base_experience_yeild * self.level))/7
 	
 	if exp_gained < 0:
 		exp_gained = exp_gained*-1
