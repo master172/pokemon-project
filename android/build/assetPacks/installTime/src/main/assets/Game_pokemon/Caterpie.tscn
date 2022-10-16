@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Game_script_resources/Pokemon.gd" type="Script" id=1]
+[ext_resource path="res://Pokemon/Caterpie.png" type="Texture" id=2]
+[ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=3]
+
+[node name="Caterpie" type="Node2D" groups=["Presist"]]
+script = ExtResource( 1 )
+base_experience_yeild = 72.0
+sprite = ExtResource( 2 )
+Name = "Caterpie"
+id = 10
+Type_1 = [ 6 ]
+Type_2 = [ 0 ]
+Damage_normally_by = [ 1, 13, 6, 16, 9, 10, 3, 7, 15, 8, 17, 18 ]
+Weak_to = [ 4, 14, 2 ]
+Resistant_to = [ 12, 5, 10 ]
+Immune_to = [ 0 ]
+catch_rate = 255.0
+Levelling_rate = "Medium_fast"
+Min_Hatch_time = 2805
+Max_Hatch_time = 3059
+egg_groups = 16
+base_friend_ship = 53
+height = 0.3
+weight = 2.9
+status_effect = 5
+base_Health_points = 45
+base_attack = 30
+base_special_attack = 20
+base_defense = 35
+base_special_defense = 20
+base_speed = 45
+hp_yield = 1
+pokemon_entry = "Caterpie, the Worm Pokémon. To repel enemies, Caterpie releases an unpleasant odor from its red antenna. It molts several times while growing."
+
+[node name="Tackle" parent="." instance=ExtResource( 3 )]
+Types = 0

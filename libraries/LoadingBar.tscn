@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Fonts/Pokemon_16.tres" type="DynamicFont" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0.976471, 1, 0.164706 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.054902, 1, 0, 1 )
+
+[sub_resource type="Theme" id=3]
+ProgressBar/fonts/font = ExtResource( 1 )
+ProgressBar/styles/bg = SubResource( 1 )
+ProgressBar/styles/fg = SubResource( 2 )
+
+[node name="LoadingBar" type="ProgressBar"]
+margin_top = 126.0
+margin_right = 240.0
+margin_bottom = 140.0
+theme = SubResource( 3 )

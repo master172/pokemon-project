@@ -1,0 +1,141 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://assests/libraries/buildings/oaks_lab_interior.png" type="Texture" id=1]
+[ext_resource path="res://assests/libraries/buildings/mat.png" type="Texture" id=2]
+[ext_resource path="res://players/ash/ash.tscn" type="PackedScene" id=3]
+[ext_resource path="res://libraries/red_house/door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://libraries/oak_lab/Pokemon-ball.gd" type="Script" id=5]
+[ext_resource path="res://Game_pokemon/Bulbasaur.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game_pokemon/Charmander.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game_pokemon/Squirtle.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/oak_lab_interior.gd" type="Script" id=9]
+[ext_resource path="res://assests/libraries/Items/Overworld item.png" type="Texture" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 104 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 120, 8 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 56, 8 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 24, 16 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 8, 16 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 8, 16 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 8, 16 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 8, 16 )
+
+[node name="oak_lab_interior" type="YSort"]
+script = ExtResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -300.0
+margin_top = -300.0
+margin_right = 300.0
+margin_bottom = 300.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 0, 96 )
+texture = ExtResource( 2 )
+
+[node name="ash" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 104 )
+z_index = 1
+can_cycle = false
+can_surf = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -112, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 112, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 0, -80 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -64, 112 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 64, 112 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 48, -24 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -96, -40 )
+shape = SubResource( 5 )
+
+[node name="door" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 112 )
+next_scene_path = "res://main/main.tscn"
+is_invisible = true
+spawn_location = Vector2( 136, 160 )
+spawn_direction = Vector2( 0, 1 )
+
+[node name="Pokemon-ball" type="StaticBody2D" parent="." groups=["Interactable", "oak_lab_data"]]
+position = Vector2( 32, -30 )
+z_index = 1
+collision_layer = 17
+collision_mask = 17
+script = ExtResource( 5 )
+Pokemon = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="Pokemon-ball"]
+texture = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pokemon-ball"]
+position = Vector2( 0, 6 )
+shape = SubResource( 6 )
+
+[node name="Pokemon-ball2" type="StaticBody2D" parent="." groups=["Interactable", "oak_lab_data"]]
+position = Vector2( 48, -30 )
+z_index = 1
+collision_layer = 17
+collision_mask = 17
+script = ExtResource( 5 )
+Pokemon = ExtResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="Pokemon-ball2"]
+texture = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pokemon-ball2"]
+position = Vector2( 0, 6 )
+shape = SubResource( 7 )
+
+[node name="Pokemon-ball3" type="StaticBody2D" parent="." groups=["Interactable", "oak_lab_data"]]
+position = Vector2( 64, -30 )
+z_index = 1
+collision_layer = 17
+collision_mask = 17
+script = ExtResource( 5 )
+Pokemon = ExtResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="Pokemon-ball3"]
+texture = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pokemon-ball3"]
+position = Vector2( 0, 6 )
+shape = SubResource( 8 )

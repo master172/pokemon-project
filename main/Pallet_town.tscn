@@ -1039,6 +1039,7 @@ frames = SubResource( 63 )
 [node name="red_house" parent="Buildings" instance=ExtResource( 10 )]
 position = Vector2( -136, -56 )
 z_index = 0
+collision_layer = 1
 
 [node name="door" type="Area2D" parent="Buildings/red_house" groups=["door"]]
 position = Vector2( -16, 31 )

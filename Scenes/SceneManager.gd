@@ -17,6 +17,7 @@ enum Transition_Type  {NONE,NEW_SCENE, PARTY_SCENE, MENU_ONLY, POKEMON_SCENE,EXI
 var transition_type = Transition_Type.NONE
 
 func _ready():
+	get_tree().set_current_scene(self)
 	self.set_meta("Name","SceneManager")
 
 func _fade_in():

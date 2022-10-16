@@ -1,0 +1,209 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assests/libraries/Ui/new_streamtexture.tres" type="Texture" id=1]
+[ext_resource path="res://Fonts/Pokemon_16.tres" type="DynamicFont" id=2]
+[ext_resource path="res://UI UX/Dialogue_bar.gd" type="Script" id=3]
+[ext_resource path="res://assests/libraries/ui_arrow_left_right.png" type="Texture" id=4]
+[ext_resource path="res://Pokemon/Charmander.png" type="Texture" id=5]
+[ext_resource path="res://assests/libraries/new_background_top.png" type="Texture" id=7]
+[ext_resource path="res://assests/libraries/new_background_bottom.png" type="Texture" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+length = 2.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7, 1, 1.2, 1.4, 1.7, 2.3, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 231.204, 160.631 ), Vector2( 231.204, 160.208 ), Vector2( 231.204, 155.009 ), Vector2( 231.204, 152.566 ), Vector2( 231.204, 151.504 ), Vector2( 231.204, 152.566 ), Vector2( 231.204, 155.009 ), Vector2( 231.204, 160.208 ), Vector2( 231.204, 160.631 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 231.204, 155.009 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Still"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 231.204, 155.009 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("NinePatchRect/RichTextLabel:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Text skip"
+tracks/0/type = "value"
+tracks/0/path = NodePath("NinePatchRect/RichTextLabel:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Text_display"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("NinePatchRect/RichTextLabel:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[node name="Dialogue_bar" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -160.0
+script = ExtResource( 3 )
+
+[node name="NinePatchRect" type="TextureRect" parent="."]
+margin_top = 109.0
+margin_right = 240.0
+margin_bottom = 159.0
+rect_min_size = Vector2( 0, 50 )
+texture = ExtResource( 1 )
+expand = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect"]
+anchor_left = 0.028
+anchor_top = 0.098
+anchor_right = 0.972
+anchor_bottom = 0.816
+custom_fonts/normal_font = ExtResource( 2 )
+visible_characters = 0
+percent_visible = 0.0
+text = "Hello, World! Spam and Eggs this is sure gonna be exilirating lets get excited on it
+"
+scroll_active = false
+
+[node name="Arrow" type="Sprite" parent="."]
+modulate = Color( 0.176471, 0.176471, 0.176471, 1 )
+position = Vector2( 231.204, 155.009 )
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Arrow"]
+anims/Idle = SubResource( 1 )
+anims/RESET = SubResource( 2 )
+anims/Still = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 4 )
+"anims/Text skip" = SubResource( 6 )
+anims/Text_display = SubResource( 5 )
+
+[node name="Option_container" type="VBoxContainer" parent="."]
+margin_left = 182.0
+margin_top = 76.0
+margin_right = 237.0
+margin_bottom = 116.0
+custom_constants/separation = 0
+
+[node name="Top_piece" type="TextureRect" parent="Option_container"]
+margin_right = 55.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 55, 10 )
+texture = ExtResource( 7 )
+expand = true
+
+[node name="Choices" type="VBoxContainer" parent="Option_container"]
+margin_top = 10.0
+margin_right = 55.0
+margin_bottom = 10.0
+custom_constants/separation = 0
+
+[node name="Bottom_piece" type="TextureRect" parent="Option_container"]
+margin_top = 10.0
+margin_right = 55.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 55, 10 )
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Picture_frame" type="ColorRect" parent="."]
+visible = false
+margin_left = 13.0
+margin_top = 26.0
+margin_right = 93.0
+margin_bottom = 104.0
+color = Color( 0.101961, 0.101961, 0.101961, 1 )
+
+[node name="Border" type="ColorRect" parent="Picture_frame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+color = Color( 0.231373, 0.231373, 0.231373, 1 )
+
+[node name="Item_displayer" type="TextureRect" parent="Picture_frame/Border"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -3.0
+expand = true
+stretch_mode = 6
+
+[node name="Pokemon_displayer" type="Sprite" parent="Picture_frame/Border/Item_displayer"]
+position = Vector2( 34.3409, 32.6292 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 0.482079, 34.6825, 62.9001, 62.3969 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_started" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_started"]

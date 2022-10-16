@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game_script_resources/Actions.gd" type="Script" id=1]
+[ext_resource path="res://assests/libraries/Ui/Status_Type_icons/Types/fire.png" type="Texture" id=2]
+
+[node name="FlameThrower" type="Node2D" groups=["presistent"]]
+script = ExtResource( 1 )
+power = 95
+Name = "FlameThrower"
+Types = 2
+learned_level = 16
+pp = 20
+max_pp = 20
+description = "The foe is scorched with intense flames. The foe may suffer a burn."
+type_image = ExtResource( 2 )

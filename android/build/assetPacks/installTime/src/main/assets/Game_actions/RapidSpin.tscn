@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game_script_resources/Actions.gd" type="Script" id=1]
+[ext_resource path="res://assests/libraries/Ui/Status_Type_icons/Types/water.png" type="Texture" id=2]
+
+[node name="RapidSpin" type="Node2D" groups=["presistent"]]
+script = ExtResource( 1 )
+power = 50
+Name = "Rapid Spin"
+Types = 11
+learned_level = 12
+pp = 40
+max_pp = 40
+description = "An attack that frees the user from Bind, Wrap, Leech Seed, and Spikes."
+type_image = ExtResource( 2 )

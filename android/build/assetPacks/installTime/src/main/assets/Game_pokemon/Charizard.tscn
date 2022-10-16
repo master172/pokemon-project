@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Pokemon/Charizard.png" type="Texture" id=1]
+[ext_resource path="res://Game_script_resources/Pokemon.gd" type="Script" id=2]
+[ext_resource path="res://Game_actions/Scratch.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game_actions/Growl.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game_actions/SmokeScreen.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game_actions/Ember.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game_actions/FlameThrower.tscn" type="PackedScene" id=8]
+
+[node name="Charizard" type="Node2D" groups=["Presist"]]
+script = ExtResource( 2 )
+base_experience_yeild = 209.0
+sprite = ExtResource( 1 )
+Name = "Charizard"
+id = 6
+Type_1 = [ 2 ]
+Type_2 = [ 4 ]
+Damage_normally_by = [ 1, 4, 13, 16, 8, 15, 8, 17 ]
+Weak_to = [ 14, 11, 3, 2, 10, 18 ]
+Resistant_to = [ 12, 6, 9 ]
+Immune_to = [ 5 ]
+catch_rate = 40.0
+Levelling_rate = "Medium_slow"
+Min_Hatch_time = 4396
+Max_Hatch_time = 5140
+gender_ratio = "87.5%_male"
+egg_groups = 8193
+base_friend_ship = 209
+height = 1.7
+weight = 90.5
+status_effect = 5
+base_Health_points = 78
+base_attack = 84
+base_special_attack = 109
+base_defense = 78
+base_special_defense = 85
+base_speed = 100
+sp_attack_yield = 3
+pokemon_entry = "Charizard, the Flame Pokémon. Charizard is a Flying and Fire type. When competing in intense battles, Charizard's flame becomes more intense as well."
+
+[node name="Tackle" parent="." instance=ExtResource( 4 )]
+Types = 0
+
+[node name="Scratch" parent="." instance=ExtResource( 3 )]
+Types = 0
+
+[node name="Growl" parent="." instance=ExtResource( 5 )]
+Types = 0
+
+[node name="Ember" parent="." instance=ExtResource( 7 )]
+
+[node name="SmokeScreen" parent="." instance=ExtResource( 6 )]
+
+[node name="FlameThrower" parent="." instance=ExtResource( 8 )]

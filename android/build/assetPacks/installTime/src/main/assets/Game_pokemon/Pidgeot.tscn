@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Pokemon/Pidgeot.png" type="Texture" id=1]
+[ext_resource path="res://Game_script_resources/Pokemon.gd" type="Script" id=2]
+[ext_resource path="res://Game_actions/SandAttack.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game_actions/Gust.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game_actions/QuickAttack.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game_actions/WingAttack.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game_actions/AriealAce.tscn" type="PackedScene" id=8]
+
+[node name="Pidgeot" type="Node2D" groups=["Presist"]]
+script = ExtResource( 2 )
+base_experience_yeild = 172.0
+current_stage = 3
+sprite = ExtResource( 1 )
+Name = "Pidgeot"
+id = 18
+Type_1 = [ 1 ]
+Type_2 = [ 4 ]
+Damage_normally_by = [ 1, 11, 12, 7, 4, 8, 13, 17, 9, 2, 18 ]
+Weak_to = [ 14, 3, 15 ]
+Resistant_to = [ 6, 10 ]
+Immune_to = [ 5, 16 ]
+level_to_next_form = 36
+catch_rate = 45.0
+Levelling_rate = "Medium_fast"
+Min_Hatch_time = 3855
+Max_Hatch_time = 4111
+gender_ratio = "50.0%_male"
+egg_groups = 64
+base_friend_ship = 70
+height = 1.5
+weight = 39.5
+status_effect = 5
+base_Health_points = 83
+base_attack = 80
+base_special_attack = 70
+base_defense = 75
+base_special_defense = 70
+base_speed = 91
+speed_yield = 3
+pokemon_entry = "Pidgeot, the Bird Pokémon. The evolved form of Pidgeotto. It can fly at twice the speed of sound at an altitude of nearly one mile."
+
+[node name="Tackle" parent="." instance=ExtResource( 5 )]
+
+[node name="SandAttack" parent="." instance=ExtResource( 3 )]
+
+[node name="Gust" parent="." instance=ExtResource( 4 )]
+
+[node name="QuickAttack" parent="." instance=ExtResource( 6 )]
+
+[node name="WingAttack" parent="." instance=ExtResource( 7 )]
+
+[node name="AriealAce" parent="." instance=ExtResource( 8 )]

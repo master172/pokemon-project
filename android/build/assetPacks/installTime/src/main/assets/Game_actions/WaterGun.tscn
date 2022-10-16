@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game_script_resources/Actions.gd" type="Script" id=1]
+[ext_resource path="res://assests/libraries/Ui/Status_Type_icons/Types/water.png" type="Texture" id=2]
+
+[node name="WaterGun" type="Node2D" groups=["presistent"]]
+script = ExtResource( 1 )
+power = 40
+Name = "Water Gun"
+Types = 11
+learned_level = 11
+pp = 25
+max_pp = 25
+description = "The foe is struck with a lot of water expelled forcibly from the mouth."
+type_image = ExtResource( 2 )
+category = 2

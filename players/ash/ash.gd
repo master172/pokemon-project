@@ -100,7 +100,7 @@ var current_interacted
 var current_dialog_to_display = []
 
 #variables-->grass_variables
-var inside_grass
+var inside_grass = false
 
 #variables-->onready_variables
 

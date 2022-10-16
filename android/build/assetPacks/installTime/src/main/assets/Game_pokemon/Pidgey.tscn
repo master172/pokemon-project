@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Game_script_resources/Pokemon.gd" type="Script" id=1]
+[ext_resource path="res://Pokemon/Pidgey.png" type="Texture" id=2]
+[ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game_actions/SandAttack.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game_pokemon/Pidgeotto.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game_actions/Gust.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game_actions/QuickAttack.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game_actions/WingAttack.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Game_actions/AriealAce.tscn" type="PackedScene" id=9]
+
+[node name="Pidgey" type="Node2D" groups=["Presist"]]
+script = ExtResource( 1 )
+base_experience_yeild = 55.0
+sprite = ExtResource( 2 )
+Name = "Pidgey"
+id = 16
+Type_1 = [ 1 ]
+Type_2 = [ 4 ]
+Damage_normally_by = [ 1, 12, 4, 13, 9, 2, 11, 7, 8, 17, 18 ]
+Weak_to = [ 14, 3, 15 ]
+Resistant_to = [ 6, 10 ]
+Immune_to = [ 5, 16 ]
+level_to_next_form = 18
+catch_rate = 255.0
+Min_Hatch_time = 3855
+Max_Hatch_time = 4111
+gender_ratio = "50.0%_male"
+egg_groups = 64
+base_friend_ship = 70
+height = 0.3
+weight = 1.8
+status_effect = 5
+base_Health_points = 40
+base_attack = 45
+base_special_attack = 35
+base_defense = 40
+base_special_defense = 35
+base_speed = 56
+speed_yield = 1
+pokemon_entry = "Pidgey is a Flying Pokémon. Among all the Flying Pokémon, it is the gentlest and easiest to capture. A perfect target for the beginning Pokémon Trainer to test his Pokémon's skills."
+next_form = ExtResource( 5 )
+
+[node name="Tackle" parent="." instance=ExtResource( 3 )]
+
+[node name="SandAttack" parent="." instance=ExtResource( 4 )]
+
+[node name="Gust" parent="." instance=ExtResource( 6 )]
+
+[node name="QuickAttack" parent="." instance=ExtResource( 7 )]
+
+[node name="WingAttack" parent="." instance=ExtResource( 8 )]
+
+[node name="AriealAce" parent="." instance=ExtResource( 9 )]

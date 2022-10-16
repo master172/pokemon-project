@@ -51,6 +51,8 @@ anims/idle = SubResource( 1 )
 anims/stepped = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 0, 1, 0.25098, 1 )

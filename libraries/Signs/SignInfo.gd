@@ -13,6 +13,7 @@ func _ready():
 
 func _Start_dialog():
 
+	dialog = Dialog.instance()
 	dialog.text_to_diaplay = first_dialog
 	Utils.get_dialog_layer().add_child(dialog)
 

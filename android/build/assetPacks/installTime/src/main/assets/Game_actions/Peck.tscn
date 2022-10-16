@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game_script_resources/Actions.gd" type="Script" id=1]
+[ext_resource path="res://assests/libraries/Ui/Status_Type_icons/Types/flying.png" type="Texture" id=2]
+
+[node name="Peck" type="Node2D" groups=["presistent"]]
+script = ExtResource( 1 )
+power = 35
+Name = "Peck"
+Types = 4
+learned_level = 1
+pp = 35
+max_pp = 35
+description = "The foe is jabbed with a sharply pointed beak or horn."
+type_image = ExtResource( 2 )

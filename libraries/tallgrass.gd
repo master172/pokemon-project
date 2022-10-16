@@ -74,6 +74,7 @@ func player_in_grass():
 		
 
 func _on_Area2D_body_entered(_body):
+
 	player_inside = true
 	Utils.get_player().inside_grass = true
 	anim_player.play("stepped")

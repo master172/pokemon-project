@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Game_script_resources/Pokemon.gd" type="Script" id=1]
+[ext_resource path="res://Pokemon/Ivysaur.png" type="Texture" id=2]
+[ext_resource path="res://Game_pokemon/Venusaur.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game_actions/Growl.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game_actions/RazorLeaf.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game_actions/Pound.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game_actions/VineWhip.tscn" type="PackedScene" id=8]
+
+[node name="Ivysaur" type="Node2D" groups=["Presist"]]
+script = ExtResource( 1 )
+base_experience_yeild = 142.0
+current_stage = 2
+sprite = ExtResource( 2 )
+Name = "Ivysaur"
+id = 2
+Type_1 = [ 10 ]
+Type_2 = [ 13 ]
+Damage_normally_by = [ 1, 9, 13, 8, 5, 8, 14, 6, 16 ]
+Weak_to = [ 4, 2, 7, 15 ]
+Resistant_to = [ 12, 11, 10, 3, 18 ]
+Immune_to = [ 0 ]
+level_to_next_form = 16
+catch_rate = 45.0
+Levelling_rate = "Medium_slow"
+Min_Hatch_time = 5140
+Max_Hatch_time = 5396
+gender_ratio = "87.5%_male"
+egg_groups = 4097
+base_friend_ship = 70
+height = 1.0
+weight = 13.0
+status_effect = 5
+base_Health_points = 60
+base_attack = 62
+base_special_attack = 80
+base_defense = 63
+base_special_defense = 80
+base_speed = 60
+sp_attack_yield = 1
+sp_defense_yield = 1
+pokemon_entry = "The Seed Pokémon, Ivysaur, Bulbasaur's evolved form. The bulb on its back absorbs nourishment and blooms into a large flower."
+next_form = ExtResource( 3 )
+
+[node name="Tackle" parent="." instance=ExtResource( 7 )]
+
+[node name="Pound" parent="." instance=ExtResource( 6 )]
+
+[node name="Growl" parent="." instance=ExtResource( 4 )]
+
+[node name="VineWhip" parent="." instance=ExtResource( 8 )]
+
+[node name="RazorLeaf" parent="." instance=ExtResource( 5 )]

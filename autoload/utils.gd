@@ -16,8 +16,11 @@ var pc_state = null
 var pc_num = null
 
 var pc
+var current_save
+var save_games = []
 
 func _ready():
+	
 	if current_rest_shelter == null:
 		current_rest_shelter = default_rest_shelter
 	_load_data()

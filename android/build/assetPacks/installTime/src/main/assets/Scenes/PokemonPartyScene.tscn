@@ -1,0 +1,591 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://assests/libraries/party_background.png" type="Texture" id=1]
+[ext_resource path="res://assests/libraries/health.png" type="Texture" id=2]
+[ext_resource path="res://assests/libraries/main_pokemon_background.png" type="Texture" id=3]
+[ext_resource path="res://assests/libraries/pkmnfl.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://libraries/Themes/ProgressBarTheme.tres" type="Theme" id=5]
+[ext_resource path="res://assests/libraries/gender_icons.png" type="Texture" id=6]
+[ext_resource path="res://assests/libraries/standby_pokemon_background.png" type="Texture" id=7]
+[ext_resource path="res://assests/libraries/exit_background_button.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/PokemonPartyScene.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/HealthBar.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/HealthBar.gd" type="Script" id=11]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Breath"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="DynamicFont" id=2]
+size = 10
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 60, 4 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 1, 1, 1, 0 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Breath"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Breath"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Breath"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Breath"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Breath"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[node name="PokemonPartyScene" type="Node2D"]
+position = Vector2( 1, 0 )
+z_index = 4
+script = ExtResource( 9 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -1.3335
+margin_right = 238.667
+margin_bottom = 160.0
+texture = ExtResource( 1 )
+
+[node name="Pokemon_1" type="Node2D" parent="."]
+
+[node name="Back_ground" type="Sprite" parent="Pokemon_1"]
+position = Vector2( 44.0053, 47.2478 )
+texture = ExtResource( 3 )
+hframes = 2
+
+[node name="Pokemon_sprite" type="Sprite" parent="Pokemon_1"]
+position = Vector2( 18.6689, 40.4981 )
+z_index = 2
+hframes = 2
+region_enabled = true
+region_rect = Rect2( 30, 9, 70, 24 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pokemon_1/Pokemon_sprite"]
+autoplay = "Breath"
+anims/Breath = SubResource( 1 )
+
+[node name="Name" type="Sprite" parent="Pokemon_1"]
+position = Vector2( 66.6748, 33.7484 )
+z_index = 2
+region_enabled = true
+region_rect = Rect2( 0, -1, 72, 10 )
+
+[node name="Level" type="Label" parent="Pokemon_1"]
+margin_left = 48.0058
+margin_top = 49.4977
+margin_right = 56.0058
+margin_bottom = 57.4977
+custom_fonts/font = SubResource( 2 )
+
+[node name="Current_health" type="Label" parent="Pokemon_1"]
+margin_left = 48.0058
+margin_top = 65.247
+margin_right = 56.0058
+margin_bottom = 73.247
+custom_fonts/font = SubResource( 2 )
+
+[node name="Out_of" type="Label" parent="Pokemon_1"]
+margin_left = 65.3413
+margin_top = 65.247
+margin_right = 73.3413
+margin_bottom = 73.247
+custom_fonts/font = SubResource( 2 )
+
+[node name="gender" type="Sprite" parent="Pokemon_1"]
+position = Vector2( 76.0092, 52.8726 )
+z_index = 2
+texture = ExtResource( 6 )
+hframes = 2
+
+[node name="HealthBarHolder" type="Node2D" parent="Pokemon_1"]
+position = Vector2( 0, -0.264484 )
+
+[node name="HealthBar" type="ProgressBar" parent="Pokemon_1/HealthBarHolder"]
+margin_left = 32.0
+margin_top = 60.0
+margin_right = 80.0
+margin_bottom = 68.0
+rect_scale = Vector2( 0.999889, 0.376637 )
+theme = ExtResource( 5 )
+custom_styles/fg = SubResource( 8 )
+custom_styles/bg = SubResource( 9 )
+value = 100.0
+percent_visible = false
+script = ExtResource( 10 )
+
+[node name="Pokemon_2" type="Node2D" parent="."]
+position = Vector2( 135.723, -2.3811 )
+
+[node name="Back_ground" type="Sprite" parent="Pokemon_2"]
+position = Vector2( -47.7123, 11.3807 )
+texture = ExtResource( 7 )
+centered = false
+hframes = 2
+__meta__ = {
+"_editor_description_": "
+"
+}
+
+[node name="Pokemon_sprite" type="Sprite" parent="Pokemon_2"]
+position = Vector2( -33.044, 23.396 )
+hframes = 2
+region_enabled = true
+region_rect = Rect2( 30, 9, 70, 24 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pokemon_2/Pokemon_sprite"]
+autoplay = "Breath"
+anims/Breath = SubResource( 3 )
+
+[node name="Name" type="Sprite" parent="Pokemon_2"]
+position = Vector2( 26.277, 17.3811 )
+region_enabled = true
+region_rect = Rect2( 0, -1, 72, 10 )
+
+[node name="Level" type="Label" parent="Pokemon_2"]
+margin_left = 0.29351
+margin_top = 27.13
+margin_right = 8.29351
+margin_bottom = 35.13
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Current_health" type="Label" parent="Pokemon_2"]
+margin_left = 60.3008
+margin_top = 26.005
+margin_right = 68.3008
+margin_bottom = 34.005
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Out_of" type="Label" parent="Pokemon_2"]
+margin_left = 81.3008
+margin_top = 26.005
+margin_right = 89.3008
+margin_bottom = 34.005
+custom_fonts/font = SubResource( 2 )
+
+[node name="gender" type="Sprite" parent="Pokemon_2"]
+position = Vector2( 34.9644, 29.3799 )
+texture = ExtResource( 6 )
+hframes = 2
+
+[node name="HealthBarHolder" type="Node2D" parent="Pokemon_2"]
+position = Vector2( 0.285233, 0.384449 )
+
+[node name="HealthBar" type="ProgressBar" parent="Pokemon_2/HealthBarHolder"]
+modulate = Color( 0, 1, 0.321569, 1 )
+margin_left = 48.4707
+margin_top = 20.4752
+margin_right = 96.4707
+margin_bottom = 28.4752
+rect_scale = Vector2( 1, 0.377 )
+theme = ExtResource( 5 )
+custom_styles/fg = SubResource( 8 )
+custom_styles/bg = SubResource( 9 )
+step = 0.107
+value = 100.0
+percent_visible = false
+script = ExtResource( 11 )
+
+[node name="Pokemon_3" type="Node2D" parent="."]
+position = Vector2( 135.723, 24.6189 )
+
+[node name="Back_ground" type="Sprite" parent="Pokemon_3"]
+position = Vector2( -48.742, 8.379 )
+texture = ExtResource( 7 )
+centered = false
+hframes = 2
+
+[node name="Pokemon_sprite" type="Sprite" parent="Pokemon_3"]
+position = Vector2( -33.0439, 20.379 )
+hframes = 2
+region_enabled = true
+region_rect = Rect2( 30, 9, 70, 24 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pokemon_3/Pokemon_sprite"]
+autoplay = "Breath"
+anims/Breath = SubResource( 4 )
+
+[node name="Name" type="Sprite" parent="Pokemon_3"]
+position = Vector2( 25.277, 14.3811 )
+region_enabled = true
+region_rect = Rect2( 0, -1, 72, 10 )
+
+[node name="Level" type="Label" parent="Pokemon_3"]
+margin_left = 0.293526
+margin_top = 23.6289
+margin_right = 8.29353
+margin_bottom = 31.6289
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Current_health" type="Label" parent="Pokemon_3"]
+margin_left = 59.6234
+margin_top = 22.6289
+margin_right = 67.6234
+margin_bottom = 30.6289
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Out_of" type="Label" parent="Pokemon_3"]
+margin_left = 80.6234
+margin_top = 22.6289
+margin_right = 88.6234
+margin_bottom = 30.6289
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gender" type="Sprite" parent="Pokemon_3"]
+position = Vector2( 34.9644, 27.1287 )
+texture = ExtResource( 6 )
+hframes = 2
+
+[node name="HealthBarHolder" type="Node2D" parent="Pokemon_3"]
+position = Vector2( -0.739594, -2.65001 )
+
+[node name="HealthBar" type="ProgressBar" parent="Pokemon_3/HealthBarHolder"]
+modulate = Color( 0, 1, 0.321569, 1 )
+margin_left = 48.4707
+margin_top = 20.4752
+margin_right = 96.4707
+margin_bottom = 28.4752
+rect_scale = Vector2( 1, 0.377 )
+theme = ExtResource( 5 )
+custom_styles/fg = SubResource( 8 )
+custom_styles/bg = SubResource( 9 )
+step = 0.107
+value = 100.0
+percent_visible = false
+script = ExtResource( 11 )
+
+[node name="Pokemon_4" type="Node2D" parent="."]
+position = Vector2( 135.723, 51.6189 )
+
+[node name="Back_ground" type="Sprite" parent="Pokemon_4"]
+position = Vector2( -48.683, 5.406 )
+texture = ExtResource( 7 )
+centered = false
+hframes = 2
+
+[node name="Pokemon_sprite" type="Sprite" parent="Pokemon_4"]
+position = Vector2( -33.044, 17.38 )
+hframes = 2
+region_enabled = true
+region_rect = Rect2( 30, 9, 70, 24 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pokemon_4/Pokemon_sprite"]
+autoplay = "Breath"
+anims/Breath = SubResource( 5 )
+
+[node name="Name" type="Sprite" parent="Pokemon_4"]
+position = Vector2( 25.277, 11.3811 )
+region_enabled = true
+region_rect = Rect2( 0, -1, 72, 10 )
+
+[node name="Level" type="Label" parent="Pokemon_4"]
+margin_left = 0.29351
+margin_top = 21.3778
+margin_right = 8.29351
+margin_bottom = 29.3778
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Current_health" type="Label" parent="Pokemon_4"]
+margin_left = 60.3008
+margin_top = 20.3778
+margin_right = 68.3008
+margin_bottom = 28.3778
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Out_of" type="Label" parent="Pokemon_4"]
+margin_left = 81.3008
+margin_top = 20.3778
+margin_right = 89.3008
+margin_bottom = 28.3778
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gender" type="Sprite" parent="Pokemon_4"]
+position = Vector2( 34.9644, 22.6277 )
+texture = ExtResource( 6 )
+hframes = 2
+
+[node name="HealthBarHolder" type="Node2D" parent="Pokemon_4"]
+position = Vector2( -0.702728, -5.59557 )
+
+[node name="HealthBar" type="ProgressBar" parent="Pokemon_4/HealthBarHolder"]
+modulate = Color( 0, 1, 0.321569, 1 )
+margin_left = 48.4707
+margin_top = 20.4752
+margin_right = 96.4707
+margin_bottom = 28.4752
+rect_scale = Vector2( 1, 0.377 )
+theme = ExtResource( 5 )
+custom_styles/fg = SubResource( 8 )
+custom_styles/bg = SubResource( 9 )
+step = 0.107
+value = 100.0
+percent_visible = false
+script = ExtResource( 11 )
+
+[node name="Pokemon_5" type="Node2D" parent="."]
+position = Vector2( 135.723, 78.6189 )
+
+[node name="Back_ground" type="Sprite" parent="Pokemon_5"]
+position = Vector2( -48.753, 2.377 )
+texture = ExtResource( 7 )
+centered = false
+hframes = 2
+
+[node name="Pokemon_sprite" type="Sprite" parent="Pokemon_5"]
+position = Vector2( -33.044, 14.206 )
+hframes = 2
+region_enabled = true
+region_rect = Rect2( 30, 9, 70, 24 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pokemon_5/Pokemon_sprite"]
+autoplay = "Breath"
+anims/Breath = SubResource( 6 )
+
+[node name="Name" type="Sprite" parent="Pokemon_5"]
+position = Vector2( 25.277, 9.3811 )
+region_enabled = true
+region_rect = Rect2( 0, -1, 72, 10 )
+
+[node name="Level" type="Label" parent="Pokemon_5"]
+margin_left = 0.29351
+margin_top = 18.0017
+margin_right = 8.29351
+margin_bottom = 26.0017
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Current_health" type="Label" parent="Pokemon_5"]
+margin_left = 60.3008
+margin_top = 17.0017
+margin_right = 68.3008
+margin_bottom = 25.0017
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Out_of" type="Label" parent="Pokemon_5"]
+margin_left = 81.3008
+margin_top = 17.0017
+margin_right = 89.3008
+margin_bottom = 25.0017
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gender" type="Sprite" parent="Pokemon_5"]
+position = Vector2( 34.9644, 20.3765 )
+texture = ExtResource( 6 )
+hframes = 2
+
+[node name="HealthBarHolder" type="Node2D" parent="Pokemon_5"]
+position = Vector2( -0.768677, -8.62332 )
+
+[node name="HealthBar" type="ProgressBar" parent="Pokemon_5/HealthBarHolder"]
+modulate = Color( 0, 1, 0.321569, 1 )
+margin_left = 48.4707
+margin_top = 20.4752
+margin_right = 96.4707
+margin_bottom = 28.4752
+rect_scale = Vector2( 1, 0.377 )
+theme = ExtResource( 5 )
+custom_styles/fg = SubResource( 8 )
+custom_styles/bg = SubResource( 9 )
+step = 0.107
+value = 100.0
+percent_visible = false
+script = ExtResource( 11 )
+
+[node name="Pokemon_6" type="Node2D" parent="."]
+position = Vector2( 135.723, 105.619 )
+
+[node name="Back_ground" type="Sprite" parent="Pokemon_6"]
+position = Vector2( -48.717, -0.596 )
+texture = ExtResource( 7 )
+centered = false
+hframes = 2
+
+[node name="Pokemon_sprite" type="Sprite" parent="Pokemon_6"]
+position = Vector2( -33.0439, 11.3756 )
+hframes = 2
+region_enabled = true
+region_rect = Rect2( 30, 9, 70, 24 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pokemon_6/Pokemon_sprite"]
+autoplay = "Breath"
+anims/Breath = SubResource( 7 )
+
+[node name="Name" type="Sprite" parent="Pokemon_6"]
+position = Vector2( 24.277, 7.381 )
+region_enabled = true
+region_rect = Rect2( 0, -1, 72, 10 )
+
+[node name="Level" type="Label" parent="Pokemon_6"]
+margin_left = 0.293526
+margin_top = 14.6255
+margin_right = 8.29353
+margin_bottom = 22.6255
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Current_health" type="Label" parent="Pokemon_6"]
+margin_left = 58.9673
+margin_top = 13.6255
+margin_right = 66.9673
+margin_bottom = 21.6255
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Out_of" type="Label" parent="Pokemon_6"]
+margin_left = 79.9673
+margin_top = 13.6255
+margin_right = 87.9673
+margin_bottom = 21.6255
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gender" type="Sprite" parent="Pokemon_6"]
+position = Vector2( 34.9644, 17.0003 )
+texture = ExtResource( 6 )
+hframes = 2
+
+[node name="HealthBarHolder" type="Node2D" parent="Pokemon_6"]
+position = Vector2( -0.713989, -11.5922 )
+
+[node name="HealthBar" type="ProgressBar" parent="Pokemon_6/HealthBarHolder"]
+modulate = Color( 0, 1, 0.321569, 1 )
+margin_left = 48.4707
+margin_top = 20.4752
+margin_right = 96.4707
+margin_bottom = 28.4752
+rect_scale = Vector2( 1, 0.377 )
+theme = ExtResource( 5 )
+custom_styles/fg = SubResource( 8 )
+custom_styles/bg = SubResource( 9 )
+step = 0.107
+value = 100.0
+percent_visible = false
+script = ExtResource( 11 )
+
+[node name="Cancel_sprite" type="Sprite" parent="."]
+position = Vector2( 181.355, 131.619 )
+scale = Vector2( 1.03716, 1 )
+texture = ExtResource( 8 )
+centered = false
+hframes = 2

@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Game_script_resources/Pokemon.gd" type="Script" id=1]
+[ext_resource path="res://Pokemon/Charmander.png" type="Texture" id=2]
+[ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game_actions/Growl.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game_actions/Scratch.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game_pokemon/Charmeleon.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game_actions/Ember.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game_actions/SmokeScreen.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Game_actions/FlameThrower.tscn" type="PackedScene" id=9]
+
+[node name="Charmander" type="Node2D" groups=["Presist"]]
+script = ExtResource( 1 )
+base_experience_yeild = 64.0
+sprite = ExtResource( 2 )
+Name = "Charmander"
+id = 4
+Type_1 = [ 2 ]
+Type_2 = [ 0 ]
+Damage_normally_by = [ 1, 12, 4, 13, 16, 3, 7, 8, 17 ]
+Weak_to = [ 5, 14, 11 ]
+Resistant_to = [ 6, 9, 2, 10, 15, 18 ]
+Immune_to = [ 0 ]
+level_to_next_form = 16
+catch_rate = 45.0
+Levelling_rate = "Medium_slow"
+Min_Hatch_time = 5140
+Max_Hatch_time = 5935
+gender_ratio = "87.5%_male"
+egg_groups = 8193
+base_friend_ship = 70
+height = 0.6
+weight = 8.5
+status_effect = 5
+base_Health_points = 39
+base_attack = 52
+base_special_attack = 60
+base_defense = 43
+base_special_defense = 50
+base_speed = 65
+speed_yield = 1
+pokemon_entry = "The flame that burns at the tip of its tail is an indication of its emotions. The flame wavers when Charmander is happy, and blazes when it is enraged."
+next_form = ExtResource( 6 )
+
+[node name="Tackle" parent="." instance=ExtResource( 3 )]
+Types = 0
+
+[node name="Scratch" parent="." instance=ExtResource( 5 )]
+Types = 0
+
+[node name="Growl" parent="." instance=ExtResource( 4 )]
+Types = 0
+
+[node name="Ember" parent="." instance=ExtResource( 7 )]
+
+[node name="SmokeScreen" parent="." instance=ExtResource( 8 )]
+
+[node name="FlameThrower" parent="." instance=ExtResource( 9 )]

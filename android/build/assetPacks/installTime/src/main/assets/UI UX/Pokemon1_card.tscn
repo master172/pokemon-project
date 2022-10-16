@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Fonts/Pokemon_16.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI UX/Pokemon1_card.gd" type="Script" id=3]
+
+[node name="Pokemon1" type="TextureRect"]
+margin_right = 34.0
+margin_bottom = 43.0
+rect_min_size = Vector2( 34, 43 )
+expand = true
+stretch_mode = 1
+script = ExtResource( 3 )
+
+[node name="Selector" type="ColorRect" parent="."]
+margin_right = 34.0
+margin_bottom = 43.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Cover" type="ColorRect" parent="."]
+anchor_left = -0.00806452
+anchor_top = 0.00625
+anchor_right = -0.00806452
+anchor_bottom = 0.01875
+margin_left = 1.27419
+margin_top = 0.73125
+margin_right = 33.2742
+margin_bottom = 41.1937
+color = Color( 0.0588235, 0.0235294, 0.231373, 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 5, 1 )
+scale = Vector2( 0.4, 0.4 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0.684021, 34.0005, 62.8255, 63.3979 )
+
+[node name="Lv" type="Label" parent="."]
+margin_left = 2.0
+margin_top = 35.0
+margin_right = 35.0
+margin_bottom = 46.0
+rect_scale = Vector2( 0.37, 0.37 )
+custom_fonts/font = ExtResource( 1 )
+text = "Level :"
+
+[node name="Level" type="Label" parent="."]
+margin_left = 14.0
+margin_top = 35.0
+margin_right = 44.0
+margin_bottom = 46.0
+rect_scale = Vector2( 0.37, 0.37 )
+custom_fonts/font = ExtResource( 1 )
+
+[node name="Nm" type="Label" parent="."]
+margin_left = 2.0
+margin_top = 30.0
+margin_right = 32.0
+margin_bottom = 41.0
+rect_scale = Vector2( 0.37, 0.37 )
+custom_fonts/font = ExtResource( 1 )
+text = "Name :"
+
+[node name="Name" type="Label" parent="."]
+margin_left = 13.0
+margin_top = 30.0
+margin_right = 77.0
+margin_bottom = 41.0
+rect_scale = Vector2( 0.312571, 0.342007 )
+custom_fonts/font = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

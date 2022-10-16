@@ -1,0 +1,264 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assests/libraries/Ui/Tackle_box2.png" type="Texture" id=1]
+[ext_resource path="res://assests/libraries/Ui/Place_box1.png" type="Texture" id=2]
+[ext_resource path="res://assests/libraries/battle_pokemon_selecter.png" type="Texture" id=3]
+[ext_resource path="res://assests/libraries/pkmnfl.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://UI UX/Move_learner.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=5]
+size = 11
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 12
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 12
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 12
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 12
+font_data = ExtResource( 4 )
+
+[node name="Move_learner" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -160.0
+script = ExtResource( 5 )
+
+[node name="Background" type="Sprite" parent="."]
+scale = Vector2( 2, 2.66667 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Move_container" type="GridContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 22.0
+margin_bottom = -61.0
+custom_constants/vseparation = 17
+custom_constants/hseparation = 20
+columns = 2
+
+[node name="Move1" type="TextureRect" parent="Move_container"]
+margin_right = 100.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 1
+
+[node name="Selected" type="Sprite" parent="Move_container/Move1"]
+scale = Vector2( 1.16279, 0.882353 )
+texture = ExtResource( 3 )
+centered = false
+hframes = 2
+
+[node name="Name" type="Label" parent="Move_container/Move1"]
+margin_left = 6.0
+margin_top = 8.0
+margin_right = 68.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 5 )
+text = "Tackle"
+
+[node name="Move2" type="TextureRect" parent="Move_container"]
+margin_left = 120.0
+margin_right = 220.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 1
+
+[node name="Selected" type="Sprite" parent="Move_container/Move2"]
+scale = Vector2( 1.16279, 0.882353 )
+texture = ExtResource( 3 )
+centered = false
+hframes = 2
+
+[node name="Name" type="Label" parent="Move_container/Move2"]
+margin_left = 6.0
+margin_top = 8.0
+margin_right = 68.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 5 )
+text = "Tackle"
+
+[node name="Move3" type="TextureRect" parent="Move_container"]
+margin_top = 47.0
+margin_right = 100.0
+margin_bottom = 77.0
+rect_min_size = Vector2( 100, 30 )
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 1
+
+[node name="Selected" type="Sprite" parent="Move_container/Move3"]
+scale = Vector2( 1.16279, 0.882353 )
+texture = ExtResource( 3 )
+centered = false
+hframes = 2
+
+[node name="Name" type="Label" parent="Move_container/Move3"]
+margin_left = 6.0
+margin_top = 8.0
+margin_right = 68.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 5 )
+text = "Tackle"
+
+[node name="Move4" type="TextureRect" parent="Move_container"]
+margin_left = 120.0
+margin_top = 47.0
+margin_right = 220.0
+margin_bottom = 77.0
+rect_min_size = Vector2( 100, 30 )
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 1
+
+[node name="Selected" type="Sprite" parent="Move_container/Move4"]
+scale = Vector2( 1.16279, 0.882353 )
+texture = ExtResource( 3 )
+centered = false
+hframes = 2
+
+[node name="Name" type="Label" parent="Move_container/Move4"]
+margin_left = 6.0
+margin_top = 8.0
+margin_right = 68.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 5 )
+text = "Tackle"
+
+[node name="Forgetter" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -50.0
+margin_right = -10.0
+margin_bottom = -14.0
+
+[node name="Move" type="TextureRect" parent="Forgetter"]
+margin_right = 110.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 110, 30 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Selected" type="Sprite" parent="Forgetter/Move"]
+scale = Vector2( 1.27907, 1.05882 )
+texture = ExtResource( 3 )
+centered = false
+hframes = 2
+
+[node name="Name" type="Label" parent="Forgetter/Move"]
+margin_left = 6.0
+margin_top = 12.0
+margin_right = 38.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 5 )
+text = "Tackle"
+
+[node name="Buttons" type="GridContainer" parent="Forgetter"]
+margin_left = 114.0
+margin_right = 218.0
+margin_bottom = 36.0
+columns = 2
+
+[node name="Learn" type="TextureRect" parent="Forgetter/Buttons"]
+margin_right = 50.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 50, 15 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Selected" type="Sprite" parent="Forgetter/Buttons/Learn"]
+scale = Vector2( 0.58, 0.44 )
+texture = ExtResource( 3 )
+centered = false
+hframes = 2
+
+[node name="Learn" type="Label" parent="Forgetter/Buttons/Learn"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+custom_fonts/font = SubResource( 6 )
+text = "Learn"
+align = 1
+
+[node name="Forget" type="TextureRect" parent="Forgetter/Buttons"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 50, 15 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Selected" type="Sprite" parent="Forgetter/Buttons/Forget"]
+scale = Vector2( 0.58, 0.44 )
+texture = ExtResource( 3 )
+centered = false
+hframes = 2
+
+[node name="Forget" type="Label" parent="Forgetter/Buttons/Forget"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+custom_fonts/font = SubResource( 7 )
+text = "Forget"
+align = 1
+
+[node name="Info" type="TextureRect" parent="Forgetter/Buttons"]
+margin_top = 19.0
+margin_right = 50.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 50, 15 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Selected" type="Sprite" parent="Forgetter/Buttons/Info"]
+scale = Vector2( 0.58, 0.44 )
+texture = ExtResource( 3 )
+centered = false
+hframes = 2
+
+[node name="Info" type="Label" parent="Forgetter/Buttons/Info"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+custom_fonts/font = SubResource( 3 )
+text = "Info"
+align = 1
+
+[node name="Back" type="TextureRect" parent="Forgetter/Buttons"]
+margin_left = 54.0
+margin_top = 19.0
+margin_right = 104.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 50, 15 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Selected" type="Sprite" parent="Forgetter/Buttons/Back"]
+scale = Vector2( 0.58, 0.44 )
+texture = ExtResource( 3 )
+centered = false
+hframes = 2
+
+[node name="Label" type="Label" parent="Forgetter/Buttons/Back"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+custom_fonts/font = SubResource( 4 )
+text = "Back"
+align = 1

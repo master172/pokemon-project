@@ -46,7 +46,7 @@ _global_script_class_icons={
 
 config/name="pokemon project"
 config/description="a trial to recreate pokemon red in godot or something like it or close to it"
-run/main_scene="res://Scenes/SceneManager.tscn"
+run/main_scene="res://main/TitleScreen.tscn"
 run/low_processor_mode=true
 config/icon="res://icon.png"
 
@@ -63,6 +63,7 @@ GameSaver="*res://autoload/GameSaver.gd"
 PokeHelper="*res://autoload/Poke_helper.gd"
 MoveLearner="*res://autoload/Move_learner.gd"
 SaveAndLoad="*res://autoload/Save_and_load.gd"
+SceneChanger="*res://autoload/SceneChanger.gd"
 
 [debug]
 
@@ -97,6 +98,7 @@ singletons=[  ]
 collision=false
 "project version"="0.0.1-prototype"
 poniting=false
+Name=false
 
 [importer_defaults]
 
@@ -215,6 +217,8 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_3="ledge"
 2d_physics/layer_4="doors"
 2d_physics/layer_5="interactable"
+2d_physics/layer_6="Collisions"
+2d_physics/layer_7="Grass"
 
 [physics]
 
@@ -223,4 +227,5 @@ common/physics_interpolation=true
 
 [rendering]
 
+vram_compression/import_etc=true
 environment/default_environment="res://default_env.tres"

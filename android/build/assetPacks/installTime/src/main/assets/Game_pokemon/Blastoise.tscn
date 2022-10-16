@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Game_script_resources/Pokemon.gd" type="Script" id=1]
+[ext_resource path="res://Pokemon/Blastoise.png" type="Texture" id=2]
+[ext_resource path="res://Game_actions/TailWhip.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game_actions/RapidSpin.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game_actions/Skull bash.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game_actions/WaterGun.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game_actions/HydroPump.tscn" type="PackedScene" id=8]
+
+[node name="Blastoise" type="Node2D"]
+script = ExtResource( 1 )
+base_experience_yeild = 210.0
+current_stage = 3
+sprite = ExtResource( 2 )
+Name = "Blastoise"
+id = 9
+Type_1 = [ 11 ]
+Type_2 = [ 0 ]
+Damage_normally_by = [ 1, 6, 12, 16, 4, 7, 13, 8, 5, 17, 14, 18 ]
+Weak_to = [ 10, 3 ]
+Resistant_to = [ 9, 2, 11, 15 ]
+Immune_to = [ 0 ]
+catch_rate = 45.0
+Levelling_rate = "Medium_slow"
+Min_Hatch_time = 5140
+Max_Hatch_time = 5396
+gender_ratio = "87.5%_male"
+egg_groups = 5
+base_friend_ship = 70
+height = 1.6
+weight = 85.5
+status_effect = 5
+base_Health_points = 79
+base_attack = 83
+base_special_attack = 85
+base_defense = 100
+base_special_defense = 105
+base_speed = 78
+sp_defense_yield = 3
+pokemon_entry = "Blastoise, the Shellfish Pokémon. The evolved form of Wartortle. Blastoise's strength lies in its power, rather than its speed. Its shell is like armor and attacks from the hydro cannon on its back are virtually unstoppable."
+
+[node name="Tackle" parent="." instance=ExtResource( 6 )]
+
+[node name="TailWhip" parent="." instance=ExtResource( 3 )]
+
+[node name="Skull bash" parent="." instance=ExtResource( 5 )]
+
+[node name="RapidSpin" parent="." instance=ExtResource( 4 )]
+
+[node name="WaterGun" parent="." instance=ExtResource( 7 )]
+
+[node name="HydroPump" parent="." instance=ExtResource( 8 )]

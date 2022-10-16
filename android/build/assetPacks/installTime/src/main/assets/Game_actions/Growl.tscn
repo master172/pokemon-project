@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Game_script_resources/Actions.gd" type="Script" id=1]
+[ext_resource path="res://Game_actions/Special_effects/Growl_special.gd" type="Script" id=2]
+[ext_resource path="res://assests/libraries/Ui/Status_Type_icons/Types/normal.png" type="Texture" id=3]
+
+[node name="Growl" type="Node2D" groups=["presistent"]]
+script = ExtResource( 1 )
+Name = "Growl"
+Types = 1
+learned_level = 5
+pp = 40
+max_pp = 40
+special_effects = NodePath("Growl_special")
+description = "Lowers opponent's Defense."
+type_image = ExtResource( 3 )
+category = 1
+
+[node name="Growl_special" type="Node" parent="."]
+script = ExtResource( 2 )

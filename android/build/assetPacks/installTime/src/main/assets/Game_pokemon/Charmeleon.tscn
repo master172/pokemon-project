@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Pokemon/Charmeleon.png" type="Texture" id=1]
+[ext_resource path="res://Game_script_resources/Pokemon.gd" type="Script" id=2]
+[ext_resource path="res://Game_pokemon/Charizard.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game_actions/Tackle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game_actions/Growl.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game_actions/Scratch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game_actions/Ember.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game_actions/SmokeScreen.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Game_actions/FlameThrower.tscn" type="PackedScene" id=9]
+
+[node name="Charmeleon" type="Node2D"]
+script = ExtResource( 2 )
+base_experience_yeild = 142.0
+current_stage = 2
+sprite = ExtResource( 1 )
+Name = "Charmeleon"
+id = 5
+Type_1 = [ 2 ]
+Type_2 = [ 0 ]
+Damage_normally_by = [ 1, 7, 12, 8, 4, 17, 13, 16, 3 ]
+Weak_to = [ 5, 14, 11 ]
+Resistant_to = [ 6, 9, 2, 10, 15, 18 ]
+Immune_to = [ 0 ]
+level_to_next_form = 36
+catch_rate = 45.0
+Levelling_rate = "Medium_slow"
+Min_Hatch_time = 5140
+Max_Hatch_time = 5936
+gender_ratio = "87.5%_male"
+egg_groups = 8193
+base_friend_ship = 70
+height = 1.1
+weight = 19.0
+status_effect = 5
+base_Health_points = 58
+base_attack = 64
+base_special_attack = 80
+base_defense = 58
+base_special_defense = 65
+base_speed = 80
+speed_yield = 1
+sp_attack_yield = 1
+pokemon_entry = "Charmeleon, the Flame Pokémon. It has razor-sharp claws and its tail is exceptionally strong."
+next_form = ExtResource( 3 )
+
+[node name="Tackle" parent="." instance=ExtResource( 4 )]
+
+[node name="Scratch" parent="." instance=ExtResource( 6 )]
+
+[node name="Growl" parent="." instance=ExtResource( 5 )]
+
+[node name="Ember" parent="." instance=ExtResource( 7 )]
+
+[node name="SmokeScreen" parent="." instance=ExtResource( 8 )]
+
+[node name="FlameThrower" parent="." instance=ExtResource( 9 )]
