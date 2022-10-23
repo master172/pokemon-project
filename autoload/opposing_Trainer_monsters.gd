@@ -24,7 +24,8 @@ func _remove_children():
 		child.queue_free()
 
 func _change_parent():
-	self.get_child(0).change_parent()
+	if self.get_child_count() > 0:
+		self.get_child(0).change_parent()
 
 func _attack():
 	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:

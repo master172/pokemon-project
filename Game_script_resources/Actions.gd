@@ -43,6 +43,8 @@ export(Texture) var type_image
 
 export(int,"physical","status","special") var category
 
+var to_add_crit = false
+
 func save():
 	var save_dict = {
 
@@ -67,16 +69,24 @@ func _calculate_damage():
 		var crit : int = 1
 		var critical = RandomNumberGenerator.new()
 		critical.randomize()
-		var critical_damage = critical.randi_range(0,8)
-		if critical_damage == 8:
+		var critical_damage = critical.randi_range(0,1)
+		if critical_damage == 1:
 			crit = 2
 		else:
 			crit = 1
+		
+		if crit == 2:
+			to_add_crit = true
+		else:
+			to_add_crit = false
+		
+
 		var stab : float 
 		if self.Types == current_holder.Type_1[0] or self.Types == current_holder.Type_2[0]:
 			stab = 1.5
 		else:
 			stab = 1
+
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
 		var random_number = rng.randi_range(85,100)
@@ -135,6 +145,10 @@ func _apply_damage():
 			
 		elif damage >= 1:
 			self.current_holder.opposing_pokemon.Current_health_points -= int(damage)
+			if to_add_crit == true:
+				Utils.Get_Pokemon_Manger().get_child(0).get_child(0).events.append("critical_hit")
+				to_add_crit = false
+
 	elif is_missed == true:
 		print("missed")
 		if self.get_parent().get_parent() == PlayerPokemon:

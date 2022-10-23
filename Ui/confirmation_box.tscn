@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assests/libraries/pkmnfl.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://assests/libraries/Ui/new_streamtexture.tres" type="Texture" id=2]
+[ext_resource path="res://assests/libraries/Background2.png" type="Texture" id=2]
 [ext_resource path="res://Ui/confirmation_box.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]

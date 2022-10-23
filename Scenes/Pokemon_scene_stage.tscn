@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://assests/libraries/Ui/Place_box1.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Pokemon_scene_stage.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Ui/Poke_box.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Pokemon/Venasaur.png" type="Texture" id=15]
 [ext_resource path="res://Ui/Capture_box.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/EventManager.gd" type="Script" id=17]
 [ext_resource path="res://assests/libraries/health.png" type="Texture" id=18]
 [ext_resource path="res://assests/libraries/Ui/Battle identifier.png" type="Texture" id=19]
 [ext_resource path="res://assests/libraries/Ui/Battle identifier 0.png" type="Texture" id=20]
@@ -117,6 +118,9 @@ glow_high_quality = true
 
 [node name="Pokemon_scene" type="Control"]
 script = ExtResource( 2 )
+
+[node name="EventManager" type="Node2D" parent="."]
+script = ExtResource( 17 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color( 0.772549, 0.878431, 0.745098, 1 )

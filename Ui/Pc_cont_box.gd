@@ -38,22 +38,22 @@ func _kill():
 	self.controller.controller_active = false
 
 func _input(event):
-	if event.is_action_pressed("ui_down"):
+	if event.is_action_pressed("s"):
 		unset_active_option()
 		selected_option = (selected_option + 1) % 6
 		set_active_option()
-	elif event.is_action_pressed("ui_up"):
+	elif event.is_action_pressed("w"):
 		unset_active_option()
 		if selected_option == 0:
 			selected_option = Options.Back
 		else:
 			selected_option -= 1
 		set_active_option()
-	elif event.is_action_pressed("ui_left"):
+	elif event.is_action_pressed("a"):
 		unset_active_option()
 		selected_option = 0
 		set_active_option()
-	elif event.is_action_pressed("ui_right") and selected_option == Options.Summary:
+	elif event.is_action_pressed("d") and selected_option == Options.Summary:
 		unset_active_option()
 		selected_option = 1
 		set_active_option()

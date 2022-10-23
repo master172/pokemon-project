@@ -5,6 +5,7 @@ onready var Do_you_yes = $Do_you_want_to/Option_container/VBoxContainer/Yes/Spri
 onready var Do_you_no = $Do_you_want_to/Option_container/VBoxContainer/No/Sprite
 onready var Dialogue_layer = $Dialog_layer
 onready var Bag_layer = $Bag_layer
+onready var EventManger = $EventManager
 
 const pokemon_scene = preload("res://Scenes/Battle_pokemon.tscn")
 const Bag = preload("res://Game resources/InventoryUi.tscn")
@@ -62,11 +63,19 @@ func _display_enemy_attack_dialogue(pokemon,move):
 
 		if BattleManager.multi_battle == false:
 			if OpposingTrainerMonsters.pokemon != null:
+				if Dialogue_layer.get_child_count() > 0:
+					if self.get_child(0).current_event != null:
+						yield(self.get_child(0),'finished_event')
 				
-				var Dialogue = Dialog.instance()
-				Dialogue.text_to_diaplay = ["The opposing "+ pokemon.Name + " used "+ pokemon.Learned_moves[move].Name, 0]
-				Dialogue_layer.add_child(Dialogue)
-				Dialogue.connect("Dialog_ended",self,"_finish_Enemy_attack_dialogue")
+						var Dialogue = Dialog.instance()
+						Dialogue.text_to_diaplay = ["The opposing "+ pokemon.Name + " used "+ pokemon.Learned_moves[move].Name, 0]
+						Dialogue_layer.add_child(Dialogue)
+						Dialogue.connect("Dialog_ended",self,"_finish_Enemy_attack_dialogue")
+				else:
+					var Dialogue = Dialog.instance()
+					Dialogue.text_to_diaplay = ["The opposing "+ pokemon.Name + " used "+ pokemon.Learned_moves[move].Name, 0]
+					Dialogue_layer.add_child(Dialogue)
+					Dialogue.connect("Dialog_ended",self,"_finish_Enemy_attack_dialogue")
 
 func _finish_Enemy_attack_dialogue():
 	if BattleManager.multi_battle == false:
@@ -84,11 +93,19 @@ func _finish_Enemy_attack_dialogue():
 
 func _enemy_attack_missed():
 	if ui_state == Ui_state.Dialogue:
+		if Dialogue_layer.get_child_count() > 0:
+			if self.get_child(0).current_event != null:
+				yield(self.get_child(0),'finished_event')
 		
-		var Dialogue = Dialog.instance()
-		Dialogue.text_to_diaplay = ["But it missed", 0]
-		Dialogue_layer.add_child(Dialogue)
-		Dialogue.connect("Dialog_ended",self,"_enemy_finish_attack_missed")
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = ["But it missed", 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"_enemy_finish_attack_missed")
+		else:
+			var Dialogue = Dialog.instance()
+			Dialogue.text_to_diaplay = ["But it missed", 0]
+			Dialogue_layer.add_child(Dialogue)
+			Dialogue.connect("Dialog_ended",self,"_enemy_finish_attack_missed")
 	
 
 func _enemy_finish_attack_missed():
@@ -100,10 +117,18 @@ func _enemy_finish_attack_missed():
 
 func _enemy_attack_evaded():
 	if ui_state == Ui_state.Dialogue:
-		var Dialogue = Dialog.instance()
-		Dialogue.text_to_diaplay = ["But it was evaded", 0]
-		Dialogue_layer.add_child(Dialogue)
-		Dialogue.connect("Dialog_ended",self,"_enemy_finish_attack_evaded")
+		if Dialogue_layer.get_child_count() > 0:
+			if self.get_child(0).current_event != null:
+				yield(self.get_child(0),'finished_event')		
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = ["But it was evaded", 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"_enemy_finish_attack_evaded")
+		else:
+			var Dialogue = Dialog.instance()
+			Dialogue.text_to_diaplay = ["But it was evaded", 0]
+			Dialogue_layer.add_child(Dialogue)
+			Dialogue.connect("Dialog_ended",self,"_enemy_finish_attack_evaded")
 
 
 func _enemy_finish_attack_evaded():
@@ -114,10 +139,18 @@ func _enemy_finish_attack_evaded():
 
 func _attack_missed():
 	if ui_state == Ui_state.Dialogue:
-		var Dialogue = Dialog.instance()
-		Dialogue.text_to_diaplay = ["But it missed", 0]
-		Dialogue_layer.add_child(Dialogue)
-		Dialogue.connect("Dialog_ended",self,"_finish_attack_missed")
+		if Dialogue_layer.get_child_count() > 0:
+			if self.get_child(0).current_event != null:
+				yield(self.get_child(0),'finished_event')	
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = ["But it missed", 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"_finish_attack_missed")
+		else:
+			var Dialogue = Dialog.instance()
+			Dialogue.text_to_diaplay = ["But it missed", 0]
+			Dialogue_layer.add_child(Dialogue)
+			Dialogue.connect("Dialog_ended",self,"_finish_attack_missed")
 	
 
 func _finish_attack_missed():
@@ -127,10 +160,18 @@ func _finish_attack_missed():
 
 func _attack_evaded():
 	if ui_state == Ui_state.Dialogue:
-		var Dialogue = Dialog.instance()
-		Dialogue.text_to_diaplay = ["But it was evaded", 0]
-		Dialogue_layer.add_child(Dialogue)
-		Dialogue.connect("Dialog_ended",self,"_finish_attack_evaded")
+		if Dialogue_layer.get_child_count() > 0:
+			if self.get_child(0).current_event != null:
+				yield(self.get_child(0),'finished_event')
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = ["But it was evaded", 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"_finish_attack_evaded")
+		else:
+			var Dialogue = Dialog.instance()
+			Dialogue.text_to_diaplay = ["But it was evaded", 0]
+			Dialogue_layer.add_child(Dialogue)
+			Dialogue.connect("Dialog_ended",self,"_finish_attack_evaded")		
 
 
 func _finish_attack_evaded():
@@ -145,18 +186,28 @@ func _Dialog_end(STATE):
 		ui_state = STATE
 
 func _physics_process(_delta):
-	if BattleManager.multi_battle == false:
-		_single_battle()
+	if EventManger.current_event == null:
+
+			if BattleManager.multi_battle == false:
+
+				_single_battle()
 
 func _initial_dialogue():
 	if ui_state == Ui_state.Dialogue:
 		if BattleManager.multi_battle == false:
 			if OpposingTrainerMonsters.pokemon != null:
-				
-				var Dialogue = Dialog.instance()
-				Dialogue.text_to_diaplay = ["A wild " + OpposingTrainerMonsters.pokemon.Name + " appeared","What pokemon will ash send", 0]
-				Dialogue_layer.add_child(Dialogue)
-				Dialogue.connect("Dialog_ended",self,"_finish_Init_dialogue")
+				if Dialogue_layer.get_child_count() > 0:
+					if self.get_child(0).current_event != null:
+						yield(self.get_child(0),'finished_event')			
+						var Dialogue = Dialog.instance()
+						Dialogue.text_to_diaplay = ["A wild " + OpposingTrainerMonsters.pokemon.Name + " appeared","What pokemon will ash send", 0]
+						Dialogue_layer.add_child(Dialogue)
+						Dialogue.connect("Dialog_ended",self,"_finish_Init_dialogue")
+				else:
+					var Dialogue = Dialog.instance()
+					Dialogue.text_to_diaplay = ["A wild " + OpposingTrainerMonsters.pokemon.Name + " appeared","What pokemon will ash send", 0]
+					Dialogue_layer.add_child(Dialogue)
+					Dialogue.connect("Dialog_ended",self,"_finish_Init_dialogue")				
 
 func _finish_Init_dialogue():
 	ui_state = Ui_state.Selection
@@ -164,10 +215,18 @@ func _finish_Init_dialogue():
 
 func _player_attack_dialogue(move):
 	ui_state = Ui_state.Dialogue
-	var Dialogue = Dialog.instance()
-	Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name + " used "+PlayerPokemon.current_pokemon.Learned_moves[move].Name, 0]
-	Dialogue_layer.add_child(Dialogue)
-	Dialogue.connect("Dialog_ended",self,"_finish_player_attack_dialogue",[move])
+	if Dialogue_layer.get_child_count() > 0:
+		if self.get_child(0).current_event != null:
+			yield(self.get_child(0),'finished_event')	
+			var Dialogue = Dialog.instance()
+			Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name + " used "+PlayerPokemon.current_pokemon.Learned_moves[move].Name, 0]
+			Dialogue_layer.add_child(Dialogue)
+			Dialogue.connect("Dialog_ended",self,"_finish_player_attack_dialogue",[move])
+	else:
+		var Dialogue = Dialog.instance()
+		Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name + " used "+PlayerPokemon.current_pokemon.Learned_moves[move].Name, 0]
+		Dialogue_layer.add_child(Dialogue)
+		Dialogue.connect("Dialog_ended",self,"_finish_player_attack_dialogue",[move])
 
 func _finish_player_attack_dialogue(move):
 	
@@ -185,22 +244,36 @@ func _Run_dialogue():
 	if ui_state == Ui_state.Dialogue:
 		if BattleManager.multi_battle == false:
 			if PlayerPokemon.current_pokemon != null:
-				
-				var Dialogue = Dialog.instance()
-				Dialogue.text_to_diaplay = ["Got away safely", 0]
-				Dialogue_layer.add_child(Dialogue)
-				Dialogue.connect("Dialog_ended",self,"_run")
+				if Dialogue_layer.get_child_count() > 0:
+					if self.get_child(0).current_event != null:
+						yield(self.get_child(0),'finished_event')	
+						var Dialogue = Dialog.instance()
+						Dialogue.text_to_diaplay = ["Got away safely", 0]
+						Dialogue_layer.add_child(Dialogue)
+						Dialogue.connect("Dialog_ended",self,"_run")
+				else:
+					var Dialogue = Dialog.instance()
+					Dialogue.text_to_diaplay = ["Got away safely", 0]
+					Dialogue_layer.add_child(Dialogue)
+					Dialogue.connect("Dialog_ended",self,"_run")
 
 func _Init_lose_dialogue():
 	
 	if ui_state == Ui_state.Dialogue:
 		if BattleManager.multi_battle == false:
 			if OpposingTrainerMonsters.pokemon != null:
-				
-				var Dialogue = Dialog.instance()
-				Dialogue.text_to_diaplay = [ PlayerPokemon.current_pokemon.Name + " fainted", 0]
-				Dialogue_layer.add_child(Dialogue)
-				Dialogue.connect("Dialog_ended",self,"_lose_process")
+				if Dialogue_layer.get_child_count() > 0:
+					if self.get_child(0).current_event != null:
+						yield(self.get_child(0),'finished_event')
+						var Dialogue = Dialog.instance()
+						Dialogue.text_to_diaplay = [ PlayerPokemon.current_pokemon.Name + " fainted", 0]
+						Dialogue_layer.add_child(Dialogue)
+						Dialogue.connect("Dialog_ended",self,"_lose_process")
+				else:
+					var Dialogue = Dialog.instance()
+					Dialogue.text_to_diaplay = [ PlayerPokemon.current_pokemon.Name + " fainted", 0]
+					Dialogue_layer.add_child(Dialogue)
+					Dialogue.connect("Dialog_ended",self,"_lose_process")
 
 
 func _lose_process():
@@ -218,11 +291,18 @@ func total_loss():
 	if ui_state == Ui_state.Dialogue:
 		if BattleManager.multi_battle == false:
 			if OpposingTrainerMonsters.pokemon != null:
-				
-				var Dialogue = Dialog.instance()
-				Dialogue.text_to_diaplay = ["Ash was defeated by the opponent","Ash whited out", 0]
-				Dialogue_layer.add_child(Dialogue)
-				Dialogue.connect("Dialog_ended",self,"_total_loss_process")
+				if Dialogue_layer.get_child_count() > 0:
+					if self.get_child(0).current_event != null:
+						yield(self.get_child(0),'finished_event')
+						var Dialogue = Dialog.instance()
+						Dialogue.text_to_diaplay = ["Ash was defeated by the opponent","Ash whited out", 0]
+						Dialogue_layer.add_child(Dialogue)
+						Dialogue.connect("Dialog_ended",self,"_total_loss_process")
+				else:
+					var Dialogue = Dialog.instance()
+					Dialogue.text_to_diaplay = ["Ash was defeated by the opponent","Ash whited out", 0]
+					Dialogue_layer.add_child(Dialogue)
+					Dialogue.connect("Dialog_ended",self,"_total_loss_process")
 
 func _total_loss_process():
 	yield(get_tree().create_timer(0.2),"timeout")
@@ -239,11 +319,18 @@ func Pokemon_Comeback_Init():
 	if ui_state == Ui_state.Dialogue:
 		if BattleManager.multi_battle == false:
 			if PlayerPokemon.current_pokemon != null:
-				
-				var Dialogue = Dialog.instance()
-				Dialogue.text_to_diaplay = ["Ash called " +PlayerPokemon.current_pokemon.Name +" back", 0]
-				Dialogue_layer.add_child(Dialogue)
-				Dialogue.connect("Dialog_ended",self,"PokemonComebackProcess")
+				if Dialogue_layer.get_child_count() > 0:
+					if self.get_child(0).current_event != null:
+						yield(self.get_child(0),'finished_event')
+						var Dialogue = Dialog.instance()
+						Dialogue.text_to_diaplay = ["Ash called " +PlayerPokemon.current_pokemon.Name +" back", 0]
+						Dialogue_layer.add_child(Dialogue)
+						Dialogue.connect("Dialog_ended",self,"PokemonComebackProcess")
+				else:
+					var Dialogue = Dialog.instance()
+					Dialogue.text_to_diaplay = ["Ash called " +PlayerPokemon.current_pokemon.Name +" back", 0]
+					Dialogue_layer.add_child(Dialogue)
+					Dialogue.connect("Dialog_ended",self,"PokemonComebackProcess")
 
 func PokemonComebackProcess():
 	yield(get_tree().create_timer(0.2),"timeout")
@@ -252,7 +339,14 @@ func PokemonComebackProcess():
 func IchoosePokemon(pokemon):
 	if ui_state == Ui_state.Dialogue:
 		if BattleManager.multi_battle == false:
-				
+			if Dialogue_layer.get_child_count() > 0:
+				if self.get_child(0).current_event != null:
+					yield(self.get_child(0),'finished_event')
+					var Dialogue = Dialog.instance()
+					Dialogue.text_to_diaplay = [pokemon.Name +" I choose you", 0]
+					Dialogue_layer.add_child(Dialogue)
+					Dialogue.connect("Dialog_ended",self,"PokemonChoosingProcess")
+			else:
 				var Dialogue = Dialog.instance()
 				Dialogue.text_to_diaplay = [pokemon.Name +" I choose you", 0]
 				Dialogue_layer.add_child(Dialogue)
@@ -403,6 +497,20 @@ func _win_dialog(exp_points = 0):
 			Dialogue_layer.add_child(Dialogue)
 			Dialogue.connect("Dialog_ended",self,"win")
 			win_exp_points = 0
+	if learning_a_move == false and Dialogue_layer.get_child_count() > 0:
+		if self.get_child(0).current_event != null:
+			yield(self.get_child(0),'finished_event')
+			if exp_points != 0:
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"), 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"win")
+			elif exp_points == 0:
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"), 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"win")
+				win_exp_points = 0
 
 
 
@@ -553,11 +661,21 @@ func start_move_learning(move):
 	if ui_state == Ui_state.Dialogue:
 		if BattleManager.multi_battle == false:
 			if PlayerPokemon.current_pokemon != null:
-				learning_a_move = true
-				var Dialogue = Dialog.instance()
-				Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name +" wants to learn " + move.Name," how ever "+ PlayerPokemon.current_pokemon.Name + " already knows four moves please choose what to do", 0]
-				Dialogue_layer.add_child(Dialogue)
-				Dialogue.connect("Dialog_ended",self,"MoveLearningProcess")
+				if Dialogue_layer.get_child_count() > 0:
+					if self.get_child(0).current_event != null:
+						yield(self.get_child(0),'finished_event')
+						learning_a_move = true
+						var Dialogue = Dialog.instance()
+						Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name +" wants to learn " + move.Name," how ever "+ PlayerPokemon.current_pokemon.Name + " already knows four moves please choose what to do", 0]
+						Dialogue_layer.add_child(Dialogue)
+						Dialogue.connect("Dialog_ended",self,"MoveLearningProcess")
+				else:
+					learning_a_move = true
+					var Dialogue = Dialog.instance()
+					Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name +" wants to learn " + move.Name," how ever "+ PlayerPokemon.current_pokemon.Name + " already knows four moves please choose what to do", 0]
+					Dialogue_layer.add_child(Dialogue)
+					Dialogue.connect("Dialog_ended",self,"MoveLearningProcess")
+
 
 func MoveLearningProcess():
 	ui_state = Ui_state.MoveLearner
@@ -574,11 +692,19 @@ func StartMoveLearnDialogue(move):
 	if ui_state == Ui_state.Dialogue:
 		if BattleManager.multi_battle == false:
 			if PlayerPokemon.current_pokemon != null:
-				learning_a_move = true
-				var Dialogue = Dialog.instance()
-				Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name +" learned " + move.Name, 0]
-				Dialogue_layer.add_child(Dialogue)
-				Dialogue.connect("Dialog_ended",self,"StartMoveLearnProcess")
+				if Dialogue_layer.get_child_count() > 0:
+					if self.get_child(0).current_event != null:
+						yield(self.get_child(0),'finished_event')
+						learning_a_move = true
+						var Dialogue = Dialog.instance()
+						Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name +" learned " + move.Name, 0]
+						Dialogue_layer.add_child(Dialogue)
+						Dialogue.connect("Dialog_ended",self,"StartMoveLearnProcess")
+				else:
+					var Dialogue = Dialog.instance()
+					Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name +" learned " + move.Name, 0]
+					Dialogue_layer.add_child(Dialogue)
+					Dialogue.connect("Dialog_ended",self,"StartMoveLearnProcess")					
 	
 func StartMoveLearnProcess():
 	learning_a_move = false

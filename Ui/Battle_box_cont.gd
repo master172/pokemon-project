@@ -36,22 +36,22 @@ func _kill():
 	queue_free()
 
 func _input(event):
-	if event.is_action_pressed("ui_down"):
+	if event.is_action_pressed("S"):
 		unset_active_option()
 		selected_option = (selected_option + 1) % 6
 		set_active_option()
-	elif event.is_action_pressed("ui_up"):
+	elif event.is_action_pressed("W"):
 		unset_active_option()
 		if selected_option == 0:
 			selected_option = Options.Back
 		else:
 			selected_option -= 1
 		set_active_option()
-	elif event.is_action_pressed("ui_left"):
+	elif event.is_action_pressed("A"):
 		unset_active_option()
 		selected_option = 0
 		set_active_option()
-	elif event.is_action_pressed("ui_right") and selected_option == Options.Summary:
+	elif event.is_action_pressed("D") and selected_option == Options.Summary:
 		unset_active_option()
 		selected_option = 1
 		set_active_option()
