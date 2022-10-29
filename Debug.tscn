@@ -26,7 +26,7 @@ margin_bottom = 15.0
 custom_fonts/font = ExtResource( 1 )
 text = "1000"
 
-[node name="V-sync" type="Label" parent="Control"]
+[node name="V_sync" type="Label" parent="Control"]
 margin_left = 169.0
 margin_top = 3.0
 margin_right = 209.0
@@ -34,7 +34,7 @@ margin_bottom = 17.0
 custom_fonts/font = ExtResource( 1 )
 text = "V-sync"
 
-[node name="V-sync-Buuton" type="CheckButton" parent="Control/V-sync"]
+[node name="V_sync_Buuton" type="CheckButton" parent="Control/V_sync"]
 unique_name_in_owner = true
 margin_left = 33.0
 margin_top = -2.0
@@ -84,7 +84,7 @@ margin_bottom = 71.0
 rect_scale = Vector2( 0.521331, 0.533739 )
 text = "Total loss"
 
-[connection signal="toggled" from="Control/V-sync/V-sync-Buuton" to="." method="_on_VsyncBuuton_toggled"]
+[connection signal="toggled" from="Control/V_sync/V_sync_Buuton" to="." method="_on_VsyncBuuton_toggled"]
 [connection signal="pressed" from="Control/Win/Win_button" to="." method="_on_Winbutton_pressed"]
 [connection signal="pressed" from="Control/Lose/Lose_button" to="." method="_on_Lose_button_pressed"]
 [connection signal="pressed" from="Total_loss" to="." method="_on_Total_loss_pressed"]

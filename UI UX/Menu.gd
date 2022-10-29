@@ -3,12 +3,13 @@ extends CanvasLayer
 const PokemonPartyScreen = preload("res://Scenes/PokemonPartyScene.tscn")
 const Dialog = preload("res://UI UX/Dialogue_bar.tscn")
 const BagScene = preload("res://Game resources/InventoryUi.tscn")
+const Pokedex = preload("res://UI UX/Pokedex.tscn")
 
 onready var select_arrow = $Control/NinePatchRect/TextureRect
 onready var menu = $Control
 onready var dialog = Dialog.instance()
 
-enum ScreenLoaded {Nothing,Menu_only,Party_screen,Bag_screen}
+enum ScreenLoaded {Nothing,Menu_only,Party_screen,Bag_screen,Option_Screen,Pokedex}
 var screen_loaded = ScreenLoaded.Nothing
 
 var selected_option :int = 0
@@ -44,6 +45,30 @@ func unload_bag_screen():
 	menu.visible = true
 	screen_loaded = ScreenLoaded.Menu_only
 	remove_child(bag_screen)
+
+func _display_option_menu():
+	menu.visible = false
+	Utils.get_player().set_physics_process(false)
+	screen_loaded = ScreenLoaded.Option_Screen
+	Utils.get_option_menu().ui_state = Utils.get_option_menu().Ui_state.Options
+
+func _undisplay_option_menu():
+	menu.visible = true
+	Utils.get_player().set_physics_process(true)
+	screen_loaded = ScreenLoaded.Menu_only
+	Utils.get_option_menu().ui_state = Utils.get_option_menu().Ui_state.Unactive
+
+func _display_pokedex():
+	menu.visible = false
+	Utils.get_player().set_physics_process(false)
+	screen_loaded = ScreenLoaded.Pokedex
+	Utils.get_Pokedex_layer().add_child(Pokedex.instance())
+
+func _undisplay_pokedex():
+	menu.visible = true
+	Utils.get_player().set_physics_process(true)
+	screen_loaded = ScreenLoaded.Menu_only
+	Utils.get_Pokedex_layer().get_child(0).queue_free()
 
 func _ready():
 	menu.visible = false
@@ -139,10 +164,14 @@ func _input(event):
 				select_arrow.rect_position.y = 6 + (selected_option % 7) * 15
 			elif event.is_action_pressed("accept") and selected_option == 0:
 				get_parent().transition_to_party_scene()
+			elif event.is_action_pressed("accept") and selected_option == 1:
+				_display_pokedex()
 			elif event.is_action_pressed("accept") and selected_option== 2:
 				get_parent().transition_to_bag_scene()
 			elif event.is_action_pressed("accept") and selected_option == 4:
 				_save_game()
+			elif event.is_action_pressed("accept") and selected_option == 5:
+				_display_option_menu()
 			elif event.is_action_pressed("accept") and selected_option == 6:
 				_exit()
 			

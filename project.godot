@@ -48,6 +48,7 @@ config/name="pokemon project"
 config/description="a trial to recreate pokemon red in godot or something like it or close to it"
 run/main_scene="res://main/TitleScreen.tscn"
 run/low_processor_mode=true
+boot_splash/show_image=false
 config/icon="res://icon.png"
 
 [autoload]
@@ -80,8 +81,6 @@ window/size/test_height=960
 window/dpi/allow_hidpi=true
 window/vsync/use_vsync=false
 window/vsync/vsync_via_compositor=true
-window/per_pixel_transparency/allowed=true
-window/per_pixel_transparency/enabled=true
 window/energy_saving/keep_screen_on=false
 window/handheld/orientation="portrait"
 window/stretch/mode="2d"

@@ -1,13 +1,24 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Test.gd" type="Script" id=1]
-[ext_resource path="res://UI UX/Control_tab.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI UX/Control_tab.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI UX/Pokedex.gd" type="Script" id=2]
+[ext_resource path="res://Fonts/Pokemon_16.tres" type="DynamicFont" id=3]
 
-[node name="Filesystem" type="Control"]
+[sub_resource type="StyleBoxFlat" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+
+[node name="Pokedex" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -160.0
-script = ExtResource( 1 )
+mouse_filter = 1
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.101961, 0.101961, 0.101961, 1 )
 
 [node name="MainContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -17,11 +28,15 @@ anchor_bottom = 1.0
 margin_right = 240.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
+custom_styles/separator = SubResource( 2 )
 
 [node name="TextEdit" type="LineEdit" parent="MainContainer"]
 margin_top = 24.0
 margin_right = 240.0
 margin_bottom = 48.0
+focus_mode = 1
+shortcut_keys_enabled = false
+selecting_enabled = false
 caret_blink = true
 caret_blink_speed = 0.5
 
@@ -30,6 +45,7 @@ margin_top = 52.0
 margin_right = 240.0
 margin_bottom = 72.0
 rect_min_size = Vector2( 0, 20 )
+custom_styles/separator = SubResource( 1 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainContainer"]
 margin_top = 76.0
@@ -42,31 +58,46 @@ margin_right = 240.0
 margin_bottom = 84.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 4
 
 [node name="PokemonView" type="Control" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="ColorRect" type="ColorRect" parent="PokemonView"]
+[node name="Background" type="ColorRect" parent="PokemonView"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.101961, 0.101961, 0.101961, 1 )
+color = Color( 0.160784, 0.160784, 0.478431, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="PokemonView/Background"]
+margin_top = 64.0
+margin_right = 240.0
+margin_bottom = 160.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="PokemonView/Background"]
+margin_top = 69.0
+margin_right = 240.0
+margin_bottom = 160.0
+color = Color( 0.0588235, 0.0235294, 0.231373, 1 )
 
 [node name="MainContainer" type="VBoxContainer" parent="PokemonView"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -9.0
 custom_constants/separation = 5
 
 [node name="SpriteContainer" type="HBoxContainer" parent="PokemonView/MainContainer"]
-margin_right = 240.0
+margin_right = 223.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 0, 64 )
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="PokemonView/MainContainer/SpriteContainer"]
-margin_left = 120.0
-margin_right = 120.0
+margin_left = 111.0
+margin_right = 111.0
 margin_bottom = 64.0
 
 [node name="Sprite" type="Sprite" parent="PokemonView/MainContainer/SpriteContainer/TextureRect"]
@@ -77,26 +108,31 @@ region_rect = Rect2( 0, 34, 64, 64 )
 
 [node name="TextContainer" type="VBoxContainer" parent="PokemonView/MainContainer"]
 margin_top = 69.0
-margin_right = 240.0
+margin_right = 223.0
 margin_bottom = 160.0
 size_flags_vertical = 3
 custom_constants/separation = 5
 
 [node name="Name" type="Label" parent="PokemonView/MainContainer/TextContainer"]
-margin_right = 240.0
+margin_right = 223.0
 margin_bottom = 14.0
+custom_fonts/font = ExtResource( 3 )
 
 [node name="Id" type="Label" parent="PokemonView/MainContainer/TextContainer"]
 margin_top = 19.0
-margin_right = 240.0
+margin_right = 223.0
 margin_bottom = 33.0
+custom_fonts/font = ExtResource( 3 )
 
 [node name="Description" type="RichTextLabel" parent="PokemonView/MainContainer/TextContainer"]
 margin_top = 38.0
-margin_right = 240.0
+margin_right = 223.0
 margin_bottom = 91.0
 size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 3 )
+tab_size = 1
 
-[node name="Control_tab" parent="." instance=ExtResource( 2 )]
+[node name="Control_tab" parent="." instance=ExtResource( 1 )]
 
 [connection signal="text_changed" from="MainContainer/TextEdit" to="." method="_on_TextEdit_text_changed"]
+[connection signal="text_entered" from="MainContainer/TextEdit" to="." method="_on_TextEdit_text_entered"]

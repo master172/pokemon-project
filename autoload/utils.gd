@@ -35,6 +35,15 @@ func Get_Scene_Manager():
 		else:
 			return null
 
+func get_option_menu():
+	return get_node("/root/SceneManager/Options/Options")
+
+func get_menu():
+	return get_node("/root/SceneManager/Menu")
+
+func get_Pokedex_layer():
+	return get_node("/root/SceneManager/Pokedex")
+	
 func Get_Pokemon_Manger():
 	return get_node("/root/SceneManager/Pokemon_scene")
 

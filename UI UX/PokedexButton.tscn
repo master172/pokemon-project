@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="PokdexButton" type="Button"]
+margin_right = 19.0
+margin_bottom = 20.0
+focus_mode = 0
+custom_colors/font_color = Color( 1, 1, 1, 1 )

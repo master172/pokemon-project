@@ -38,22 +38,22 @@ func _kill():
 	self.controller.controller_active = false
 
 func _input(event):
-	if event.is_action_pressed("s"):
+	if event.is_action_pressed("S"):
 		unset_active_option()
 		selected_option = (selected_option + 1) % 6
 		set_active_option()
-	elif event.is_action_pressed("w"):
+	elif event.is_action_pressed("W"):
 		unset_active_option()
 		if selected_option == 0:
 			selected_option = Options.Back
 		else:
 			selected_option -= 1
 		set_active_option()
-	elif event.is_action_pressed("a"):
+	elif event.is_action_pressed("A"):
 		unset_active_option()
 		selected_option = 0
 		set_active_option()
-	elif event.is_action_pressed("d") and selected_option == Options.Summary:
+	elif event.is_action_pressed("D") and selected_option == Options.Summary:
 		unset_active_option()
 		selected_option = 1
 		set_active_option()

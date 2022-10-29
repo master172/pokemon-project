@@ -31,7 +31,6 @@ func save_game():
 	save_file.store_line(to_json(save_dict))
 	# Write the JSON to the file and save to disk
 	save_file.close()
-	pass
 
 func load_game():
 	# Try to load a saved file
@@ -52,6 +51,7 @@ func load_game():
 				node.set_pos(Vector2(data[node_path]['pos_x']['x'],data[node_path]['pos_y']['y']))
 			else:
 				node.set(attribute,data[node_path][attribute])
+	
+	save_file.close()
 
-	pass
 

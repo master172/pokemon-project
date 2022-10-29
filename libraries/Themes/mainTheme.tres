@@ -1,0 +1,49 @@
+[gd_resource type="Theme" load_steps=12 format=2]
+
+[ext_resource path="res://Fonts/Pokemon_16.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assests/libraries/health.png" type="Texture" id=2]
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.0588235, 0.0235294, 0.231373, 1 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 1, 1, 1, 0 )
+
+[sub_resource type="StyleBoxTexture" id=11]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 60, 4 )
+margin_right = 55.2602
+modulate_color = Color( 0, 0.988235, 0.0156863, 1 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.0705882, 0.027451, 0.278431, 1 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.0431373, 0.0156863, 0.164706, 1 )
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.0705882, 0.027451, 0.278431, 1 )
+
+[sub_resource type="StyleBoxFlat" id=16]
+
+[sub_resource type="StyleBoxFlat" id=17]
+
+[sub_resource type="StyleBoxFlat" id=18]
+
+[resource]
+Button/fonts/font = ExtResource( 1 )
+Label/fonts/font = ExtResource( 1 )
+LineEdit/fonts/font = ExtResource( 1 )
+Panel/styles/panel = SubResource( 15 )
+ProgressBar/fonts/font = ExtResource( 1 )
+ProgressBar/styles/bg = SubResource( 10 )
+ProgressBar/styles/fg = SubResource( 11 )
+TabContainer/fonts/font = ExtResource( 1 )
+TabContainer/styles/panel = SubResource( 12 )
+Tabs/fonts/font = ExtResource( 1 )
+Tabs/styles/button = SubResource( 13 )
+Tabs/styles/button_pressed = SubResource( 14 )
+Tabs/styles/tab_bg = SubResource( 16 )
+Tabs/styles/tab_disabled = SubResource( 17 )
+Tabs/styles/tab_fg = SubResource( 18 )
+TextEdit/fonts/font = ExtResource( 1 )

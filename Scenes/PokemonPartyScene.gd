@@ -143,7 +143,7 @@ func _physics_process(_delta):
 			$Pokemon_5/gender.frame = 1
 
 		$Pokemon_5/HealthBarHolder/HealthBar.max_value = PlayerPokemon.fifth_pokemon.Max_health_points
-		$Pokemon_5/HealthBarHolder/HealthBar.value = PlayerPokemon.ftfth_pokemon.Current_health_points
+		$Pokemon_5/HealthBarHolder/HealthBar.value = PlayerPokemon.fifth_pokemon.Current_health_points
 
 		p5 = true
 	if PlayerPokemon.sixth_pokemon != null:

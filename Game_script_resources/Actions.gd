@@ -69,8 +69,8 @@ func _calculate_damage():
 		var crit : int = 1
 		var critical = RandomNumberGenerator.new()
 		critical.randomize()
-		var critical_damage = critical.randi_range(0,1)
-		if critical_damage == 1:
+		var critical_damage = critical.randi_range(0,8)
+		if critical_damage == 8:
 			crit = 2
 		else:
 			crit = 1

@@ -2,10 +2,15 @@ extends CanvasLayer
 
 var debug = false
 
+onready var VsyncButton = $Control/V_sync/V_sync_Buuton
+
 func _ready():
 	pass
+	
 
 func _physics_process(_delta):
+	if VsyncButton.pressed != OS.is_vsync_enabled():
+		VsyncButton.pressed = OS.is_vsync_enabled()
 	if OS.is_debug_build():
 
 		get_node("%Fps_value").text = str(Performance.get_monitor(Performance.TIME_FPS))
@@ -23,10 +28,8 @@ func _physics_process(_delta):
 func _on_VsyncBuuton_toggled(button_pressed:bool):
 	if button_pressed == true:
 		OS.set_use_vsync(true)
-		print(OS.is_vsync_enabled())
 	elif button_pressed == false:
 		OS.set_use_vsync(false)
-		print(OS.is_vsync_enabled())
 
 
 
