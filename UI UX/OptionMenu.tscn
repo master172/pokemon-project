@@ -101,24 +101,24 @@ margin_left = 196.0
 margin_right = 220.0
 margin_bottom = 24.0
 
-[node name="Styles" type="Tabs" parent="TabContainer"]
+[node name="Graphics" type="Tabs" parent="TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 24.0
 scrolling_enabled = false
 
-[node name="Panel" type="Panel" parent="TabContainer/Styles"]
+[node name="Panel" type="Panel" parent="TabContainer/Graphics"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Text" type="Tabs" parent="TabContainer"]
+[node name="Audio" type="Tabs" parent="TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 24.0
 scrolling_enabled = false
 
-[node name="Panel" type="Panel" parent="TabContainer/Text"]
+[node name="Panel" type="Panel" parent="TabContainer/Audio"]
 anchor_right = 1.0
 anchor_bottom = 1.0
