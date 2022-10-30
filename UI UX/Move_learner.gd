@@ -28,7 +28,6 @@ onready var back = $Forgetter/Buttons/Back/Selected
 
 onready var move_to_learn = $Forgetter/Move/Selected
 onready var move_to_learn_Name = $Forgetter/Move/Name
-onready var move_to_learn_Description = $Forgetter/Move/Description
 
 func _ready():
 	pass
@@ -153,7 +152,6 @@ func _physics_process(_delta):
 			Move_4_Name.text = current_pokemon.Learned_moves[3].name
 		if MoveLearner.move_to_learn != null:
 			move_to_learn_Name.text = MoveLearner.move_to_learn.name
-			move_to_learn_Description.text = MoveLearner.move_to_learn.description
 	if current_option == Options.Main:
 		visible = false
 	elif current_option == Options.Selection:
