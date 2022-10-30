@@ -24,6 +24,7 @@ onready var Id = $PokemonView/MainContainer/TextContainer/Id
 onready var Description = $PokemonView/MainContainer/TextContainer/Description
 onready var text_edit = $MainContainer/TextEdit
 
+
 var ui_state = Ui_state.Active
 enum Ui_state {Active,Pokemon}
 
@@ -47,10 +48,13 @@ func _input(event):
 				current_selected = 0
 			else:
 				if current_selected > 0:
-					pokemonContainer.get_child(current_selected -1).set("custom_colors/font_color", Color("ffffff"))
+					if text_edit.text == "":	
+						pokemonContainer.get_child(current_selected -1).set("custom_colors/font_color", Color("ffffff"))
+						current_selected += 1
 				elif current_selected == 0:
 					text_edit.release_focus()
-				current_selected += 1
+					current_selected += 1
+				
 			
 
 			if current_selected >= 4:
