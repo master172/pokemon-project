@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assests/libraries/Ui/Tackle_box2.png" type="Texture" id=1]
 [ext_resource path="res://Ui/battle_boxes/Attack_box_2.gd" type="Script" id=2]
 [ext_resource path="res://assests/items/clipart1298464 (1).png" type="Texture" id=3]
 [ext_resource path="res://assests/libraries/pkmnfl.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assests/libraries/Ui/Type efeectiveness/Type_effectiveness.png" type="Texture" id=5]
 
 [sub_resource type="Theme" id=1]
 
@@ -117,26 +118,12 @@ margin_top = -20.0
 margin_right = 60.0
 margin_bottom = 21.0
 
-[node name="Description_box" type="Label" parent="Control"]
-margin_left = 40.0
-margin_top = 3.0
-margin_right = 225.0
-margin_bottom = 90.0
-rect_scale = Vector2( 0.4, 0.4 )
-theme = SubResource( 1 )
-custom_fonts/font = SubResource( 2 )
-text = "Try To Capture The Pokemon With a 
-
-Regular Pokeball If You Have One "
-autowrap = true
-
 [node name="Main_Label" type="Label" parent="Control"]
 anchor_right = 0.128
 margin_left = 5.0
 margin_top = 3.0
 margin_right = 43.64
 margin_bottom = 18.0
-rect_scale = Vector2( 0.6, 0.6 )
 theme = SubResource( 1 )
 custom_fonts/font = SubResource( 2 )
 text = "Capture
@@ -153,3 +140,10 @@ autoplay = "Default"
 anims/Default = SubResource( 3 )
 anims/RESET = SubResource( 4 )
 anims/Side_stepped = SubResource( 5 )
+
+[node name="EffectivenessBox" type="Sprite" parent="."]
+position = Vector2( 57.5, -20 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 5 )
+vframes = 6
+frame = 2

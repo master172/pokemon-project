@@ -58,15 +58,25 @@ func _ready():
 	_initial_dialogue()
 	
 func _display_enemy_attack_dialogue(pokemon,move):
+	
 	ui_state = Ui_state.Dialogue
 	if ui_state == Ui_state.Dialogue:
 
 		if BattleManager.multi_battle == false:
 			if OpposingTrainerMonsters.pokemon != null:
 				if Dialogue_layer.get_child_count() > 0:
+					#start error fixing from here
 					if self.get_child(0).current_event != null:
+						
 						yield(self.get_child(0),'finished_event')
-				
+						
+						var Dialogue = Dialog.instance()
+						Dialogue.text_to_diaplay = ["The opposing "+ pokemon.Name + " used "+ pokemon.Learned_moves[move].Name, 0]
+						Dialogue_layer.add_child(Dialogue)
+						Dialogue.connect("Dialog_ended",self,"_finish_Enemy_attack_dialogue")
+
+					elif self.get_child(0).current_event == null:
+						yield(self.get_node("%Dialog_layer"),"child_exiting_tree")
 						var Dialogue = Dialog.instance()
 						Dialogue.text_to_diaplay = ["The opposing "+ pokemon.Name + " used "+ pokemon.Learned_moves[move].Name, 0]
 						Dialogue_layer.add_child(Dialogue)
@@ -386,7 +396,7 @@ func _single_battle():
 		if OpposingTrainerMonsters.pokemon != null:
 			enemy_pokemon = OpposingTrainerMonsters.pokemon
 			if enemy_dialogue_connected == false:
-				
+
 				OpposingTrainerMonsters.pokemon.connect("Enemy_attacked",self,"_display_enemy_attack_dialogue")
 				enemy_dialogue_connected = true
 			if enemy_lost_dialogue_connected == false:

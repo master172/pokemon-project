@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://assests/libraries/Ui/Place_box1.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Pokemon_scene_stage.gd" type="Script" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://assests/libraries/Ui/Do-you-want-to-yes.png" type="Texture" id=26]
 [ext_resource path="res://Fonts/Pokemon_16.tres" type="DynamicFont" id=27]
 [ext_resource path="res://Pokemon/Bulbasaur.png" type="Texture" id=28]
+[ext_resource path="res://Scenes/Dialog_layer.gd" type="Script" id=29]
 
 [sub_resource type="Animation" id=5]
 resource_name = "Day_night_cycle"
@@ -181,7 +182,6 @@ anims/Day_night_cycle = SubResource( 5 )
 anims/RESET = SubResource( 4 )
 
 [node name="Battle_box" type="Node2D" parent="."]
-visible = false
 position = Vector2( 45, 16 )
 
 [node name="back box" parent="Battle_box" instance=ExtResource( 9 )]
@@ -343,5 +343,7 @@ frame = 1
 z_index = 20
 
 [node name="Dialog_layer" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 29 )
 
 [connection signal="tween_completed" from="Battle_identifier/Tween" to="Battle_identifier" method="_on_Tween_tween_completed"]

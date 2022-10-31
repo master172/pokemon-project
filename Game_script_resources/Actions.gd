@@ -61,11 +61,12 @@ func save():
 func _calculate_damage():
 	if self.special_effects == null:
 		if self.current_holder.opposing_pokemon.Weak_to.has(self.Types):
-			effectiveness = 4
+			effectiveness = 2
 		elif self.current_holder.opposing_pokemon.Resistant_to.has(self.Types):
 			effectiveness = 0.5
 		else:
 			effectiveness = 1
+
 		var crit : int = 1
 		var critical = RandomNumberGenerator.new()
 		critical.randomize()
