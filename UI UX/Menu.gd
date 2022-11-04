@@ -9,7 +9,7 @@ onready var select_arrow = $Control/NinePatchRect/TextureRect
 onready var menu = $Control
 onready var dialog = Dialog.instance()
 
-enum ScreenLoaded {Nothing,Menu_only,Party_screen,Bag_screen,Option_Screen,Pokedex}
+enum ScreenLoaded {Nothing,Menu_only,Party_screen,Bag_screen,Option_Screen,Pokedex,PlayerCard}
 var screen_loaded = ScreenLoaded.Nothing
 
 var selected_option :int = 0
@@ -135,6 +135,18 @@ func _exit():
 	menu.visible = false		
 	screen_loaded = ScreenLoaded.Nothing
 
+func _Display_Player_card():
+	menu.visible = false
+	Utils.get_player().set_physics_process(false)
+	screen_loaded = ScreenLoaded.PlayerCard
+	Utils.get_Player_Card().get_child(0)._change_visibility()
+
+func _Undisplay_Player_card():
+	menu.visible = true
+	Utils.get_player().set_physics_process(true)
+	screen_loaded = ScreenLoaded.Menu_only
+	Utils.get_Player_Card().get_child(0)._change_visibility()
+
 func _input(event):
 	match screen_loaded:
 		ScreenLoaded.Nothing:
@@ -168,6 +180,8 @@ func _input(event):
 				_display_pokedex()
 			elif event.is_action_pressed("accept") and selected_option== 2:
 				get_parent().transition_to_bag_scene()
+			elif event.is_action_pressed("accept") and selected_option == 3:
+				_Display_Player_card()
 			elif event.is_action_pressed("accept") and selected_option == 4:
 				_save_game()
 			elif event.is_action_pressed("accept") and selected_option == 5:

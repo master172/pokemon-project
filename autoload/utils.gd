@@ -41,6 +41,9 @@ func get_option_menu():
 func get_menu():
 	return get_node("/root/SceneManager/Menu")
 
+func get_Player_Card():
+	return get_node("/root/SceneManager/PlayerCard")
+
 func get_Pokedex_layer():
 	return get_node("/root/SceneManager/Pokedex")
 	
