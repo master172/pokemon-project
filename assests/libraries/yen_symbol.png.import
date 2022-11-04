@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player_shadow.png-66b43ff7d0076e869585c45c785ba21d.stex"
+path="res://.import/yen_symbol.png-a01cb2376714ea81765fa4d31b2a8101.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assests/player/player_shadow.png"
-dest_files=[ "res://.import/player_shadow.png-66b43ff7d0076e869585c45c785ba21d.stex" ]
+source_file="res://assests/libraries/yen_symbol.png"
+dest_files=[ "res://.import/yen_symbol.png-a01cb2376714ea81765fa4d31b2a8101.stex" ]
 
 [params]
 

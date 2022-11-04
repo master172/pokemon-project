@@ -161,7 +161,7 @@ func _attack_missed():
 			Dialogue.text_to_diaplay = ["But it missed", 0]
 			Dialogue_layer.add_child(Dialogue)
 			Dialogue.connect("Dialog_ended",self,"_finish_attack_missed")
-	
+
 
 func _finish_attack_missed():
 	ui_state = Ui_state.Battle
@@ -181,7 +181,7 @@ func _attack_evaded():
 			var Dialogue = Dialog.instance()
 			Dialogue.text_to_diaplay = ["But it was evaded", 0]
 			Dialogue_layer.add_child(Dialogue)
-			Dialogue.connect("Dialog_ended",self,"_finish_attack_evaded")		
+			Dialogue.connect("Dialog_ended",self,"_finish_attack_evaded")
 
 
 func _finish_attack_evaded():
@@ -463,7 +463,7 @@ func _single_battle():
 							elif battle_mouse_num == 4:
 								if PlayerPokemon.current_pokemon.Learned_moves.size() >= 1 and current_attack_locked == false:
 									current_attack_locked = true
-									_player_attack_dialogue(0)					
+									_player_attack_dialogue(0)
 							elif battle_mouse_num == 0:
 								if PlayerPokemon.current_pokemon.Learned_moves.size() >= 2 and current_attack_locked == false:
 									current_attack_locked = true
@@ -563,8 +563,8 @@ func _run():
 
 func _input(event):
 	if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN :
-		if BattleManager.multi_battle == false:	
-			if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN:		
+		if BattleManager.multi_battle == false:
+			if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN:
 				if event is InputEventMouseButton:
 					if event.is_pressed():
 						if ui_state ==  Ui_state.Main:
@@ -620,7 +620,7 @@ func _input(event):
 									scroll_container.get_child(i).position.x -= 101
 								current_mouse_num = 0
 				elif ui_state == Ui_state.Battle:
-					if event.is_action_pressed("A"):					
+					if event.is_action_pressed("A"):
 						if ui_state == Ui_state.Battle:
 							if battle_mouse_num != 0:
 								battle_mouse_num -= 1
@@ -714,11 +714,10 @@ func StartMoveLearnDialogue(move):
 					var Dialogue = Dialog.instance()
 					Dialogue.text_to_diaplay = [PlayerPokemon.current_pokemon.Name +" learned " + move.Name, 0]
 					Dialogue_layer.add_child(Dialogue)
-					Dialogue.connect("Dialog_ended",self,"StartMoveLearnProcess")					
+					Dialogue.connect("Dialog_ended",self,"StartMoveLearnProcess")
 	
 func StartMoveLearnProcess():
 	learning_a_move = false
 	if BattleManager.multi_battle == false:
 		if PlayerPokemon.current_pokemon != null:
 			_win_dialog(0)
-	

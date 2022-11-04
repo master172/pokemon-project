@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/player_house_floor_1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/SceneManager.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://UI UX/Control_tab.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Debug.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI UX/Move_learner.tscn" type="PackedScene" id=8]
+[ext_resource path="res://UI UX/PlayerCard.tscn" type="PackedScene" id=9]
 [ext_resource path="res://UI UX/EvolutionAnimator.tscn" type="PackedScene" id=13]
 [ext_resource path="res://UI UX/OptionMenu.tscn" type="PackedScene" id=14]
 
@@ -170,5 +171,7 @@ visible = false
 
 [node name="Pokedex" type="CanvasLayer" parent="."]
 layer = 21
+
+[node name="PlayerCard" parent="." instance=ExtResource( 9 )]
 
 [editable path="Evolution/EvolutionAnimator"]
