@@ -35,6 +35,9 @@ func _input(event):
 	if event.is_action_pressed("decline"):
 		if ui_state == Ui_state.Pokemon:
 			pokemonView.visible = false 
+			text_edit.text = ""
+			text_edit.release_focus()
+			_on_TextEdit_text_changed("")
 			ui_state = Ui_state.Active
 		elif ui_state == Ui_state.Active:
 			Utils.get_menu()._undisplay_pokedex()
@@ -92,13 +95,14 @@ func _input(event):
 					pokemonContainer.get_child(current_selected -1).emit_signal("pressed")
 				ui_state = Ui_state.Pokemon
 		elif text_edit.text != "":
-			for i in pokemonContainer.get_children():
-				if i.visible == false:
-					continue
-				elif i.visible == true:
-					text_edit.text = ""
-					i.emit_signal("pressed")
-					break
+			if text == false:
+				for i in pokemonContainer.get_children():
+					if i.visible == false:
+						continue
+					elif i.visible == true:
+						text_edit.text = ""
+						i.emit_signal("pressed")
+						break
 
 func _ready():
 	var pokemons = list_files_in_directory(PATH)
@@ -209,3 +213,4 @@ func _physics_process(_delta):
 func _on_TextEdit_text_entered(new_text:String):
 	text = false
 	text_edit.release_focus()
+

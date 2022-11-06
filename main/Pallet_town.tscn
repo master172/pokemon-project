@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=2]
+[gd_scene load_steps=90 format=2]
 
 [ext_resource path="res://libraries/water_tiles.tres" type="Texture" id=1]
 [ext_resource path="res://assests/libraries/oaks_lab.png" type="Texture" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://assests/tilesets/tree1.png" type="Texture" id=21]
 [ext_resource path="res://libraries/Signs/LocationSigns.tscn" type="PackedScene" id=22]
 [ext_resource path="res://libraries/red_house/door.gd" type="Script" id=23]
+[ext_resource path="res://npc's/Trainer/Trainer1.tscn" type="PackedScene" id=24]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -1142,8 +1143,13 @@ holding_item = ExtResource( 12 )
 position = Vector2( -24, -104 )
 first_dialog = [ "Please choose a pokemon from oaks lab before proceeding", 0 ]
 
+[node name="Trainers" type="YSort" parent="."]
+
+[node name="Trainer1" parent="Trainers" instance=ExtResource( 24 )]
+position = Vector2( 8, 0 )
+
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 16, 176 )
+position = Vector2( 24, 176 )
 scale = Vector2( 41.6, 28.8 )
 
 [connection signal="body_entered" from="Buildings/red_house/door" to="Buildings/red_house/door" method="_on_door_body_entered"]

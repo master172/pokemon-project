@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assests/npc_misc/Trainer1/Trainer1SpriteAtlas.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="Trainer1" type="KinematicBody2D"]
+position = Vector2( 0.5, 0 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -0.5, -9 )
+texture = ExtResource( 1 )
+hframes = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -8 )
+shape = SubResource( 1 )
