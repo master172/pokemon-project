@@ -37,7 +37,7 @@ const LANDING_SUST_EFFECT = preload("res://libraries/landong_dust_effect.tscn")
 
 #variables-->enums
 #variables-->enums-->player_state
-enum Player_state { idle , walking, turning, running, cycling, surfing }
+enum Player_state { idle , walking, turning, running, cycling, surfing, hm_call }
 
 #variables-->enums-->Looking/Facing_directions_state
 enum Facing_direction { left, right, up, down }
@@ -79,6 +79,10 @@ var is_cycling: bool = false
 #variables-->surfing_variables
 var is_surfing: bool = false
 export(bool)var can_surf: bool = true
+
+#variables-->Hm_call
+var hm_calling = false
+export(bool)var can_call: bool = true
 
 #variables-->jumping_over_ledge
 var jumpin_over_ledge : bool = false
@@ -270,6 +274,8 @@ func _update_check():
 						position.y += int(position.y)%int(8)
 
 func _physics_process(delta):
+	#check for Hm_call
+	_test_hm_call()
 	#this_method_is_called_every_frame
 	
 	_update_check()
@@ -289,7 +295,7 @@ func _physics_process(delta):
 	#checking_if_we_are_colliding_with_water
 	if colliding:
 		#meeting_the_requirments_for_surfing
-		if Input.is_action_just_pressed("accept") and not is_surfing and can_surf and not is_cycling and not is_running and is_moving == false:
+		if Input.is_action_just_pressed("accept") and not is_surfing and can_surf and not is_cycling and not is_running and is_moving == false and hm_calling == false:
 			is_surfing =  true
 
 			#moving_to_the_water_based_on_the_facing_direction
@@ -305,7 +311,7 @@ func _physics_process(delta):
 	#checking_if_we_are_colliding_with_land
 	elif collison_with_land:
 		#meeting_the_requirments_for_walking
-		if Input.is_action_just_pressed("accept") and is_surfing and not is_cycling and not is_running and is_moving == false:
+		if Input.is_action_just_pressed("accept") and is_surfing and not is_cycling and not is_running and is_moving == false and hm_calling == false:
 			
 
 			#moving_to_the_land_based_on_the_facing_direction
@@ -350,10 +356,10 @@ func _physics_process(delta):
 	
 	
 	#meeting_the_requirments_for_cycling
-	if Input.is_action_just_pressed("debug") and can_cycle and is_running == false and is_cycling == false and not is_surfing:
+	if Input.is_action_just_pressed("debug") and can_cycle and is_running == false and is_cycling == false and not is_surfing and hm_calling == false:
 		is_cycling = true
 	#metting_the_requirmenrs_for_getting_off_the_cycle
-	elif Input.is_action_just_pressed("debug") and can_cycle and is_running == false and is_cycling == true and not is_surfing:
+	elif Input.is_action_just_pressed("debug") and can_cycle and is_running == false and is_cycling == true and not is_surfing and hm_calling == false:
 		is_cycling = false
 	
 	#setting_the+cycling_state
@@ -366,7 +372,7 @@ func _physics_process(delta):
 		$AnimatedSprite.position.y = -10
 	
 	#meeting_the_requirments_for_running
-	if Input.is_action_pressed("decline") and can_run and is_cycling == false and is_surfing == false:
+	if Input.is_action_pressed("decline") and can_run and is_cycling == false and is_surfing == false and hm_calling == false:
 		#setting_the_running_variables
 		walk_speed = 8.0
 		is_running = true
@@ -386,11 +392,11 @@ func _physics_process(delta):
 	
 	#setting_the_animation_blender_according_to_the_current_state
 	elif input_direction != Vector2.ZERO and can_move:
-		if Input.is_action_pressed("decline") and can_run and input_direction != Vector2.ZERO and not is_cycling and not is_surfing:
+		if Input.is_action_pressed("decline") and can_run and input_direction != Vector2.ZERO and not is_cycling and not is_surfing and not hm_calling:
 			anim_state.travel("run")
-		elif is_cycling == true and can_cycle and input_direction != Vector2.ZERO and not is_running and not is_surfing:
+		elif is_cycling == true and can_cycle and input_direction != Vector2.ZERO and not is_running and not is_surfing and not hm_calling:
 			anim_state.travel("cycle")
-		elif is_surfing == true and can_surf and input_direction != Vector2.ZERO and not is_cycling and not is_running:
+		elif is_surfing == true and can_surf and input_direction != Vector2.ZERO and not is_cycling and not is_running and not hm_calling:
 			anim_state.travel("surf")
 		else:
 			anim_state.travel("walk")
@@ -633,4 +639,16 @@ func _apply_data():
 		self.is_cycling = player_data.is_cycling
 		player_data = null
 	
+func _finished_hm_call():
+	anim_player.set("parameters/idle/blend_position",Vector2(0,-1))
+	anim_state.travel("idle")
 
+
+func _test_hm_call():
+	if is_cycling == false and is_surfing == false:
+		
+		if Input.is_action_just_pressed("test"):
+			if can_call == true:
+				hm_calling = true
+				
+				anim_state.travel("hm_call") 

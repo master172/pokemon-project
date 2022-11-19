@@ -1,18 +1,56 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assests/npc_misc/Trainer1/Trainer1SpriteAtlas.png" type="Texture" id=1]
+[ext_resource path="res://npc's/Trainer/Trainer1.gd" type="Script" id=2]
+[ext_resource path="res://Game_pokemon/Rattata.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game_pokemon/Pidgey.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
-[node name="Trainer1" type="KinematicBody2D"]
-position = Vector2( 0.5, 0 )
+[node name="Trainer1" type="KinematicBody2D" groups=["Interactable"]]
+collision_layer = 17
+collision_mask = 17
+script = ExtResource( 2 )
+pokemons = [ ExtResource( 3 ), ExtResource( 4 ) ]
+pokemonLevels = [ 5, 5 ]
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -0.5, -9 )
+position = Vector2( 0, -9 )
 texture = ExtResource( 1 )
 hframes = 8
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -8 )
 shape = SubResource( 1 )
+
+[node name="Detectors" type="Node2D" parent="."]
+
+[node name="Down" type="RayCast2D" parent="Detectors"]
+self_modulate = Color( 0, 1, 0.27451, 1 )
+position = Vector2( 0, -8 )
+enabled = true
+cast_to = Vector2( 0, 16 )
+collision_mask = 128
+
+[node name="Right" type="RayCast2D" parent="Detectors"]
+self_modulate = Color( 0, 1, 0.27451, 1 )
+position = Vector2( 0, -8 )
+enabled = true
+cast_to = Vector2( 16, 0 )
+collision_mask = 128
+
+[node name="Left" type="RayCast2D" parent="Detectors"]
+self_modulate = Color( 0, 1, 0.27451, 1 )
+position = Vector2( 0, -8 )
+enabled = true
+cast_to = Vector2( -16, 0 )
+collision_mask = 128
+
+[node name="Up" type="RayCast2D" parent="Detectors"]
+self_modulate = Color( 0, 1, 0.27451, 1 )
+position = Vector2( 0, -8 )
+enabled = true
+cast_to = Vector2( 0, -16 )
+collision_mask = 128

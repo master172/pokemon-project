@@ -1,4 +1,4 @@
-[gd_scene load_steps=187 format=2]
+[gd_scene load_steps=198 format=2]
 
 [ext_resource path="res://assests/player/walk/walk_left/walk_left_0.png" type="Texture" id=1]
 [ext_resource path="res://assests/player/walk/move_right/walk_right_2.png" type="Texture" id=2]
@@ -568,6 +568,20 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.24 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_finished_hm_call"
+} ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -1456,6 +1470,9 @@ blend_point_3/node = SubResource( 44 )
 blend_point_3/pos = Vector2( 0, -1 )
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id=136]
+animation = "hm_call"
+
 [sub_resource type="AnimationNodeAnimation" id=46]
 animation = "idle_left"
 
@@ -1706,11 +1723,33 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=131]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=137]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=138]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=139]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=140]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=141]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=142]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=143]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=144]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=145]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=146]
+
 [sub_resource type="AnimationNodeStateMachine" id=132]
 states/cycle/node = SubResource( 40 )
 states/cycle/position = Vector2( 351, 1.56219 )
 states/cycle_idle/node = SubResource( 45 )
 states/cycle_idle/position = Vector2( 351, -94.642 )
+states/hm_call/node = SubResource( 136 )
+states/hm_call/position = Vector2( -44.6701, 96 )
 states/idle/node = SubResource( 50 )
 states/idle/position = Vector2( 107, 96 )
 states/run/node = SubResource( 55 )
@@ -1723,9 +1762,9 @@ states/turn/node = SubResource( 70 )
 states/turn/position = Vector2( 351, 203 )
 states/walk/node = SubResource( 75 )
 states/walk/position = Vector2( 573, 91 )
-transitions = [ "idle", "walk", SubResource( 76 ), "walk", "idle", SubResource( 77 ), "turn", "walk", SubResource( 78 ), "walk", "turn", SubResource( 79 ), "turn", "idle", SubResource( 80 ), "idle", "turn", SubResource( 81 ), "idle", "run", SubResource( 82 ), "run", "idle", SubResource( 83 ), "run", "walk", SubResource( 84 ), "walk", "run", SubResource( 85 ), "turn", "run", SubResource( 86 ), "run", "turn", SubResource( 87 ), "walk", "cycle", SubResource( 88 ), "cycle", "walk", SubResource( 89 ), "turn", "cycle", SubResource( 90 ), "cycle", "turn", SubResource( 91 ), "run", "cycle", SubResource( 92 ), "cycle", "run", SubResource( 93 ), "idle", "cycle", SubResource( 94 ), "cycle", "idle", SubResource( 95 ), "cycle_idle", "cycle", SubResource( 96 ), "cycle", "cycle_idle", SubResource( 97 ), "run", "cycle_idle", SubResource( 98 ), "cycle_idle", "run", SubResource( 99 ), "turn", "cycle_idle", SubResource( 100 ), "cycle_idle", "turn", SubResource( 101 ), "walk", "cycle_idle", SubResource( 102 ), "cycle_idle", "walk", SubResource( 103 ), "idle", "cycle_idle", SubResource( 104 ), "cycle_idle", "idle", SubResource( 105 ), "turn", "surf", SubResource( 106 ), "surf", "turn", SubResource( 107 ), "run", "surf", SubResource( 108 ), "surf", "run", SubResource( 109 ), "cycle", "surf", SubResource( 110 ), "surf", "cycle", SubResource( 111 ), "cycle_idle", "surf", SubResource( 112 ), "surf", "cycle_idle", SubResource( 113 ), "walk", "surf", SubResource( 114 ), "surf", "walk", SubResource( 115 ), "idle", "surf", SubResource( 116 ), "surf", "idle", SubResource( 117 ), "run", "run_turn", SubResource( 118 ), "run_turn", "run", SubResource( 119 ), "walk", "run_turn", SubResource( 120 ), "run_turn", "walk", SubResource( 121 ), "idle", "run_turn", SubResource( 122 ), "run_turn", "idle", SubResource( 123 ), "turn", "run_turn", SubResource( 124 ), "run_turn", "turn", SubResource( 125 ), "surf", "run_turn", SubResource( 126 ), "run_turn", "surf", SubResource( 127 ), "cycle", "run_turn", SubResource( 128 ), "run_turn", "cycle", SubResource( 129 ), "cycle_idle", "run_turn", SubResource( 130 ), "run_turn", "cycle_idle", SubResource( 131 ) ]
+transitions = [ "idle", "walk", SubResource( 76 ), "walk", "idle", SubResource( 77 ), "turn", "walk", SubResource( 78 ), "walk", "turn", SubResource( 79 ), "turn", "idle", SubResource( 80 ), "idle", "turn", SubResource( 81 ), "idle", "run", SubResource( 82 ), "run", "idle", SubResource( 83 ), "run", "walk", SubResource( 84 ), "walk", "run", SubResource( 85 ), "turn", "run", SubResource( 86 ), "run", "turn", SubResource( 87 ), "walk", "cycle", SubResource( 88 ), "cycle", "walk", SubResource( 89 ), "turn", "cycle", SubResource( 90 ), "cycle", "turn", SubResource( 91 ), "run", "cycle", SubResource( 92 ), "cycle", "run", SubResource( 93 ), "idle", "cycle", SubResource( 94 ), "cycle", "idle", SubResource( 95 ), "cycle_idle", "cycle", SubResource( 96 ), "cycle", "cycle_idle", SubResource( 97 ), "run", "cycle_idle", SubResource( 98 ), "cycle_idle", "run", SubResource( 99 ), "turn", "cycle_idle", SubResource( 100 ), "cycle_idle", "turn", SubResource( 101 ), "walk", "cycle_idle", SubResource( 102 ), "cycle_idle", "walk", SubResource( 103 ), "idle", "cycle_idle", SubResource( 104 ), "cycle_idle", "idle", SubResource( 105 ), "turn", "surf", SubResource( 106 ), "surf", "turn", SubResource( 107 ), "run", "surf", SubResource( 108 ), "surf", "run", SubResource( 109 ), "cycle", "surf", SubResource( 110 ), "surf", "cycle", SubResource( 111 ), "cycle_idle", "surf", SubResource( 112 ), "surf", "cycle_idle", SubResource( 113 ), "walk", "surf", SubResource( 114 ), "surf", "walk", SubResource( 115 ), "idle", "surf", SubResource( 116 ), "surf", "idle", SubResource( 117 ), "run", "run_turn", SubResource( 118 ), "run_turn", "run", SubResource( 119 ), "walk", "run_turn", SubResource( 120 ), "run_turn", "walk", SubResource( 121 ), "idle", "run_turn", SubResource( 122 ), "run_turn", "idle", SubResource( 123 ), "turn", "run_turn", SubResource( 124 ), "run_turn", "turn", SubResource( 125 ), "surf", "run_turn", SubResource( 126 ), "run_turn", "surf", SubResource( 127 ), "cycle", "run_turn", SubResource( 128 ), "run_turn", "cycle", SubResource( 129 ), "cycle_idle", "run_turn", SubResource( 130 ), "run_turn", "cycle_idle", SubResource( 131 ), "hm_call", "idle", SubResource( 137 ), "idle", "hm_call", SubResource( 138 ), "walk", "hm_call", SubResource( 139 ), "hm_call", "walk", SubResource( 140 ), "run", "hm_call", SubResource( 141 ), "hm_call", "run", SubResource( 142 ), "turn", "hm_call", SubResource( 143 ), "hm_call", "turn", SubResource( 144 ), "run_turn", "hm_call", SubResource( 145 ), "hm_call", "run_turn", SubResource( 146 ) ]
 start_node = "idle"
-graph_offset = Vector2( -284.831, -222.176 )
+graph_offset = Vector2( -197.67, -140.176 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=133]
 
@@ -1737,8 +1776,8 @@ extents = Vector2( 7, 7 )
 
 [node name="ash" type="KinematicBody2D"]
 process_priority = 1
-collision_layer = 127
-collision_mask = 127
+collision_layer = 255
+collision_mask = 255
 script = ExtResource( 13 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -1748,7 +1787,8 @@ texture = ExtResource( 51 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -10 )
 frames = SubResource( 1 )
-animation = "cycle_idle_down"
+animation = "hm_call"
+frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite"]
 anims/cycle_down = SubResource( 2 )

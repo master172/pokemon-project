@@ -1147,6 +1147,7 @@ first_dialog = [ "Please choose a pokemon from oaks lab before proceeding", 0 ]
 
 [node name="Trainer1" parent="Trainers" instance=ExtResource( 24 )]
 position = Vector2( 8, 0 )
+first_dialog = [ "Howdy! Ash", 0 ]
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( 24, 176 )

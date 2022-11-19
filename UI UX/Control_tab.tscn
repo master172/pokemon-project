@@ -54,7 +54,7 @@ margin_bottom = 320.0
 [node name="ColorRect" type="ColorRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.34902, 0.337255, 0.337255, 1 )
+color = Color( 0.454902, 0.454902, 0.454902, 1 )
 
 [node name="A" type="TouchScreenButton" parent="Control"]
 position = Vector2( 16, 76 )

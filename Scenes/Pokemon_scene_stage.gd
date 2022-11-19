@@ -6,6 +6,7 @@ onready var Do_you_no = $Do_you_want_to/Option_container/VBoxContainer/No/Sprite
 onready var Dialogue_layer = $Dialog_layer
 onready var Bag_layer = $Bag_layer
 onready var EventManger = $EventManager
+onready var PokemonTrainerManager = $Opoosing_Trainers_Container
 
 const pokemon_scene = preload("res://Scenes/Battle_pokemon.tscn")
 const Bag = preload("res://Game resources/InventoryUi.tscn")
@@ -55,7 +56,9 @@ var win_exp_points
 
 func _ready():
 	ui_state = Ui_state.Dialogue
-	_initial_dialogue()
+	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
+		if BattleManager.multi_battle == false:
+			_initial_dialogue()
 	
 func _display_enemy_attack_dialogue(pokemon,move):
 	
@@ -197,10 +200,9 @@ func _Dialog_end(STATE):
 
 func _physics_process(_delta):
 	if EventManger.current_event == null:
-
 			if BattleManager.multi_battle == false:
-
-				_single_battle()
+				if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
+					_single_battle()
 
 func _initial_dialogue():
 	if ui_state == Ui_state.Dialogue:
@@ -367,6 +369,7 @@ func PokemonChoosingProcess():
 	ui_state = Ui_state.Main
 
 func _single_battle():
+	PokemonTrainerManager.visible = false
 	if PlayerPokemon.current_learning_pokemon == null:
 
 		if ui_state == Ui_state.Selection:
@@ -522,8 +525,22 @@ func _win_dialog(exp_points = 0):
 				Dialogue.connect("Dialog_ended",self,"win")
 				win_exp_points = 0
 
+func _single_battle_win_dialog(exp_points = 0):
+	if exp_points != 0:
+		win_exp_points = exp_points
+	
+	yield(get_tree().create_timer(0.2),"timeout")
 
+	if learning_a_move == false and Dialogue_layer.get_child_count() == 0:
+		if exp_points != 0:
+			var Dialogue = Dialog.instance()
+			Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"), 0]
+			Dialogue_layer.add_child(Dialogue)
+			Dialogue.connect("Dialog_ended",self,"_check_win")
 
+func _check_win():
+	pass
+	
 func _attack_inp():
 	ui_state = Ui_state.Battle
 
@@ -721,3 +738,133 @@ func StartMoveLearnProcess():
 	if BattleManager.multi_battle == false:
 		if PlayerPokemon.current_pokemon != null:
 			_win_dialog(0)
+
+func _trainer_battle():
+	opposing_pokemon_sprite.visible = false
+	get_node("%TrainerPlayer").play("ComeIn")
+	yield(get_node("%TrainerPlayer"),"animation_finished")
+	ui_state = Ui_state.Dialogue
+	_single_trainer_battle_dialogue()
+	yield(self._single_trainer_battle_dialogue,"completed")
+
+
+func _single_trainer_battle_dialogue():
+	if ui_state == Ui_state.Dialogue:
+		var Dialogue = Dialog.instance()
+		Dialogue.text_to_diaplay = [OpposingTrainerMonsters.active_trainers[0].Name + " sent his pokemon for battle"]
+
+		Dialogue_layer.add_child(Dialogue)
+		#Dialogue.connect("Dialog_ended",self,"StartMoveLearnProcess")
+
+func _trainer_battle_process():
+	PokemonTrainerManager.visible = true
+	
+	if PlayerPokemon.current_learning_pokemon == null:
+
+		if ui_state == Ui_state.Selection:
+			$Poke_box.visible = true
+		else:
+			$Poke_box.visible = false
+	
+
+
+		if PlayerPokemon.current_pokemon != null:
+				if PlayerPokemon.current_pokemon.Current_health_points <= 0:
+					if lose_oneshot == false:
+						PlayerPokemon.current_pokemon._lose()
+						ui_state = Ui_state.Dialogue
+						_Init_lose_dialogue()
+						lose_oneshot = true
+						
+						
+					
+		
+		if PlayerPokemon.current_pokemon != null:
+			player_pokemon = PlayerPokemon.current_pokemon
+			player_pokemon_sprite.texture = PlayerPokemon.current_pokemon.sprite
+		elif PlayerPokemon.current_pokemon == null:
+			player_pokemon = null
+			player_pokemon_sprite.texture = null
+		if OpposingTrainerMonsters.pokemon != null:
+			enemy_pokemon = OpposingTrainerMonsters.pokemon
+			if enemy_dialogue_connected == false:
+
+				OpposingTrainerMonsters.pokemon.connect("Enemy_attacked",self,"_display_enemy_attack_dialogue")
+				enemy_dialogue_connected = true
+			if enemy_lost_dialogue_connected == false:
+				OpposingTrainerMonsters.pokemon.connect("enemy_lost",self,"_win_dialog")
+				enemy_lost_dialogue_connected = true
+			opposing_pokemon_sprite.texture = enemy_pokemon.sprite
+		else:
+			enemy_pokemon = null
+			opposing_pokemon_sprite.texture = null
+
+		if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN:
+			if ui_state == Ui_state.Main:
+				main_box.visible = true
+				battle_box.visible = false
+			elif ui_state == Ui_state.Battle:
+				main_box.visible = false
+				battle_box.visible = true
+
+			elif ui_state == Ui_state.Option:
+				if option_num == 0:
+					Do_you_yes.frame = 0
+				else:
+					Do_you_yes.frame = 1
+				if option_num == 1:
+					Do_you_no.frame = 0
+				else:
+					Do_you_no.frame = 1
+			if ui_state != Ui_state.Option:
+					Do_You_want.visible = false
+			if Input.is_action_just_pressed("decline"):
+				if ui_state == Ui_state.Battle:
+					ui_state = Ui_state.Main
+			if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN :
+				if Input.is_action_just_pressed("accept") and Dialogue_layer.get_child_count() == 0:
+					if ui_state != Ui_state.Dialogue:
+						if ui_state == Ui_state.Main:
+							if current_mouse_num == 0:
+								_attack_inp()
+							elif current_mouse_num == 1:
+								_bag()
+							elif current_mouse_num == 2:
+								ui_state = Ui_state.Dialogue
+								_Run_dialogue()
+							elif current_mouse_num == 3:
+								_capture()
+							elif current_mouse_num == 4:
+								ui_state = Ui_state.Dialogue
+								Pokemon_Comeback_Init()
+								
+						
+						elif ui_state == Ui_state.Option:
+							if option_num == 0:
+								ui_state = Ui_state.Pokemon
+								reset_pokemon = true
+								ui_state = Ui_state.Dialogue
+								Pokemon_Comeback_Init()
+							elif option_num == 1:
+								ui_state = Ui_state.Dialogue
+								_Run_dialogue()
+
+						elif ui_state == Ui_state.Battle:
+							if battle_mouse_num == 3:
+								ui_state = Ui_state.Main
+							elif battle_mouse_num == 4:
+								if PlayerPokemon.current_pokemon.Learned_moves.size() >= 1 and current_attack_locked == false:
+									current_attack_locked = true
+									_player_attack_dialogue(0)
+							elif battle_mouse_num == 0:
+								if PlayerPokemon.current_pokemon.Learned_moves.size() >= 2 and current_attack_locked == false:
+									current_attack_locked = true
+									_player_attack_dialogue(1)
+							elif battle_mouse_num == 1:
+								if PlayerPokemon.current_pokemon.Learned_moves.size() >= 3 and current_attack_locked == false: 
+									current_attack_locked = true
+									_player_attack_dialogue(2)
+							elif battle_mouse_num == 2:
+								if PlayerPokemon.current_pokemon.Learned_moves.size() >= 4 and current_attack_locked == false:
+									current_attack_locked = true
+									_player_attack_dialogue(3)

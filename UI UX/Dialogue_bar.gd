@@ -15,7 +15,7 @@ onready var Picture_frame = $Picture_frame
 onready var item_displayer = $Picture_frame/Border/Item_displayer
 onready var Pokemon_displayer = $Picture_frame/Border/Item_displayer/Pokemon_displayer
 
-var text_to_diaplay : Array = ["Hello, World! Spam and Eggs this is gonna be exilirating lets get excited",
+var text_to_diaplay : Array = ["Howdy, Ash",
 "Progress has been made", "We reached to infinite and beyond","lets try choices",1,"we finished choices",
 "We started functions",2,"We finished functions","we started item displaying",3,"we finished item displaying",0]
 

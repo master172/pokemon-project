@@ -189,7 +189,7 @@ menu={
 }
 test={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":57,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777359,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 dialogic_default_action={
@@ -220,6 +220,7 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_5="interactable"
 2d_physics/layer_6="Collisions"
 2d_physics/layer_7="Grass"
+2d_physics/layer_8="Player"
 
 [physics]
 

@@ -12,6 +12,8 @@ var num_active_pokemon = []
 
 var pokemons = []
 
+var active_trainers = []
+
 func _ready():
 	pass
 
@@ -31,3 +33,4 @@ func _attack():
 	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
 		if self.pokemon != null:
 			pokemon._wild_battle()
+
