@@ -34,3 +34,11 @@ func _attack():
 		if self.pokemon != null:
 			pokemon._wild_battle()
 
+func _physics_process(_delta):
+	if BattleManager.in_battle == true:
+		if BattleManager.type_of_battle ==BattleManager.types_of_battle.Trainer:
+			if BattleManager.multi_battle == false:
+				if self.pokemons.size() >= 0:
+					if self.pokemon == null:
+						self.pokemon = pokemons[0]
+						self.pokemons.remove(0)

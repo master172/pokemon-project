@@ -19,6 +19,8 @@ export(Array) var pokemons
 
 export(Array) var pokemonLevels
 
+export(String) var Name
+
 func _ready():
 	self.sprite.frame = 0
 	self.sprite.scale = Vector2(1,1)
@@ -60,12 +62,12 @@ func _prepare_for_fight():
 	var Pokemon1 = pokemons[0].instance()
 	var Pokemon2 = pokemons[1].instance()
 
-	Pokemon1.level = pokemonLevels[0].instance()
+	Pokemon1.level = pokemonLevels[0]
 	Pokemon1._calculate_stats()
 	Pokemon1._calculate_experience()
 	Pokemon1._calculate_gender()
 
-	Pokemon2.level = pokemonLevels[1].instance()
+	Pokemon2.level = pokemonLevels[1]
 	Pokemon2._calculate_stats()
 	Pokemon2._calculate_experience()
 	Pokemon2._calculate_gender()

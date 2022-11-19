@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assests/libraries/Ui/Place_box1.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Pokemon_scene_stage.gd" type="Script" id=2]
@@ -44,6 +44,21 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 240, 6 ), Vector2( 162, 6 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "ComeOut"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 162, 6 ), Vector2( 240, 6 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -201,7 +216,6 @@ position = Vector2( 45, 16 )
 [node name="Run_Box" parent="Node2D" instance=ExtResource( 7 )]
 
 [node name="Opoosing_Trainers_Container" type="HBoxContainer" parent="."]
-visible = false
 margin_left = 162.0
 margin_top = 5.0
 margin_right = 203.0
@@ -216,6 +230,7 @@ texture = ExtResource( 30 )
 [node name="TrainerPlayer" type="AnimationPlayer" parent="Opoosing_Trainers_Container"]
 unique_name_in_owner = true
 anims/ComeIn = SubResource( 6 )
+anims/ComeOut = SubResource( 8 )
 anims/RESET = SubResource( 7 )
 
 [node name="Battle_box" type="Node2D" parent="."]

@@ -59,7 +59,10 @@ func _ready():
 	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
 		if BattleManager.multi_battle == false:
 			_initial_dialogue()
-	
+	else:
+		if BattleManager.multi_battle == false:
+			_trainer_battle()
+
 func _display_enemy_attack_dialogue(pokemon,move):
 	
 	ui_state = Ui_state.Dialogue
@@ -203,6 +206,8 @@ func _physics_process(_delta):
 			if BattleManager.multi_battle == false:
 				if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
 					_single_battle()
+				else:
+					_trainer_battle_process()
 
 func _initial_dialogue():
 	if ui_state == Ui_state.Dialogue:
@@ -539,8 +544,15 @@ func _single_battle_win_dialog(exp_points = 0):
 			Dialogue.connect("Dialog_ended",self,"_check_win")
 
 func _check_win():
-	pass
-	
+	if OpposingTrainerMonsters.pokemons.size() >= 0 or OpposingTrainerMonsters.pokemon != null:
+		_change_opposing_pokemon()
+		pass
+	else:
+		win()
+
+func _change_opposing_pokemon():
+	OpposingTrainerMonsters.pokemon = null
+
 func _attack_inp():
 	ui_state = Ui_state.Battle
 
@@ -741,20 +753,39 @@ func StartMoveLearnProcess():
 
 func _trainer_battle():
 	opposing_pokemon_sprite.visible = false
+	PokemonTrainerManager.visible = true
 	get_node("%TrainerPlayer").play("ComeIn")
 	yield(get_node("%TrainerPlayer"),"animation_finished")
 	ui_state = Ui_state.Dialogue
 	_single_trainer_battle_dialogue()
-	yield(self._single_trainer_battle_dialogue,"completed")
 
 
 func _single_trainer_battle_dialogue():
 	if ui_state == Ui_state.Dialogue:
 		var Dialogue = Dialog.instance()
-		Dialogue.text_to_diaplay = [OpposingTrainerMonsters.active_trainers[0].Name + " sent his pokemon for battle"]
+		Dialogue.text_to_diaplay = [OpposingTrainerMonsters.active_trainers[0].Name + " wants to battle",OpposingTrainerMonsters.active_trainers[0].Name + " sent his pokemon for battle",0]
 
 		Dialogue_layer.add_child(Dialogue)
-		#Dialogue.connect("Dialog_ended",self,"StartMoveLearnProcess")
+		Dialogue.connect("Dialog_ended",self,"_trainer_battle_init")
+
+func _trainer_battle_init():
+	get_node("%TrainerPlayer").play("ComeOut")
+	yield(get_node("%TrainerPlayer"),"animation_finished")
+	opposing_pokemon_sprite.visible = true
+	PokemonTrainerManager.visible = false
+	_single_trainer_battle_choose_your_pokemon()
+
+func _single_trainer_battle_choose_your_pokemon():
+	if ui_state == Ui_state.Dialogue:
+		var Dialogue = Dialog.instance()
+		Dialogue.text_to_diaplay = ["What pokemon will ash send",0]
+
+		Dialogue_layer.add_child(Dialogue)
+		Dialogue.connect("Dialog_ended",self,"_choosing_single_trainer_battle_pokemon")
+
+func _choosing_single_trainer_battle_pokemon():
+		ui_state = Ui_state.Selection
+		$Poke_box.can_select = true
 
 func _trainer_battle_process():
 	PokemonTrainerManager.visible = true
