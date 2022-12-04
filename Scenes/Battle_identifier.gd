@@ -42,14 +42,15 @@ func _physics_process(_delta):
 	else:
 		Player_sprite.texture = null
 	if OpposingTrainerMonsters.pokemon != null:
-		Enemy_health.max_value = (OpposingTrainerMonsters.pokemon.Max_health_points)
-		Enemy_sprite.texture = (OpposingTrainerMonsters.pokemon.sprite)
-		if temp_enemy_health  != OpposingTrainerMonsters.pokemon.Current_health_points:
-			tween.interpolate_property(Enemy_health, "value",
-					temp_enemy_health, OpposingTrainerMonsters.pokemon.Current_health_points, 1,
-					Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			tween.start()
-			temp_enemy_health = OpposingTrainerMonsters.pokemon.Current_health_points
+		if OpposingTrainerMonsters.get_child_count() > 0:
+			Enemy_health.max_value = (OpposingTrainerMonsters.pokemon.Max_health_points)
+			Enemy_sprite.texture = (OpposingTrainerMonsters.pokemon.sprite)
+			if temp_enemy_health  != OpposingTrainerMonsters.pokemon.Current_health_points:
+				tween.interpolate_property(Enemy_health, "value",
+						temp_enemy_health, OpposingTrainerMonsters.pokemon.Current_health_points, 1,
+						Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+				tween.start()
+				temp_enemy_health = OpposingTrainerMonsters.pokemon.Current_health_points
 	else:
 		Enemy_sprite.texture = null
 
@@ -59,8 +60,9 @@ func _change_turn(object:Object, _key:NodePath):
 
 		if object == Enemy_health:
 			if PlayerPokemon.current_pokemon != null:
-				if OpposingTrainerMonsters.pokemon != null and OpposingTrainerMonsters.pokemon.Current_health_points >= 1:
-					BattleManager.Enemy_turn()
+				if OpposingTrainerMonsters.get_child_count() > 0:
+					if OpposingTrainerMonsters.pokemon != null and OpposingTrainerMonsters.pokemon.Current_health_points >= 1:
+						BattleManager.Enemy_turn()
 		elif object == Player_health:
 			if PlayerPokemon.current_pokemon != null:
 				if initial_set == true:

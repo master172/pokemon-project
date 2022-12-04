@@ -42,10 +42,3 @@ func _physics_process(_delta):
 		PlayerPokemon.opposing_pokemon = OpposingTrainerMonsters.pokemon
 	else:
 		PlayerPokemon.opposing_pokemon = null
-	
-	if OpposingTrainerMonsters.pokemon != null:
-		if PlayerPokemon.current_pokemon != null and OpposingTrainerMonsters.pokemon.opposing_pokemon != PlayerPokemon.current_pokemon:
-			OpposingTrainerMonsters.opposing_pokemon = PlayerPokemon.current_pokemon
-			OpposingTrainerMonsters.pokemon._calc_weak_and_res()
-	else:
-		OpposingTrainerMonsters.opposing_pokemon = null

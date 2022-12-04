@@ -15,7 +15,8 @@ var pokemons = []
 var active_trainers = []
 
 func _ready():
-	pass
+	yield(get_tree().create_timer(0.2),"timeout")
+	_remove_children()
 
 func _notification(what):
 	if what == NOTIFICATION_WM_QUIT_REQUEST or what == NOTIFICATION_WM_GO_BACK_REQUEST:
@@ -23,6 +24,7 @@ func _notification(what):
 
 func _remove_children():
 	for child in self.get_children():
+		print(child.Name)
 		child.queue_free()
 
 func _change_parent():
@@ -33,12 +35,16 @@ func _attack():
 	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
 		if self.pokemon != null:
 			pokemon._wild_battle()
+	elif BattleManager.type_of_battle ==BattleManager.types_of_battle.Trainer:
+		if BattleManager.multi_battle == false:
+			if self.pokemon != null:
+				pokemon._wild_battle()
 
 func _physics_process(_delta):
-	if BattleManager.in_battle == true:
-		if BattleManager.type_of_battle ==BattleManager.types_of_battle.Trainer:
-			if BattleManager.multi_battle == false:
-				if self.pokemons.size() >= 0:
-					if self.pokemon == null:
-						self.pokemon = pokemons[0]
-						self.pokemons.remove(0)
+	if self.pokemon != null:
+		if self.get_child_count() >0 :
+			if PlayerPokemon.current_pokemon != null and self.pokemon.opposing_pokemon != PlayerPokemon.current_pokemon:
+				self.opposing_pokemon = PlayerPokemon.current_pokemon
+				self.pokemon._calc_weak_and_res()
+		else:
+			self.opposing_pokemon = null

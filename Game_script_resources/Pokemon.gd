@@ -168,6 +168,8 @@ func _calculate_exp_points_to_give():
 
 
 func _lose():
+	print("lose")
+	print(self.Current_health_points)
 	_calculate_exp_points_to_give()
 	if self.get_parent() == OpposingTrainerMonsters:
 		emit_signal("enemy_lost",exp_gained)
@@ -528,13 +530,14 @@ func _calc_weak_and_res():
 func _physics_process(_delta):
 
 
-	if self.Current_health_points < 0.9:
+	if is_zero_approx(self.Current_health_points):
 		self.fainted = true
 	else:
 		self.fainted = false
 	
 	if fainted == true:
 		if exp_given == false:
+			print("losing")
 			_lose()
 			exp_given = true
 
@@ -661,6 +664,15 @@ func _wild_battle():
 	emit_signal("Enemy_attacked",self,rng_move)
 
 func _wild_battle_attack():
+	self.Learned_moves[rng_move]._calculate_damage()
+
+func _trainer_battle():
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	rng_move = rng.randi_range(0,(self.Learned_moves.size() -1))
+	emit_signal("Enemy_attacked",self,rng_move)
+
+func _trainer_battle_attack():
 	self.Learned_moves[rng_move]._calculate_damage()
 
 func _heal():

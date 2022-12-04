@@ -165,6 +165,9 @@ tracks/1/keys = {
 
 [node name="Pokemon_scene" type="Control"]
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
 
 [node name="EventManager" type="Node2D" parent="."]
 script = ExtResource( 17 )

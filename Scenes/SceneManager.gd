@@ -162,6 +162,8 @@ func finished_fading():
 			OpposingTrainerMonsters._remove_children()
 			PlayerPokemon.current_pokemon = null
 			PlayerPokemon._start_evolution()
+			Utils.get_player().interacting = false
+			Utils.get_player().is_talking = false
 
 		Transition_Type.BAG_SCENE:
 			$Menu.load_bag_scene()

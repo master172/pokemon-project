@@ -21,6 +21,9 @@ export(Array) var pokemonLevels
 
 export(String) var Name
 
+
+
+
 func _ready():
 	self.sprite.frame = 0
 	self.sprite.scale = Vector2(1,1)
@@ -52,28 +55,18 @@ func _finish_dialog():
 		yield(get_tree().create_timer(0.2),"timeout")
 		#player.interacting = false
 		#player.is_talking = false
-		#player = null
+		player = null
 		_prepare_for_fight()
 	dialog = null
 
 
 func _prepare_for_fight():
 	BattleManager.type_of_battle = BattleManager.types_of_battle.Trainer
-	var Pokemon1 = pokemons[0].instance()
-	var Pokemon2 = pokemons[1].instance()
 
-	Pokemon1.level = pokemonLevels[0]
-	Pokemon1._calculate_stats()
-	Pokemon1._calculate_experience()
-	Pokemon1._calculate_gender()
+	_add_pokemon(0)
 
-	Pokemon2.level = pokemonLevels[1]
-	Pokemon2._calculate_stats()
-	Pokemon2._calculate_experience()
-	Pokemon2._calculate_gender()
-
-	OpposingTrainerMonsters.pokemon = Pokemon1
-	OpposingTrainerMonsters.pokemons.append(Pokemon2)
+	OpposingTrainerMonsters.pokemons.append(pokemons[1])
+		
 	after_done()
 
 func after_done():
@@ -95,3 +88,22 @@ func _after_battle_done():
 		player.interacting = false
 		player.is_talking = false
 		player = null
+
+func _add_pokemon(num):
+	var Pokemon = pokemons[num].instance()
+	LoadedPokemon.add_child(Pokemon)
+	LoadedPokemon.current_loaded_pokemon = LoadedPokemon.get_child(0)
+
+	Utils.parent_to_change = OpposingTrainerMonsters
+	LoadedPokemon._change_parent()
+
+	if num == 0:
+		Pokemon.level = pokemonLevels[0]
+	elif num == 1:
+		Pokemon.level = pokemonLevels[1]
+
+	Pokemon._calculate_stats()
+	Pokemon._calculate_experience()
+	Pokemon._calculate_gender()
+
+	OpposingTrainerMonsters.pokemon = Pokemon

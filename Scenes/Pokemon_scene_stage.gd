@@ -95,17 +95,30 @@ func _display_enemy_attack_dialogue(pokemon,move):
 
 func _finish_Enemy_attack_dialogue():
 	if BattleManager.multi_battle == false:
-		ui_state = Ui_state.Battle
-		OpposingTrainerMonsters.pokemon._wild_battle_attack()
-		if BattleManager.EnemyLastMoveEvaded == true:
-			ui_state = Ui_state.Dialogue
-			_enemy_attack_evaded()
-		elif BattleManager.EnemyLastMoveMissed == true:
-			ui_state = Ui_state.Dialogue
-			_enemy_attack_missed()
-		elif BattleManager.EnemyLastMoveEvaded == false and BattleManager.EnemyLastMoveMissed == false:
-			BattleManager.Ally_turn()
-			current_attack_locked = false
+		if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
+			ui_state = Ui_state.Battle
+			OpposingTrainerMonsters.pokemon._wild_battle_attack()
+			if BattleManager.EnemyLastMoveEvaded == true:
+				ui_state = Ui_state.Dialogue
+				_enemy_attack_evaded()
+			elif BattleManager.EnemyLastMoveMissed == true:
+				ui_state = Ui_state.Dialogue
+				_enemy_attack_missed()
+			elif BattleManager.EnemyLastMoveEvaded == false and BattleManager.EnemyLastMoveMissed == false:
+				BattleManager.Ally_turn()
+				current_attack_locked = false
+		elif BattleManager.type_of_battle ==BattleManager.types_of_battle.Trainer:
+			ui_state = Ui_state.Battle
+			OpposingTrainerMonsters.pokemon._trainer_battle_attack()
+			if BattleManager.EnemyLastMoveEvaded == true:
+				ui_state = Ui_state.Dialogue
+				_enemy_attack_evaded()
+			elif BattleManager.EnemyLastMoveMissed == true:
+				ui_state = Ui_state.Dialogue
+				_enemy_attack_missed()
+			elif BattleManager.EnemyLastMoveEvaded == false and BattleManager.EnemyLastMoveMissed == false:
+				BattleManager.Ally_turn()
+				current_attack_locked = false
 
 func _enemy_attack_missed():
 	if ui_state == Ui_state.Dialogue:
@@ -402,18 +415,19 @@ func _single_battle():
 			player_pokemon = null
 			player_pokemon_sprite.texture = null
 		if OpposingTrainerMonsters.pokemon != null:
-			enemy_pokemon = OpposingTrainerMonsters.pokemon
-			if enemy_dialogue_connected == false:
+			if OpposingTrainerMonsters.get_child_count() > 0:
+				enemy_pokemon = OpposingTrainerMonsters.pokemon
+				if enemy_dialogue_connected == false:
 
-				OpposingTrainerMonsters.pokemon.connect("Enemy_attacked",self,"_display_enemy_attack_dialogue")
-				enemy_dialogue_connected = true
-			if enemy_lost_dialogue_connected == false:
-				OpposingTrainerMonsters.pokemon.connect("enemy_lost",self,"_win_dialog")
-				enemy_lost_dialogue_connected = true
-			opposing_pokemon_sprite.texture = enemy_pokemon.sprite
-		else:
-			enemy_pokemon = null
-			opposing_pokemon_sprite.texture = null
+					OpposingTrainerMonsters.pokemon.connect("Enemy_attacked",self,"_display_enemy_attack_dialogue")
+					enemy_dialogue_connected = true
+				if enemy_lost_dialogue_connected == false:
+					OpposingTrainerMonsters.pokemon.connect("enemy_lost",self,"_win_dialog")
+					enemy_lost_dialogue_connected = true
+				opposing_pokemon_sprite.texture = enemy_pokemon.sprite
+			else:
+				enemy_pokemon = null
+				opposing_pokemon_sprite.texture = null
 
 		if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN:
 			if ui_state == Ui_state.Main:
@@ -499,26 +513,14 @@ func _change_pokemon():
 	add_child(Pokemon_scene)
 
 func _win_dialog(exp_points = 0):
-	if exp_points != 0:
-		win_exp_points = exp_points
-
-	yield(get_tree().create_timer(0.2),"timeout")
-	if learning_a_move == false and Dialogue_layer.get_child_count() == 0:
+	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
 		if exp_points != 0:
-			var Dialogue = Dialog.instance()
-			Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"), 0]
-			Dialogue_layer.add_child(Dialogue)
-			Dialogue.connect("Dialog_ended",self,"win")
-		elif exp_points == 0:
-			var Dialogue = Dialog.instance()
-			Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"), 0]
-			Dialogue_layer.add_child(Dialogue)
-			Dialogue.connect("Dialog_ended",self,"win")
-			win_exp_points = 0
-	if learning_a_move == false and Dialogue_layer.get_child_count() > 0:
-		if self.get_child(0).current_event != null:
-			yield(self.get_child(0),'finished_event')
+			win_exp_points = exp_points
+
+		yield(get_tree().create_timer(0.2),"timeout")
+		if learning_a_move == false and Dialogue_layer.get_child_count() == 0:
 			if exp_points != 0:
+				
 				var Dialogue = Dialog.instance()
 				Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"), 0]
 				Dialogue_layer.add_child(Dialogue)
@@ -529,8 +531,24 @@ func _win_dialog(exp_points = 0):
 				Dialogue_layer.add_child(Dialogue)
 				Dialogue.connect("Dialog_ended",self,"win")
 				win_exp_points = 0
+		if learning_a_move == false and Dialogue_layer.get_child_count() > 0:
+			if self.get_child(0).current_event != null:
+				yield(self.get_child(0),'finished_event')
+				if exp_points != 0:
+					var Dialogue = Dialog.instance()
+					Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"), 0]
+					Dialogue_layer.add_child(Dialogue)
+					Dialogue.connect("Dialog_ended",self,"win")
+				elif exp_points == 0:
+					var Dialogue = Dialog.instance()
+					Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"), 0]
+					Dialogue_layer.add_child(Dialogue)
+					Dialogue.connect("Dialog_ended",self,"win")
+					win_exp_points = 0
+		OpposingTrainerMonsters._remove_children()
 
 func _single_battle_win_dialog(exp_points = 0):
+	print("single trainer battle winning")
 	if exp_points != 0:
 		win_exp_points = exp_points
 	
@@ -542,16 +560,56 @@ func _single_battle_win_dialog(exp_points = 0):
 			Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"), 0]
 			Dialogue_layer.add_child(Dialogue)
 			Dialogue.connect("Dialog_ended",self,"_check_win")
+		elif exp_points == 0:
+			var Dialogue = Dialog.instance()
+			Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"), 0]
+			Dialogue_layer.add_child(Dialogue)
+			Dialogue.connect("Dialog_ended",self,"_check_win")
+			win_exp_points = 0
+	if learning_a_move == false and Dialogue_layer.get_child_count() > 0:
+		if self.get_child(0).current_event != null:
+			yield(self.get_child(0),'finished_event')
+			if exp_points != 0:
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"), 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"_check_win")
+			elif exp_points == 0:
+				var Dialogue = Dialog.instance()
+				Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(PlayerPokemon.current_pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"), 0]
+				Dialogue_layer.add_child(Dialogue)
+				Dialogue.connect("Dialog_ended",self,"_check_win")
+				win_exp_points = 0
+	print("removing")
+	OpposingTrainerMonsters._remove_children()
 
 func _check_win():
-	if OpposingTrainerMonsters.pokemons.size() >= 0 or OpposingTrainerMonsters.pokemon != null:
+	print("checking winning")
+	OpposingTrainerMonsters.pokemons.remove(0)
+	if OpposingTrainerMonsters.pokemons.size() > 0:
 		_change_opposing_pokemon()
-		pass
 	else:
+		print("win")
 		win()
 
+
 func _change_opposing_pokemon():
-	OpposingTrainerMonsters.pokemon = null
+	if BattleManager.multi_battle == false:
+		OpposingTrainerMonsters.pokemon = null
+		if BattleManager.multi_battle == false:
+			if OpposingTrainerMonsters.pokemons.size() > 0:
+				
+
+				OpposingTrainerMonsters.active_trainers[0]._add_pokemon(0) 
+
+				enemy_dialogue_connected = false
+
+				enemy_lost_dialogue_connected = false
+
+			
+
+		
+			
 
 func _attack_inp():
 	ui_state = Ui_state.Battle
@@ -560,12 +618,18 @@ func _attack_inp():
 func win():
 	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
 		Utils.Num_loaded_pokemon -= 1
-		OpposingTrainerMonsters.pokemon.disconnect("enemy_lost",self,"_win_dialog")
-		OpposingTrainerMonsters.pokemon.disconnect("Enemy_attacked",self,"_display_enemy_attack_dialogue")
 		enemy_dialogue_connected = false
+		enemy_lost_dialogue_connected = false
 		
 		BattleManager.fainted = true
 		Utils.Get_Scene_Manager().transition_exit_pokemon_scene()
+	elif BattleManager.type_of_battle ==BattleManager.types_of_battle.Trainer:
+		if BattleManager.multi_battle == false:
+			enemy_dialogue_connected = false
+			enemy_lost_dialogue_connected = false
+
+			BattleManager.fainted = true
+			Utils.Get_Scene_Manager().transition_exit_pokemon_scene()
 		
 
 func _capture():
@@ -817,15 +881,16 @@ func _trainer_battle_process():
 			player_pokemon = null
 			player_pokemon_sprite.texture = null
 		if OpposingTrainerMonsters.pokemon != null:
-			enemy_pokemon = OpposingTrainerMonsters.pokemon
-			if enemy_dialogue_connected == false:
+			if OpposingTrainerMonsters.get_child_count() > 0:
+				enemy_pokemon = OpposingTrainerMonsters.pokemon
+				if enemy_dialogue_connected == false:
 
-				OpposingTrainerMonsters.pokemon.connect("Enemy_attacked",self,"_display_enemy_attack_dialogue")
-				enemy_dialogue_connected = true
-			if enemy_lost_dialogue_connected == false:
-				OpposingTrainerMonsters.pokemon.connect("enemy_lost",self,"_win_dialog")
-				enemy_lost_dialogue_connected = true
-			opposing_pokemon_sprite.texture = enemy_pokemon.sprite
+					OpposingTrainerMonsters.pokemon.connect("Enemy_attacked",self,"_display_enemy_attack_dialogue")
+					enemy_dialogue_connected = true
+				if enemy_lost_dialogue_connected == false:
+					OpposingTrainerMonsters.pokemon.connect("enemy_lost",self,"_single_battle_win_dialog")
+					enemy_lost_dialogue_connected = true
+				opposing_pokemon_sprite.texture = enemy_pokemon.sprite
 		else:
 			enemy_pokemon = null
 			opposing_pokemon_sprite.texture = null

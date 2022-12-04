@@ -59,6 +59,7 @@ func save():
 
 
 func _calculate_damage():
+	self.current_holder._calc_weak_and_res()
 	if self.special_effects == null:
 		if self.current_holder.opposing_pokemon.Weak_to.has(self.Types):
 			effectiveness = 2
