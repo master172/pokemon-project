@@ -66,6 +66,7 @@ func _prepare_for_fight():
 	_add_pokemon(0)
 
 	OpposingTrainerMonsters.pokemons.append(pokemons[1])
+	OpposingTrainerMonsters.pokemons.append(pokemons[2])
 		
 	after_done()
 

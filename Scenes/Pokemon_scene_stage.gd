@@ -587,24 +587,35 @@ func _check_win():
 	print("checking winning")
 	OpposingTrainerMonsters.pokemons.remove(0)
 	if OpposingTrainerMonsters.pokemons.size() > 0:
+		ui_state = Ui_state.Dialogue
 		_change_opposing_pokemon()
 	else:
 		print("win")
 		win()
 
-
+#bookmark
 func _change_opposing_pokemon():
 	if BattleManager.multi_battle == false:
-		OpposingTrainerMonsters.pokemon = null
-		if BattleManager.multi_battle == false:
-			if OpposingTrainerMonsters.pokemons.size() > 0:
-				
+		if ui_state == Ui_state.Dialogue:
+			var Dialogue = Dialog.instance()
+			Dialogue.text_to_diaplay = ["the opposing trainer sended his next pokemon", 0]
+			Dialogue_layer.add_child(Dialogue)
+			Dialogue.connect("Dialog_ended",self,"_change_opposing_pokemon_progress")
 
-				OpposingTrainerMonsters.active_trainers[0]._add_pokemon(0) 
+func _change_opposing_pokemon_progress():
+	OpposingTrainerMonsters.pokemon = null
+	if BattleManager.multi_battle == false:
+		if OpposingTrainerMonsters.pokemons.size() > 0:
+			
+			
 
-				enemy_dialogue_connected = false
+			OpposingTrainerMonsters.active_trainers[0]._add_pokemon(0) 
 
-				enemy_lost_dialogue_connected = false
+			enemy_dialogue_connected = false
+
+			enemy_lost_dialogue_connected = false
+	ui_state = Ui_state.Battle
+
 
 			
 
@@ -625,11 +636,17 @@ func win():
 		Utils.Get_Scene_Manager().transition_exit_pokemon_scene()
 	elif BattleManager.type_of_battle ==BattleManager.types_of_battle.Trainer:
 		if BattleManager.multi_battle == false:
-			enemy_dialogue_connected = false
-			enemy_lost_dialogue_connected = false
-
-			BattleManager.fainted = true
-			Utils.Get_Scene_Manager().transition_exit_pokemon_scene()
+			ui_state = Ui_state.Dialogue
+			var Dialogue = Dialog.instance()
+			Dialogue.text_to_diaplay = ["Ash defeated the opposing trainer", 0]
+			Dialogue_layer.add_child(Dialogue)
+			Dialogue.connect("Dialog_ended",self,"_trainer_complete_win")
+	
+func _trainer_complete_win():
+	enemy_dialogue_connected = false
+	enemy_lost_dialogue_connected = false
+	BattleManager.fainted = true
+	Utils.Get_Scene_Manager().transition_exit_pokemon_scene()
 		
 
 func _capture():
@@ -641,7 +658,13 @@ func _capture():
 		PlayerPokemon.current_pokemon = null
 		BattleManager.catched = true
 		Utils.Get_Scene_Manager().transition_exit_pokemon_scene()
-		
+	else:
+		ui_state = Ui_state.Dialogue
+		var Dialogue = Dialog.instance()
+		Dialogue.text_to_diaplay = ["Can't capture an trainers pokemon", 0]
+		Dialogue_layer.add_child(Dialogue)
+		Dialogue.connect("Dialog_ended",self,"_trainer_complete_win")
+		ui_state = Ui_state.Battle
 
 func _run():
 	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
@@ -652,7 +675,11 @@ func _run():
 		PlayerPokemon.current_pokemon = null
 		
 	else:
-		print("cant escape an trainer battle")
+		ui_state = Ui_state.Dialogue
+		var Dialogue = Dialog.instance()
+		Dialogue.text_to_diaplay = ["Can't run from a trainer battle", 0]
+		Dialogue_layer.add_child(Dialogue)
+		ui_state = Ui_state.Battle
 
 func _input(event):
 	if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN :
