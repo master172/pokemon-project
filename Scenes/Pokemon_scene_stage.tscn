@@ -291,7 +291,9 @@ margin_top = 15.0
 margin_right = 120.0
 margin_bottom = 19.0
 rect_scale = Vector2( 2.5, 2.7 )
+min_value = 1.0
 value = 100.0
+exp_edit = true
 texture_progress = ExtResource( 18 )
 
 [node name="CONTAINER" type="Sprite" parent="Battle_identifier/Player_pokemon_0"]

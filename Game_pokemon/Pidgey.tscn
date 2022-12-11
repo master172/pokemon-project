@@ -24,6 +24,7 @@ Resistant_to = [ 6, 10 ]
 Immune_to = [ 5, 16 ]
 level_to_next_form = 18
 catch_rate = 255.0
+Levelling_rate = "Medium_fast"
 Min_Hatch_time = 3855
 Max_Hatch_time = 4111
 gender_ratio = "50.0%_male"

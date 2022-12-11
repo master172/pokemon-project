@@ -126,11 +126,13 @@ var gender
 
 var level : int = 0
 var experince_gained :int = 0
-var experince_to_next_level :float = 0 
+var experince_to_next_level :float = 0
+var experince_to_this_level :float = 0
 var max_level:int = 100
 
 var opposing_pokemon
 signal enemy_lost(exp_to_give)
+signal level_up(lev)
 var current_holder
 
 
@@ -252,6 +254,8 @@ func _ready():
 	
 	
 	yield(get_tree().create_timer(0.2),"timeout")
+	
+	_calculate_experience_current_level()
 
 	_calculate_stats()
 	
@@ -302,7 +306,35 @@ func _calculate_experience():
 	if experince_to_next_level != 0:
 		if experince_gained >= experince_to_next_level:
 			level += 1
+			emit_signal("level_up",level)
 			_calculate_experience()
+			_calculate_experience_current_level()
+
+func _calculate_experience_current_level():
+	if Levelling_rate == "Fast":
+		experince_to_this_level = (4*pow((level-1),3)/5)
+	elif Levelling_rate == "Medium_fast":
+		experince_to_this_level = (pow((level-1),3))
+	elif Levelling_rate == "Medium_slow":
+		experince_to_this_level = (6/5*pow((level-1),3) - 15*pow((level-1),2) + 100*(level-1) - 140)
+	elif Levelling_rate == "Slow":
+		experince_to_this_level = (5*pow((level-1),3)/4)
+	elif Levelling_rate == "Erratic":
+		if (level-1) < 50:
+			experince_to_this_level = (pow((level-1),3)*(100-(level-1))/50)
+		elif (level-1) > 50 and (level-1) < 68:
+			experince_to_this_level = (pow((level-1),3)*(150 - (level-1))/100)
+		elif (level-1) > 68 and (level-1) < 98:
+			experince_to_this_level = (pow((level-1),3)*((1911 - 10*(level-1))/3.0)/500)
+		elif (level-1) > 98 and (level-1) < 100:
+			experince_to_this_level = ((pow((level-1),3)*(160-(level-1)))/100)
+	elif Levelling_rate == "Fluctuating":
+		if (level-1) < 15:
+			experince_to_this_level = (pow((level-1),3)*(((level-1)+1)/3.0 + 24)/50)
+		elif 15 < (level-1) and (level-1) < 36:
+			experince_to_this_level = (pow((level-1),3)*(((level-1)+14)/50.0))
+		elif 36 < (level-1) and (level-1) < 100:
+			experince_to_this_level = pow((level-1),3)*((((level-1)/2.0)+32)/50)
 
 func _update_level():
 	if experince_to_next_level != 0:
