@@ -308,7 +308,7 @@ func _calculate_experience():
 			level += 1
 			emit_signal("level_up",level)
 			_calculate_experience()
-			_calculate_experience_current_level()
+	_calculate_experience_current_level()
 
 func _calculate_experience_current_level():
 	if Levelling_rate == "Fast":
