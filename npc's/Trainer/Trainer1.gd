@@ -108,3 +108,8 @@ func _add_pokemon(num):
 	Pokemon._calculate_gender()
 
 	OpposingTrainerMonsters.pokemon = Pokemon
+
+func get_pokemon_moves(PokemonName):
+	for i in $Pokemons.get_children():
+		if i.Name == PokemonName:
+			return i.Moves

@@ -453,8 +453,26 @@ func change_parent():
 		OpposingTrainerMonsters.pokemon = self
 
 func _check_move_to_learn():
-	for i in range(0,self.get_child_count()):
-		self.get_child(i)._start_learning()
+	if self.get_parent() != null:
+		if self.get_parent() == OpposingTrainerMonsters:
+			if BattleManager.type_of_battle == BattleManager.types_of_battle.Trainer:
+				if BattleManager.multi_battle == false:
+					var Moves : Array = OpposingTrainerMonsters.active_trainers[0].get_pokemon_moves(self.Name)
+					if Moves.size() > 0:
+						for i in Moves:
+							var Move = i.instance()
+							for j in self.get_children():
+								if Move.Name == j.Name:
+									i._start_learning()
+					else:
+						for i in range(0,self.get_child_count()):
+							self.get_child(i)._start_learning()
+			elif BattleManager.type_of_battle ==BattleManager.types_of_battle.Wild: 
+				for i in range(0,self.get_child_count()):
+					self.get_child(i)._start_learning()
+		elif self.get_parent() == PlayerPokemon:
+			for i in range(0,self.get_child_count()):
+				self.get_child(i)._start_learning()
 
 
 func learn(move):

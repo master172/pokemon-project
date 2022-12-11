@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game_script_resources/Pokemon.gd"
 }, {
+"base": "Node",
+"class": "TrainerPokemonMoves",
+"language": "GDScript",
+"path": "res://Game_script_resources/TrainerPokemonMoves.gd"
+}, {
 "base": "Node2D",
 "class": "base_item",
 "language": "GDScript",
@@ -38,6 +43,7 @@ _global_script_class_icons={
 "Learned_moves": "",
 "Moves": "",
 "Pokemon": "",
+"TrainerPokemonMoves": "",
 "base_item": "",
 "potion": ""
 }
