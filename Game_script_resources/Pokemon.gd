@@ -303,11 +303,7 @@ func _calculate_experience():
 			experince_to_next_level = (pow(level,3)*((level+14)/50.0))
 		elif 36 < level and level < 100:
 			experince_to_next_level = pow(level,3)*(((level/2.0)+32)/50)
-	if experince_to_next_level != 0:
-		if experince_gained >= experince_to_next_level:
-			level += 1
-			emit_signal("level_up",level)
-			_calculate_experience()
+	_update_level()
 	_calculate_experience_current_level()
 
 func _calculate_experience_current_level():
@@ -340,7 +336,10 @@ func _update_level():
 	if experince_to_next_level != 0:
 		if experince_gained >= experince_to_next_level:
 			level += 1
+			print("emmited level up signal")
+			emit_signal("level_up",level)
 			_calculate_experience()
+			
 	if self.get_parent() == PlayerPokemon:
 		PlayerPokemon._check_move_learning(self)
 		if self.level >= self.level_to_next_form and self.next_form != null:

@@ -522,6 +522,7 @@ func _change_pokemon():
 	add_child(Pokemon_scene)
 
 func _win_dialog(exp_points = 0):
+	print(to_level_up)
 	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
 		if exp_points != 0:
 			win_exp_points = exp_points
@@ -1069,5 +1070,6 @@ func _trainer_battle_process():
 									_player_attack_dialogue(3)
 
 func _level_up_function(lev):
+	print("level up function lev ")
 	to_level_up = true
 	to_level_up_level = lev
