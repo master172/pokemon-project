@@ -67,6 +67,7 @@ func _input(event):
 						if BattleManager.in_battle == true:
 							PlayerPokemon.current_pokemon = Pokemon_cont
 							PlayerPokemon.current_pokemon._calc_weak_and_res()
+							BattleManager.BatteledPokemon.append(Pokemon_cont)
 							OpposingTrainerMonsters.pokemon._calc_weak_and_res()
 							self.controller._kill(Pokemon_cont)
 						_kill()

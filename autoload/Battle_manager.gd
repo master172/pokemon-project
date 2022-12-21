@@ -20,6 +20,9 @@ var EnemyLastMoveMissed = false
 enum  what_turn {ALLY_TURN, ENEMY_TURN}
 var current_turn = what_turn.ENEMY_TURN
 
+var BatteledPokemon : Array = []
+var BatteledExperiece : Array = []
+
 func Ally_turn():
 	#print("Ally_turn")
 	current_turn = what_turn.ALLY_TURN

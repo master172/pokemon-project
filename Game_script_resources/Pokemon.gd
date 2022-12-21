@@ -173,13 +173,17 @@ func _lose():
 	print("lose")
 	print(self.Current_health_points)
 	_calculate_exp_points_to_give()
+	
 	if self.get_parent() == OpposingTrainerMonsters:
-		emit_signal("enemy_lost",exp_gained)
+		emit_signal("enemy_lost")
 	
 		if self.opposing_pokemon != null:
-			self.opposing_pokemon.experince_gained += exp_gained
-			_add_ev_yield()
-			self.opposing_pokemon._level_up()
+			for i in BattleManager.BatteledPokemon:
+				print(i.Name)
+				BattleManager.BatteledExperiece.append(exp_gained)
+				i.experince_gained += exp_gained
+				_add_ev_yield()
+				i._level_up()
 	
 	elif self.get_parent() == PlayerPokemon:
 		PlayerPokemon._active_pokemon()

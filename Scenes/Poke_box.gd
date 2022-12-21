@@ -45,6 +45,7 @@ func _say_choosing_dialogue(pokemon):
 func _finish_choosing_dialogue(pokemon):
 	self.get_parent()._Dialog_end(self.get_parent().Ui_state.Main)
 	PlayerPokemon.current_pokemon = pokemon
+	BattleManager.BatteledPokemon.append(PlayerPokemon.current_pokemon)
 	PlayerPokemon.current_pokemon._calc_weak_and_res()
 	OpposingTrainerMonsters.pokemon._calc_weak_and_res()
 	_kill()

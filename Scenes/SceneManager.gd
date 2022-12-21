@@ -164,6 +164,7 @@ func finished_fading():
 			PlayerPokemon._start_evolution()
 			Utils.get_player().interacting = false
 			Utils.get_player().is_talking = false
+			BattleManager.BatteledPokemon = []
 
 		Transition_Type.BAG_SCENE:
 			$Menu.load_bag_scene()
