@@ -429,7 +429,7 @@ func _single_battle():
 					OpposingTrainerMonsters.pokemon.connect("Enemy_attacked",self,"_display_enemy_attack_dialogue")
 					enemy_dialogue_connected = true
 				if enemy_lost_dialogue_connected == false:
-					OpposingTrainerMonsters.pokemon.connect("enemy_lost",self,"_win_dialog_process")
+					OpposingTrainerMonsters.pokemon.connect("enemy_lost",self,"_win_dialog_process_dailog")
 					enemy_lost_dialogue_connected = true
 				opposing_pokemon_sprite.texture = enemy_pokemon.sprite
 			else:
@@ -523,8 +523,16 @@ func _change_pokemon():
 	ui_state = Ui_state.Pokemon
 	add_child(Pokemon_scene)
 
+func _win_dialog_process_dailog():
+	var Dialogue
+
+	Dialogue = Dialog.instance()
+	Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name, 0]
+	Dialogue_layer.add_child(Dialogue)
+	Dialogue.connect("Dialog_ended",self,"_win_dialog_process")
+
+
 func _win_dialog_process():
-	
 	pokemon_index += 1
 
 	if pokemon_index - 1 == BattleManager.BatteledPokemon.size():
@@ -549,12 +557,12 @@ func _win_dialog(index,Pokemon = PlayerPokemon.first_pokemon):
 				if exp_points != 0:
 					
 					Dialogue = Dialog.instance()
-					Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(Pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"), 0]
+					Dialogue.text_to_diaplay = [String(Pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"), 0]
 					Dialogue_layer.add_child(Dialogue)
 					Dialogue.connect("Dialog_ended",self,"_win_dialog_process")
 				elif exp_points == 0:
 					Dialogue = Dialog.instance()
-					Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(Pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"), 0]
+					Dialogue.text_to_diaplay = [String(Pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"), 0]
 					Dialogue_layer.add_child(Dialogue)
 					Dialogue.connect("Dialog_ended",self,"_win_dialog_process")
 					win_exp_points = 0
@@ -562,13 +570,13 @@ func _win_dialog(index,Pokemon = PlayerPokemon.first_pokemon):
 				if exp_points != 0:
 					
 					Dialogue = Dialog.instance()
-					Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(Pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"),PlayerPokemon.current_pokemon.Name + " leveled up to level "+ String(int(to_level_up_level)), 0]
+					Dialogue.text_to_diaplay = [String(Pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"),PlayerPokemon.current_pokemon.Name + " leveled up to level "+ String(int(to_level_up_level)), 0]
 					Dialogue_layer.add_child(Dialogue)
 					Dialogue.connect("Dialog_ended",self,"_win_dialog_process")
 					to_level_up = false
 				elif exp_points == 0:
 					Dialogue = Dialog.instance()
-					Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(Pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"),PlayerPokemon.current_pokemon.Name + " leveled up to level "+ String(int(to_level_up_level)), 0]
+					Dialogue.text_to_diaplay = [String(Pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"),PlayerPokemon.current_pokemon.Name + " leveled up to level "+ String(int(to_level_up_level)), 0]
 					Dialogue_layer.add_child(Dialogue)
 					Dialogue.connect("Dialog_ended",self,"_win_dialog_process")
 					win_exp_points = 0
@@ -580,12 +588,12 @@ func _win_dialog(index,Pokemon = PlayerPokemon.first_pokemon):
 					if exp_points != 0:
 						
 						Dialogue = Dialog.instance()
-						Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(Pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"), 0]
+						Dialogue.text_to_diaplay = [String(Pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"), 0]
 						Dialogue_layer.add_child(Dialogue)
 						Dialogue.connect("Dialog_ended",self,"_win_dialog_process")
 					elif exp_points == 0:
 						Dialogue = Dialog.instance()
-						Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(Pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"), 0]
+						Dialogue.text_to_diaplay = [String(Pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"), 0]
 						Dialogue_layer.add_child(Dialogue)
 						Dialogue.connect("Dialog_ended",self,"_win_dialog_process")
 						win_exp_points = 0
@@ -593,13 +601,13 @@ func _win_dialog(index,Pokemon = PlayerPokemon.first_pokemon):
 					if exp_points != 0:
 						
 						Dialogue = Dialog.instance()
-						Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(Pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"),PlayerPokemon.current_pokemon.Name + " leveled up to level "+ String(int(to_level_up_level)), 0]
+						Dialogue.text_to_diaplay = [String(Pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"),PlayerPokemon.current_pokemon.Name + " leveled up to level "+ String(int(to_level_up_level)), 0]
 						Dialogue_layer.add_child(Dialogue)
 						Dialogue.connect("Dialog_ended",self,"_win_dialog_process")
 						to_level_up = false
 					elif exp_points == 0:
 						Dialogue = Dialog.instance()
-						Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(Pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"),PlayerPokemon.current_pokemon.Name + " leveled up to level "+ String(int(to_level_up_level)), 0]
+						Dialogue.text_to_diaplay = [String(Pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"),PlayerPokemon.current_pokemon.Name + " leveled up to level "+ String(int(to_level_up_level)), 0]
 						Dialogue_layer.add_child(Dialogue)
 						Dialogue.connect("Dialog_ended",self,"_win_dialog_process")
 						win_exp_points = 0
@@ -621,12 +629,12 @@ func _single_battle_win_dialog(index,Pokemon = PlayerPokemon.first_pokemon):
 			if exp_points != 0:
 				
 				Dialogue = Dialog.instance()
-				Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(Pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"), 0]
+				Dialogue.text_to_diaplay = [String(Pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"), 0]
 				Dialogue_layer.add_child(Dialogue)
 				Dialogue.connect("Dialog_ended",self,"_check_win")
 			elif exp_points == 0:
 				Dialogue = Dialog.instance()
-				Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(Pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"), 0]
+				Dialogue.text_to_diaplay = [String(Pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"), 0]
 				Dialogue_layer.add_child(Dialogue)
 				Dialogue.connect("Dialog_ended",self,"_check_win")
 				win_exp_points = 0
@@ -634,13 +642,13 @@ func _single_battle_win_dialog(index,Pokemon = PlayerPokemon.first_pokemon):
 			if exp_points != 0:
 				
 				Dialogue = Dialog.instance()
-				Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(Pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"),PlayerPokemon.current_pokemon.Name + " leveled up to level "+ String(int(to_level_up_level)), 0]
+				Dialogue.text_to_diaplay = [String(Pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"),PlayerPokemon.current_pokemon.Name + " leveled up to level "+ String(int(to_level_up_level)), 0]
 				Dialogue_layer.add_child(Dialogue)
 				Dialogue.connect("Dialog_ended",self,"_check_win")
 				to_level_up = false
 			elif exp_points == 0:
 				Dialogue = Dialog.instance()
-				Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(Pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"),PlayerPokemon.current_pokemon.Name + " leveled up to level "+ String(int(to_level_up_level)), 0]
+				Dialogue.text_to_diaplay = [String(Pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"),PlayerPokemon.current_pokemon.Name + " leveled up to level "+ String(int(to_level_up_level)), 0]
 				Dialogue_layer.add_child(Dialogue)
 				Dialogue.connect("Dialog_ended",self,"_check_win")
 				win_exp_points = 0
@@ -652,12 +660,12 @@ func _single_battle_win_dialog(index,Pokemon = PlayerPokemon.first_pokemon):
 				if exp_points != 0:
 					
 					Dialogue = Dialog.instance()
-					Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(Pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"), 0]
+					Dialogue.text_to_diaplay = [String(Pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"), 0]
 					Dialogue_layer.add_child(Dialogue)
 					Dialogue.connect("Dialog_ended",self,"_check_win")
 				elif exp_points == 0:
 					Dialogue = Dialog.instance()
-					Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(Pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"), 0]
+					Dialogue.text_to_diaplay = [String(Pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"), 0]
 					Dialogue_layer.add_child(Dialogue)
 					Dialogue.connect("Dialog_ended",self,"_check_win")
 					win_exp_points = 0
@@ -665,23 +673,31 @@ func _single_battle_win_dialog(index,Pokemon = PlayerPokemon.first_pokemon):
 				if exp_points != 0:
 					
 					Dialogue = Dialog.instance()
-					Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(Pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"),PlayerPokemon.current_pokemon.Name + " leveled up to level "+ String(int(to_level_up_level)), 0]
+					Dialogue.text_to_diaplay = [String(Pokemon.Name + " gained "+ String(int(exp_points))+ " experience points"),PlayerPokemon.current_pokemon.Name + " leveled up to level "+ String(int(to_level_up_level)), 0]
 					Dialogue_layer.add_child(Dialogue)
 					Dialogue.connect("Dialog_ended",self,"_check_win")
 					to_level_up = false
 				elif exp_points == 0:
 					Dialogue = Dialog.instance()
-					Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name,String(Pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"),PlayerPokemon.current_pokemon.Name + " leveled up to level "+ String(int(to_level_up_level)), 0]
+					Dialogue.text_to_diaplay = [String(Pokemon.Name + " gained "+ String(int(win_exp_points))+ " experience points"),PlayerPokemon.current_pokemon.Name + " leveled up to level "+ String(int(to_level_up_level)), 0]
 					Dialogue_layer.add_child(Dialogue)
 					Dialogue.connect("Dialog_ended",self,"_check_win")
 					win_exp_points = 0
 					to_level_up = false
 
+func _check_win_dialog():
+	var Dialogue
+
+	Dialogue = Dialog.instance()
+	Dialogue.text_to_diaplay = ["Ash defeated the opposing "+OpposingTrainerMonsters.pokemon.Name, 0]
+	Dialogue_layer.add_child(Dialogue)
+	Dialogue.connect("Dialog_ended",self,"_check_win")
+
 func _check_win():
 	
 	pokemon_index += 1
 
-	if pokemon_index == BattleManager.BatteledPokemon.size():
+	if pokemon_index -1 == BattleManager.BatteledPokemon.size():
 		_check_win_process()
 	else:
 		_single_battle_win_dialog((pokemon_index-1),BattleManager.BatteledPokemon[pokemon_index-1])
@@ -1022,7 +1038,7 @@ func _trainer_battle_process():
 					OpposingTrainerMonsters.pokemon.connect("Enemy_attacked",self,"_display_enemy_attack_dialogue")
 					enemy_dialogue_connected = true
 				if enemy_lost_dialogue_connected == false:
-					OpposingTrainerMonsters.pokemon.connect("enemy_lost",self,"_check_win")
+					OpposingTrainerMonsters.pokemon.connect("enemy_lost",self,"_check_win_dialog")
 					enemy_lost_dialogue_connected = true
 				opposing_pokemon_sprite.texture = enemy_pokemon.sprite
 		else:
