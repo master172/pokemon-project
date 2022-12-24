@@ -175,6 +175,8 @@ func _lose():
 	_calculate_exp_points_to_give()
 	
 	if self.get_parent() == OpposingTrainerMonsters:
+		BattleManager.turns = 0
+		BattleManager.Ally_turn()
 		emit_signal("enemy_lost")
 	
 		if self.opposing_pokemon != null:
@@ -187,6 +189,8 @@ func _lose():
 	
 	elif self.get_parent() == PlayerPokemon:
 		PlayerPokemon._active_pokemon()
+		BattleManager.turns = 0
+		BattleManager.Ally_turn()
 
 	
 func _calculate_gender():
@@ -340,6 +344,10 @@ func _update_level():
 	if experince_to_next_level != 0:
 		if experince_gained >= experince_to_next_level:
 			level += 1
+			
+			BattleManager.BatteledLevelPokemon.append(self)
+			BattleManager.BatteledLevelUp.append(self.level)
+
 			print("emmited level up signal")
 			emit_signal("level_up",level)
 			_calculate_experience()
@@ -583,7 +591,7 @@ func _calc_weak_and_res():
 func _physics_process(_delta):
 
 
-	if is_zero_approx(self.Current_health_points):
+	if is_zero_approx(self.Current_health_points) or self.Current_health_points < 0:
 		self.fainted = true
 	else:
 		self.fainted = false

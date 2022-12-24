@@ -45,13 +45,15 @@ func transition_to_Pc():
 
 
 func transition_to_Move_learner(move):
-	
+	print("why not working 1")
 	if $Pokemon_scene.get_child_count() < 0:
 		_fade_in()
 		Utils.get_player().set_physics_process(false)
 		transition_type = Transition_Type.MOVE_LEARNER
 	elif $Pokemon_scene.get_child_count() > 0:
+
 		$Pokemon_scene.get_child(0).ui_state = $Pokemon_scene.get_child(0).Ui_state.Dialogue
+		print("why not working")
 		$Pokemon_scene.get_child(0).start_move_learning(move)
 
 func PokemonSceneMoveLearning():

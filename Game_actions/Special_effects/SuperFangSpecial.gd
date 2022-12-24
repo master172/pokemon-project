@@ -6,4 +6,3 @@ func _attack():
         self.get_parent().current_holder.opposing_pokemon.Current_health_points = (self.get_parent().current_holder.opposing_pokemon.Current_health_points/2)
     else:
         self.get_parent().current_holder.opposing_pokemon.Current_health_points -= 1
-    BattleManager.switch_turns()

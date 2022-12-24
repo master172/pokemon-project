@@ -45,6 +45,8 @@ export(int,"physical","status","special") var category
 
 var to_add_crit = false
 
+export(int) var speed = 0
+
 func save():
 	var save_dict = {
 
@@ -59,7 +61,14 @@ func save():
 
 
 func _calculate_damage():
+
+	if self.speed == 0:
+		self.speed = self.current_holder.Current_speed
+	else:
+		self.speed = self.speed
+
 	self.current_holder._calc_weak_and_res()
+	print(self.Name)
 	if self.special_effects == null:
 		if self.current_holder.opposing_pokemon.Weak_to.has(self.Types):
 			effectiveness = 2
@@ -165,6 +174,7 @@ func _physics_process(_delta):
 	
 
 func _start_learning():
+	
 	if self.current_holder != null:
 		if current_holder.level >= self.learned_level and can_add == true:
 			if learned == false and unlearned == false:
@@ -176,20 +186,27 @@ func _start_learning():
 					learned = true
 					Utils.Get_Scene_Manager().PokemonSceneMoveLearningDialog(self)
 				elif current_holder.Learned_moves.size() == 4:
+					print("to learn ", self.current_holder.Name)
 					PlayerPokemon.current_learning_pokemon = self.current_holder
 					MoveLearner.target_pokemon = self.current_holder
 					MoveLearner.move_to_learn = self
+					print("why not working 2")
 					Utils.Get_Scene_Manager().transition_to_Move_learner(self)
 					
 
 func _ready():
 	
 	yield(get_tree().create_timer(0.2),"timeout")
+
+	
 	if self.get_parent() != null:
 		current_holder = self.get_parent()
 	if to_add == true:
 		current_holder.learn(self)
-	
+	if self.speed == 0:
+		self.speed = self.current_holder.Current_speed
+	else:
+		self.speed = self.speed
 
 func _check_to_add():
 	if learned == true and to_add == false:
@@ -199,3 +216,28 @@ func _check_to_add():
 
 func _heal():
 	pp = max_pp
+
+func _check_speed():
+	if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
+		print("check_speed")
+		if self.speed > self.current_holder.opposing_pokemon.Current_speed:
+			if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
+				Utils.Get_Pokemon_Manger().get_child(0)._player_attack_dialogue(self)
+				yield(Utils.Get_Pokemon_Manger().get_child(0),"playerDialogueFinished")
+				if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
+					_calculate_damage()
+		elif self.speed == self.current_holder.opposing_pokemon.Current_speed:
+			if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
+				Utils.Get_Pokemon_Manger().get_child(0)._player_attack_dialogue(self)
+				yield(Utils.Get_Pokemon_Manger().get_child(0),"playerDialogueFinished")
+				if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
+					_calculate_damage()
+		else:
+			BattleManager.Enemy_turn()
+			yield(BattleManager, "TurnChangedTrainer")
+			print("turn changed")
+			if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
+				Utils.Get_Pokemon_Manger().get_child(0)._player_attack_dialogue(self)
+				yield(Utils.Get_Pokemon_Manger().get_child(0),"playerDialogueFinished")
+				if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
+					_calculate_damage()
