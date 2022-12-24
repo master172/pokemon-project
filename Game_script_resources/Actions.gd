@@ -186,11 +186,9 @@ func _start_learning():
 					learned = true
 					Utils.Get_Scene_Manager().PokemonSceneMoveLearningDialog(self)
 				elif current_holder.Learned_moves.size() == 4:
-					print("to learn ", self.current_holder.Name)
 					PlayerPokemon.current_learning_pokemon = self.current_holder
 					MoveLearner.target_pokemon = self.current_holder
 					MoveLearner.move_to_learn = self
-					print("why not working 2")
 					Utils.Get_Scene_Manager().transition_to_Move_learner(self)
 					
 

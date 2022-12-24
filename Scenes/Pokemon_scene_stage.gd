@@ -905,23 +905,24 @@ func _input(event):
 								option_num = 0
 
 func start_move_learning(move):
-	if ui_state == Ui_state.Dialogue:
-		if BattleManager.multi_battle == false:
-			if MoveLearner.target_pokemon != null:
-				if Dialogue_layer.get_child_count() > 0:
-					if self.get_child(0).current_event != null:
-						yield(self.get_child(0),'finished_event')
+	if MoveLearner.target_pokemon.get_parent() == PlayerPokemon:
+		if ui_state == Ui_state.Dialogue:
+			if BattleManager.multi_battle == false:
+				if MoveLearner.target_pokemon != null:
+					if Dialogue_layer.get_child_count() > 0:
+						if self.get_child(0).current_event != null:
+							yield(self.get_child(0),'finished_event')
+							learning_a_move = true
+							var Dialogue = Dialog.instance()
+							Dialogue.text_to_diaplay = [MoveLearner.target_pokemon.Name +" wants to learn " + move.Name," how ever "+ MoveLearner.target_pokemon.Name + " already knows four moves please choose what to do", 0]
+							Dialogue_layer.add_child(Dialogue)
+							Dialogue.connect("Dialog_ended",self,"MoveLearningProcess")
+					else:
 						learning_a_move = true
 						var Dialogue = Dialog.instance()
 						Dialogue.text_to_diaplay = [MoveLearner.target_pokemon.Name +" wants to learn " + move.Name," how ever "+ MoveLearner.target_pokemon.Name + " already knows four moves please choose what to do", 0]
 						Dialogue_layer.add_child(Dialogue)
 						Dialogue.connect("Dialog_ended",self,"MoveLearningProcess")
-				else:
-					learning_a_move = true
-					var Dialogue = Dialog.instance()
-					Dialogue.text_to_diaplay = [MoveLearner.target_pokemon.Name +" wants to learn " + move.Name," how ever "+ MoveLearner.target_pokemon.Name + " already knows four moves please choose what to do", 0]
-					Dialogue_layer.add_child(Dialogue)
-					Dialogue.connect("Dialog_ended",self,"MoveLearningProcess")
 
 
 func MoveLearningProcess():
@@ -936,23 +937,24 @@ func FinishMoveLearningProcess():
 			_win_dialog_process()	
 
 func StartMoveLearnDialogue(move):
-	if ui_state == Ui_state.Dialogue:
-		if BattleManager.multi_battle == false:
-			if MoveLearner.target_pokemon != null:
-				if Dialogue_layer.get_child_count() > 0:
-					yield(get_tree().create_timer(1),"timeout")
-					if self.get_child(0).current_event != null:
-						yield(self.get_child(0),'finished_event')
-						learning_a_move = true
+	if MoveLearner.target_pokemon.get_parent() == PlayerPokemon:
+		if ui_state == Ui_state.Dialogue:
+			if BattleManager.multi_battle == false:
+				if MoveLearner.target_pokemon != null:
+					if Dialogue_layer.get_child_count() > 0:
+						yield(get_tree().create_timer(1),"timeout")
+						if self.get_child(0).current_event != null:
+							yield(self.get_child(0),'finished_event')
+							learning_a_move = true
+							var Dialogue = Dialog.instance()
+							Dialogue.text_to_diaplay = [MoveLearner.target_pokemon.Name +" learned " + move.Name, 0]
+							Dialogue_layer.add_child(Dialogue)
+							Dialogue.connect("Dialog_ended",self,"StartMoveLearnProcess")
+					else:
 						var Dialogue = Dialog.instance()
 						Dialogue.text_to_diaplay = [MoveLearner.target_pokemon.Name +" learned " + move.Name, 0]
 						Dialogue_layer.add_child(Dialogue)
 						Dialogue.connect("Dialog_ended",self,"StartMoveLearnProcess")
-				else:
-					var Dialogue = Dialog.instance()
-					Dialogue.text_to_diaplay = [MoveLearner.target_pokemon.Name +" learned " + move.Name, 0]
-					Dialogue_layer.add_child(Dialogue)
-					Dialogue.connect("Dialog_ended",self,"StartMoveLearnProcess")
 	
 func StartMoveLearnProcess():
 	learning_a_move = false
