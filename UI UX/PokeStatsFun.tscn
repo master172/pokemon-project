@@ -1,0 +1,421 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://assests/libraries/Ui/circle.png" type="Texture" id=1]
+[ext_resource path="res://Pokemon/Arbok.png" type="Texture" id=2]
+[ext_resource path="res://assests/libraries/Ui/CircularProgress.png" type="Texture" id=3]
+[ext_resource path="res://assests/libraries/Ui/CircularUnder.png" type="Texture" id=4]
+[ext_resource path="res://assests/libraries/Ui/heart2.png" type="Texture" id=5]
+[ext_resource path="res://assests/libraries/Ui/heart1.png" type="Texture" id=6]
+[ext_resource path="res://libraries/Themes/mainTheme.tres" type="Theme" id=7]
+[ext_resource path="res://Pokemon/Dragonite.png" type="Texture" id=8]
+[ext_resource path="res://Pokemon/Venasaur.png" type="Texture" id=9]
+[ext_resource path="res://assests/libraries/Items/Overworld item.png" type="Texture" id=10]
+[ext_resource path="res://UI UX/PokeStatsFun.gd" type="Script" id=11]
+[ext_resource path="res://UI UX/PokeCard.gd" type="Script" id=12]
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("PokeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "breath"
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("PokeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 6 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("PokeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "breath"
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("PokeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("PokeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "breath"
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("PokeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[node name="PokeStatsFun" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -160.0
+script = ExtResource( 11 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.32549, 0, 0.403922, 0.54902 )
+
+[node name="PokeCardLeft" type="Control" parent="."]
+margin_left = 38.0
+margin_top = 42.0
+margin_right = 110.0
+margin_bottom = 138.0
+rect_scale = Vector2( 0.75, 0.75 )
+size_flags_horizontal = 3
+script = ExtResource( 12 )
+
+[node name="Background" type="ColorRect" parent="PokeCardLeft"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="PokeCardLeft/Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = -3.0
+margin_bottom = -3.0
+color = Color( 0, 0.882353, 1, 1 )
+
+[node name="PokeBackground" type="TextureRect" parent="PokeCardLeft"]
+margin_left = 17.0
+margin_top = 16.0
+margin_right = 55.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 38 )
+texture = ExtResource( 1 )
+expand = true
+
+[node name="PokeSprite" type="Sprite" parent="PokeCardLeft/PokeBackground"]
+position = Vector2( 18.2304, 18.2757 )
+texture = ExtResource( 8 )
+hframes = 2
+region_enabled = true
+region_rect = Rect2( 28.8895, 9.10978, 71.1165, 23.6264 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PokeCardLeft/PokeBackground"]
+anims/RESET = SubResource( 4 )
+anims/breath = SubResource( 5 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="PokeCardLeft"]
+position = Vector2( 36.5017, 68.5017 )
+frames = SubResource( 3 )
+
+[node name="TextureProgress" type="TextureProgress" parent="PokeCardLeft"]
+margin_left = 20.1051
+margin_top = 57.1051
+margin_right = 86.1051
+margin_bottom = 123.105
+rect_scale = Vector2( 0.5, 0.5 )
+value = 42.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 3 )
+fill_mode = 5
+
+[node name="Name" type="Label" parent="PokeCardLeft"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 69.0
+margin_bottom = 17.0
+theme = ExtResource( 7 )
+text = "Dragonite"
+align = 1
+
+[node name="Percentage" type="Label" parent="PokeCardLeft"]
+margin_left = 25.3249
+margin_top = 76.1329
+margin_right = 65.3249
+margin_bottom = 90.1329
+rect_scale = Vector2( 0.6, 0.6 )
+theme = ExtResource( 7 )
+text = "42%"
+align = 1
+
+[node name="PokeCardRight" type="Control" parent="."]
+margin_left = 148.0
+margin_top = 42.0
+margin_right = 220.0
+margin_bottom = 138.0
+rect_scale = Vector2( 0.75, 0.75 )
+size_flags_horizontal = 3
+script = ExtResource( 12 )
+
+[node name="Background" type="ColorRect" parent="PokeCardRight"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="PokeCardRight/Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = -3.0
+margin_bottom = -3.0
+color = Color( 0, 0.882353, 1, 1 )
+
+[node name="PokeBackground" type="TextureRect" parent="PokeCardRight"]
+margin_left = 17.0
+margin_top = 16.0
+margin_right = 55.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 38 )
+texture = ExtResource( 1 )
+expand = true
+
+[node name="PokeSprite" type="Sprite" parent="PokeCardRight/PokeBackground"]
+position = Vector2( 18.2304, 18.2757 )
+texture = ExtResource( 9 )
+hframes = 2
+region_enabled = true
+region_rect = Rect2( 28.89, 9.11, 71.116, 23.626 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PokeCardRight/PokeBackground"]
+anims/RESET = SubResource( 6 )
+anims/breath = SubResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="PokeCardRight"]
+position = Vector2( 36.5017, 68.5017 )
+frames = SubResource( 3 )
+
+[node name="TextureProgress" type="TextureProgress" parent="PokeCardRight"]
+margin_left = 20.1051
+margin_top = 57.1051
+margin_right = 86.1051
+margin_bottom = 123.105
+rect_scale = Vector2( 0.5, 0.5 )
+value = 78.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 3 )
+fill_mode = 5
+
+[node name="Name" type="Label" parent="PokeCardRight"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 69.0
+margin_bottom = 17.0
+theme = ExtResource( 7 )
+text = "Venasaur"
+align = 1
+
+[node name="Percentage" type="Label" parent="PokeCardRight"]
+margin_left = 25.3249
+margin_top = 76.1329
+margin_right = 65.3249
+margin_bottom = 90.1329
+rect_scale = Vector2( 0.6, 0.6 )
+theme = ExtResource( 7 )
+text = "78%"
+align = 1
+
+[node name="PokeCardMain" type="Control" parent="."]
+margin_left = 84.0
+margin_top = 30.0
+margin_right = 156.0
+margin_bottom = 126.0
+size_flags_horizontal = 3
+script = ExtResource( 12 )
+
+[node name="Background" type="ColorRect" parent="PokeCardMain"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="PokeCardMain/Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = -3.0
+margin_bottom = -3.0
+color = Color( 0, 0.882353, 1, 1 )
+
+[node name="PokeBackground" type="TextureRect" parent="PokeCardMain"]
+margin_left = 17.0
+margin_top = 16.0
+margin_right = 55.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 0, 38 )
+texture = ExtResource( 1 )
+expand = true
+
+[node name="PokeSprite" type="Sprite" parent="PokeCardMain/PokeBackground"]
+position = Vector2( 18.2304, 18.2757 )
+texture = ExtResource( 2 )
+hframes = 2
+region_enabled = true
+region_rect = Rect2( 28.89, 9.11, 71.116, 23.626 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PokeCardMain/PokeBackground"]
+anims/RESET = SubResource( 1 )
+anims/breath = SubResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="PokeCardMain"]
+position = Vector2( 36.5017, 68.5017 )
+frames = SubResource( 3 )
+
+[node name="TextureProgress" type="TextureProgress" parent="PokeCardMain"]
+margin_left = 20.1051
+margin_top = 57.1051
+margin_right = 86.1051
+margin_bottom = 123.105
+rect_scale = Vector2( 0.5, 0.5 )
+value = 67.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 3 )
+fill_mode = 5
+
+[node name="Name" type="Label" parent="PokeCardMain"]
+margin_left = 3.0
+margin_top = 2.29289
+margin_right = 69.0
+margin_bottom = 16.2929
+theme = ExtResource( 7 )
+text = "Arbok"
+align = 1
+
+[node name="Percentage" type="Label" parent="PokeCardMain"]
+margin_left = 25.3249
+margin_top = 76.1329
+margin_right = 65.3249
+margin_bottom = 90.1329
+rect_scale = Vector2( 0.6, 0.6 )
+theme = ExtResource( 7 )
+text = "67%"
+align = 1
+
+[node name="TopStroke" type="ColorRect" parent="."]
+margin_left = 40.0
+margin_top = 9.0
+margin_right = 200.0
+margin_bottom = 11.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="BottomStroke" type="ColorRect" parent="."]
+margin_left = 40.0
+margin_top = 23.0
+margin_right = 200.0
+margin_bottom = 25.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="PokeBallContainer" type="Control" parent="."]
+margin_left = 40.0
+margin_top = 11.0
+margin_right = 200.0
+margin_bottom = 23.0
+
+[node name="Container" type="Control" parent="PokeBallContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 1.0
+margin_right = -20.0
+
+[node name="PokeBall1" type="Sprite" parent="PokeBallContainer/Container"]
+modulate = Color( 1, 0, 0, 1 )
+texture = ExtResource( 10 )
+centered = false
+
+[node name="PokeBall2" type="Sprite" parent="PokeBallContainer/Container"]
+modulate = Color( 0.851563, 1, 0, 1 )
+position = Vector2( 22, 0 )
+texture = ExtResource( 10 )
+centered = false
+
+[node name="PokeBall3" type="Sprite" parent="PokeBallContainer/Container"]
+modulate = Color( 0, 1, 0.0392157, 1 )
+position = Vector2( 44, 0 )
+texture = ExtResource( 10 )
+centered = false
+
+[node name="PokeBall4" type="Sprite" parent="PokeBallContainer/Container"]
+modulate = Color( 0, 1, 0.0392157, 1 )
+position = Vector2( 66, 0 )
+texture = ExtResource( 10 )
+centered = false
+
+[node name="PokeBall5" type="Sprite" parent="PokeBallContainer/Container"]
+modulate = Color( 0, 1, 0.0392157, 1 )
+position = Vector2( 88, 0 )
+texture = ExtResource( 10 )
+centered = false
+
+[node name="PokeBall6" type="Sprite" parent="PokeBallContainer/Container"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 112, 0 )
+texture = ExtResource( 10 )
+centered = false

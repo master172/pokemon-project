@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=12 format=2]
+[gd_resource type="Theme" load_steps=13 format=2]
 
 [ext_resource path="res://Fonts/Pokemon_16.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assests/libraries/health.png" type="Texture" id=2]
@@ -30,6 +30,8 @@ bg_color = Color( 0.0705882, 0.027451, 0.278431, 1 )
 
 [sub_resource type="StyleBoxFlat" id=18]
 
+[sub_resource type="StyleBoxEmpty" id=19]
+
 [resource]
 Button/fonts/font = ExtResource( 1 )
 Label/fonts/font = ExtResource( 1 )
@@ -47,3 +49,4 @@ Tabs/styles/tab_bg = SubResource( 16 )
 Tabs/styles/tab_disabled = SubResource( 17 )
 Tabs/styles/tab_fg = SubResource( 18 )
 TextEdit/fonts/font = ExtResource( 1 )
+VSeparator/styles/separator = SubResource( 19 )
