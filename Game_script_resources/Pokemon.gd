@@ -135,6 +135,10 @@ signal enemy_lost(exp_to_give)
 signal level_up(lev)
 var current_holder
 
+var hunger = 0
+var energy = 0
+var frendship = 0
+
 
 func _calculate_exp_points_to_give():
 	var _opposition_level

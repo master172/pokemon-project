@@ -754,6 +754,8 @@ func win():
 			BattleManager.BatteledLevelUp = []
 			BattleManager.BatteledLevelPokemon = []
 
+			Utils.Num_loaded_pokemon -= 1
+
 			ui_state = Ui_state.Dialogue
 			var Dialogue = Dialog.instance()
 			Dialogue.text_to_diaplay = ["Ash defeated the opposing trainer", 0]

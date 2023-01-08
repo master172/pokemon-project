@@ -19,6 +19,8 @@ var pc
 var current_save
 var save_games = []
 
+var money :int = 0
+
 func _ready():
 	
 	if current_rest_shelter == null:
@@ -58,6 +60,7 @@ func _save_data():
 	var data = {
 		"Num_loaded_pokemon":Num_loaded_pokemon,
 		"current_rest_shelter": current_rest_shelter,
+		"monry":money,
 	}
 
 	#creating the file and saving the data

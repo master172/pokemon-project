@@ -15,7 +15,7 @@ collision_layer = 17
 collision_mask = 17
 script = ExtResource( 2 )
 pokemons = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]
-pokemonLevels = [ 5, 5 ]
+pokemonLevels = [ 5, 5, 5 ]
 Name = "Damian"
 
 [node name="Sprite" type="Sprite" parent="."]

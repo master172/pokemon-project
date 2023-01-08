@@ -21,7 +21,7 @@ export(Array) var pokemonLevels
 
 export(String) var Name
 
-
+export(int) var money = 100
 
 
 func _ready():
@@ -53,8 +53,6 @@ func _Start_dialog():
 func _finish_dialog():
 	if player != null:
 		yield(get_tree().create_timer(0.2),"timeout")
-		#player.interacting = false
-		#player.is_talking = false
 		player = null
 		_prepare_for_fight()
 	dialog = null
@@ -89,6 +87,7 @@ func _after_battle_done():
 		player.interacting = false
 		player.is_talking = false
 		player = null
+	Utils.money += self.money
 
 func _add_pokemon(num):
 	var Pokemon = pokemons[num].instance()

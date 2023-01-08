@@ -29,6 +29,8 @@ var pokemons = []
 
 var evolution_queue = []
 
+
+
 func _active_pokemon():
 	active_pokemon = 0
 	if self.first_pokemon != null:
