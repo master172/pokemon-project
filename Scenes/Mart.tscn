@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://players/ash/ash.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assests/libraries/buildings/MartInterior.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://assests/libraries/buildings/decoration.png" type="Texture" id=4]
 [ext_resource path="res://assests/libraries/buildings/decoration2.png" type="Texture" id=5]
 [ext_resource path="res://assests/libraries/buildings/decoration3.png" type="Texture" id=6]
+[ext_resource path="res://assests/libraries/buildings/decoration4.png" type="Texture" id=7]
+[ext_resource path="res://npc's/Cleric.tscn" type="PackedScene" id=8]
 
 [node name="YSort" type="YSort"]
 
@@ -39,6 +41,7 @@ polygon = PoolVector2Array( 24, 0, 56, 0, 56, 48, 24, 48 )
 [node name="door" parent="." instance=ExtResource( 3 )]
 position = Vector2( -16, 72 )
 next_scene_path = "res://main/main.tscn"
+is_invisible = true
 spawn_location = Vector2( 216, -1312 )
 spawn_direction = Vector2( 0, 1 )
 
@@ -62,3 +65,32 @@ z_index = 1
 
 [node name="Sprite" type="Sprite" parent="Decoration3"]
 texture = ExtResource( 6 )
+
+[node name="Decoration4" type="Node2D" parent="."]
+position = Vector2( -64, 6 )
+z_index = 1
+
+[node name="Sprite" type="Sprite" parent="Decoration4"]
+texture = ExtResource( 7 )
+
+[node name="Cleric" parent="." instance=ExtResource( 8 )]
+position = Vector2( -48, 0 )
+z_index = 1
+
+[node name="Sprite" parent="Cleric" index="0"]
+scale = Vector2( -1, 1 )
+frame = 2
+
+[node name="InteractionArea" parent="Cleric" index="2"]
+modulate = Color( 0, 1, 0.227451, 1 )
+position = Vector2( 24, -16 )
+
+[node name="Cleric2" parent="." instance=ExtResource( 8 )]
+position = Vector2( -64, 0 )
+z_index = 1
+
+[node name="InteractionArea" parent="Cleric2" index="2"]
+modulate = Color( 0, 0.952941, 1, 1 )
+
+[editable path="Cleric"]
+[editable path="Cleric2"]
