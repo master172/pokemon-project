@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UI UX/MartOverlay.gd" type="Script" id=2]
+
+[node name="MartOverlay" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -160.0
+
+[node name="Fade" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = -3.0
+margin_bottom = -3.0
+color = Color( 0.231373, 0.231373, 0.231373, 0.596078 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/Fade"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+scroll_horizontal_enabled = false
+
+[node name="ListContainer" type="VBoxContainer" parent="Control/Fade/ScrollContainer"]
+unique_name_in_owner = true
+custom_constants/separation = 0
+
+[node name="Control" type="Control" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Left" type="ColorRect" parent="Control/Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -240.0
+margin_right = -237.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Right" type="ColorRect" parent="Control/Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -3.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Top" type="ColorRect" parent="Control/Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -240.0
+margin_bottom = -157.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Bottom" type="ColorRect" parent="Control/Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -240.0
+margin_top = 157.0
+color = Color( 0, 0, 0, 1 )

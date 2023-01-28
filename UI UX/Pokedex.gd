@@ -202,7 +202,7 @@ func _physics_process(_delta):
 		if text_edit.text == "":
 			if current_selected > 0:
 				pokemonContainer.get_child(current_selected -1).set("custom_colors/font_color", Color("00c3ff"))
-		elif text_edit.text != "":
+
 			for i in pokemonContainer.get_children():
 				if i.visible == false:
 					continue

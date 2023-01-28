@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assests/npc_misc/Cleric/Cleric.png" type="Texture" id=1]
 [ext_resource path="res://npc's/InteractionArea.gd" type="Script" id=2]
+[ext_resource path="res://npc's/Cleric.gd" type="Script" id=3]
+[ext_resource path="res://Items/potion.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -10,6 +12,8 @@ extents = Vector2( 8, 8 )
 extents = Vector2( 8, 8 )
 
 [node name="Cleric" type="StaticBody2D"]
+script = ExtResource( 3 )
+items = [ ExtResource( 4 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -10 )

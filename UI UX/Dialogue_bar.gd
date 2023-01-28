@@ -145,7 +145,7 @@ func _finish_choices():
 
 func _input(event):
 	if choosed == false and to_choice == true:
-		if event.is_action_pressed("W"):
+		if event.is_action_pressed("S"):
 			if current_choice < max_choices -1:
 				current_choice += 1
 			else:
@@ -158,7 +158,7 @@ func _input(event):
 					Option_container.get_child(1).get_child(i).get_child(0).get_child(0).visible = false
 					Option_container.get_child(1).get_child(i).get_child(0).get_child(1).self_modulate = Color("afafaf")
 
-		elif event.is_action_pressed("S"): 
+		elif event.is_action_pressed("W"): 
 			if current_choice > 0:
 				current_choice -= 1
 			else:
