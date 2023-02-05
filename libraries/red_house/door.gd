@@ -33,9 +33,6 @@ func door_closed():
 	if player_entered:
 		get_node(NodePath("/root/SceneManager")).transition_to_scene(next_scene_path, spawn_location , spawn_direction)
 
-
-
-
 func _on_door_body_entered(_body):
 	player_entered = true
 

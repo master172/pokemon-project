@@ -5,10 +5,18 @@ var currentItem
 var inactiveColor = Color()
 var activeColor = Color("00e7ff")
 
-func _ready():
-	if currentItem != null:
-		get_child(1).text = currentItem.instance().Name
+enum State {Buy,Sell}
 
+var state = State.Sell
+
+func _ready():
+	if state == State.Sell:
+		if currentItem != null:
+			get_child(1).text = currentItem.instance().Name
+	if state == State.Buy:
+		if currentItem != null:
+			get_child(1).text = currentItem.Name
+			
 func _active():
 	get_child(0).color = activeColor
 

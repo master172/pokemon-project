@@ -13,7 +13,7 @@ var max_selected = 1
 
 func _ready():
 	pass
-
+#012.2
 
 func _new_game_selected():
 	background.color = Color("00ff0a")

@@ -34,7 +34,7 @@ func _select_choice(choice):
 	if choice == 0:	
 		_start_buying_process()
 	elif choice == 1:
-		print("sell")
+		_start_selling_process()
 	else:
 		print("cancel")
 
@@ -56,6 +56,21 @@ func _start_buying_process():
 	get_tree().get_current_scene().add_child(ListDropout)
 
 func _stop_buying_process():
+	ListDropout.queue_free()
+	player.interacting = false
+	player.is_talking = false
+	player = null
+
+func _start_selling_process():
+	player.interacting = true
+	player.is_talking = true
+	ListDropout = ItemOverlay.instance()
+	ListDropout.items = PokeHelper.get_children()
+	ListDropout.holder = self
+	ListDropout.Current_state = ListDropout.States.Buy
+	get_tree().get_current_scene().add_child(ListDropout)
+
+func _stop_selling_process():
 	ListDropout.queue_free()
 	player.interacting = false
 	player.is_talking = false

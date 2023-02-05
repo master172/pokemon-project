@@ -7,20 +7,22 @@ var Current_state = States.Sell
 
 var current_seleceted = 0
 onready var max_selected 
-enum States {Sell}
+enum States {Sell, Buy}
 
 const ItemDropout = preload("res://libraries/ListDropout.tscn")
 const DialogBar = preload("res://UI UX/Dialogue_bar.tscn")
 
-var first_dialog = ["please confirm that you would like to buy it",1,0]
-var options = [["buy",1],["sell",1],["cancel",1]]
+var first_dialog = ["please confirm that",1,0]
+var options = [["yes",1],["no",1]]
 
 signal start
 signal chosen
 
 var buying_item_quantity = 1
+var selling_item_quantity = 1
 
 var buying = false
+var selling = false
 
 var holding_item
 
@@ -33,11 +35,31 @@ func _ready():
 func _decide_update_type():
 	if Current_state == States.Sell:
 		_update_buy()
+	elif Current_state == States.Buy:
+		_update_sell()
+
+func _update_sell():
+	for i in items:
+		var listItem = ItemDropout.instance()
+		listItem.currentItem = i
+		listItem.state = listItem.State.Buy
+		get_node("%ListContainer").add_child(listItem)
+		
+		if get_node("%ListContainer").get_child_count() % 2 == 0:
+			listItem.get_child(0).color = Color("9d000000")
+			listItem.inactiveColor = Color("9d000000")
+		else:
+			listItem.get_child(0).color = Color("9da0a0a0")
+			listItem.inactiveColor = Color("9da0a0a0")
+	
+	max_selected = get_node("%ListContainer").get_child_count() -1
+	get_node("%ListContainer").get_child(current_seleceted)._active()
 
 func _update_buy():
 	for i in items:
 		var listItem = ItemDropout.instance()
 		listItem.currentItem = i
+		listItem.state = listItem.State.Sell
 		get_node("%ListContainer").add_child(listItem)
 		
 		if get_node("%ListContainer").get_child_count() % 2 == 0:
@@ -79,6 +101,34 @@ func _input(event):
 		if event.is_action_pressed("accept"):
 			if Utils.get_dialog_layer().get_child_count() == 0:
 				buying = true
+	
+	if Current_state == States.Buy:
+		if Utils.get_dialog_layer().get_child_count() == 0:
+			if event.is_action_pressed("S"):
+				get_node("%ListContainer").get_child(current_seleceted)._inactive()
+				if current_seleceted < max_selected:
+					current_seleceted += 1
+					get_node("%ListContainer").get_child(current_seleceted)._active()
+				else:
+					current_seleceted = 0
+					get_node("%ListContainer").get_child(current_seleceted)._active()
+
+			elif event.is_action_pressed("W"):
+				get_node("%ListContainer").get_child(current_seleceted)._inactive()
+				if current_seleceted != 0:
+					current_seleceted -= 1
+					get_node("%ListContainer").get_child(current_seleceted)._active()
+				else:
+					current_seleceted = max_selected
+					get_node("%ListContainer").get_child(current_seleceted)._active()
+		
+		if Utils.get_dialog_layer().get_child_count() == 0:
+			if event.is_action_pressed("decline"):
+				holder._stop_selling_process()
+		
+		if event.is_action_pressed("accept"):
+			if Utils.get_dialog_layer().get_child_count() == 0:
+				selling = true
 
 func _physics_process(_delta):
 	if buying == true:
@@ -98,6 +148,23 @@ func _physics_process(_delta):
 		if Input.is_action_pressed("accept"):
 			if Utils.get_dialog_layer().get_child_count() == 0:
 				_initiate_dialog()
+	
+	if selling == true:
+		if Input.is_action_pressed("D"):
+			if get_node("%ListContainer").get_child(current_seleceted).currentItem.count > selling_item_quantity:
+				selling_item_quantity += 1
+				get_node("%ListContainer").get_child(current_seleceted)._change_quantity(selling_item_quantity)
+				print(selling_item_quantity)
+
+		elif Input.is_action_pressed("A"):
+			if  selling_item_quantity > 1:
+				selling_item_quantity -= 1
+				get_node("%ListContainer").get_child(current_seleceted)._change_quantity(selling_item_quantity)
+				print(selling_item_quantity)
+			
+		if Input.is_action_pressed("accept"):
+			if Utils.get_dialog_layer().get_child_count() == 0:
+				_initiate_dialog()
 
 func _initiate_dialog():
 	var dialog = DialogBar.instance()
@@ -110,6 +177,7 @@ func _initiate_dialog():
 	dialog.connect("_choice_number",self,"_select_choice")
 
 func _finish_dialog():
+	
 	buying = false
 	get_node("%ListContainer").get_child(current_seleceted)._close_quantiy()
 	emit_signal("start")
@@ -118,13 +186,17 @@ func _select_choice(choice):
 	emit_signal("chosen")
 	yield(self,"start")
 	if choice == 0:
-		holding_item = items[current_seleceted]
-		_buy()
-	elif choice == 1:
-		print("sell")
+		if Current_state == States.Sell:
+			holding_item = items[current_seleceted]
+			_buy()
+		elif  Current_state == States.Buy:
+			_sell()
 	else:
 		print("cancel")
 
+func _sell():
+	get_node("%ListContainer").get_child(current_seleceted).currentItem.count -= selling_item_quantity
+	selling = false
 
 func _buy():
 	Holding_item = holding_item.instance()
