@@ -64,3 +64,5 @@ func _input(event):
 			get_tree().quit()
 		elif current_selected == 0:
 			SceneChanger.goto_scene("res://Scenes/SceneManager.tscn",self)
+
+#check if it is working
