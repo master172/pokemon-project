@@ -65,4 +65,4 @@ func _input(event):
 		elif current_selected == 0:
 			SceneChanger.goto_scene("res://Scenes/SceneManager.tscn",self)
 
-#check if it is working
+#check if it is working 2
