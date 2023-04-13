@@ -2,7 +2,9 @@ extends Control
 
 
 func _ready():
-	pass
+	randomize()
+	var rand = randi() % 4
+	print(rand)
 
 
 func _on_LineEdit_mouse_entered():

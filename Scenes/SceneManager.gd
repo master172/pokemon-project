@@ -220,8 +220,10 @@ func _to_Pokemon_center():
 	nurse_interaction._healing_animation()
 
 func PokemonSceneMoveLearningDialog(move):
+	
 	if $Pokemon_scene.get_child_count() > 0:
 		$Pokemon_scene.get_child(0).ui_state = $Pokemon_scene.get_child(0).Ui_state.Dialogue
+		print_debug("cause 4.0")
 		$Pokemon_scene.get_child(0).learning_a_move = true
 		$Pokemon_scene.get_child(0).StartMoveLearnDialogue(move)
 

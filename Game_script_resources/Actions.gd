@@ -187,37 +187,76 @@ func _start_learning():
 	if get_tree().current_scene.get_name() != "SceneManager":  
 		yield(Utils,"loaded")
 		yield(get_tree().create_timer(0.2),"timeout")
+		
 		if self.current_holder != null:
-			if current_holder.level >= self.learned_level and can_add == true:
-				if learned == false and unlearned == false:
-					MoveLearner.learning = true
-					MoveLearner.target_pokemon = self.current_holder
-					MoveLearner.move_to_learn = self
-					if current_holder.Learned_moves.size() <= 3:
-						current_holder.learn(self)
-						learned = true
-						Utils.Get_Scene_Manager().PokemonSceneMoveLearningDialog(self)
-					elif current_holder.Learned_moves.size() == 4:
-						PlayerPokemon.current_learning_pokemon = self.current_holder
+			if self.current_holder.get_parent() == PlayerPokemon:
+				if current_holder.level >= self.learned_level and can_add == true:
+					if learned == false and unlearned == false:
+						MoveLearner.learning = true
 						MoveLearner.target_pokemon = self.current_holder
 						MoveLearner.move_to_learn = self
-						Utils.Get_Scene_Manager().transition_to_Move_learner(self)
+						if current_holder.Learned_moves.size() <= 3:
+							current_holder.learn(self)
+							learned = true
+							print_debug(self.name + " suspect 3.0")
+							Utils.Get_Scene_Manager().PokemonSceneMoveLearningDialog(self)
+						elif current_holder.Learned_moves.size() == 4:
+							PlayerPokemon.current_learning_pokemon = self.current_holder
+							MoveLearner.target_pokemon = self.current_holder
+							MoveLearner.move_to_learn = self
+							Utils.Get_Scene_Manager().transition_to_Move_learner(self)
+			elif self.current_holder.get_parent() == OpposingTrainerMonsters:
+				if current_holder.level >= self.learned_level and can_add == true:
+					if learned == false and unlearned == false:
+						MoveLearner.learning = true
+						MoveLearner.target_pokemon = self.current_holder
+						MoveLearner.move_to_learn = self
+						if current_holder.Learned_moves.size() <= 3:
+							current_holder.learn(self)
+							learned = true
+							print_debug(self.name + " suspect 3.0")
+						elif current_holder.Learned_moves.size() == 4:
+							randomize()
+							var rand = randi() % 4
+							current_holder.Learned_moves.remove(rand)
+							current_holder.learn(self)
+							learned = true
+							print_debug(self.name + " suspect 3.0")
 	else:
 		if self.current_holder != null:
-			if current_holder.level >= self.learned_level and can_add == true:
-				if learned == false and unlearned == false:
-					MoveLearner.learning = true
-					MoveLearner.target_pokemon = self.current_holder
-					MoveLearner.move_to_learn = self
-					if current_holder.Learned_moves.size() <= 3:
-						current_holder.learn(self)
-						learned = true
-						Utils.Get_Scene_Manager().PokemonSceneMoveLearningDialog(self)
-					elif current_holder.Learned_moves.size() == 4:
-						PlayerPokemon.current_learning_pokemon = self.current_holder
+			if self.current_holder.get_parent() == PlayerPokemon:
+				if current_holder.level >= self.learned_level and can_add == true:
+					if learned == false and unlearned == false:
+						MoveLearner.learning = true
 						MoveLearner.target_pokemon = self.current_holder
 						MoveLearner.move_to_learn = self
-						Utils.Get_Scene_Manager().transition_to_Move_learner(self)
+						if current_holder.Learned_moves.size() <= 3:
+							current_holder.learn(self)
+							learned = true
+							print_debug(self.name + " suspect 3.0")
+							Utils.Get_Scene_Manager().PokemonSceneMoveLearningDialog(self)
+						elif current_holder.Learned_moves.size() == 4:
+							PlayerPokemon.current_learning_pokemon = self.current_holder
+							MoveLearner.target_pokemon = self.current_holder
+							MoveLearner.move_to_learn = self
+							Utils.Get_Scene_Manager().transition_to_Move_learner(self)
+			elif self.current_holder.get_parent() == OpposingTrainerMonsters:
+				if current_holder.level >= self.learned_level and can_add == true:
+					if learned == false and unlearned == false:
+						MoveLearner.learning = true
+						MoveLearner.target_pokemon = self.current_holder
+						MoveLearner.move_to_learn = self
+						if current_holder.Learned_moves.size() <= 3:
+							current_holder.learn(self)
+							learned = true
+							print_debug(self.name + " suspect 3.0")
+						elif current_holder.Learned_moves.size() == 4:
+							randomize()
+							var rand = randi() % 4
+							current_holder.Learned_moves.remove(rand)
+							current_holder.learn(self)
+							learned = true
+							print_debug(self.name + " suspect 3.0")
 					
 
 func _ready():
