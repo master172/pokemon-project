@@ -257,6 +257,7 @@ position = Vector2( 274, 120 )
 visible = false
 
 [node name="Battle_identifier" type="Control" parent="."]
+unique_name_in_owner = true
 margin_right = 240.0
 margin_bottom = 40.0
 script = ExtResource( 22 )
@@ -416,4 +417,4 @@ script = ExtResource( 23 )
 anims/Day_night_cycle = SubResource( 5 )
 anims/RESET = SubResource( 4 )
 
-[connection signal="tween_completed" from="Battle_identifier/Tween" to="Battle_identifier" method="_on_Tween_tween_completed"]
+[connection signal="tween_completed" from="Battle_identifier/Tween" to="." method="_on_Tween_tween_completed"]

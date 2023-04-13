@@ -48,6 +48,8 @@ func _finish_choosing_dialogue(pokemon):
 	BattleManager.BatteledPokemon.append(PlayerPokemon.current_pokemon)
 	PlayerPokemon.current_pokemon._calc_weak_and_res()
 	OpposingTrainerMonsters.pokemon._calc_weak_and_res()
+	BattleManager.nodes.append(pokemon)
+	BattleManager.Generate_moves()
 	_kill()
 
 func _input(event):

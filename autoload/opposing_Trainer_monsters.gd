@@ -14,6 +14,8 @@ var pokemons = []
 
 var active_trainers = []
 
+var movesToGo
+
 func _ready():
 	yield(get_tree().create_timer(0.2),"timeout")
 	_remove_children()
@@ -48,3 +50,8 @@ func _physics_process(_delta):
 				self.pokemon._calc_weak_and_res()
 		else:
 			self.opposing_pokemon = null
+
+func CalcMovesSingle():
+	if self.pokemon != null:
+		movesToGo = (pokemon._wild_battle())
+		print(movesToGo)

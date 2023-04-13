@@ -119,3 +119,8 @@ func _make_reload_provisions():
 		pc.current_selected = pc_num
 		pc_state = null
 		pc_num = null
+
+signal loaded
+
+func emit_loaded():
+	emit_signal("loaded")

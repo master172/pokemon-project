@@ -18,6 +18,7 @@ var transition_type = Transition_Type.NONE
 
 func _ready():
 	get_tree().set_current_scene(self)
+	Utils.emit_loaded()
 	self.set_meta("Name","SceneManager")
 
 func _fade_in():
@@ -46,11 +47,13 @@ func transition_to_Pc():
 
 func transition_to_Move_learner(move):
 	print("why not working 1")
-	if $Pokemon_scene.get_child_count() < 0:
+	if $Pokemon_scene.get_child_count() <= 0:
+		print("why not working 2")
 		_fade_in()
 		Utils.get_player().set_physics_process(false)
 		transition_type = Transition_Type.MOVE_LEARNER
 	elif $Pokemon_scene.get_child_count() > 0:
+		print("why not working 3")
 
 		$Pokemon_scene.get_child(0).ui_state = $Pokemon_scene.get_child(0).Ui_state.Dialogue
 		print("why not working")
@@ -61,7 +64,7 @@ func PokemonSceneMoveLearning():
 	transition_type = Transition_Type.MOVE_LEARNER
 
 func transition_exit_Move_learner():
-	if $Pokemon_scene.get_child_count() < 0:
+	if $Pokemon_scene.get_child_count() <= 0:
 		_fade_in()
 		yield(get_tree().create_timer(0.1),"timeout")
 		Utils.get_player().set_physics_process(true)
@@ -150,6 +153,7 @@ func finished_fading():
 		Transition_Type.POKEMON_SCENE:
 			$Pokemon_scene.load_pokemon_scene()
 			BattleManager.in_battle = true
+			
 
 		Transition_Type.MENU_ONLY:
 			if$Menu.screen_loaded == $Menu.ScreenLoaded.Party_screen:

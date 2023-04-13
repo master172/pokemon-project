@@ -64,6 +64,9 @@ var level_up_index = 0
 
 signal playerDialogueFinished
 
+var to_player_attack = false
+var to_enemy_attack = false
+
 func _ready():
 	ui_state = Ui_state.Dialogue
 	if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
@@ -114,7 +117,6 @@ func _finish_Enemy_attack_dialogue():
 				ui_state = Ui_state.Dialogue
 				_enemy_attack_missed()
 			elif BattleManager.EnemyLastMoveEvaded == false and BattleManager.EnemyLastMoveMissed == false:
-				BattleManager.Ally_turn()
 				current_attack_locked = false
 		elif BattleManager.type_of_battle ==BattleManager.types_of_battle.Trainer:
 			ui_state = Ui_state.Battle
@@ -126,8 +128,8 @@ func _finish_Enemy_attack_dialogue():
 				ui_state = Ui_state.Dialogue
 				_enemy_attack_missed()
 			elif BattleManager.EnemyLastMoveEvaded == false and BattleManager.EnemyLastMoveMissed == false:
-				BattleManager.Ally_turn()
 				current_attack_locked = false
+	to_enemy_attack = false
 
 func _enemy_attack_missed():
 	if ui_state == Ui_state.Dialogue:
@@ -308,11 +310,13 @@ func _Init_lose_dialogue():
 						yield(self.get_child(0),'finished_event')
 						var Dialogue = Dialog.instance()
 						Dialogue.text_to_diaplay = [ PlayerPokemon.current_pokemon.Name + " fainted", 0]
+						to_player_attack = false
 						Dialogue_layer.add_child(Dialogue)
 						Dialogue.connect("Dialog_ended",self,"_lose_process")
 				else:
 					var Dialogue = Dialog.instance()
 					Dialogue.text_to_diaplay = [ PlayerPokemon.current_pokemon.Name + " fainted", 0]
+					to_player_attack = false
 					Dialogue_layer.add_child(Dialogue)
 					Dialogue.connect("Dialog_ended",self,"_lose_process")
 
@@ -440,7 +444,7 @@ func _single_battle():
 				enemy_pokemon = null
 				opposing_pokemon_sprite.texture = null
 
-		if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN:
+		if BattleManager.processing == false:
 			if ui_state == Ui_state.Main:
 				main_box.visible = true
 				battle_box.visible = false
@@ -462,8 +466,9 @@ func _single_battle():
 			if Input.is_action_just_pressed("decline"):
 				if ui_state == Ui_state.Battle:
 					ui_state = Ui_state.Main
-			if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN :
+			if BattleManager.processing == false:
 				if Input.is_action_just_pressed("accept") and Dialogue_layer.get_child_count() == 0:
+					print("yo")
 					if ui_state != Ui_state.Dialogue:
 						if ui_state == Ui_state.Main:
 							if current_mouse_num == 0:
@@ -498,6 +503,7 @@ func _single_battle():
 									current_attack_locked = true
 									PlayerPokemon.current_pokemon.Learned_moves[0]._check_speed()
 							elif battle_mouse_num == 0:
+								print("yo2")
 								if PlayerPokemon.current_pokemon.Learned_moves.size() >= 2 and current_attack_locked == false:
 									current_attack_locked = true
 									PlayerPokemon.current_pokemon.Learned_moves[1]._check_speed()
@@ -524,6 +530,7 @@ func _change_pokemon():
 	add_child(Pokemon_scene)
 
 func _win_dialog_process_dailog():
+	print("etf")
 	ui_state = Ui_state.Dialogue
 	var Dialogue
 
@@ -707,22 +714,12 @@ func _change_opposing_pokemon_progress():
 	OpposingTrainerMonsters.pokemon = null
 	if BattleManager.multi_battle == false:
 		if OpposingTrainerMonsters.pokemons.size() > 0:
-			
-			
-
 			OpposingTrainerMonsters.active_trainers[0]._add_pokemon(0) 
-
 			enemy_dialogue_connected = false
-
 			enemy_lost_dialogue_connected = false
+
 	ui_state = Ui_state.Battle
-
-
-			
-
-		
-			
-
+	
 func _attack_inp():
 	ui_state = Ui_state.Battle
 
@@ -802,42 +799,9 @@ func _run():
 		ui_state = Ui_state.Battle
 
 func _input(event):
-	if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN :
+	if BattleManager.processing == false:
 		if BattleManager.multi_battle == false:
-			if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN:
-				if event is InputEventMouseButton:
-					if event.is_pressed():
-						if ui_state ==  Ui_state.Main:
-							if event.button_index == BUTTON_WHEEL_UP:
-								if current_mouse_num < max_num:
-									current_mouse_num += 1
-									for i in range(0,scroll_container.get_child_count()):
-										scroll_container.get_child(i).position.x -= 101
-								else:
-									current_mouse_num = 0
-							elif event.button_index == BUTTON_WHEEL_DOWN:
-								if current_mouse_num != 0:
-									current_mouse_num -= 1
-									for i in range(0,scroll_container.get_child_count()):
-										scroll_container.get_child(i).position.x += 101
-								else:
-									current_mouse_num = max_num
-						elif ui_state == Ui_state.Battle:
-							if event.button_index == BUTTON_WHEEL_UP:
-								if battle_mouse_num < max_num:
-									battle_mouse_num += 1
-									for i in range(0,battle_box.get_child_count()):
-										battle_box.get_child(i).position.x -= 101
-								else:
-									battle_mouse_num = 0
-							elif event.button_index == BUTTON_WHEEL_DOWN:
-								if battle_mouse_num != 0:
-									battle_mouse_num -= 1
-									for i in range(0,battle_box.get_child_count()):
-										battle_box.get_child(i).position.x += 101
-								else:
-									battle_mouse_num = max_num
-
+			if event.is_pressed():
 				if ui_state == Ui_state.Main:
 					if event.is_action_pressed("A"):
 						if ui_state == Ui_state.Main:
@@ -860,6 +824,7 @@ func _input(event):
 									scroll_container.get_child(i).position.x -= 101
 								current_mouse_num = 0
 				elif ui_state == Ui_state.Battle:
+					print("the fuck")
 					if event.is_action_pressed("A"):
 						if ui_state == Ui_state.Battle:
 							if battle_mouse_num != 0:
@@ -871,6 +836,7 @@ func _input(event):
 									battle_box.get_child(i).position.x += 101
 								battle_mouse_num = max_num
 					elif event.is_action_pressed("D"):
+						print("the fuck")
 						if ui_state == Ui_state.Battle:
 							if battle_mouse_num < max_num:
 								battle_mouse_num += 1
@@ -1044,7 +1010,7 @@ func _trainer_battle_process():
 			enemy_pokemon = null
 			opposing_pokemon_sprite.texture = null
 
-		if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN:
+		if BattleManager.processing == false:
 			if ui_state == Ui_state.Main:
 				main_box.visible = true
 				battle_box.visible = false
@@ -1066,8 +1032,9 @@ func _trainer_battle_process():
 			if Input.is_action_just_pressed("decline"):
 				if ui_state == Ui_state.Battle:
 					ui_state = Ui_state.Main
-			if BattleManager.current_turn == BattleManager.what_turn.ALLY_TURN :
+			if BattleManager.processing == false:
 				if Input.is_action_just_pressed("accept") and Dialogue_layer.get_child_count() == 0:
+					print("2")
 					if ui_state != Ui_state.Dialogue:
 						if ui_state == Ui_state.Main:
 							if current_mouse_num == 0:
@@ -1095,21 +1062,47 @@ func _trainer_battle_process():
 								_Run_dialogue()
 
 						elif ui_state == Ui_state.Battle:
+							print("3")
 							if battle_mouse_num == 3:
 								ui_state = Ui_state.Main
 							elif battle_mouse_num == 4:
 								if PlayerPokemon.current_pokemon.Learned_moves.size() >= 1 and current_attack_locked == false:
 									current_attack_locked = true
-									_player_attack_dialogue(0)
+									PlayerPokemon.current_pokemon.Learned_moves[0]._check_speed()
 							elif battle_mouse_num == 0:
+								print("4")
 								if PlayerPokemon.current_pokemon.Learned_moves.size() >= 2 and current_attack_locked == false:
+									print("5")
 									current_attack_locked = true
-									_player_attack_dialogue(1)
+									PlayerPokemon.current_pokemon.Learned_moves[1]._check_speed()
 							elif battle_mouse_num == 1:
 								if PlayerPokemon.current_pokemon.Learned_moves.size() >= 3 and current_attack_locked == false: 
 									current_attack_locked = true
-									_player_attack_dialogue(2)
+									PlayerPokemon.current_pokemon.Learned_moves[2]._check_speed()
 							elif battle_mouse_num == 2:
 								if PlayerPokemon.current_pokemon.Learned_moves.size() >= 4 and current_attack_locked == false:
 									current_attack_locked = true
-									_player_attack_dialogue(3)
+									PlayerPokemon.current_pokemon.Learned_moves[3]._check_speed()
+
+func enemy_turn():
+	to_enemy_attack = true
+
+func _on_Tween_tween_completed(object, key):
+	if object == get_node("Battle_identifier/Player_pokemon_0/HealthBar"):
+		if to_player_attack == false:
+			ui_state = Ui_state.Battle
+			to_player_attack = true
+		elif to_player_attack == true:
+			BattleManager.Generate_moves()
+	elif object == get_node("Battle_identifier/Enemy_pokemon_0/HealthBar"):
+		if to_enemy_attack == true:
+			if OpposingTrainerMonsters.pokemon.fainted == false:
+				_display_enemy_attack_dialogue(OpposingTrainerMonsters.movesToGo[0],OpposingTrainerMonsters.movesToGo[1])
+			else:
+				to_enemy_attack = false
+				BattleManager.processing = false
+				current_attack_locked = false
+		elif to_enemy_attack == false:
+			if PlayerPokemon.current_pokemon != null:
+				ui_state = Ui_state.Battle
+				BattleManager.Generate_moves()

@@ -180,7 +180,6 @@ func _lose():
 	
 	if self.get_parent() == OpposingTrainerMonsters:
 		BattleManager.turns = 0
-		BattleManager.Ally_turn()
 		emit_signal("enemy_lost")
 	
 		if self.opposing_pokemon != null:
@@ -194,7 +193,6 @@ func _lose():
 	elif self.get_parent() == PlayerPokemon:
 		PlayerPokemon._active_pokemon()
 		BattleManager.turns = 0
-		BattleManager.Ally_turn()
 
 	
 func _calculate_gender():
@@ -726,7 +724,9 @@ func _wild_battle():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	rng_move = rng.randi_range(0,(self.Learned_moves.size() -1))
-	emit_signal("Enemy_attacked",self,rng_move)
+
+	var return_data = [self,rng_move]
+	return return_data
 
 func _wild_battle_attack():
 	self.Learned_moves[rng_move]._calculate_damage()

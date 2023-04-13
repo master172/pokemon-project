@@ -68,32 +68,3 @@ func _physics_process(_delta):
 				temp_enemy_health = OpposingTrainerMonsters.pokemon.Current_health_points
 	else:
 		Enemy_sprite.texture = null
-
-
-func _change_turn(object:Object, _key:NodePath):
-	if BattleManager.multi_battle == false:
-
-		if object == Enemy_health:
-			if PlayerPokemon.current_pokemon != null:
-				if OpposingTrainerMonsters.get_child_count() > 0:
-					if OpposingTrainerMonsters.pokemon != null and OpposingTrainerMonsters.pokemon.Current_health_points >= 1:
-						BattleManager._incrementTurns()
-						if BattleManager.turns != BattleManager.max_turns:
-							BattleManager.Enemy_turn()
-						else:
-							BattleManager._clear_turns()
-							BattleManager.Ally_turn()
-		elif object == Player_health:
-			if PlayerPokemon.current_pokemon != null:
-				if initial_set == true:
-					get_parent().ui_state = get_parent().Ui_state.Main
-					initial_set = false
-				elif initial_set == false:
-					get_parent().ui_state = get_parent().ui_state
-				BattleManager._incrementTurns()
-				if BattleManager.turns == BattleManager.max_turns:
-					BattleManager._clear_turns()
-				BattleManager.Ally_turn()
-
-func _on_Tween_tween_completed(object:Object, key:NodePath):
-	_change_turn(object, key)

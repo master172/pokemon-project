@@ -18,12 +18,14 @@ func load_pokemon_scene():
 			pokemon_scene = Pokemon_stage.instance()
 			add_child(pokemon_scene)
 			BattleManager.in_battle = true
+			BattleManager.nodes.append(OpposingTrainerMonsters.pokemon)
 	elif BattleManager.type_of_battle == BattleManager.types_of_battle.Trainer:
 		if BattleManager.multi_battle == false:
 			screen_loaded = Screen_loaded.Pokemon_stage
 			pokemon_scene = Pokemon_stage.instance()
 			add_child(pokemon_scene)
 			BattleManager.in_battle = true
+			BattleManager.nodes.append(OpposingTrainerMonsters.pokemon)
 
 func unload_pokemon_scene():
 	screen_loaded = Screen_loaded.Nothing

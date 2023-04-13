@@ -47,6 +47,8 @@ var to_add_crit = false
 
 export(int) var speed = 0
 
+export(int) var priority = 0
+
 func save():
 	var save_dict = {
 
@@ -155,10 +157,18 @@ func _apply_damage():
 				BattleManager.EnemyLastMoveEvaded = true
 			
 		elif damage >= 1:
-			self.current_holder.opposing_pokemon.Current_health_points -= int(damage)
-			if to_add_crit == true:
-				Utils.Get_Pokemon_Manger().get_child(0).get_child(0).events.append("critical_hit")
-				to_add_crit = false
+			if self.current_holder.get_parent() == PlayerPokemon:
+				self.current_holder.opposing_pokemon.Current_health_points -= int(damage)
+				Utils.Get_Pokemon_Manger().get_child(0).enemy_turn()
+				if to_add_crit == true:
+					Utils.Get_Pokemon_Manger().get_child(0).get_child(0).events.append("critical_hit")
+					to_add_crit = false
+			elif self.current_holder.get_parent() == OpposingTrainerMonsters:
+				self.current_holder.opposing_pokemon.Current_health_points -= int(damage)
+				Utils.Get_Pokemon_Manger().get_child(0).enemy_turn()
+				if to_add_crit == true:
+					Utils.Get_Pokemon_Manger().get_child(0).get_child(0).events.append("critical_hit")
+					to_add_crit = false
 
 	elif is_missed == true:
 		print("missed")
@@ -174,22 +184,40 @@ func _physics_process(_delta):
 	
 
 func _start_learning():
-	
-	if self.current_holder != null:
-		if current_holder.level >= self.learned_level and can_add == true:
-			if learned == false and unlearned == false:
-				MoveLearner.learning = true
-				MoveLearner.target_pokemon = self.current_holder
-				MoveLearner.move_to_learn = self
-				if current_holder.Learned_moves.size() <= 3:
-					current_holder.learn(self)
-					learned = true
-					Utils.Get_Scene_Manager().PokemonSceneMoveLearningDialog(self)
-				elif current_holder.Learned_moves.size() == 4:
-					PlayerPokemon.current_learning_pokemon = self.current_holder
+	if get_tree().current_scene.get_name() != "SceneManager":  
+		yield(Utils,"loaded")
+		yield(get_tree().create_timer(0.2),"timeout")
+		if self.current_holder != null:
+			if current_holder.level >= self.learned_level and can_add == true:
+				if learned == false and unlearned == false:
+					MoveLearner.learning = true
 					MoveLearner.target_pokemon = self.current_holder
 					MoveLearner.move_to_learn = self
-					Utils.Get_Scene_Manager().transition_to_Move_learner(self)
+					if current_holder.Learned_moves.size() <= 3:
+						current_holder.learn(self)
+						learned = true
+						Utils.Get_Scene_Manager().PokemonSceneMoveLearningDialog(self)
+					elif current_holder.Learned_moves.size() == 4:
+						PlayerPokemon.current_learning_pokemon = self.current_holder
+						MoveLearner.target_pokemon = self.current_holder
+						MoveLearner.move_to_learn = self
+						Utils.Get_Scene_Manager().transition_to_Move_learner(self)
+	else:
+		if self.current_holder != null:
+			if current_holder.level >= self.learned_level and can_add == true:
+				if learned == false and unlearned == false:
+					MoveLearner.learning = true
+					MoveLearner.target_pokemon = self.current_holder
+					MoveLearner.move_to_learn = self
+					if current_holder.Learned_moves.size() <= 3:
+						current_holder.learn(self)
+						learned = true
+						Utils.Get_Scene_Manager().PokemonSceneMoveLearningDialog(self)
+					elif current_holder.Learned_moves.size() == 4:
+						PlayerPokemon.current_learning_pokemon = self.current_holder
+						MoveLearner.target_pokemon = self.current_holder
+						MoveLearner.move_to_learn = self
+						Utils.Get_Scene_Manager().transition_to_Move_learner(self)
 					
 
 func _ready():
@@ -216,6 +244,40 @@ func _heal():
 	pp = max_pp
 
 func _check_speed():
+	if BattleManager.multi_battle == false:
+		if self.current_holder != null:
+			if self.current_holder == PlayerPokemon.current_pokemon:
+				if PlayerPokemon.opposing_pokemon != null:
+					_chec_diff()
+
+func _chec_diff():
+	var order
+	order = priority + self.speed + self.current_holder.Current_speed
+	
+	var opposingOrder
+	opposingOrder = OpposingTrainerMonsters.pokemon.Learned_moves[OpposingTrainerMonsters.movesToGo[1]].priority +OpposingTrainerMonsters.pokemon.Learned_moves[OpposingTrainerMonsters.movesToGo[1]].speed + OpposingTrainerMonsters.pokemon.Current_speed
+	
+	_organizeSingle(order,opposingOrder)
+
+func _organizeSingle(order1,order2):
+	print(order1,order2)
+	if order1 > order2:
+		_player_attack_first()
+	elif order2 > order1:
+		_player_attack_first()
+	else:
+		_player_attack_first()
+
+func _player_attack_first():
+	if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
+		Utils.Get_Pokemon_Manger().get_child(0)._player_attack_dialogue(self)
+		yield(Utils.Get_Pokemon_Manger().get_child(0),"playerDialogueFinished")
+		_calculate_damage()
+
+func _enemy_attack_first():
+	pass
+	
+func _check_diff2():
 	if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
 		print("check_speed")
 		if self.speed > self.current_holder.opposing_pokemon.Current_speed:
@@ -231,7 +293,6 @@ func _check_speed():
 				if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
 					_calculate_damage()
 		else:
-			BattleManager.Enemy_turn()
 			yield(BattleManager, "TurnChangedTrainer")
 			print("turn changed")
 			if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
