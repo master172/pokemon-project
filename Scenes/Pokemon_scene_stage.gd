@@ -1120,3 +1120,22 @@ func _on_Tween_tween_completed(object, key):
 			if PlayerPokemon.current_pokemon != null:
 				ui_state = Ui_state.Battle
 				BattleManager.Generate_moves()
+
+func _enemy_start_attack():
+	print("yo3")
+	if to_enemy_attack == true:
+		if OpposingTrainerMonsters.pokemon.fainted == false:
+			_display_enemy_attack_dialogue(OpposingTrainerMonsters.movesToGo[0],OpposingTrainerMonsters.movesToGo[1])
+		else:
+			to_enemy_attack = false
+			BattleManager.processing = false
+			current_attack_locked = false
+
+func _enmy_first_attack(move):
+	if to_enemy_attack == true:
+		if OpposingTrainerMonsters.pokemon.fainted == false:
+			_display_enemy_attack_dialogue(OpposingTrainerMonsters.movesToGo[0],OpposingTrainerMonsters.movesToGo[1])
+		else:
+			to_enemy_attack = false
+			BattleManager.processing = false
+			current_attack_locked = false

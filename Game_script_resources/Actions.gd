@@ -303,7 +303,7 @@ func _organizeSingle(order1,order2):
 	if order1 > order2:
 		_player_attack_first()
 	elif order2 > order1:
-		_player_attack_first()
+		_enemy_attack_first()
 	else:
 		_player_attack_first()
 
@@ -314,7 +314,13 @@ func _player_attack_first():
 		_calculate_damage()
 
 func _enemy_attack_first():
-	pass
+	yield(BattleManager, "TurnChangedTrainer")
+	print("turn changed")
+	if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
+		Utils.Get_Pokemon_Manger().get_child(0)._player_attack_dialogue(self)
+		yield(Utils.Get_Pokemon_Manger().get_child(0),"playerDialogueFinished")
+		if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
+			_calculate_damage()
 	
 func _check_diff2():
 	if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
