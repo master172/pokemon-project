@@ -63,78 +63,78 @@ func save():
 
 
 func _calculate_damage():
-
-	if self.speed == 0:
-		self.speed = self.current_holder.Current_speed
-	else:
-		self.speed = self.speed
-
-	self.current_holder._calc_weak_and_res()
-	print(self.Name)
-	if self.special_effects == null:
-		if self.current_holder.opposing_pokemon.Weak_to.has(self.Types):
-			effectiveness = 2
-		elif self.current_holder.opposing_pokemon.Resistant_to.has(self.Types):
-			effectiveness = 0.5
+	if self.current_holder.fainted == false:
+		if self.speed == 0:
+			self.speed = self.current_holder.Current_speed
 		else:
-			effectiveness = 1
+			self.speed = self.speed
 
-		var crit : int = 1
-		var critical = RandomNumberGenerator.new()
-		critical.randomize()
-		var critical_damage = critical.randi_range(0,8)
-		if critical_damage == 8:
-			crit = 2
-		else:
-			crit = 1
-		
-		if crit == 2:
-			to_add_crit = true
-		else:
-			to_add_crit = false
-		
-
-		var stab : float 
-		if self.Types == current_holder.Type_1[0] or self.Types == current_holder.Type_2[0]:
-			stab = 1.5
-		else:
-			stab = 1
-
-		var rng = RandomNumberGenerator.new()
-		rng.randomize()
-		var random_number = rng.randi_range(85,100)
-
-		if PokeHelper.current_weather == PokeHelper.weathers[1]:
-			weather = 1
-		elif PokeHelper.current_weather == PokeHelper.weathers[0]:
-			if self.Types == Types[2]:
-				weather = 2
-			elif self.Types == Types[11]:
-				weather = 0.5
+		self.current_holder._calc_weak_and_res()
+		print(self.Name)
+		if self.special_effects == null:
+			if self.current_holder.opposing_pokemon.Weak_to.has(self.Types):
+				effectiveness = 2
+			elif self.current_holder.opposing_pokemon.Resistant_to.has(self.Types):
+				effectiveness = 0.5
 			else:
-				weather = 1
-		elif PokeHelper.current_weather == PokeHelper.weathers[2]:
-			if self.Types == Types[11]:
-					weather = 2
-			elif self.Types == Types[2]:
-				weather = 0.5
+				effectiveness = 1
+
+			var crit : int = 1
+			var critical = RandomNumberGenerator.new()
+			critical.randomize()
+			var critical_damage = critical.randi_range(0,8)
+			if critical_damage == 8:
+				crit = 2
 			else:
-				weather = 1
+				crit = 1
 			
-		if current_holder.get_parent() == PlayerPokemon:
-			targets = PlayerPokemon.targets
-		elif current_holder.get_parent() == OpposingTrainerMonsters:
-			targets = OpposingTrainerMonsters.targets
-		
-		damage = ((((2 * current_holder.level/5+2)*current_holder.Current_attack * power / current_holder.opposing_pokemon.Current_defense)/50)+2)* stab * current_holder.Weakness * current_holder.Resistance * random_number/ 100
-		if self.get_parent().get_parent() == PlayerPokemon:
-			damage = damage * (PokeHelper.player_badjes + 1)
-		damage = damage / targets * weather  * crit* effectiveness
+			if crit == 2:
+				to_add_crit = true
+			else:
+				to_add_crit = false
+			
 
-		print(self.get_parent().Name + " : damage =  " + String(damage) + " random number: " + String(random_number /100) + " stab = " + String(stab) + " weather = " + String(weather) + " crit = " + String(crit) + " effectiveness = " + String(effectiveness))
-		_apply_damage()
-	elif self.special_effects != null :
-		get_node(special_effects)._attack()
+			var stab : float 
+			if self.Types == current_holder.Type_1[0] or self.Types == current_holder.Type_2[0]:
+				stab = 1.5
+			else:
+				stab = 1
+
+			var rng = RandomNumberGenerator.new()
+			rng.randomize()
+			var random_number = rng.randi_range(85,100)
+
+			if PokeHelper.current_weather == PokeHelper.weathers[1]:
+				weather = 1
+			elif PokeHelper.current_weather == PokeHelper.weathers[0]:
+				if self.Types == Types[2]:
+					weather = 2
+				elif self.Types == Types[11]:
+					weather = 0.5
+				else:
+					weather = 1
+			elif PokeHelper.current_weather == PokeHelper.weathers[2]:
+				if self.Types == Types[11]:
+						weather = 2
+				elif self.Types == Types[2]:
+					weather = 0.5
+				else:
+					weather = 1
+				
+			if current_holder.get_parent() == PlayerPokemon:
+				targets = PlayerPokemon.targets
+			elif current_holder.get_parent() == OpposingTrainerMonsters:
+				targets = OpposingTrainerMonsters.targets
+			
+			damage = ((((2 * current_holder.level/5+2)*current_holder.Current_attack * power / current_holder.opposing_pokemon.Current_defense)/50)+2)* stab * current_holder.Weakness * current_holder.Resistance * random_number/ 100
+			if self.get_parent().get_parent() == PlayerPokemon:
+				damage = damage * (PokeHelper.player_badjes + 1)
+			damage = damage / targets * weather  * crit* effectiveness
+
+			print(self.get_parent().Name + " : damage =  " + String(damage) + " random number: " + String(random_number /100) + " stab = " + String(stab) + " weather = " + String(weather) + " crit = " + String(crit) + " effectiveness = " + String(effectiveness))
+			_apply_damage()
+		elif self.special_effects != null :
+			get_node(special_effects)._attack()
 
 func _apply_damage():
 	var Missing = RandomNumberGenerator.new()
@@ -159,13 +159,15 @@ func _apply_damage():
 		elif damage >= 1:
 			if self.current_holder.get_parent() == PlayerPokemon:
 				self.current_holder.opposing_pokemon.Current_health_points -= int(damage)
-				Utils.Get_Pokemon_Manger().get_child(0).enemy_turn()
+				if BattleManager.player_attack_queued == false:
+					Utils.Get_Pokemon_Manger().get_child(0).enemy_turn()
+				else:
+					BattleManager.player_attack_queued = true
 				if to_add_crit == true:
 					Utils.Get_Pokemon_Manger().get_child(0).get_child(0).events.append("critical_hit")
 					to_add_crit = false
 			elif self.current_holder.get_parent() == OpposingTrainerMonsters:
 				self.current_holder.opposing_pokemon.Current_health_points -= int(damage)
-				Utils.Get_Pokemon_Manger().get_child(0).enemy_turn()
 				if to_add_crit == true:
 					Utils.Get_Pokemon_Manger().get_child(0).get_child(0).events.append("critical_hit")
 					to_add_crit = false
@@ -314,14 +316,18 @@ func _player_attack_first():
 		_calculate_damage()
 
 func _enemy_attack_first():
-	yield(BattleManager, "TurnChangedTrainer")
-	print("turn changed")
+	print("wtf")
+	BattleManager.player_attack_queued = true
+	BattleManager.queued_attacks.append(self)
+	Utils.Get_Pokemon_Manger().get_child(0).enemy_turn()
+	Utils.Get_Pokemon_Manger().get_child(0)._enemy_start_attack()
+
+func _player_attack():
 	if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
 		Utils.Get_Pokemon_Manger().get_child(0)._player_attack_dialogue(self)
 		yield(Utils.Get_Pokemon_Manger().get_child(0),"playerDialogueFinished")
-		if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
-			_calculate_damage()
-	
+		_calculate_damage()
+
 func _check_diff2():
 	if self.current_holder.fainted == false and self.current_holder == PlayerPokemon.current_pokemon:
 		print("check_speed")

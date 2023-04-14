@@ -106,30 +106,58 @@ func _display_enemy_attack_dialogue(pokemon,move):
 					Dialogue.connect("Dialog_ended",self,"_finish_Enemy_attack_dialogue")
 
 func _finish_Enemy_attack_dialogue():
-	if BattleManager.multi_battle == false:
-		if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
-			ui_state = Ui_state.Battle
-			OpposingTrainerMonsters.pokemon._wild_battle_attack()
-			if BattleManager.EnemyLastMoveEvaded == true:
-				ui_state = Ui_state.Dialogue
-				_enemy_attack_evaded()
-			elif BattleManager.EnemyLastMoveMissed == true:
-				ui_state = Ui_state.Dialogue
-				_enemy_attack_missed()
-			elif BattleManager.EnemyLastMoveEvaded == false and BattleManager.EnemyLastMoveMissed == false:
-				current_attack_locked = false
-		elif BattleManager.type_of_battle ==BattleManager.types_of_battle.Trainer:
-			ui_state = Ui_state.Battle
-			OpposingTrainerMonsters.pokemon._trainer_battle_attack()
-			if BattleManager.EnemyLastMoveEvaded == true:
-				ui_state = Ui_state.Dialogue
-				_enemy_attack_evaded()
-			elif BattleManager.EnemyLastMoveMissed == true:
-				ui_state = Ui_state.Dialogue
-				_enemy_attack_missed()
-			elif BattleManager.EnemyLastMoveEvaded == false and BattleManager.EnemyLastMoveMissed == false:
-				current_attack_locked = false
-	to_enemy_attack = false
+	if BattleManager.player_attack_queued == false:
+		if BattleManager.multi_battle == false:
+			if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
+				ui_state = Ui_state.Battle
+				OpposingTrainerMonsters.pokemon._wild_battle_attack()
+				if BattleManager.EnemyLastMoveEvaded == true:
+					ui_state = Ui_state.Dialogue
+					_enemy_attack_evaded()
+				elif BattleManager.EnemyLastMoveMissed == true:
+					ui_state = Ui_state.Dialogue
+					_enemy_attack_missed()
+				elif BattleManager.EnemyLastMoveEvaded == false and BattleManager.EnemyLastMoveMissed == false:
+					current_attack_locked = false
+			elif BattleManager.type_of_battle ==BattleManager.types_of_battle.Trainer:
+				ui_state = Ui_state.Battle
+				OpposingTrainerMonsters.pokemon._trainer_battle_attack()
+				if BattleManager.EnemyLastMoveEvaded == true:
+					ui_state = Ui_state.Dialogue
+					_enemy_attack_evaded()
+				elif BattleManager.EnemyLastMoveMissed == true:
+					ui_state = Ui_state.Dialogue
+					_enemy_attack_missed()
+				elif BattleManager.EnemyLastMoveEvaded == false and BattleManager.EnemyLastMoveMissed == false:
+					current_attack_locked = false
+		to_enemy_attack = false
+	else:
+		if BattleManager.multi_battle == false:
+			if BattleManager.type_of_battle == BattleManager.types_of_battle.Wild:
+				ui_state = Ui_state.Battle
+				OpposingTrainerMonsters.pokemon._wild_battle_attack()
+				if BattleManager.EnemyLastMoveEvaded == true:
+					ui_state = Ui_state.Dialogue
+					_enemy_attack_evaded()
+				elif BattleManager.EnemyLastMoveMissed == true:
+					ui_state = Ui_state.Dialogue
+					_enemy_attack_missed()
+				elif BattleManager.EnemyLastMoveEvaded == false and BattleManager.EnemyLastMoveMissed == false:
+					current_attack_locked = false
+			elif BattleManager.type_of_battle ==BattleManager.types_of_battle.Trainer:
+				ui_state = Ui_state.Battle
+				OpposingTrainerMonsters.pokemon._trainer_battle_attack()
+				if BattleManager.EnemyLastMoveEvaded == true:
+					ui_state = Ui_state.Dialogue
+					_enemy_attack_evaded()
+				elif BattleManager.EnemyLastMoveMissed == true:
+					ui_state = Ui_state.Dialogue
+					_enemy_attack_missed()
+				elif BattleManager.EnemyLastMoveEvaded == false and BattleManager.EnemyLastMoveMissed == false:
+					current_attack_locked = false
+		to_enemy_attack = false
+		var to_attack_action = BattleManager._get_queue()
+		to_attack_action._player_attack()
 
 func _enemy_attack_missed():
 	if ui_state == Ui_state.Dialogue:

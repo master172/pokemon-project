@@ -30,6 +30,9 @@ var nodes = []
 
 var processing = false
 
+var player_attack_queued = false
+var queued_attacks = []
+
 func _physics_process(_delta):
 	if OpposingTrainerMonsters.pokemon != null:
 		PlayerPokemon.opposing_pokemon = OpposingTrainerMonsters.pokemon
@@ -39,3 +42,8 @@ func _physics_process(_delta):
 func Generate_moves():
 	if multi_battle == false:
 		OpposingTrainerMonsters.CalcMovesSingle()
+
+func _get_queue():
+	if multi_battle == false:
+		print(queued_attacks[0])
+		return queued_attacks[0]
